@@ -1,0 +1,40 @@
+/* =====================================================================
+  Admin Sidebar — presentation styles.
+
+  Layout/colors are handled with Tailwind utilities in the template using
+  the design-system theme tokens. This stylesheet only covers the
+  active-route highlight (primary background + gold start accent bar),
+  which needs to survive Tailwind's `hover:*` utilities.
+
+  RTL note: logical properties (`inset-block` / `inset-inline-start`) keep
+  the gold accent bar on the *start* edge — the right side in Arabic RTL.
+===================================================================== */
+
+.admin-sidebar-link {
+  position: relative;
+}
+
+/* Higher specificity than the `hover:*` utilities so the active highlight
+   stays intact while the user hovers over the current link. */
+.admin-sidebar .admin-sidebar-link.is-active {
+  background-color: var(--color-primary);
+  color: #ffffff;
+  box-shadow: 0 8px 16px -6px rgba(120, 86, 0, 0.4);
+}
+
+/* Gold accent bar on the start edge of the active link. */
+.admin-sidebar .admin-sidebar-link.is-active::before {
+  content: '';
+  position: absolute;
+  inset-block: 0.6rem;
+  inset-inline-start: 0;
+  width: 4px;
+  border-radius: 9999px;
+  background-color: var(--color-brand-gold);
+}
+
+/* Icon chip inside the active link turns white-on-primary. */
+.admin-sidebar .admin-sidebar-link.is-active .admin-sidebar-link-icon {
+  background-color: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+}

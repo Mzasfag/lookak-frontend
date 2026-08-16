@@ -1,0 +1,1000 @@
+<!-- =====================================================================
+  Admin Users Management — Lookak.
+  Stats chips, filterable users table (desktop) + card list (mobile) with
+  search, role, provider-status and restriction filters, client-side
+  pagination + sorting, user-details and booking-restriction modals,
+  restriction toggle, provider approve/reject, guarded delete
+  (confirmation modal) and CSV export.
+  Styled with Tailwind theme tokens (--color-primary, --color-brand-gold,
+  --color-surface-container-lowest, --color-on-surface,
+  --color-on-surface-variant, --color-outline-variant). Font: Almarai (global).
+  RTL is the document default.
+===================================================================== -->
+<section class="bg-background px-4 py-6 sm:px-6 lg:px-8">
+  <!-- ===================== Page header ===================== -->
+  <header
+    class="animate-admin-users-fade-up mb-6 flex flex-wrap items-center justify-between gap-4"
+  >
+    <div>
+      <h1
+        class="flex items-center gap-3 text-2xl font-extrabold tracking-tight text-on-surface sm:text-3xl"
+      >
+        <span
+          class="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-gold/15 text-brand-gold ring-1 ring-brand-gold/20"
+        >
+          <i class="pi pi-users"></i>
+        </span>
+        إدارة المستخدمين
+      </h1>
+      <p class="mt-2 text-sm text-on-surface-variant">
+        تصفية المستخدمين، إدارة القيود، اعتماد مزودي الخدمات، وحذف الحسابات
+      </p>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <button
+        type="button"
+        data-testid="export-csv"
+        (click)="exportCsv()"
+        [disabled]="isLoading() || users().length === 0"
+        class="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-outline-variant bg-surface-container-lowest px-4 py-2.5 text-sm font-bold text-on-surface transition duration-200 hover:border-brand-gold hover:text-primary disabled:cursor-not-allowed disabled:opacity-50"
+      >
+        <i class="pi pi-file-export text-primary"></i>
+        تصدير CSV
+      </button>
+      <button
+        type="button"
+        (click)="loadUsers()"
+        [disabled]="isLoading()"
+        class="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-outline-variant bg-surface-container-lowest px-4 py-2.5 text-sm font-bold text-primary transition duration-200 hover:border-brand-gold hover:bg-brand-gold/5 disabled:cursor-not-allowed disabled:opacity-50"
+      >
+        <i [class]="isLoading() ? 'pi pi-spin pi-spinner' : 'pi pi-refresh'"></i>
+        تحديث البيانات
+      </button>
+    </div>
+  </header>
+
+  <!-- ===================== Stats chips ===================== -->
+  @if (statChips(); as chips) {
+    <div
+      class="animate-admin-users-fade-up mb-5 grid grid-cols-2 gap-3 sm:grid-cols-4"
+      data-testid="stat-chips"
+    >
+      @for (chip of chips; track chip.label) {
+        <div
+          class="flex items-center gap-3 rounded-xl bg-surface-container-lowest p-4 shadow-sm ring-1 ring-outline-variant/20"
+        >
+          <span
+            class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg {{
+              chip.iconClasses
+            }}"
+          >
+            <i class="pi {{ chip.icon }}"></i>
+          </span>
+          <div class="min-w-0">
+            <p class="truncate text-xs font-extrabold text-on-surface-variant">
+              {{ chip.label }}
+            </p>
+            <p class="text-xl font-extrabold text-on-surface">{{ chip.value }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  }
+
+  <!-- ===================== Filters ===================== -->
+  <div
+    class="animate-admin-users-fade-up mb-5 rounded-xl bg-surface-container-lowest p-4 shadow-sm ring-1 ring-outline-variant/20 sm:p-5"
+  >
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <!-- Search -->
+      <div>
+        <label class="mb-1 block text-xs font-extrabold text-on-surface-variant">بحث</label>
+
+        <div class="relative">
+          <i
+            class="pi pi-search pointer-events-none absolute top-1/2 right-3.5 -translate-y-1/2 text-sm text-on-surface-variant/60"
+          ></i>
+          <input
+            type="search"
+            data-testid="search-input"
+            [value]="searchQuery()"
+            (input)="onSearchChange($any($event.target).value)"
+            placeholder="ابحث بالاسم، الهاتف، البريد، أو اسم الصالون…"
+            class="w-full rounded-lg border border-outline-variant bg-surface-container-lowest py-2.5 pr-10 pl-3 text-sm text-on-surface transition placeholder:text-on-surface-variant/60 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/25 focus:outline-none"
+          />
+        </div>
+      </div>
+
+      <!-- Role -->
+      <div>
+        <label class="mb-1 block text-xs font-extrabold text-on-surface-variant">الدور</label>
+        <select
+          data-testid="role-filter"
+          [value]="roleFilter()"
+          (change)="onRoleChange($any($event.target).value)"
+          class="w-full cursor-pointer rounded-lg border border-outline-variant bg-surface-container-lowest px-3 py-2.5 text-sm text-on-surface transition focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/25 focus:outline-none"
+        >
+          <option value="">كل الأدوار</option>
+          <option value="client">عميل</option>
+          <option value="provider">مزود خدمة</option>
+          <option value="admin">مدير</option>
+        </select>
+      </div>
+
+      <!-- Provider status -->
+      <div>
+        <label class="mb-1 block text-xs font-extrabold text-on-surface-variant">
+          حالة مزود الخدمة
+        </label>
+        <select
+          data-testid="provider-status-filter"
+          [value]="providerStatusFilter()"
+          (change)="onProviderStatusChange($any($event.target).value)"
+          class="w-full cursor-pointer rounded-lg border border-outline-variant bg-surface-container-lowest px-3 py-2.5 text-sm text-on-surface transition focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/25 focus:outline-none"
+        >
+          <option value="">كل الحالات</option>
+          <option value="pending">قيد المراجعة</option>
+          <option value="approved">مقبول</option>
+          <option value="rejected">مرفوض</option>
+        </select>
+      </div>
+
+      <!-- Restricted toggle -->
+      <div class="flex items-end">
+        <label
+          class="flex cursor-pointer items-center gap-2.5 py-2.5 text-sm font-bold text-on-surface"
+        >
+          <input
+            type="checkbox"
+            data-testid="restricted-filter"
+            [checked]="restrictedOnly()"
+            (change)="onRestrictedChange($any($event.target).checked)"
+            class="h-4.5 w-4.5 cursor-pointer accent-[#b8860b]"
+          />
+          المقيدون فقط
+        </label>
+      </div>
+    </div>
+
+    <div
+      class="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-outline-variant/30 pt-4"
+    >
+      <p class="text-sm text-on-surface-variant">
+        عرض
+        <span class="font-extrabold text-on-surface">{{ totalCount() }}</span>
+        مستخدم
+      </p>
+      @if (hasActiveFilters()) {
+        <button
+          type="button"
+          data-testid="clear-filters"
+          (click)="clearFilters()"
+          class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-outline-variant bg-surface-container px-3 py-1.5 text-xs font-extrabold text-on-surface-variant transition duration-200 hover:border-brand-gold hover:text-primary"
+        >
+          <i class="pi pi-filter-slash"></i>
+          إعادة تعيين الفلاتر
+        </button>
+      }
+    </div>
+  </div>
+
+  <!-- ===================== Loading state ===================== -->
+  @if (isLoading()) {
+    <app-loader [fullScreen]="false" label="جارٍ تحميل المستخدمين…" />
+  }
+
+  <!-- ===================== Error state ===================== -->
+  @else if (hasError()) {
+    <div
+      class="flex flex-col items-center gap-5 rounded-xl bg-surface-container-lowest px-6 py-14 text-center shadow-lg shadow-primary/5 ring-1 ring-outline-variant/20"
+    >
+      <div
+        class="flex h-14 w-14 items-center justify-center rounded-full bg-red-500/10 ring-1 ring-red-500/20"
+      >
+        <i class="pi pi-exclamation-triangle text-2xl text-red-500"></i>
+      </div>
+      <div class="space-y-1.5">
+        <h2 class="text-lg font-extrabold text-on-surface">تعذر تحميل المستخدمين</h2>
+        <p class="text-sm text-on-surface-variant">
+          حدث خطأ أثناء جلب بيانات المستخدمين. يرجى المحاولة مرة أخرى.
+        </p>
+      </div>
+      <button
+        type="button"
+        (click)="loadUsers()"
+        class="inline-flex cursor-pointer items-center gap-2 rounded-lg bg-gradient-to-l from-brand-gold to-primary px-6 py-3 text-sm font-extrabold text-white shadow-lg shadow-primary/25 transition duration-200 hover:shadow-xl hover:shadow-primary/30 active:scale-[0.98]"
+      >
+        <i class="pi pi-refresh"></i>
+        إعادة المحاولة
+      </button>
+    </div>
+  }
+
+  <!-- ===================== Users list ===================== -->
+  @else if (users().length > 0) {
+    <div class="animate-admin-users-fade-up space-y-5">
+      <!-- Desktop table -->
+      <div
+        class="hidden overflow-hidden rounded-xl bg-surface-container-lowest shadow-sm ring-1 ring-outline-variant/20 md:block"
+      >
+        <div class="overflow-x-auto">
+          <table class="w-full min-w-[860px] border-collapse text-sm" data-testid="users-table">
+            <thead>
+              <tr
+                class="bg-surface-container/70 text-right text-xs font-extrabold text-on-surface-variant"
+              >
+                <th scope="col" class="px-5 py-3.5">
+                  <button
+                    type="button"
+                    data-testid="sort-name"
+                    (click)="sortBy('name')"
+                    class="inline-flex cursor-pointer items-center gap-1.5 font-extrabold text-on-surface-variant transition hover:text-primary"
+                  >
+                    المستخدم
+                    <i [class]="sortIcon('name')" class="text-[10px]"></i>
+                  </button>
+                </th>
+                <th scope="col" class="px-5 py-3.5">
+                  <button
+                    type="button"
+                    data-testid="sort-phone"
+                    (click)="sortBy('phone')"
+                    class="inline-flex cursor-pointer items-center gap-1.5 font-extrabold text-on-surface-variant transition hover:text-primary"
+                  >
+                    الهاتف
+                    <i [class]="sortIcon('phone')" class="text-[10px]"></i>
+                  </button>
+                </th>
+                <th scope="col" class="px-5 py-3.5">البريد</th>
+                <th scope="col" class="px-5 py-3.5">
+                  <button
+                    type="button"
+                    data-testid="sort-role"
+                    (click)="sortBy('role')"
+                    class="inline-flex cursor-pointer items-center gap-1.5 font-extrabold text-on-surface-variant transition hover:text-primary"
+                  >
+                    الدور
+                    <i [class]="sortIcon('role')" class="text-[10px]"></i>
+                  </button>
+                </th>
+                <th scope="col" class="px-5 py-3.5">
+                  <button
+                    type="button"
+                    data-testid="sort-provider-status"
+                    (click)="sortBy('providerStatus')"
+                    class="inline-flex cursor-pointer items-center gap-1.5 font-extrabold text-on-surface-variant transition hover:text-primary"
+                  >
+                    حالة المزود
+                    <i [class]="sortIcon('providerStatus')" class="text-[10px]"></i>
+                  </button>
+                </th>
+                <th scope="col" class="px-5 py-3.5">
+                  <button
+                    type="button"
+                    data-testid="sort-restricted"
+                    (click)="sortBy('isRestricted')"
+                    class="inline-flex cursor-pointer items-center gap-1.5 font-extrabold text-on-surface-variant transition hover:text-primary"
+                  >
+                    الحالة
+                    <i [class]="sortIcon('isRestricted')" class="text-[10px]"></i>
+                  </button>
+                </th>
+                <th scope="col" class="px-5 py-3.5 text-left">الإجراءات</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-outline-variant/20">
+              @for (user of pagedUsers(); track userKey(user)) {
+                <tr
+                  data-testid="user-row"
+                  class="transition duration-200 hover:bg-surface-container/40"
+                >
+                  <td class="px-5 py-4">
+                    <div class="flex items-center gap-3">
+                      <span
+                        class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-brand-gold/25 to-primary/15 text-sm font-extrabold text-primary"
+                      >
+                        {{ user.name.charAt(0) }}
+                      </span>
+                      <div class="min-w-0">
+                        <p class="truncate font-extrabold text-on-surface">{{ user.name }}</p>
+                        @if (user.salonName) {
+                          <p class="truncate text-xs text-on-surface-variant">
+                            {{ user.salonName }}
+                          </p>
+                        }
+                      </div>
+                    </div>
+                  </td>
+                  <td class="whitespace-nowrap px-5 py-4 text-on-surface-variant" dir="ltr">
+                    {{ user.phone }}
+                  </td>
+                  <td class="max-w-[220px] truncate px-5 py-4 text-on-surface-variant" dir="ltr">
+                    {{ user.email }}
+                  </td>
+                  <td class="px-5 py-4">
+                    <span
+                      class="inline-flex rounded-full px-3 py-1 text-xs font-extrabold ring-1 {{
+                        roleBadgeClass(user.role)
+                      }}"
+                    >
+                      {{ roleLabel(user.role) }}
+                    </span>
+                  </td>
+                  <td class="px-5 py-4">
+                    <span
+                      class="inline-flex rounded-full px-3 py-1 text-xs font-extrabold ring-1 {{
+                        providerStatusBadgeClass(user.providerStatus)
+                      }}"
+                    >
+                      {{ providerStatusLabel(user.providerStatus) }}
+                    </span>
+                  </td>
+                  <td class="px-5 py-4">
+                    <span
+                      class="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-extrabold ring-1 {{
+                        restrictionBadgeClass(user)
+                      }}"
+                    >
+                      <span class="h-1.5 w-1.5 rounded-full {{ restrictionDotClass(user) }}"></span>
+                      {{ restrictionLabel(user) }}
+                    </span>
+                  </td>
+                  <td class="px-5 py-4">
+                    <div class="flex items-center justify-end gap-2">
+                      <button
+                        type="button"
+                        data-testid="view-user"
+                        (click)="openDetails(user)"
+                        [disabled]="isRowBusy(user)"
+                        class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-outline-variant bg-surface-container px-3 py-1.5 text-xs font-extrabold text-on-surface-variant transition duration-200 hover:border-brand-gold hover:text-primary disabled:cursor-not-allowed disabled:opacity-50"
+                      >
+                        <i class="pi pi-eye"></i>
+                        التفاصيل
+                      </button>
+                      @if (user.role === 'provider') {
+                        <button
+                          type="button"
+                          data-testid="booking-restriction-btn"
+                          (click)="openBookingRestriction(user)"
+                          [disabled]="isRowBusy(user)"
+                          class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-outline-variant bg-surface-container px-3 py-1.5 text-xs font-extrabold text-on-surface-variant transition duration-200 hover:border-brand-gold hover:text-primary disabled:cursor-not-allowed disabled:opacity-50"
+                        >
+                          <i class="pi pi-calendar-times"></i>
+                          قيود الحجز
+                        </button>
+                      }
+                      @if (user.role === 'provider' && user.providerStatus === 'pending') {
+                        <button
+                          type="button"
+                          data-testid="reject-provider"
+                          (click)="rejectProvider(user)"
+                          [disabled]="isRowBusy(user)"
+                          class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-1.5 text-xs font-extrabold text-red-600 transition duration-200 hover:bg-red-500/20 disabled:cursor-not-allowed disabled:opacity-50"
+                        >
+                          <i class="pi pi-times"></i>
+                          رفض
+                        </button>
+                      }
+                      @if (user.role === 'provider' && user.providerStatus === 'pending') {
+                        <button
+                          type="button"
+                          data-testid="approve-provider"
+                          (click)="approveProvider(user)"
+                          [disabled]="isRowBusy(user)"
+                          class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg bg-gradient-to-l from-brand-gold to-primary px-3 py-1.5 text-xs font-extrabold text-white shadow-md shadow-primary/20 transition duration-200 hover:shadow-lg hover:shadow-primary/30 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+                        >
+                          <i class="pi pi-check"></i>
+                          موافقة
+                        </button>
+                      }
+                      <button
+                        type="button"
+                        (click)="toggleRestriction(user)"
+                        [disabled]="isRowBusy(user)"
+                        class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-extrabold transition duration-200 disabled:cursor-not-allowed disabled:opacity-50 {{
+                          user.isRestricted
+                            ? 'border-emerald-500/40 bg-emerald-500/10 text-emerald-700 hover:bg-emerald-500/20'
+                            : 'border-amber-500/40 bg-amber-500/10 text-amber-700 hover:bg-amber-500/20'
+                        }}"
+                      >
+                        <i [class]="user.isRestricted ? 'pi pi-check-circle' : 'pi pi-ban'"></i>
+                        {{ user.isRestricted ? 'إلغاء التقييد' : 'تقييد' }}
+                      </button>
+                      <button
+                        type="button"
+                        (click)="requestDelete(user)"
+                        [disabled]="isRowBusy(user)"
+                        class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-1.5 text-xs font-extrabold text-red-600 transition duration-200 hover:bg-red-500/20 disabled:cursor-not-allowed disabled:opacity-50"
+                      >
+                        <i class="pi pi-trash"></i>
+                        حذف
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Mobile cards -->
+      <div class="space-y-3 md:hidden">
+        @for (user of pagedUsers(); track userKey(user)) {
+          <article
+            data-testid="user-card"
+            class="rounded-xl bg-surface-container-lowest p-4 shadow-sm ring-1 ring-outline-variant/20"
+          >
+            <div class="flex items-start gap-3">
+              <span
+                class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-brand-gold/25 to-primary/15 text-sm font-extrabold text-primary"
+              >
+                {{ user.name.charAt(0) }}
+              </span>
+              <div class="min-w-0 flex-1">
+                <p class="truncate font-extrabold text-on-surface">{{ user.name }}</p>
+                @if (user.salonName) {
+                  <p class="truncate text-xs text-on-surface-variant">{{ user.salonName }}</p>
+                }
+                <div class="mt-2 flex flex-wrap items-center gap-1.5">
+                  <span
+                    class="inline-flex rounded-full px-2.5 py-0.5 text-[11px] font-extrabold ring-1 {{
+                      roleBadgeClass(user.role)
+                    }}"
+                  >
+                    {{ roleLabel(user.role) }}
+                  </span>
+                  <span
+                    class="inline-flex rounded-full px-2.5 py-0.5 text-[11px] font-extrabold ring-1 {{
+                      providerStatusBadgeClass(user.providerStatus)
+                    }}"
+                  >
+                    {{ providerStatusLabel(user.providerStatus) }}
+                  </span>
+                  <span
+                    class="inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[11px] font-extrabold ring-1 {{
+                      restrictionBadgeClass(user)
+                    }}"
+                  >
+                    <span class="h-1 w-1 rounded-full {{ restrictionDotClass(user) }}"></span>
+                    {{ restrictionLabel(user) }}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <dl class="mt-3 space-y-1.5 text-sm">
+              <div class="flex items-center justify-between gap-2">
+                <dt class="text-on-surface-variant">الهاتف</dt>
+                <dd class="font-bold text-on-surface" dir="ltr">{{ user.phone }}</dd>
+              </div>
+              <div class="flex items-center justify-between gap-2">
+                <dt class="shrink-0 text-on-surface-variant">البريد</dt>
+                <dd class="truncate font-bold text-on-surface" dir="ltr">{{ user.email }}</dd>
+              </div>
+            </dl>
+
+            <div
+              class="mt-3 flex flex-wrap items-center justify-end gap-2 border-t border-outline-variant/20 pt-3"
+            >
+              <button
+                type="button"
+                data-testid="view-user"
+                (click)="openDetails(user)"
+                [disabled]="isRowBusy(user)"
+                class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-outline-variant bg-surface-container px-3 py-1.5 text-xs font-extrabold text-on-surface-variant transition duration-200 hover:border-brand-gold hover:text-primary disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                <i class="pi pi-eye"></i>
+                التفاصيل
+              </button>
+              @if (user.role === 'provider') {
+                <button
+                  type="button"
+                  data-testid="booking-restriction-btn"
+                  (click)="openBookingRestriction(user)"
+                  [disabled]="isRowBusy(user)"
+                  class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-outline-variant bg-surface-container px-3 py-1.5 text-xs font-extrabold text-on-surface-variant transition duration-200 hover:border-brand-gold hover:text-primary disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  <i class="pi pi-calendar-times"></i>
+                  قيود الحجز
+                </button>
+              }
+              @if (user.role === 'provider' && user.providerStatus === 'pending') {
+                <button
+                  type="button"
+                  (click)="approveProvider(user)"
+                  [disabled]="isRowBusy(user)"
+                  class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg bg-gradient-to-l from-brand-gold to-primary px-3 py-1.5 text-xs font-extrabold text-white shadow-md shadow-primary/20 transition duration-200 hover:shadow-lg hover:shadow-primary/30 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  <i class="pi pi-check"></i>
+                  موافقة
+                </button>
+              }
+              <button
+                type="button"
+                (click)="toggleRestriction(user)"
+                [disabled]="isRowBusy(user)"
+                class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-extrabold transition duration-200 disabled:cursor-not-allowed disabled:opacity-50 {{
+                  user.isRestricted
+                    ? 'border-emerald-500/40 bg-emerald-500/10 text-emerald-700 hover:bg-emerald-500/20'
+                    : 'border-amber-500/40 bg-amber-500/10 text-amber-700 hover:bg-amber-500/20'
+                }}"
+              >
+                <i [class]="user.isRestricted ? 'pi pi-check-circle' : 'pi pi-ban'"></i>
+                {{ user.isRestricted ? 'إلغاء التقييد' : 'تقييد' }}
+              </button>
+              <button
+                type="button"
+                (click)="requestDelete(user)"
+                [disabled]="isRowBusy(user)"
+                class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-1.5 text-xs font-extrabold text-red-600 transition duration-200 hover:bg-red-500/20 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                <i class="pi pi-trash"></i>
+                حذف
+              </button>
+            </div>
+          </article>
+        }
+      </div>
+    </div>
+
+    <!-- ===================== Pagination ===================== -->
+    @if (totalPages() > 1) {
+      <div
+        class="flex flex-wrap items-center justify-between gap-3 rounded-xl bg-surface-container-lowest px-4 py-3 shadow-sm ring-1 ring-outline-variant/20"
+        data-testid="pagination"
+      >
+        <p class="text-sm text-on-surface-variant">
+          صفحة
+          <span class="font-extrabold text-on-surface">{{ page() }}</span>
+          من
+          <span class="font-extrabold text-on-surface">{{ totalPages() }}</span>
+        </p>
+        <div class="flex items-center gap-2">
+          <label class="text-xs font-extrabold text-on-surface-variant" for="page-size">عرض</label>
+          <select
+            id="page-size"
+            data-testid="page-size"
+            [value]="pageSize()"
+            (change)="onPageSizeChange($any($event.target).value)"
+            class="cursor-pointer rounded-lg border border-outline-variant bg-surface-container-lowest px-2 py-1.5 text-xs font-bold text-on-surface transition focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/25 focus:outline-none"
+          >
+            @for (size of pageSizeOptions; track size) {
+              <option [value]="size">{{ size }}</option>
+            }
+          </select>
+          <span class="text-xs font-extrabold text-on-surface-variant">لكل صفحة</span>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <button
+            type="button"
+            data-testid="prev-page"
+            (click)="prevPage()"
+            [disabled]="page() <= 1"
+            class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-outline-variant bg-surface-container px-3 py-1.5 text-xs font-extrabold text-on-surface-variant transition duration-200 hover:border-brand-gold hover:text-primary disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            <i class="pi pi-chevron-right"></i>
+            السابق
+          </button>
+          <button
+            type="button"
+            data-testid="next-page"
+            (click)="nextPage()"
+            [disabled]="page() >= totalPages()"
+            class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg bg-gradient-to-l from-brand-gold to-primary px-3 py-1.5 text-xs font-extrabold text-white shadow-md shadow-primary/20 transition duration-200 hover:shadow-lg hover:shadow-primary/30 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            التالي
+            <i class="pi pi-chevron-left"></i>
+          </button>
+        </div>
+      </div>
+    }
+  }
+
+  <!-- ===================== Empty state ===================== -->
+  @else {
+    <div
+      class="flex flex-col items-center gap-4 rounded-xl bg-surface-container-lowest px-6 py-14 text-center shadow-sm ring-1 ring-outline-variant/20"
+    >
+      <span
+        class="flex h-14 w-14 items-center justify-center rounded-full bg-brand-gold/10 text-brand-gold"
+      >
+        <i class="pi pi-users text-2xl"></i>
+      </span>
+      <div class="space-y-1.5">
+        <h2 class="text-lg font-extrabold text-on-surface">لا يوجد مستخدمون</h2>
+        <p class="text-sm text-on-surface-variant">
+          {{
+            hasActiveFilters()
+              ? 'لم يتم العثور على مستخدمين مطابقين للفلاتر المحددة.'
+              : 'لم يتم إضافة أي مستخدمين بعد.'
+          }}
+        </p>
+      </div>
+      @if (hasActiveFilters()) {
+        <button
+          type="button"
+          data-testid="clear-filters-empty"
+          (click)="clearFilters()"
+          class="inline-flex cursor-pointer items-center gap-2 rounded-lg bg-gradient-to-l from-brand-gold to-primary px-6 py-3 text-sm font-extrabold text-white shadow-lg shadow-primary/25 transition duration-200 hover:shadow-xl hover:shadow-primary/30 active:scale-[0.98]"
+        >
+          <i class="pi pi-filter-slash"></i>
+          إعادة تعيين الفلاتر
+        </button>
+      }
+    </div>
+  }
+
+  <!-- ===================== User details modal ===================== -->
+  @if (detailUser(); as detail) {
+    <div
+      class="fixed inset-0 z-50 flex items-center justify-center p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="details-modal-title"
+    >
+      <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" (click)="closeDetails()"></div>
+
+      <div
+        class="animate-admin-modal-pop relative w-full overflow-hidden rounded-2xl bg-surface-container-lowest shadow-2xl ring-1 ring-outline-variant/40"
+        data-testid="details-modal"
+      >
+        <div
+          class="flex items-center justify-between gap-3 border-b border-outline-variant/30 bg-gradient-to-l from-brand-gold/10 to-primary/5 px-6 py-4"
+        >
+          <div class="flex items-center gap-3">
+            <span
+              class="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-brand-gold/30 to-primary/20 text-base font-extrabold text-primary"
+            >
+              {{ detail.name.charAt(0) }}
+            </span>
+            <div>
+              <h3 id="details-modal-title" class="text-lg font-extrabold text-on-surface">
+                {{ detail.name }}
+              </h3>
+              <span
+                class="inline-flex rounded-full px-2.5 py-0.5 text-[11px] font-extrabold ring-1 {{
+                  roleBadgeClass(detail.role)
+                }}"
+              >
+                {{ roleLabel(detail.role) }}
+              </span>
+            </div>
+          </div>
+          <button
+            type="button"
+            data-testid="close-details"
+            (click)="closeDetails()"
+            aria-label="إغلاق"
+            class="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-surface-container text-on-surface-variant transition hover:bg-surface-container-high hover:text-on-surface"
+          >
+            <i class="pi pi-times"></i>
+          </button>
+        </div>
+
+        <div class="max-h-[60vh] space-y-4 overflow-y-auto px-6 py-5">
+          <dl class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <div class="rounded-lg bg-surface-container/50 p-3">
+              <dt class="text-xs font-extrabold text-on-surface-variant">البريد الإلكتروني</dt>
+              <dd class="mt-1 truncate text-sm font-bold text-on-surface" dir="ltr">
+                {{ detail.email }}
+              </dd>
+            </div>
+            <div class="rounded-lg bg-surface-container/50 p-3">
+              <dt class="text-xs font-extrabold text-on-surface-variant">الهاتف</dt>
+              <dd class="mt-1 text-sm font-bold text-on-surface" dir="ltr">
+                {{ detail.phone }}
+              </dd>
+            </div>
+            <div class="rounded-lg bg-surface-container/50 p-3">
+              <dt class="text-xs font-extrabold text-on-surface-variant">حالة الحساب</dt>
+              <dd class="mt-1">
+                <span
+                  class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-[11px] font-extrabold ring-1 {{
+                    restrictionBadgeClass(detail)
+                  }}"
+                >
+                  <span class="h-1.5 w-1.5 rounded-full {{ restrictionDotClass(detail) }}"></span>
+                  {{ restrictionLabel(detail) }}
+                </span>
+              </dd>
+            </div>
+            <div class="rounded-lg bg-surface-container/50 p-3">
+              <dt class="text-xs font-extrabold text-on-surface-variant">تاريخ الانضمام</dt>
+              <dd class="mt-1 text-sm font-bold text-on-surface">
+                {{ formatDate(detail.createdAt) }}
+              </dd>
+            </div>
+          </dl>
+          @if (detail.role === 'provider') {
+            <div class="rounded-lg bg-surface-container/50 p-3">
+              <h4 class="text-xs font-extrabold text-on-surface-variant">بيانات مزود الخدمة</h4>
+              <dl class="mt-2 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                <div>
+                  <dt class="text-xs text-on-surface-variant">حالة المزود</dt>
+                  <dd class="mt-0.5">
+                    <span
+                      class="inline-flex rounded-full px-2.5 py-0.5 text-[11px] font-extrabold ring-1 {{
+                        providerStatusBadgeClass(detail.providerStatus)
+                      }}"
+                    >
+                      {{ providerStatusLabel(detail.providerStatus) }}
+                    </span>
+                  </dd>
+                </div>
+                <div>
+                  <dt class="text-xs text-on-surface-variant">التقييم</dt>
+                  <dd class="mt-0.5 flex items-center gap-1 text-sm font-extrabold text-on-surface">
+                    <i class="pi pi-star-fill text-xs text-brand-gold"></i>
+                    {{ formatRating(detail.averageRating) }}
+                  </dd>
+                </div>
+                @if (detail.salonName) {
+                  <div>
+                    <dt class="text-xs text-on-surface-variant">اسم الصالون</dt>
+                    <dd class="mt-0.5 text-sm font-bold text-on-surface">{{ detail.salonName }}</dd>
+                  </div>
+                }
+                @if (detail.address) {
+                  <div>
+                    <dt class="text-xs text-on-surface-variant">العنوان</dt>
+                    <dd class="mt-0.5 text-sm font-bold text-on-surface">{{ detail.address }}</dd>
+                  </div>
+                }
+                @if (detail.bio || detail.description) {
+                  <div class="sm:col-span-2">
+                    <dt class="text-xs text-on-surface-variant">نبذة</dt>
+                    <dd class="mt-0.5 text-sm text-on-surface">
+                      {{ detail.bio || detail.description }}
+                    </dd>
+                  </div>
+                }
+                @if (detail.workingHours?.length) {
+                  <div class="sm:col-span-2">
+                    <dt class="text-xs text-on-surface-variant">أوقات العمل</dt>
+                    <dd class="mt-1">
+                      <ul class="space-y-1">
+                        @for (slot of detail.workingHours; track $index) {
+                          <li
+                            class="flex items-center justify-between gap-2 text-xs text-on-surface"
+                          >
+                            <span class="font-bold">{{ dayLabel(slot.dayOfWeek) }}</span>
+                            <span class="text-on-surface-variant" dir="ltr">
+                              @if (slot.isOpen) {
+                                {{ slot.startTime }} – {{ slot.endTime }}
+                              } @else {
+                                مغلق
+                              }
+                            </span>
+                          </li>
+                        }
+                      </ul>
+                    </dd>
+                  </div>
+                }
+              </dl>
+            </div>
+          }
+          <div class="grid grid-cols-1 gap-3 sm:grid-cols-3">
+            <div class="rounded-lg bg-surface-container/50 p-3 text-center">
+              <p class="text-lg font-extrabold text-on-surface">{{ detail.noShowCount ?? 0 }}</p>
+              <p class="text-xs font-extrabold text-on-surface-variant">مرات عدم الحضور</p>
+            </div>
+            <div class="rounded-lg bg-surface-container/50 p-3 text-center">
+              <p class="text-lg font-extrabold text-on-surface">
+                {{ detail.isBookingRestricted ? 'مقيد' : 'غير مقيد' }}
+              </p>
+              <p class="text-xs font-extrabold text-on-surface-variant">قيود الحجز</p>
+            </div>
+            <div class="rounded-lg bg-surface-container/50 p-3 text-center">
+              <p class="text-lg font-extrabold text-on-surface">
+                {{ detail.isVerified ? 'موثق' : 'غير موثق' }}
+              </p>
+              <p class="text-xs font-extrabold text-on-surface-variant">التوثيق</p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="flex items-center justify-end gap-3 border-t border-outline-variant/30 bg-surface-container/40 px-6 py-4"
+        >
+          @if (detail.role === 'provider') {
+            <button
+              type="button"
+              (click)="closeDetails(); openBookingRestriction(detail)"
+              class="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-outline-variant bg-surface-container-lowest px-5 py-2.5 text-sm font-bold text-on-surface transition duration-200 hover:border-brand-gold hover:text-primary"
+            >
+              <i class="pi pi-calendar-times"></i>
+              قيود الحجز
+            </button>
+          }
+          <button
+            type="button"
+            data-testid="details-close"
+            (click)="closeDetails()"
+            class="inline-flex cursor-pointer items-center gap-2 rounded-lg bg-gradient-to-l from-brand-gold to-primary px-5 py-2.5 text-sm font-extrabold text-white shadow-md shadow-primary/25 transition duration-200 hover:shadow-lg hover:shadow-primary/30 active:scale-[0.98]"
+          >
+            إغلاق
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- ===================== Booking-restriction modal ===================== -->
+  @if (bookingRestrictionUser(); as restrictionUser) {
+    <div
+      class="fixed inset-0 z-50 flex items-center justify-center p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="booking-restriction-title"
+    >
+      <div
+        class="absolute inset-0 bg-black/50 backdrop-blur-sm"
+        (click)="closeBookingRestriction()"
+      ></div>
+
+      <div
+        class="animate-admin-modal-pop relative w-full overflow-hidden rounded-2xl bg-surface-container-lowest shadow-2xl ring-1 ring-outline-variant/40"
+        data-testid="booking-restriction-modal"
+      >
+        <div
+          class="flex items-center gap-3 border-b border-outline-variant/30 bg-red-500/5 px-6 py-4"
+        >
+          <span
+            class="flex h-10 w-10 items-center justify-center rounded-full bg-red-500/10 text-red-600"
+          >
+            <i class="pi pi-calendar-times"></i>
+          </span>
+          <div>
+            <h3 id="booking-restriction-title" class="text-lg font-extrabold text-on-surface">
+              قيود الحجز
+            </h3>
+            <p class="text-xs text-on-surface-variant">للمستخدم "{{ restrictionUser.name }}"</p>
+          </div>
+        </div>
+
+        <div class="space-y-4 px-6 py-5">
+          <label class="flex cursor-pointer items-center justify-between gap-3">
+            <span class="text-sm font-extrabold text-on-surface">تفعيل قيد الحجز</span>
+            <input
+              type="checkbox"
+              data-testid="booking-restriction-enabled"
+              [checked]="bookingRestrictionEnabled()"
+              (change)="bookingRestrictionEnabled.set($any($event.target).checked)"
+              class="h-5 w-5 cursor-pointer accent-red-500"
+            />
+          </label>
+
+          <div>
+            <label
+              class="mb-1 block text-xs font-extrabold text-on-surface-variant"
+              for="booking-restriction-reason"
+            >
+              سبب القيد
+            </label>
+            <textarea
+              id="booking-restriction-reason"
+              data-testid="booking-restriction-reason"
+              [value]="bookingRestrictionReason()"
+              (input)="bookingRestrictionReason.set($any($event.target).value)"
+              rows="3"
+              placeholder="اختياري — سبب تقييد الحجز…"
+              class="w-full rounded-lg border border-outline-variant bg-surface-container-lowest px-3 py-2.5 text-sm text-on-surface transition placeholder:text-on-surface-variant/60 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/25 focus:outline-none"
+            ></textarea>
+          </div>
+
+          <div>
+            <label
+              class="mb-1 block text-xs font-extrabold text-on-surface-variant"
+              for="booking-restriction-until"
+            >
+              حتى تاريخ (اختياري)
+            </label>
+            <input
+              id="booking-restriction-until"
+              type="date"
+              data-testid="booking-restriction-until"
+              [value]="bookingRestrictionUntil()"
+              (change)="bookingRestrictionUntil.set($any($event.target).value)"
+              class="w-full cursor-pointer rounded-lg border border-outline-variant bg-surface-container-lowest px-3 py-2.5 text-sm text-on-surface transition focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/25 focus:outline-none"
+            />
+          </div>
+
+          @if (restrictionUser.bookingRestrictionReason) {
+            <p class="rounded-lg bg-surface-container/60 p-3 text-xs text-on-surface-variant">
+              القيد الحالي:
+              <span class="font-bold text-on-surface">
+                {{ restrictionUser.bookingRestrictionReason }}
+              </span>
+            </p>
+          }
+        </div>
+
+        <div
+          class="flex items-center justify-end gap-3 border-t border-outline-variant/30 bg-surface-container/40 px-6 py-4"
+        >
+          <button
+            type="button"
+            (click)="closeBookingRestriction()"
+            [disabled]="isSavingBookingRestriction()"
+            class="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-outline-variant bg-surface-container-lowest px-5 py-2.5 text-sm font-bold text-on-surface transition duration-200 hover:border-brand-gold hover:text-primary disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            إلغاء
+          </button>
+          <button
+            type="button"
+            data-testid="save-booking-restriction"
+            (click)="saveBookingRestriction()"
+            [disabled]="isSavingBookingRestriction()"
+            class="inline-flex cursor-pointer items-center gap-2 rounded-lg bg-red-600 px-5 py-2.5 text-sm font-extrabold text-white shadow-md shadow-red-600/25 transition duration-200 hover:bg-red-700 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            <i [class]="isSavingBookingRestriction() ? 'pi pi-spin pi-spinner' : 'pi pi-check'"></i>
+            {{ isSavingBookingRestriction() ? 'جارٍ الحفظ…' : 'حفظ' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- ===================== Delete confirmation modal ===================== -->
+  @if (userToDelete(); as pendingDelete) {
+    <div
+      class="fixed inset-0 z-50 flex items-center justify-center p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="delete-modal-title"
+    >
+      <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" (click)="cancelDelete()"></div>
+
+      <div
+        class="animate-admin-modal-pop relative w-full overflow-hidden rounded-2xl bg-surface-container-lowest shadow-2xl ring-1 ring-outline-variant/40"
+        data-testid="delete-modal"
+      >
+        <div
+          class="flex items-center gap-3 border-b border-outline-variant/30 bg-red-500/5 px-6 py-4"
+        >
+          <span
+            class="flex h-10 w-10 items-center justify-center rounded-full bg-red-500/10 text-red-600"
+          >
+            <i class="pi pi-trash"></i>
+          </span>
+          <h3 id="delete-modal-title" class="text-lg font-extrabold text-on-surface">
+            تأكيد حذف المستخدم
+          </h3>
+        </div>
+
+        <div class="px-6 py-5">
+          <p class="text-sm leading-relaxed text-on-surface-variant">
+            هل أنت متأكد من حذف المستخدم
+            <span class="font-extrabold text-on-surface">"{{ pendingDelete.name }}"</span>؟ سيتم
+            إلغاء تفعيل الحساب ولا يمكن التراجع عن هذا الإجراء.
+          </p>
+        </div>
+
+        <div
+          class="flex items-center justify-end gap-3 border-t border-outline-variant/30 bg-surface-container/40 px-6 py-4"
+        >
+          <button
+            type="button"
+            (click)="cancelDelete()"
+            [disabled]="isDeleting()"
+            class="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-outline-variant bg-surface-container-lowest px-5 py-2.5 text-sm font-bold text-on-surface transition duration-200 hover:border-brand-gold hover:text-primary disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            إلغاء
+          </button>
+          <button
+            type="button"
+            data-testid="confirm-delete"
+            (click)="confirmDelete()"
+            [disabled]="isDeleting()"
+            class="inline-flex cursor-pointer items-center gap-2 rounded-lg bg-red-600 px-5 py-2.5 text-sm font-extrabold text-white shadow-md shadow-red-600/25 transition duration-200 hover:bg-red-700 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            <i [class]="isDeleting() ? 'pi pi-spin pi-spinner' : 'pi pi-trash'"></i>
+            {{ isDeleting() ? 'جارٍ الحذف…' : 'نعم، حذف' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+</section>

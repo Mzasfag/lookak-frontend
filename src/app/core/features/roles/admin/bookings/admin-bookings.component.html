@@ -1,0 +1,320 @@
+<!-- =====================================================================
+  Admin Bookings Management — Lookak.
+  Status-filtered bookings table (desktop) + card list (mobile) with
+  nested-object-safe rendering (clientId/providerId/serviceId), color-coded
+  status badges, per-row status updates via the admin API, refresh + loading
+  states. Styled with Tailwind theme tokens (--color-primary,
+  --color-brand-gold, --color-surface-container-lowest, --color-on-surface,
+  --color-on-surface-variant, --color-outline-variant). Font: Almarai (global).
+  RTL is the document default.
+===================================================================== -->
+<section class="bg-background px-4 py-6 sm:px-6 lg:px-8">
+  <!-- ===================== Page header ===================== -->
+  <header
+    class="animate-admin-bookings-fade-up mb-6 flex flex-wrap items-center justify-between gap-4"
+  >
+    <div>
+      <h1
+        class="flex items-center gap-3 text-2xl font-extrabold tracking-tight text-on-surface sm:text-3xl"
+      >
+        <span
+          class="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-gold/15 text-brand-gold ring-1 ring-brand-gold/20"
+        >
+          <i class="pi pi-calendar"></i>
+        </span>
+        إدارة الحجوزات
+      </h1>
+      <p class="mt-2 text-sm text-on-surface-variant">
+        متابعة حجوزات العملاء، تصفية حالتها، وتحديثها بسهولة
+      </p>
+    </div>
+
+    <button
+      type="button"
+      data-testid="refresh-bookings"
+      (click)="loadBookings()"
+      [disabled]="isLoading()"
+      class="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-outline-variant bg-surface-container-lowest px-4 py-2.5 text-sm font-bold text-primary transition duration-200 hover:border-brand-gold hover:bg-brand-gold/5 disabled:cursor-not-allowed disabled:opacity-50"
+    >
+      <i [class]="isLoading() ? 'pi pi-spin pi-spinner' : 'pi pi-refresh'"></i>
+      تحديث البيانات
+    </button>
+  </header>
+
+  <!-- ===================== Stats chips ===================== -->
+  @if (statChips(); as chips) {
+    <div
+      class="animate-admin-bookings-fade-up mb-5 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:max-w-3xl"
+      data-testid="booking-stats"
+    >
+      @for (chip of chips; track chip.label) {
+        <div
+          class="flex items-center gap-3 rounded-xl bg-surface-container-lowest p-4 shadow-sm ring-1 ring-outline-variant/20"
+        >
+          <span
+            class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg {{ chip.iconClasses }}"
+          >
+            <i class="pi {{ chip.icon }}"></i>
+          </span>
+          <div class="min-w-0">
+            <p class="truncate text-xs font-extrabold text-on-surface-variant">
+              {{ chip.label }}
+            </p>
+            <p class="truncate text-lg font-extrabold text-on-surface">{{ chip.value }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  }
+
+  <!-- ===================== Filter bar ===================== -->
+  <div
+    class="animate-admin-bookings-fade-up mb-6 rounded-xl bg-surface-container-lowest p-4 shadow-sm ring-1 ring-outline-variant/20"
+  >
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <div class="w-full sm:w-72">
+        <label
+          class="mb-1 block text-xs font-extrabold text-on-surface-variant"
+          for="booking-status-filter"
+        >
+          الحالة
+        </label>
+        <select
+          id="booking-status-filter"
+          data-testid="status-filter"
+          [value]="statusFilter()"
+          (change)="onStatusFilterChange($any($event.target).value)"
+          class="w-full cursor-pointer rounded-lg border border-outline-variant bg-surface-container-lowest px-3 py-2.5 text-sm font-bold text-on-surface transition focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/25 focus:outline-none"
+        >
+          @for (option of statusFilterOptions; track option.value) {
+            <option [value]="option.value">{{ option.label }}</option>
+          }
+        </select>
+      </div>
+
+      <p class="text-sm text-on-surface-variant">
+        عرض
+        <span class="font-extrabold text-on-surface">{{ totalCount() }}</span>
+        حجز
+        @if (statusFilter() !== 'all') {
+          <span class="text-brand-gold"> — {{ currentStatusLabel() }}</span>
+        }
+      </p>
+    </div>
+  </div>
+
+  <!-- ===================== Loading (first load) ===================== -->
+  @if (isLoading() && bookings().length === 0) {
+    <app-loader [fullScreen]="false" label="جارٍ تحميل الحجوزات…"></app-loader>
+  } @else if (hasError()) {
+    <!-- ===================== Error state ===================== -->
+    <div
+      class="animate-admin-bookings-fade-up rounded-xl bg-surface-container-lowest px-6 py-14 text-center shadow-sm ring-1 ring-outline-variant/20"
+      data-testid="bookings-error"
+    >
+      <span
+        class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-red-500/10 text-red-500"
+      >
+        <i class="pi pi-exclamation-triangle text-2xl"></i>
+      </span>
+      <h3 class="mt-4 text-lg font-extrabold text-on-surface">تعذر تحميل الحجوزات</h3>
+      <p class="mt-1 text-sm text-on-surface-variant">يرجى المحاولة مرة أخرى</p>
+      <button
+        type="button"
+        data-testid="retry-bookings"
+        (click)="loadBookings()"
+        class="mt-5 inline-flex cursor-pointer items-center gap-2 rounded-lg bg-gradient-to-l from-brand-gold to-primary px-5 py-2.5 text-sm font-extrabold text-white shadow-md shadow-primary/25 transition duration-200 hover:shadow-lg active:scale-[0.98]"
+      >
+        <i class="pi pi-refresh"></i>
+        إعادة المحاولة
+      </button>
+    </div>
+  } @else if (bookings().length === 0) {
+    <!-- ===================== Empty state ===================== -->
+    <div
+      class="animate-admin-bookings-fade-up rounded-xl bg-surface-container-lowest px-6 py-14 text-center shadow-sm ring-1 ring-outline-variant/20"
+      data-testid="bookings-empty"
+    >
+      <span
+        class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-surface-container text-on-surface-variant"
+      >
+        <i class="pi pi-calendar-times text-2xl"></i>
+      </span>
+      <h3 class="mt-4 text-lg font-extrabold text-on-surface">لا توجد حجوزات</h3>
+      <p class="mt-1 text-sm text-on-surface-variant">
+        @if (statusFilter() === 'all') {
+          لم يتم العثور على أي حجوزات بعد.
+        } @else {
+          لا توجد حجوزات بحالة «{{ currentStatusLabel() }}».
+        }
+      </p>
+    </div>
+  } @else {
+    <!-- ===================== Desktop table ===================== -->
+    <div
+      class="animate-admin-bookings-fade-up hidden overflow-hidden rounded-xl bg-surface-container-lowest shadow-sm ring-1 ring-outline-variant/20 md:block"
+      data-testid="bookings-table"
+    >
+      <div class="overflow-x-auto">
+        <table class="w-full min-w-[960px] text-sm">
+          <thead class="bg-surface-container/60 text-xs text-on-surface-variant">
+            <tr>
+              <th scope="col" class="px-5 py-3.5 text-start">العميل</th>
+              <th scope="col" class="px-5 py-3.5 text-start">الصالون</th>
+              <th scope="col" class="px-5 py-3.5 text-start">الخدمة</th>
+              <th scope="col" class="px-5 py-3.5 text-start">التاريخ</th>
+              <th scope="col" class="px-5 py-3.5 text-start">الحالة</th>
+              <th scope="col" class="px-5 py-3.5 text-end">الإجراءات</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-outline-variant/20">
+
+            @for (booking of bookings(); track bookingKey(booking)) {
+              <tr
+                data-testid="booking-row"
+                class="transition duration-200 hover:bg-surface-container/40"
+              >
+                <td class="px-5 py-4">
+                  <div class="flex items-center gap-3">
+                    <span
+                      class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-brand-gold/25 to-primary/15 text-sm font-extrabold text-primary"
+                    >
+                      {{ clientInitial(booking) }}
+                    </span>
+                    <div class="min-w-0">
+                      <p class="truncate font-extrabold text-on-surface">
+                        {{ clientName(booking) }}
+                      </p>
+                      <p class="truncate text-xs text-on-surface-variant" dir="ltr">
+                        {{ clientPhone(booking) }}
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td class="max-w-[200px] px-5 py-4">
+                  <p class="truncate font-bold text-on-surface">{{ providerName(booking) }}</p>
+                </td>
+                <td class="px-5 py-4">
+                  <p class="font-bold text-on-surface">{{ serviceName(booking) }}</p>
+                  <p class="text-xs font-bold text-brand-gold">
+                    {{ formatCurrency(bookingPrice(booking)) }}
+                  </p>
+                </td>
+                <td class="whitespace-nowrap px-5 py-4 text-on-surface-variant">
+                  <p class="font-bold text-on-surface">{{ formatDate(booking.date) }}</p>
+                  <p class="text-xs" dir="ltr">{{ formatTime(booking.timeSlot) }}</p>
+                </td>
+                <td class="px-5 py-4">
+                  <span
+                    class="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1 text-xs font-extrabold ring-1 {{
+                      statusBadgeClass(booking.status)
+                    }}"
+                    data-testid="booking-status-badge"
+                  >
+                    <span
+                      class="h-1.5 w-1.5 rounded-full {{ statusDotClass(booking.status) }}"
+                    ></span>
+                    {{ statusLabel(booking.status) }}
+                  </span>
+                </td>
+                <td class="px-5 py-4">
+                  <div class="flex items-center justify-end gap-2">
+                    <select
+                      data-testid="booking-status-select"
+                      [value]="booking.status"
+                      [disabled]="isRowBusy(booking) || isLoading()"
+                      (change)="onStatusChange(booking, $event)"
+                      class="w-44 cursor-pointer rounded-lg border border-outline-variant bg-surface-container-lowest px-2.5 py-2 text-xs font-bold text-on-surface transition focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/25 focus:outline-none disabled:cursor-not-allowed disabled:opacity-60"
+                    >
+                      @for (option of statusChangeOptions; track option.value) {
+                        <option [value]="option.value">{{ option.label }}</option>
+                      }
+                    </select>
+                    @if (isRowBusy(booking)) {
+                      <i class="pi pi-spin pi-spinner text-primary" data-testid="row-spinner"></i>
+                    }
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <!-- ===================== Mobile cards ===================== -->
+    <div class="space-y-3 md:hidden" data-testid="booking-cards">
+      @for (booking of bookings(); track bookingKey(booking)) {
+        <div
+          class="rounded-xl bg-surface-container-lowest p-4 shadow-sm ring-1 ring-outline-variant/20"
+        >
+          <div class="mb-3 flex items-start justify-between gap-3">
+            <div class="flex min-w-0 items-center gap-3">
+              <span
+                class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-brand-gold/25 to-primary/15 text-sm font-extrabold text-primary"
+              >
+                {{ clientInitial(booking) }}
+              </span>
+              <div class="min-w-0">
+                <p class="truncate font-extrabold text-on-surface">{{ clientName(booking) }}</p>
+                <p class="truncate text-xs text-on-surface-variant" dir="ltr">
+                  {{ clientPhone(booking) }}
+                </p>
+              </div>
+            </div>
+            <span
+              class="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1 text-xs font-extrabold ring-1 {{
+                statusBadgeClass(booking.status)
+              }}"
+              data-testid="booking-status-badge"
+            >
+              <span class="h-1.5 w-1.5 rounded-full {{ statusDotClass(booking.status) }}"></span>
+              {{ statusLabel(booking.status) }}
+            </span>
+          </div>
+
+          <dl class="space-y-2 text-sm">
+            <div class="flex items-center justify-between gap-3">
+              <dt class="text-on-surface-variant">الصالون</dt>
+              <dd class="truncate font-bold text-on-surface">{{ providerName(booking) }}</dd>
+            </div>
+            <div class="flex items-center justify-between gap-3">
+              <dt class="text-on-surface-variant">الخدمة</dt>
+              <dd class="truncate font-bold text-on-surface">
+                {{ serviceName(booking) }}
+                <span class="text-xs font-bold text-brand-gold">
+                  ({{ formatCurrency(bookingPrice(booking)) }})
+                </span>
+              </dd>
+            </div>
+            <div class="flex items-center justify-between gap-3">
+              <dt class="text-on-surface-variant">التاريخ</dt>
+              <dd class="font-bold text-on-surface" dir="ltr">
+                {{ formatDate(booking.date) }} • {{ formatTime(booking.timeSlot) }}
+              </dd>
+            </div>
+          </dl>
+
+          <div class="mt-4 flex items-center gap-2 border-t border-outline-variant/30 pt-3">
+            <select
+              data-testid="booking-status-select"
+              [value]="booking.status"
+              [disabled]="isRowBusy(booking) || isLoading()"
+              (change)="onStatusChange(booking, $event)"
+              class="w-full cursor-pointer rounded-lg border border-outline-variant bg-surface-container-lowest px-2.5 py-2 text-xs font-bold text-on-surface transition focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/25 focus:outline-none disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              @for (option of statusChangeOptions; track option.value) {
+                <option [value]="option.value">{{ option.label }}</option>
+              }
+            </select>
+            @if (isRowBusy(booking)) {
+              <i class="pi pi-spin pi-spinner shrink-0 text-primary" data-testid="row-spinner"></i>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  }
+</section>
+

@@ -1,0 +1,61 @@
+<div class="flex min-h-screen items-stretch bg-background text-on-surface">
+  <!-- Client Navigation Sidebar (desktop persistent / mobile drawer) -->
+  <app-client-sidebar [isOpen]="isSidebarOpen()" (closed)="closeSidebar()" />
+
+  <!-- Mobile Backdrop Overlay -->
+  @if (isSidebarOpen()) {
+    <div
+      class="fixed inset-0 z-30 bg-black/40 backdrop-blur-xs transition-opacity duration-300 lg:hidden"
+      (click)="closeSidebar()"
+      (keydown.escape)="closeSidebar()"
+      tabindex="0"
+      role="button"
+      aria-label="إغلاق القائمة الجانبية"
+    ></div>
+  }
+
+  <!-- Main Content Layout Area -->
+  <div class="flex min-w-0 flex-1 flex-col">
+    <!-- Top Header Bar -->
+    <header
+      class="sticky top-0 z-20 flex items-center justify-between gap-3 border-b border-outline-variant/30 bg-surface-container-lowest/95 px-4 py-3 shadow-xs backdrop-blur-md sm:px-6"
+    >
+      <!-- Left side (RTL Start): Hamburger Toggle + Greeting -->
+      <div class="flex items-center gap-3 min-w-0">
+        <button
+          type="button"
+          (click)="toggleSidebar()"
+          aria-label="فتح القائمة الجانبية"
+          class="inline-flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-xl border border-outline-variant/40 bg-surface-container/50 text-on-surface transition duration-200 hover:border-primary/40 hover:bg-primary/10 hover:text-primary active:scale-95 lg:hidden"
+        >
+          <i class="pi pi-bars text-lg"></i>
+        </button>
+
+        <div class="min-w-0">
+          <p class="truncate text-xs font-bold text-on-surface-variant">مرحباً بك 👋</p>
+          <p class="truncate text-base font-extrabold text-on-surface">{{ displayName() }}</p>
+        </div>
+      </div>
+
+      <!-- Right side (RTL End): Notifications + Quick Profile Chip -->
+      <div class="flex items-center gap-3 shrink-0">
+        <!-- Live Notifications Dropdown -->
+        <app-notification-dropdown />
+
+        <!-- User Quick Initial Chip -->
+        <div
+          class="hidden sm:flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-brand-gold to-primary text-xs font-extrabold text-white shadow-sm ring-2 ring-brand-gold/20"
+          title="حسابك المسجل"
+        >
+          {{ userInitial() }}
+        </div>
+      </div>
+    </header>
+
+    <!-- Page Content Container -->
+    <main class="min-w-0 flex-1">
+      <router-outlet />
+    </main>
+  </div>
+</div>
+

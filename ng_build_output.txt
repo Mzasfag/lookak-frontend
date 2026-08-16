@@ -1,0 +1,201 @@
+❯ Building...
+
+
+#
+# Fatal process out of memory: Re-embedded builtins: set permissions
+#
+----- Native stack trace -----
+
+runtime: VirtualAlloc of 8192 bytes failed with errno=1455
+fatal error: 
+<--- Last few GCs --->
+
+[2544:000001794838D000]       92 ms: Scavenge 4.1 (6.0) -> 3.8 (6.2) MB, pooled: 0 MB, 2.61 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[2544:000001794838D000]      139 ms: Scavenge 5.3 (7.2) -> 5.0 (9.7) MB, pooled: 0 MB, 18.97 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: MarkCompactCollector: young object promotion failed Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+out of memory
+runtime: VirtualAlloc of 32768 bytes failed with errno=1455
+fatal error: out of memory
+runtime: VirtualAlloc of 24576 bytes failed with errno=1455
+fatal error: out of memory
+runtime: VirtualAlloc of 90112 bytes failed with errno=1455
+fatal error: out of memory
+runtime: VirtualAlloc of 8192 bytes failed with errno=1455
+fatal error: out of memory
+
+<--- Last few GCs --->
+
+[2544:00000179216EF000]      128 ms: Scavenge 4.0 (6.0) -> 3.7 (6.2) MB, pooled: 0 MB, 2.79 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[2544:00000179216EF000]      304 ms: Scavenge 5.3 (7.2) -> 5.0 (9.5) MB, pooled: 0 MB, 109.35 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: MarkCompactCollector: young object promotion failed Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+
+<--- Last few GCs --->
+
+[2544:00000179481F5000]      111 ms: Scavenge 4.1 (6.0) -> 3.8 (6.2) MB, pooled: 0 MB, 1.59 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[2544:00000179481F5000]      340 ms: Scavenge 5.3 (7.2) -> 5.0 (9.7) MB, pooled: 0 MB, 108.29 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: MarkCompactCollector: young object promotion failed Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+ 1: 00007FF7A76650BF 
+ 2: 00007FF7A628DD27 
+ 3: 00007FF7A608E567 
+ 4: 00007FF7A606DC5E 
+ 5: 00007FF7A606331D 
+ 6: 00007FF7A6062FCC 
+ 7: 00007FF7A6062C11 
+ 8: 00007FF7A6075108 
+ 9: 00007FF7A6A7F2CF 
+10: 00007FF7A75A954B 
+11: 00007FF7A62E3136 
+12: 00007FF7A79A35B3 
+13: 00007FFF5DBB7374 
+14: 00007FFF5F33CC91 
+ 1: 00007FF7A76650BF 
+ 2: 00007FF7A628DD27 
+ 3: 00007FF7A608E567 
+ 4: 00007FF7A606DC5E 
+ 5: 00007FF7A606331D 
+ 6: 00007FF7A6062FCC 
+ 7: 00007FF7A6062C11 
+ 8: 00007FF7A6074EF8 
+ 9: 00007FF7A6A7EA7D 
+10: 00007FF7A6A7EF22 
+11: 00007FF7A6065C54 
+12: 00007FF7A604D37D 
+13: 00007FF7A60473F4 
+14: 00007FF7A609096A 
+15: 00007FF7A608FF96 
+16: 00007FF7A60A0EF2 
+17: 00007FF7A60A0A1B 
+
+runtime stack:
+runtime.throw({0x7ff62dd02aa1?, 0x46ee3ffb40?})
+	runtime/panic.go:1229 +0x4d fp=0x46ee3ffb08 sp=0x46ee3ffad8 pc=0x7ff62d6e3d8d
+runtime.sysUsedOS(0x87a74c80000, 0x2000)
+	runtime/mem_windows.go:83 +0x1e5 fp=0x46ee3ffb88 sp=0x46ee3ffb08 pc=0x7ff62d684545
+runtime.sysUsed(...)
+	runtime/mem.go:91
+runtime.(*mheap).allocSpan(0x7ff62e15d980, 0x1, 0x0, 0x66)
+	runtime/mheap.go:1404 +0x4a7 fp=0x46ee3ffc38 sp=0x46ee3ffb88 pc=0x7ff62d69a5a7
+runtime.(*mheap).alloc.func1()
+	runtime/mheap.go:1017 +0x5c fp=0x46ee3ffc80 sp=0x46ee3ffc38 pc=0x7ff62d699d5c
+runtime.systemstack(0x87a72a805a0)
+	runtime/asm_amd64.s:562 +0x49 fp=0x46ee3ffc90 sp=0x46ee3ffc80 pc=0x7ff62d6e9969
+
+goroutine 625 gp=0x87a741d2960 m=14 mp=0x87a733aa008 [running]:
+runtime.systemstack_switch()
+	runtime/asm_amd64.s:516 +0x8 fp=0x87a72baada0 sp=0x87a72baad90 pc=0x7ff62d6e9908
+runtime.(*mheap).alloc(0x87a733aa008?, 0x87a72baae58?, 0xa7?)
+	runtime/mheap.go:1011 +0x57 fp=0x87a72baade8 sp=0x87a72baada0 pc=0x7ff62d699cb7
+runtime.(*mcentral).grow(0x1800000001?)
+	runtime/mcentral.go:253 +0x36 fp=0x87a72baae18 sp=0x87a72baade8 pc=0x7ff62d682376
+runtime.(*mcentral).cacheSpan(0x7ff62e172a98)
+	runtime/mcentral.go:171 +0x454 fp=0x87a72baae90 sp=0x87a72baae18 pc=0x7ff62d6821f4
+runtime.(*mcache).refill(0x209e8231400, 0x66?)
+	runtime/mcache.go:205 +0x16b fp=0x87a72baaed0 sp=0x87a72baae90 pc=0x7ff62d6817cb
+runtime.(*mcache).nextFree(0x209e8231400, 0x66)
+	runtime/malloc.go:1006 +0x7e fp=0x87a72baaf08 sp=0x87a72baaed0 pc=0x7ff62d67dcde
+runtime.mallocgcSmallScanHeader(0x3f?, 0x7ff62dcdd3e0)
+	runtime/malloc.go:1627 +0x18e fp=0x87a72baaf60 sp=0x87a72baaf08 pc=0x7ff62d67e90e
+runtime.mallocgc(0x1fe0, 0x7ff62dcdd3e0, 0x1)
+	runtime/malloc.go:1152 +0xac fp=0x87a72baaf90 sp=0x87a72baaf60 pc=0x7ff62d6e1bcc
+runtime.growslice(0x87a7464f008, 0x0?, 0x0?, 0x87a73b83a80?, 0x7ff62dcdd3e0)
+	runtime/slice.go:273 +0x507 fp=0x87a72bab000 sp=0x87a72baaf90 pc=0x7ff62d6e5fe7
+github.com/evanw/esbuild/internal/js_parser.(*parser).parseClass(0x87a7494b508, {{0x4?}, 0x0?}, 0x87a74115d50, {{0x0?, 0x87a72218ea0?, 0x87a72be34dc?}, 0x6?, 0x0?})
+	github.com/evanw/esbuild/internal/js_parser/js_parser.go:6524 +0x651 fp=0x87a72bab3a0 sp=0x87a72bab000 pc=0x7ff62d9ba851
+github.com/evanw/esbuild/internal/js_parser.(*parser).parseClassStmt(0x87a7494b508, {0x74283598?}, {0x0, 0x1, 0x1, 0x0, 0x1, 0x0, 0x0, 0x0, ...})
+	github.com/evanw/esbuild/internal/js_parser/js_parser.go:6398 +0x466 fp=0x87a72bab5b8 sp=0x87a72bab3a0 pc=0x7ff62d9b97a6
+github.com/evanw/esbuild/internal/js_parser.(*parser).parseStmt(0x87a7494b508, {0x0, 0x1, 0x1, 0x0, 0x1, 0x0, 0x0, 0x0, 0x0, ...})
+	github.com/evanw/esbuild/internal/js_parser/js_parser.go:7455 +0x461a fp=0x87a72babf18 sp=0x87a72bab5b8 pc=0x7ff62d9c2eba
+github.com/evanw/esbuild/internal/js_parser.(*parser).parseStmt(0x87a7494b508, {0x0, 0x1, 0x1, 0x0, 0x1, 0x0, 0x0, 0x0, 0x0, ...})
+	github.com/evanw/esbuild/internal/js_parser/js_parser.go:7088 +0x681a fp=0x87a72bac878 sp=0x87a72babf18 pc=0x7ff62d9c50ba
+github.com/evanw/esbuild/internal/js_parser.(*parser).parseStmtsUpTo(0x87a7494b508, 0x0, {0x0, 0x1, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, ...})
+	github.com/evanw/esbuild/internal/js_parser/js_parser.go:8489 +0xe8 fp=0x87a72bac9d8 sp=0x87a72bac878 pc=0x7ff62d9c8748
+github.com/evanw/esbuild/internal/js_parser.Parse({_, _, _, _, _, _}, {{{0x87a7408e880, 0x76}, {0x87a7256b680, 0x48}}, ...}, ...)
+	github.com/evanw/esbuild/internal/js_parser/js_parser.go:17808 +0x44f fp=0x87a72bad578 sp=0x87a72bac9d8 pc=0x7ff62da1116f
+github.com/evanw/esbuild/internal/cache.(*JSCache).Parse(_, {_, _, _, _, _, _}, {{{0x87a7408e880, 0x76}, {0x87a7256b680, ...}}, ...}, ...)
+	github.com/evanw/esbuild/internal/cache/cache_ast.go:170 +0x2da fp=0x87a72badc78 sp=0x87a72bad578 pc=0x7ff62da58efa
+github.com/evanw/esbuild/internal/bundler.parseFile({{0x7ff62dd48d80, 0x87a7239e060}, {0x87a72380070, 0x87a72398048, 0x87a72398060, 0x87a7239e040, 0x6, 0x87a7249c2a0}, 0x87a72394488, 0x87a7240e420, ...})
+	github.com/evanw/esbuild/internal/bundler/bundler.go:287 +0x1bd3 fp=0x87a72baf600 sp=0x87a72badc78 pc=0x7ff62da99e53
+github.com/evanw/esbuild/internal/bundler.(*scanner).maybeParseFile.gowrap1()
+	github.com/evanw/esbuild/internal/bundler/bundler.go:1633 +0x385 fp=0x87a72baffe0 sp=0x87a72baf600 pc=0x7ff62daa79c5
+runtime.goexit({})
+	runtime/asm_amd64.s:1771 +0x1 fp=0x87a72baffe8 sp=0x87a72baffe0 pc=0x7ff62d6eb5a1
+created by github.com/evanw/esbuild/internal/bundler.(*scanner).maybeParseFile in goroutine 18
+	github.com/evanw/esbuild/internal/bundler/bundler.go:1633 +0xca9
+
+goroutine 1 gp=0x87a7220c000 m=19 mp=0x87a73137808 [running]:
+	goroutine running on other thread; stack unavailable
+
+goroutine 2 gp=0x87a7220c780 m=nil [force gc (idle)]:
+runtime.gopark(0x0?, 0x0?, 0x0?, 0x0?, 0x0?)
+	runtime/proc.go:462 +0xce fp=0x87a7220ffa8 sp=0x87a7220ff88 pc=0x7ff62d6e3eae
+runtime.goparkunlock(...)
+	runtime/proc.go:468
+runtime.forcegchelper()
+	runtime/proc.go:375 +0xb8 fp=0x87a7220ffe0 sp=0x87a7220ffa8 pc=0x7ff62d6af298
+runtime.goexit({})
+	runtime/asm_amd64.s:1771 +0x1 fp=0x87a7220ffe8 sp=0x87a7220ffe0 pc=0x7ff62d6eb5a1
+created by runtime.init.7 in goroutine 1
+	runtime/proc.go:363 +0x1a
+
+goroutine 3 gp=0x87a7220cb40 m=nil [GC sweep wait]:
+runtime.gopark(0x1?, 0x0?, 0x0?, 0x0?, 0x0?)
+	runtime/proc.go:462 +0xce fp=0x87a72211f88 sp=0x87a72211f68 pc=0x7ff62d6e3eae
+runtime.goparkunlock(...)
+	runtime/proc.go:468
+runtime.bgsweep(0x87a721ce080)
+	runtime/mgcsweep.go:324 +0x151 fp=0x87a72211fc8 sp=0x87a72211f88 pc=0x7ff62d696571
+runtime.gcenable.gowrap1()
+	runtime/mgc.go:214 +0x17 fp=0x87a72211fe0 sp=0x87a72211fc8 pc=0x7ff62d687917
+runtime.goexit({})
+	runtime/asm_amd64.s:1771 +0x1 fp=0x87a72211fe8 sp=0x87a72211fe0 pc=0x7ff62d6eb5a1
+created by runtime.gcenable in goroutine 1
+	runtime/mgc.go:214 +0x66
+
+goroutine 4 gp=0x87a7220cd20 m=nil [GC scavenge wait]:
+runtime.gopark(0x10000?, 0x11e249ee?, 0x0?, 0x0?, 0x0?)
+	runtime/proc.go:462 +0xce fp=0x87a72221f78 sp=0x87a72221f58 pc=0x7ff62d6e3eae
+runtime.goparkunlock(...)
+	runtime/proc.go:468
+runtime.(*scavengerState).park(0x7ff62e153300)
+	runtime/mgcscavenge.go:425 +0x49 fp=0x87a72221fa8 sp=0x87a72221f78 pc=0x7ff62d693fe9
+runtime.bgscavenge(0x87a721ce080)
+	runtime/mgcscavenge.go:658 +0x59 fp=0x87a72221fc8 sp=0x87a72221fa8 pc=0x7ff62d694579
+runtime.gcenable.gowrap2()
+	runtime/mgc.go:215 +0x17 fp=0x87a72221fe0 sp=0x87a72221fc8 pc=0x7ff62d6878d7
+runtime.goexit({})
+	runtime/asm_amd64.s:1771 +0x1 fp=0x87a72221fe8 sp=0x87a72221fe0 pc=0x7ff62d6eb5a1
+created by runtime.gcenable in goroutine 1
+	runtime/mgc.go:215 +0xa5
+
+goroutine 5 gp=0x87a7220d0e0 m=nil [finalizer wait]:
+runtime.gopark(0x0?, 0x0?, 0x0?, 0x0?, 0x0?)
+	runtime/proc.go:462 +0xce fp=0x87a72223e20 sp=0x87a72223e00 pc=0x7ff62d6e3eae
+runtime.runFinalizers()
+	runtime/mfinal.go:210 +0x107 fp=0x87a72223fe0 sp=0x87a72223e20 pc=0x7ff62d6868a7
+runtime.goexit({})
+	runtime/asm_amd64.s:1771 +0x1 fp=0x87a72223fe8 sp=0x87a72223fe0 pc=0x7ff62d6eb5a1
+created by runtime.createfing in goroutine 1
+	runtime/mfinal.go:172 +0x3d
+
+goroutine 6 gp=0x87a7220d2c0 m=nil [cleanup wait]:
+runtime.gopark(0x0?, 0x0?, 0x0?, 0x0?, 0x0?)
+	runtime/proc.go:462 +0xce fp=0x87a7221df68 sp=0x87a7221df48 pc=0x7ff62d6e3eae
+runtime.goparkunlock(...)
+	runtime/proc.go:468
+runtime.(*cleanupQueue).dequeue(0x7ff62e1535e0)
+	runtime/mcleanup.go:522 +0xd4 fp=0x87a7221dfa0 sp=0x87a7221df68 pc=0x7ff62d683734
+runtime.runCleanups()
+	runtime/mcleanup.go:718 +0x45 fp=0x87a7221dfe0 sp=0x87a7221dfa0 pc=0x7ff62d683da5
+runtime.goexit({})
+	runtime/asm_amd64.s:1771 +0x1 fp=0x87a7221dfe8 sp=0x87a7221dfe0 pc=0x7ff62d6eb5a1
+created by runtime.(*cleanupQueue).createGs in goroutine 1
+	runtime/mcleanup.go:672 +0xa5

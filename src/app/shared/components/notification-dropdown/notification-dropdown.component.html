@@ -1,0 +1,29 @@
+<button 
+  pButton 
+  type="button" 
+  icon="pi pi-bell" 
+  (click)="op.toggle($event)" 
+  class="p-button-text p-button-rounded p-button-secondary">
+  <p-badge [value]="unreadCount().toString()" [hidden]="unreadCount() === 0"></p-badge>
+</button>
+
+<p-popover #op>
+  <div class="flex justify-content-between p-2 align-items-center">
+    <h5>الإشعارات</h5>
+    <div class="flex gap-2">
+      <button pButton [iconOnly]="isMuted() ? 'pi pi-volume-off' : 'pi pi-volume-up'" class="p-button-text p-button-sm" (click)="toggleMute()"></button>
+      <button pButton label="قراءة الكل" class="p-button-text p-button-sm" (click)="markAllAsRead()"></button>
+    </div>
+  </div>
+  <div style="max-height: 400px; overflow-y: auto;">
+    @for (n of notifications(); track n._id) {
+      <div class="p-2 border-bottom-1" [class.bg-gray-100]="!n.isRead" (click)="markAsRead(n._id)">
+        <h6>{{n.title}}</h6>
+        <p>{{n.message}}</p>
+      </div>
+    }
+  </div>
+  <div class="p-2 border-top-1 text-center">
+    <a [routerLink]="notificationsRoute" (click)="op.hide()">عرض الكل</a>
+  </div>
+</p-popover>

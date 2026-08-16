@@ -1,0 +1,27 @@
+
+> lookak@0.0.0 build
+> ng build
+
+❯ Building...
+Error: Not enough space
+    at Function.<anonymous> (D:\projects\lookak-app\lookak-frontend\lookak\node_modules\lmdb\dist\index.cjs:677:7) {
+  code: 12
+}
+D:\projects\lookak-app\lookak-frontend\lookak\node_modules\lmdb\dist\index.cjs:773
+				let error = new Error('Commit failed (see commitError for details)');
+				            ^
+
+Error: Commit failed (see commitError for details)
+    at rejectCommit (D:\projects\lookak-app\lookak-frontend\lookak\node_modules\lmdb\dist\index.cjs:773:17)
+    at resolveWrites (D:\projects\lookak-app\lookak-frontend\lookak\node_modules\lmdb\dist\index.cjs:735:40)
+    at Function.<anonymous> (D:\projects\lookak-app\lookak-frontend\lookak\node_modules\lmdb\dist\index.cjs:662:4) {
+  commitError: Promise {
+    <rejected> Error: Not enough space
+        at Function.<anonymous> (D:\projects\lookak-app\lookak-frontend\lookak\node_modules\lmdb\dist\index.cjs:677:7) {
+      code: 12
+    },
+    reject: [Function (anonymous)]
+  }
+}
+
+Node.js v24.19.0

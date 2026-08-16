@@ -1,0 +1,38 @@
+/* =====================================================================
+  Admin Users — presentation-only styles.
+  Layout, colors, and typography are handled via Tailwind theme tokens
+  (--color-*, --radius-* in src/styles.css). This file only holds subtle
+  entrance + modal animations for a polished, luxurious feel.
+===================================================================== */
+
+/* soft fade + rise for the users content on load */
+@keyframes admin-users-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-admin-users-fade-up {
+  animation: admin-users-fade-up 0.4s ease-out both;
+}
+
+/* gentle pop for the delete confirmation dialog */
+@keyframes admin-modal-pop {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-admin-modal-pop {
+  animation: admin-modal-pop 0.22s ease-out both;
+}

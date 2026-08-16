@@ -1,0 +1,39 @@
+/* =====================================================================
+  Provider Bookings — presentation-only styles.
+  Layout, colors, and typography are handled via Tailwind theme tokens
+  (--color-*, --radius-* in src/styles.css). This file only holds subtle
+  entrance animations + the filter-pills horizontal scrollbar polish.
+===================================================================== */
+
+/* soft fade + rise for the bookings content on load */
+@keyframes provider-bookings-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-provider-bookings-fade-up {
+  animation: provider-bookings-fade-up 0.4s ease-out both;
+}
+
+/* slim scrollbar for the horizontally scrollable status filter pills */
+.provider-filter-pills {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-outline-variant) transparent;
+}
+.provider-filter-pills::-webkit-scrollbar {
+  height: 4px;
+}
+.provider-filter-pills::-webkit-scrollbar-track {
+  background: transparent;
+}
+.provider-filter-pills::-webkit-scrollbar-thumb {
+  background: var(--color-outline-variant);
+  border-radius: 9999px;
+}
+

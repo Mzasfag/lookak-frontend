@@ -1,0 +1,19 @@
+:host {
+  display: block;
+}
+
+/* soft fade + rise for the dashboard content on load */
+@keyframes client-dashboard-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-client-dashboard-fade-up {
+  animation: client-dashboard-fade-up 0.4s ease-out both;
+}

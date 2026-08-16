@@ -1,0 +1,12 @@
+<!-- start router outlet -->
+<router-outlet />
+<!-- end router outlet -->
+
+<!-- start toaster -->
+<p-toast />
+<!-- end toaster -->
+
+
+@if (loadingService.isLoading()) {
+    <app-loader />
+}

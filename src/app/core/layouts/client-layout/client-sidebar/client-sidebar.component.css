@@ -1,0 +1,13 @@
+@reference "tailwindcss";
+
+.is-active {
+  background-color: color-mix(in srgb, var(--color-primary) 12%, transparent);
+  color: var(--color-primary);
+  font-weight: 800;
+}
+
+.is-active .client-sidebar-link-icon {
+  background-color: var(--color-primary);
+  color: #ffffff;
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--color-primary) 30%, transparent);
+}

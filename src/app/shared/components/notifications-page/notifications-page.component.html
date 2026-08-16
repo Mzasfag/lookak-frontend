@@ -1,0 +1,18 @@
+<div class="p-4">
+  <div class="flex justify-content-between align-items-center mb-4">
+    <h2>جميع الإشعارات</h2>
+  </div>
+  <div class="grid">
+    @for (n of notifications(); track n._id) {
+      <div class="col-12">
+        <div class="p-3 border-round shadow-1 mb-2" [class.bg-gray-100]="!n.isRead">
+          <h6>{{n.title}}</h6>
+          <p>{{n.message}}</p>
+          @if (!n.isRead) {
+            <button pButton label="قراءة" class="p-button-sm p-button-text" (click)="markAsRead(n._id)"></button>
+          }
+        </div>
+      </div>
+    }
+  </div>
+</div>

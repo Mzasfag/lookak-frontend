@@ -1,0 +1,153 @@
+/* =====================================================================
+  Loader / Barber & Beauty — presentation-only styles.
+  Layout/colors use Tailwind theme tokens in the template
+  (--color-surface, --color-surface-container-lowest, --color-primary,
+  --color-brand-gold, --color-on-surface-variant);
+  this file holds the bespoke salon animation:
+
+    • .loader-halo    — slow rotating gold→primary halo ring
+    • .loader-aura    — soft pulsing glow behind the icon
+    • .loader-snip    — the two scissor assemblies (fluid dual-path snip)
+    • .loader-sparkle — twinkling beauty accents
+===================================================================== */
+
+/* ---------- soft glowing aura behind the icon ---------- */
+.loader-aura {
+  position: absolute;
+  inset: -8px;
+  border-radius: 9999px;
+  background: radial-gradient(
+    circle,
+    rgba(184, 134, 11, 0.35) 0%,
+    rgba(120, 86, 0, 0.16) 45%,
+    transparent 72%
+  );
+  filter: blur(2px);
+  animation: loader-aura-pulse 2.4s ease-in-out infinite;
+}
+
+/* ---------- slow rotating halo ring ---------- */
+.loader-halo {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 285deg,
+    var(--color-brand-gold) 330deg,
+    var(--color-primary) 360deg
+  );
+
+  /* punch a hole to form a ring of ~5px thickness */
+  -webkit-mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 5px),
+    #000 calc(100% - 4px)
+  );
+  mask: radial-gradient(farthest-side, transparent calc(100% - 5px), #000 calc(100% - 4px));
+
+  animation: loader-halo-spin 3.5s linear infinite;
+  filter: drop-shadow(0 0 6px rgba(184, 134, 11, 0.4));
+}
+
+/* ---------- the SVG scissors ---------- */
+.loader-scissors {
+  overflow: visible;
+}
+
+/* solid brand-gold details (sparkles + pivot) */
+.loader-solid {
+  fill: var(--color-brand-gold);
+}
+
+/* the two blade+handle assemblies — a fluid snip around the pivot */
+.loader-snip {
+  animation-duration: 1.5s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.loader-snip--left {
+  animation-name: loader-snip-open;
+}
+
+.loader-snip--right {
+  animation-name: loader-snip-close;
+}
+
+/* twinkling beauty accents */
+.loader-sparkle {
+  animation: loader-twinkle 2.2s ease-in-out infinite;
+}
+
+.loader-sparkle--delay {
+  animation-delay: 0.55s;
+}
+
+/* ---------- keyframes ---------- */
+
+/* rotate the halo ring */
+@keyframes loader-halo-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* gentle glow breathing */
+@keyframes loader-aura-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(0.94);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+}
+
+/* scissors closing (blades sweep toward each other) */
+@keyframes loader-snip-open {
+  0%,
+  100% {
+    transform: rotate(-9deg);
+  }
+  50% {
+    transform: rotate(9deg);
+  }
+}
+
+/* scissors opening (blades sweep apart) */
+@keyframes loader-snip-close {
+  0%,
+  100% {
+    transform: rotate(9deg);
+  }
+  50% {
+    transform: rotate(-9deg);
+  }
+}
+
+/* gentle sparkle twinkle */
+@keyframes loader-twinkle {
+  0%,
+  100% {
+    opacity: 0.85;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.15;
+    transform: scale(0.55);
+  }
+}
+
+/* ---------- accessibility: respect reduced-motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .loader-halo,
+  .loader-aura,
+  .loader-snip,
+  .loader-sparkle {
+    animation: none;
+  }
+}

@@ -1,0 +1,22 @@
+/* =====================================================================
+  Admin Bookings — presentation-only styles.
+  Layout, colors, and typography are handled via Tailwind theme tokens
+  (--color-*, --radius-* in src/styles.css). This file only holds subtle
+  entrance animations for a polished, luxurious feel.
+===================================================================== */
+
+/* soft fade + rise for the bookings content on load */
+@keyframes admin-bookings-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-admin-bookings-fade-up {
+  animation: admin-bookings-fade-up 0.4s ease-out both;
+}

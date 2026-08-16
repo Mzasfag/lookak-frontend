@@ -1,0 +1,5 @@
+
+> lookak@0.0.0 build
+> ng build
+
+❯ Building...

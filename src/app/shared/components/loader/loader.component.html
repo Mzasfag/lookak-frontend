@@ -1,0 +1,127 @@
+<!-- =====================================================================
+  Loader / Barber & Beauty — Lookak (UI-only, no backend logic).
+  A bespoke salon animation: an SVG hair-styling scissor (dual-path snip)
+  stroked with the brand gold→primary gradient, wrapped in a soft glowing
+  aura and a slow rotating halo ring inside a luxury medallion, on a
+  --color-surface backdrop. Matches the Lookak beauty/salon brand.
+===================================================================== -->
+<div
+  [class]="
+    fullScreen()
+      ? 'fixed inset-0 z-50 flex flex-col items-center justify-center gap-6 bg-surface/80 backdrop-blur-xl'
+      : 'flex w-full flex-col items-center justify-center gap-5 py-8'
+  "
+>
+  <!-- luxury medallion: aura + halo ring + animated scissors -->
+  <div
+    class="relative flex h-24 w-24 items-center justify-center rounded-full bg-surface-container-lowest shadow-xl shadow-primary/15 ring-1 ring-outline-variant/30"
+    role="status"
+    aria-live="polite"
+    [attr.aria-label]="label() || 'جارٍ تنسيق إطلالتك…'"
+  >
+    <!-- soft glowing aura -->
+    <span class="loader-aura" aria-hidden="true"></span>
+
+    <!-- slow rotating halo ring -->
+    <span class="loader-halo" aria-hidden="true"></span>
+
+    <!-- animated hair-styling scissors -->
+    <svg
+      class="loader-scissors relative h-16 w-16"
+      viewBox="0 0 64 64"
+      fill="none"
+      aria-hidden="true"
+    >
+      <defs>
+        <linearGradient
+          id="loader-gold-grad"
+          gradientUnits="userSpaceOnUse"
+          x1="10"
+          y1="52"
+          x2="54"
+          y2="12"
+        >
+          <stop offset="0%" style="stop-color: var(--color-primary)" />
+          <stop offset="100%" style="stop-color: var(--color-brand-gold)" />
+        </linearGradient>
+      </defs>
+
+      <!-- twinkling beauty accents -->
+      <g transform="translate(9 11)">
+        <g class="loader-sparkle">
+          <path
+            class="loader-solid"
+            d="M0 -3.2 L0.9 -0.9 L3.2 0 L0.9 0.9 L0 3.2 L-0.9 0.9 L-3.2 0 L-0.9 -0.9 Z"
+          />
+        </g>
+      </g>
+      <g transform="translate(55 11)">
+        <g class="loader-sparkle loader-sparkle--delay">
+          <path
+            class="loader-solid"
+            d="M0 -3.2 L0.9 -0.9 L3.2 0 L0.9 0.9 L0 3.2 L-0.9 0.9 L-3.2 0 L-0.9 -0.9 Z"
+          />
+        </g>
+      </g>
+
+      <!-- scissors: pivot centered at (32,34) in the viewBox -->
+      <g transform="translate(32 34)">
+        <!-- left blade + handle (dual-path snip) -->
+        <g class="loader-snip loader-snip--left">
+          <path
+            d="M0 0 L-19 -25"
+            stroke="url(#loader-gold-grad)"
+            stroke-width="3.5"
+            stroke-linecap="round"
+          />
+          <path
+            d="M0 0 L-8.5 12.5"
+            stroke="url(#loader-gold-grad)"
+            stroke-width="3"
+            stroke-linecap="round"
+          />
+          <circle
+            cx="-11.5"
+            cy="17"
+            r="5.5"
+            stroke="url(#loader-gold-grad)"
+            stroke-width="3"
+          />
+        </g>
+
+        <!-- right blade + handle -->
+        <g class="loader-snip loader-snip--right">
+          <path
+            d="M0 0 L19 -25"
+            stroke="url(#loader-gold-grad)"
+            stroke-width="3.5"
+            stroke-linecap="round"
+          />
+          <path
+            d="M0 0 L8.5 12.5"
+            stroke="url(#loader-gold-grad)"
+            stroke-width="3"
+            stroke-linecap="round"
+          />
+          <circle
+            cx="11.5"
+            cy="17"
+            r="5.5"
+            stroke="url(#loader-gold-grad)"
+            stroke-width="3"
+          />
+        </g>
+
+        <!-- pivot -->
+        <circle class="loader-solid" r="2.6" />
+      </g>
+    </svg>
+  </div>
+
+  <!-- helper label (beauty-themed default) -->
+  @if (label()) {
+    <p class="text-sm font-bold tracking-wide text-on-surface-variant">{{ label() }}</p>
+  } @else {
+    <p class="text-sm font-bold tracking-wide text-on-surface-variant">جارٍ تنسيق إطلالتك…</p>
+  }
+</div>

@@ -1,0 +1,486 @@
+import { Component, DestroyRef, OnInit, computed, inject, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule, FormControl, Validators } from '@angular/forms';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { forkJoin, finalize, catchError, of } from 'rxjs';
+
+import { ProvidersService } from '../../../../services/providers.service';
+import { ProviderServicesService } from '../../../../services/provider-services.service';
+import { BookingsService } from '../../../../services/bookings.service';
+import { NotifyService } from '../../../../services/notify.service';
+import { ReviewsService } from '../../../../services/reviews.service';
+import {
+  IPublicProvider,
+  IWorkingHoursEntry,
+  IProviderService,
+  IProviderPortfolioEntry,
+} from '../../../../models/provider.model';
+import { IReview } from '../../../../models/review.model';
+import { LoaderComponent } from '../../../../../shared/components/loader/loader.component';
+import { ErrorAlertComponent } from '../../../../../shared/components/error-alert/error-alert.component';
+
+/** Booking flow step progression. */
+export type BookingStep = 'services' | 'datetime' | 'confirm';
+
+/** A selectable time-slot chip. */
+export interface TimeSlotOption {
+  label: string;
+  value: string;
+  period: 'morning' | 'afternoon' | 'evening';
+}
+
+@Component({
+  selector: 'app-client-provider-details',
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterLink, LoaderComponent, ErrorAlertComponent],
+  templateUrl: './client-provider-details.component.html',
+  styleUrl: './client-provider-details.component.css',
+})
+export class ClientProviderDetailsComponent implements OnInit {
+  private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
+  private readonly providersService = inject(ProvidersService);
+  private readonly providerServicesService = inject(ProviderServicesService);
+  private readonly bookingsService = inject(BookingsService);
+  private readonly notifyService = inject(NotifyService);
+  private readonly reviewsService = inject(ReviewsService);
+  private readonly destroyRef = inject(DestroyRef);
+
+  // -------------------------------------------------------------------------
+  // Page-level state
+  // -------------------------------------------------------------------------
+  readonly providerId = signal<string>('');
+  readonly provider = signal<IPublicProvider | null>(null);
+  readonly services = signal<IProviderService[]>([]);
+  readonly isLoading = signal(true);
+  readonly hasError = signal(false);
+  readonly errorMessage = signal('');
+
+  // -------------------------------------------------------------------------
+  // Gallery state
+  // -------------------------------------------------------------------------
+  readonly portfolioImages = signal<IProviderPortfolioEntry[]>([]);
+
+  // -------------------------------------------------------------------------
+  // Reviews state
+  // -------------------------------------------------------------------------
+  readonly reviews = signal<IReview[]>([]);
+  readonly isReviewsLoading = signal(false);
+  readonly reviewsError = signal('');
+  readonly isSubmittingReview = signal(false);
+  readonly showReviewForm = signal(false);
+  readonly hoverRating = signal(0);
+  readonly reviewRating = new FormControl<number>(0, [Validators.required, Validators.min(1), Validators.max(5)]);
+  readonly reviewComment = new FormControl<string>('', [Validators.maxLength(500)]);
+
+  // -------------------------------------------------------------------------
+  // Booking flow state
+  // -------------------------------------------------------------------------
+  readonly currentStep = signal<BookingStep>('services');
+  readonly selectedServiceId = signal<string | null>(null);
+  readonly selectedDate = signal<string>('');
+  readonly selectedTimeSlot = signal<string>('');
+  readonly availableSlots = signal<string[]>([]);
+  readonly isSlotsLoading = signal(false);
+  readonly slotsError = signal('');
+  readonly isBooking = signal(false);
+  readonly showConfirmModal = signal(false);
+
+  private readonly currencyFmt = new Intl.NumberFormat('ar-EG-u-nu-latn', {
+    style: 'currency',
+    currency: 'EGP',
+    maximumFractionDigits: 0,
+  });
+
+  ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id') ?? '';
+    this.providerId.set(id);
+    if (!id) {
+      this.hasError.set(true);
+      this.errorMessage.set('معرّف مزود الخدمة غير صالح.');
+      this.isLoading.set(false);
+      return;
+    }
+    this.loadProviderData(id);
+    this.loadReviews(id);
+  }
+
+  // -------------------------------------------------------------------------
+  // Computed signals
+  // -------------------------------------------------------------------------
+
+  /** Only active services are bookable. */
+  readonly activeServices = computed<IProviderService[]>(() =>
+    this.services().filter((s) => s.isActive !== false),
+  );
+
+  /** The full selected-service object. */
+  readonly selectedService = computed<IProviderService | null>(() => {
+    const id = this.selectedServiceId();
+    if (!id) return null;
+    return this.services().find((s) => (s._id || s.id) === id) ?? null;
+  });
+
+  /** Calendar min-date (today). */
+  readonly minDate = computed<string>(() => new Date().toISOString().split('T')[0]);
+
+  /** Calendar max-date (30 days from now). */
+  readonly maxDate = computed<string>(() => {
+    const d = new Date();
+    d.setDate(d.getDate() + 30);
+    return d.toISOString().split('T')[0];
+  });
+
+  /** Structured time slots grouped by period for the template. */
+  readonly groupedSlots = computed<{
+    morning: TimeSlotOption[];
+    afternoon: TimeSlotOption[];
+    evening: TimeSlotOption[];
+  }>(() => {
+    const groups: { morning: TimeSlotOption[]; afternoon: TimeSlotOption[]; evening: TimeSlotOption[] } = {
+      morning: [],
+      afternoon: [],
+      evening: [],
+    };
+    for (const slot of this.availableSlots()) {
+      const hour = this.parseHour(slot);
+      let period: 'morning' | 'afternoon' | 'evening' = 'morning';
+      if (hour >= 17) period = 'evening';
+      else if (hour >= 12) period = 'afternoon';
+      groups[period].push({ label: slot, value: slot, period });
+    }
+    return groups;
+  });
+
+  /** True when the booking form can be submitted. */
+  readonly canSubmitBooking = computed<boolean>(
+    () =>
+      !!this.selectedServiceId() &&
+      !!this.selectedDate() &&
+      !!this.selectedTimeSlot() &&
+      !this.isBooking(),
+  );
+
+  readonly providerInitial = computed<string>(() => {
+    const p = this.provider();
+    if (!p) return 'ص';
+    return (p.salonName || p.name || 'صالون').trim().charAt(0).toUpperCase();
+  });
+
+  // -------------------------------------------------------------------------
+  // Data loading
+  // -------------------------------------------------------------------------
+
+  loadProviderData(id: string): void {
+    this.isLoading.set(true);
+    this.hasError.set(false);
+    this.errorMessage.set('');
+
+    forkJoin({
+      provider: this.providersService.getProviderById(id).pipe(catchError(() => of(null))),
+      services: this.providerServicesService.getProviderServices(id).pipe(catchError(() => of(null))),
+    })
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        finalize(() => this.isLoading.set(false)),
+      )
+      .subscribe({
+        next: ({ provider, services }) => {
+          const providerData = provider?.provider ?? provider?.user ?? provider;
+          if (!providerData) {
+            this.hasError.set(true);
+            this.errorMessage.set('لم يتم العثور على مزود الخدمة.');
+            return;
+          }
+          this.provider.set(providerData);
+          this.services.set(services?.services ?? []);
+        },
+        error: () => {
+          this.hasError.set(true);
+          this.errorMessage.set('تعذر تحميل بيانات مزود الخدمة.');
+        },
+      });
+  }
+
+  // -------------------------------------------------------------------------
+  // Booking flow actions
+  // -------------------------------------------------------------------------
+
+  selectService(serviceId: string): void {
+    this.selectedServiceId.set(serviceId);
+    this.selectedDate.set('');
+    this.selectedTimeSlot.set('');
+    this.availableSlots.set([]);
+    this.slotsError.set('');
+    this.currentStep.set('datetime');
+  }
+
+  onDateChange(date: string): void {
+    this.selectedDate.set(date);
+    this.selectedTimeSlot.set('');
+    if (date && this.selectedServiceId()) {
+      this.loadAvailableSlots();
+    }
+  }
+
+  loadAvailableSlots(): void {
+    const serviceId = this.selectedServiceId();
+    const date = this.selectedDate();
+    if (!serviceId || !date) return;
+
+    this.isSlotsLoading.set(true);
+    this.slotsError.set('');
+    this.availableSlots.set([]);
+
+    this.bookingsService
+      .getAvailableSlots(this.providerId(), serviceId, date)
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        finalize(() => this.isSlotsLoading.set(false)),
+      )
+      .subscribe({
+        next: (res) => {
+          this.availableSlots.set(res?.availableSlots ?? res?.slots ?? []);
+        },
+        error: (err) => {
+          this.slotsError.set(err?.error?.message || 'تعذر تحميل المواعيد المتاحة.');
+        },
+      });
+  }
+
+  selectTimeSlot(slot: string): void {
+    this.selectedTimeSlot.set(slot);
+  }
+
+  goToConfirm(): void {
+    if (this.canSubmitBooking()) {
+      this.currentStep.set('confirm');
+      this.showConfirmModal.set(true);
+    }
+  }
+
+  goBack(step: BookingStep): void {
+    this.currentStep.set(step);
+    this.showConfirmModal.set(false);
+    if (step === 'services') {
+      this.selectedServiceId.set(null);
+      this.selectedDate.set('');
+      this.selectedTimeSlot.set('');
+      this.availableSlots.set([]);
+    }
+  }
+
+  submitBooking(): void {
+    if (!this.canSubmitBooking()) return;
+    this.isBooking.set(true);
+
+    const payload = {
+      providerId: this.providerId(),
+      serviceId: this.selectedServiceId(),
+      date: this.selectedDate(),
+      timeSlot: this.selectedTimeSlot(),
+    };
+
+    this.bookingsService
+      .createBooking(payload)
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        finalize(() => this.isBooking.set(false)),
+      )
+      .subscribe({
+        next: () => {
+          this.notifyService.showSuccess('تم إنشاء الحجز بنجاح! 🎉');
+          this.showConfirmModal.set(false);
+          this.router.navigate(['/client/bookings']);
+        },
+        error: (err) => {
+          this.notifyService.showError(
+            err?.error?.message || 'تعذر إنشاء الحجز. يرجى المحاولة لاحقاً.',
+          );
+        },
+      });
+  }
+
+  closeModal(): void {
+    this.showConfirmModal.set(false);
+    this.currentStep.set('datetime');
+  }
+
+  // -------------------------------------------------------------------------
+  // Presentation helpers
+  // -------------------------------------------------------------------------
+
+  getWorkingStatus(wh?: IWorkingHoursEntry[]): { isOpen: boolean; text: string } {
+    if (!wh || wh.length === 0) return { isOpen: true, text: 'مفتوح اليوم' };
+    const today = new Date().getDay();
+    const entry = wh.find((w) => w.dayOfWeek === today);
+    if (entry?.isOpen) {
+      const t = entry.startTime && entry.endTime ? `${entry.startTime} - ${entry.endTime}` : 'مفتوح اليوم';
+      return { isOpen: true, text: t };
+    }
+    return { isOpen: false, text: 'مغلق اليوم' };
+  }
+
+  getCoverGradient(id: string): string {
+    const g = [
+      'from-amber-600/90 via-primary to-primary-dark',
+      'from-emerald-600/90 via-teal-700 to-slate-900',
+      'from-indigo-600/90 via-purple-700 to-slate-900',
+      'from-rose-600/90 via-pink-700 to-amber-900',
+      'from-brand-gold/80 via-amber-700 to-slate-900',
+    ];
+    let hash = 0;
+    for (let i = 0; i < (id || '').length; i++) hash = id.charCodeAt(i) + ((hash << 5) - hash);
+    return g[Math.abs(hash) % g.length];
+  }
+
+  formatCurrency(val: number | null | undefined): string {
+    if (val == null || Number.isNaN(val)) return '—';
+    return this.currencyFmt.format(val);
+  }
+
+  formatDuration(minutes: number | null | undefined): string {
+    if (minutes == null || Number.isNaN(minutes) || minutes <= 0) return '—';
+    if (minutes < 60) return `${minutes} دقيقة`;
+    if (minutes % 60 === 0) return `${minutes / 60} ساعة`;
+    return `${Math.floor(minutes / 60)} س و${minutes % 60} د`;
+  }
+
+  formatSelectedDate(): string {
+    const d = this.selectedDate();
+    if (!d) return '—';
+    const dt = new Date(d);
+    if (Number.isNaN(dt.getTime())) return d;
+    return dt.toLocaleDateString('ar-EG-u-nu-latn', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+  }
+
+  private parseHour(slot: string): number {
+    const match = slot.match(/^(\d{1,2})/);
+    return match ? parseInt(match[1], 10) : 0;
+  }
+
+  getServiceId(svc: IProviderService): string {
+    return svc._id || svc.id || '';
+  }
+
+  getProviderId(): string {
+    const p = this.provider();
+    return p?._id || p?.id || this.providerId();
+  }
+
+  // -------------------------------------------------------------------------
+  // Reviews & Ratings
+  // -------------------------------------------------------------------------
+
+  toggleReviewForm(): void {
+    this.showReviewForm.update((v) => !v);
+    if (this.showReviewForm()) {
+      this.reviewRating.reset(0);
+      this.reviewComment.reset('');
+      this.hoverRating.set(0);
+    }
+  }
+
+  setRating(rating: number): void {
+    this.reviewRating.setValue(rating);
+  }
+
+  onStarHover(rating: number): void {
+    this.hoverRating.set(rating);
+  }
+
+  onStarLeave(): void {
+    this.hoverRating.set(0);
+  }
+
+  getDisplayRating(): number {
+    return this.hoverRating() || this.reviewRating.value || 0;
+  }
+
+  submitReview(): void {
+    if (this.reviewRating.invalid || this.isSubmittingReview()) return;
+
+    const payload = {
+      providerId: this.providerId(),
+      rating: this.reviewRating.value || 0,
+      comment: this.reviewComment.value?.trim() || undefined,
+    };
+
+    this.isSubmittingReview.set(true);
+    this.reviewsService
+      .createReview(payload)
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        finalize(() => this.isSubmittingReview.set(false)),
+      )
+      .subscribe({
+        next: (response) => {
+          this.notifyService.showSuccess('تم إضافة تقييمك بنجاح! 🎉');
+          this.reviews.update((list) => [response.review, ...list]);
+          this.showReviewForm.set(false);
+          this.reviewRating.reset(0);
+          this.reviewComment.reset('');
+        },
+        error: (err) => {
+          this.notifyService.showError(
+            err?.error?.message || 'تعذر إضافة التقييم. يرجى المحاولة لاحقاً.',
+          );
+        },
+      });
+  }
+
+  getReviewerName(review: IReview): string {
+    return review.clientId?.name || 'عميل';
+  }
+
+  getReviewerInitial(review: IReview): string {
+    const name = this.getReviewerName(review);
+    return name.charAt(0).toUpperCase();
+  }
+
+  formatReviewDate(dateStr?: string): string {
+    if (!dateStr) return '';
+    const date = new Date(dateStr);
+    if (Number.isNaN(date.getTime())) return '';
+    
+    const now = new Date();
+    const diffMs = now.getTime() - date.getTime();
+    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+    
+    if (diffDays === 0) return 'اليوم';
+    if (diffDays === 1) return 'أمس';
+    if (diffDays < 7) return `منذ ${diffDays} أيام`;
+    if (diffDays < 30) return `منذ ${Math.floor(diffDays / 7)} أسابيع`;
+    if (diffDays < 365) return `منذ ${Math.floor(diffDays / 30)} شهور`;
+    return `منذ ${Math.floor(diffDays / 365)} سنة`;
+  }
+
+  getStarArray(rating: number): boolean[] {
+    return Array.from({ length: 5 }, (_, i) => i < rating);
+  }
+
+  getRatingBreakdown(): { stars: number; count: number; percentage: number }[] {
+    const reviews = this.reviews();
+    const total = reviews.length;
+    if (total === 0) return [];
+
+    const breakdown = [5, 4, 3, 2, 1].map((stars) => {
+      const count = reviews.filter((r) => Math.round(r.rating) === stars).length;
+      const percentage = (count / total) * 100;
+      return { stars, count, percentage };
+    });
+    return breakdown;
+  }
+
+  getAverageRating(): number {
+    const reviews = this.reviews();
+    if (reviews.length === 0) return 0;
+    const sum = reviews.reduce((acc, r) => acc + r.rating, 0);
+    return sum / reviews.length;
+  }
+}

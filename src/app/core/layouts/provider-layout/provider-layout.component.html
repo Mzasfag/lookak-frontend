@@ -1,0 +1,64 @@
+<div class="flex min-h-screen items-stretch bg-background text-on-surface">
+  <!-- Sidebar: sticky column on desktop, off-canvas drawer on mobile -->
+  <app-provider-sidebar [isOpen]="isSidebarOpen()" (closed)="closeSidebar()" />
+
+  <!-- Mobile drawer backdrop -->
+  @if (isSidebarOpen()) {
+    <div
+      data-testid="drawer-backdrop"
+      class="fixed inset-0 z-30 bg-black/40 backdrop-blur-sm lg:hidden"
+      (click)="closeSidebar()"
+    ></div>
+  }
+
+  <!-- Main content -->
+  <div class="flex min-w-0 flex-1 flex-col">
+    <!-- Top header: salon greeting + status indicator + logout -->
+    <header
+      class="  flex items-center gap-3 border-b border-outline-variant/30 bg-surface-container-lowest/90 px-4 py-3 shadow-sm backdrop-blur sm:px-6"
+    >
+      <button
+        type="button"
+        (click)="toggleSidebar()"
+        [attr.aria-label]="'فتح القائمة الجانبية'"
+        class="inline-flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-lg text-on-surface transition duration-200 hover:bg-surface-container hover:text-primary lg:hidden"
+      >
+        <i class="pi pi-bars text-lg"></i>
+      </button>
+
+      <!-- Greeting -->
+      <div class="min-w-0 flex-1">
+        <p class="truncate text-xs font-bold text-on-surface-variant">أهلاً بك 👋</p>
+        <p class="truncate text-base font-extrabold text-on-surface">{{ displaySalonName() }}</p>
+      </div>
+
+      <!-- Status indicator -->
+      <span
+        [class]="statusPillClass()"
+        class="inline-flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-extrabold ring-1"
+      >
+        <span class="h-1.5 w-1.5 rounded-full bg-current"></span>
+        {{ statusLabel() }}
+      </span>
+
+      <!-- Logout -->
+      <!-- Notifications -->
+      <app-notification-dropdown />
+
+      <button
+        type="button"
+        (click)="onLogout()"
+        class="inline-flex shrink-0 cursor-pointer items-center gap-2 rounded-lg bg-red-500/10 px-3 py-2 text-sm font-extrabold text-red-600 transition duration-200 hover:bg-red-500/15 active:scale-[0.98]"
+      >
+        <i class="pi pi-sign-out text-sm"></i>
+        <span class="hidden sm:inline">تسجيل الخروج</span>
+      </button>
+    </header>
+
+    <!-- Sub-page outlet -->
+    <main class="min-w-0 flex-1">
+      <router-outlet />
+    </main>
+  </div>
+</div>
+

@@ -1,0 +1,22 @@
+/* =====================================================================
+  Admin Dashboard — presentation-only styles.
+  Layout, colors, and typography are handled via Tailwind theme tokens
+  (--color-*, --radius-* in src/styles.css). This file only holds a
+  subtle entrance animation for a polished, luxurious feel.
+===================================================================== */
+
+/* soft fade + rise for the dashboard content on load */
+@keyframes dashboard-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-dashboard-fade-up {
+  animation: dashboard-fade-up 0.4s ease-out both;
+}

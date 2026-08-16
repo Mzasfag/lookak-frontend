@@ -1,0 +1,63 @@
+/* =====================================================================
+  Register / Sign Up — presentation-only styles.
+  Layout, colors, and typography are handled via Tailwind theme tokens
+  (--color-*, --radius-* in src/styles.css). This file only holds a
+  subtle entrance + glow animation for a polished, luxurious feel that
+  matches the login screen.
+===================================================================== */
+
+/* soft fade + rise for the auth card on load */
+@keyframes register-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-register-fade-up {
+  animation: register-fade-up 0.55s ease-out both;
+}
+
+/* slow float for the decorative background glows */
+@keyframes register-glow-float {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-18px) scale(1.05);
+  }
+}
+
+.animate-register-glow-float {
+  animation: register-glow-float 9s ease-in-out infinite;
+}
+
+/* smooth reveal for the provider-only business details block */
+@keyframes field-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-field-reveal {
+  animation: field-reveal 0.35s ease-out both;
+}
+
+/* accessibility: respect reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-register-fade-up,
+  .animate-register-glow-float,
+  .animate-field-reveal {
+    animation: none;
+  }
+}

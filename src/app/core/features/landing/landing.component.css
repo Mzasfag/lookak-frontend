@@ -1,0 +1,74 @@
+/* =====================================================================
+  Landing / Home page — presentation-only styles.
+  Layout, colors, and typography are handled via Tailwind theme tokens
+  (--color-*, --radius-* in src/styles.css). This file only holds the
+  bespoke entrance + ambient animations for a luxurious feel, matching
+  the login/register screens.
+===================================================================== */
+
+/* soft fade + rise for hero content on load */
+@keyframes landing-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-landing-fade-up {
+  animation: landing-fade-up 0.7s ease-out both;
+}
+
+/* slow ambient float for the decorative background glows */
+@keyframes landing-glow-float {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.06);
+  }
+}
+
+.animate-landing-glow-float {
+  animation: landing-glow-float 10s ease-in-out infinite;
+}
+
+/* gentle float for the hero floating chips */
+@keyframes landing-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-landing-float {
+  animation: landing-float 5s ease-in-out infinite;
+}
+
+/* slow rotation for the decorative dashed ring */
+@keyframes landing-spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-landing-spin-slow {
+  animation: landing-spin-slow 40s linear infinite;
+}
+
+/* accessibility: respect reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-landing-fade-up,
+  .animate-landing-glow-float,
+  .animate-landing-float,
+  .animate-landing-spin-slow {
+    animation: none;
+  }
+}

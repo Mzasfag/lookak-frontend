@@ -1,0 +1,24 @@
+/* Provider — Salon profile & portfolio. Structural visual treatment is kept in
+   Tailwind; this file covers component-specific animation and motion settings. */
+
+@keyframes provider-profile-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-provider-profile-fade-up {
+  animation: provider-profile-fade-up 0.4s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-provider-profile-fade-up {
+    animation: none;
+  }
+}

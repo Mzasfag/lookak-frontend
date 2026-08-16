@@ -1,0 +1,37 @@
+/* ============================================================================
+   Provider — Services & prices (خدماتي وأسعارها).
+   Soft reveal + dialog pop animations, matching the other provider pages.
+   ============================================================================ */
+
+/* Soft fade + rise for the services content on load */
+@keyframes provider-services-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-provider-services-fade-up {
+  animation: provider-services-fade-up 0.4s ease-out both;
+}
+
+/* Gentle pop for the service form + delete dialogs */
+@keyframes provider-services-modal-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-provider-services-modal-pop {
+  animation: provider-services-modal-pop 0.2s ease-out both;
+}
+

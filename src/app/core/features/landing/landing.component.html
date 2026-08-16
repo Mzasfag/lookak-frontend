@@ -1,0 +1,673 @@
+<!-- =====================================================================
+  Landing / Home page — Lookak (default root route for all visitors).
+  Sections: sticky header → luxury hero (live top salons + derived stats)
+  → "Why Lookak" features → featured salons (live) → CTA banner → footer.
+  RTL-friendly (document default) and fully responsive.
+  Theme tokens via Tailwind utilities: --color-background, --color-primary,
+  --color-brand-gold, --color-on-surface, --color-on-surface-variant,
+  --color-surface-container-lowest, --color-surface-container,
+  --color-surface-container-high, --color-outline-variant, --radius-lg,
+  --radius-xl. Font: Almarai (global).
+===================================================================== -->
+
+<!-- ===================== HEADER ===================== -->
+<header
+  class="sticky top-0 z-50 border-b border-outline-variant/60 bg-background/85 backdrop-blur-md"
+>
+  <div class="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
+    <!-- brand -->
+    <a
+      routerLink="/"
+      class="group flex shrink-0 items-center gap-3"
+      aria-label="لوَكك - الصفحة الرئيسية"
+    >
+      <span
+        class="grid h-11 w-11 place-items-center rounded-full border border-brand-gold/40 bg-gradient-to-br from-brand-gold/15 to-primary/15 shadow-inner transition-transform duration-300 group-hover:scale-105"
+      >
+        <img
+          src="lookak-without-bg.png"
+          alt="شعار لوَكك"
+          class="h-9 w-9 rounded-full object-cover"
+        />
+      </span>
+      <span class="flex flex-col leading-none">
+        <span class="text-2xl font-extrabold tracking-tight text-primary">لوَكك</span>
+        <span class="mt-1 hidden text-[10px] font-bold tracking-widest text-brand-gold sm:block"
+          >جمالك… عنوانه</span
+        >
+      </span>
+    </a>
+
+    <!-- quick actions -->
+    <nav class="flex items-center gap-2 sm:gap-3" aria-label="إجراءات سريعة">
+      <a
+        routerLink="/login"
+        class="hidden items-center gap-2 rounded-lg border border-outline-variant bg-surface-container-lowest px-4 py-2.5 text-sm font-bold text-on-surface transition-colors duration-200 hover:border-brand-gold/60 hover:text-brand-gold sm:flex"
+      >
+        <i class="pi pi-user text-xs"></i>
+        تسجيل الدخول
+      </a>
+      <a
+        routerLink="/login"
+        class="grid h-10 w-10 place-items-center rounded-lg border border-outline-variant bg-surface-container-lowest text-primary sm:hidden"
+        aria-label="تسجيل الدخول"
+      >
+        <i class="pi pi-user text-sm"></i>
+      </a>
+      <a
+        routerLink="/register"
+        class="group flex items-center gap-2 rounded-lg bg-gradient-to-l from-brand-gold to-primary px-4 py-2.5 text-sm font-extrabold text-white shadow-lg shadow-primary/25 transition duration-200 hover:shadow-xl hover:shadow-primary/30 active:scale-[0.98]"
+      >
+        <i
+          class="pi pi-user-plus text-xs transition-transform duration-200 group-hover:-translate-x-0.5"
+        ></i>
+        انضم إلينا
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <!-- ===================== HERO ===================== -->
+  <section
+    class="relative overflow-hidden bg-gradient-to-bl from-brand-gold via-primary to-primary text-white"
+  >
+    <!-- decorative layers -->
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0">
+      <div
+        class="animate-landing-glow-float absolute -start-32 -top-32 h-96 w-96 rounded-full bg-brand-gold/25 blur-3xl"
+      ></div>
+      <div
+        class="animate-landing-glow-float absolute -bottom-40 -end-24 h-[28rem] w-[28rem] rounded-full bg-primary-fixed/15 blur-3xl"
+        style="animation-delay: 2.2s"
+      ></div>
+      <div
+        class="absolute inset-0 opacity-[0.07]"
+        style="
+          background-image:
+            linear-gradient(rgba(255, 255, 255, 0.7) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.7) 1px, transparent 1px);
+          background-size: 44px 44px;
+        "
+      ></div>
+      <div class="absolute inset-0 bg-black/20"></div>
+    </div>
+
+    <!-- soft transition into the background section -->
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-background to-transparent"
+    ></div>
+
+    <div class="relative mx-auto max-w-7xl px-4 pb-20 pt-14 sm:px-6 lg:px-8 lg:pb-28 lg:pt-20">
+      <div class="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]">
+        <!-- copy -->
+        <div class="animate-landing-fade-up space-y-7 text-center lg:text-start">
+          <span
+            class="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-xs font-bold tracking-wide backdrop-blur-sm"
+          >
+            <i class="pi pi-sparkles text-brand-gold"></i>
+            منصة لوَكك لحجوزات التجميل والعناية
+          </span>
+
+          <h1 class="text-4xl font-extrabold leading-[1.4] sm:text-5xl lg:text-6xl">
+            اكتشف أرقى صالونات التجميل والعناية
+            <span class="relative mt-3 block text-brand-gold">
+              واحجز موعدك بكل سهولة
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 220 12"
+                fill="none"
+                class="absolute inset-x-0 -bottom-4 mx-auto h-3 w-48 text-primary-fixed sm:w-64"
+              >
+                <path
+                  d="M3 8.5C60 2.5 142 2 217 6.5"
+                  stroke="currentColor"
+                  stroke-width="5"
+                  stroke-linecap="round"
+                  opacity="0.9"
+                />
+              </svg>
+            </span>
+          </h1>
+
+          <p class="mx-auto text-base leading-relaxed text-white/85 sm:text-lg lg:mx-0">
+            من تسريحة الشعر إلى جلسات العناية الفاخرة — لوَكك تجمع لك نخبة الخبراء وتوصلّك إلى موعدك
+            المثالي في ثوانٍ معدودة.
+          </p>
+
+          <!-- dual CTAs -->
+          <div class="flex flex-col items-center justify-center gap-3 sm:flex-row lg:justify-start">
+            <button
+              type="button"
+              (click)="scrollToSection('features')"
+              class="group flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-gradient-to-l from-brand-gold to-primary px-7 py-4 text-base font-extrabold text-white shadow-xl shadow-black/25 transition duration-200 hover:shadow-2xl hover:shadow-black/30 active:scale-[0.98] sm:w-auto"
+            >
+              استكشف الخدمات والحجوزات
+              <i
+                class="pi pi-arrow-left text-sm transition-transform duration-200 group-hover:-translate-x-1"
+              ></i>
+            </button>
+            <a
+              routerLink="/register"
+              [queryParams]="{ role: 'provider' }"
+              class="group flex w-full items-center justify-center gap-2 rounded-xl border border-white/40 bg-white/10 px-7 py-4 text-base font-bold text-white backdrop-blur-sm transition duration-200 hover:border-brand-gold hover:bg-white/20 active:scale-[0.98] sm:w-auto"
+            >
+              <i
+                class="pi pi-briefcase text-sm text-brand-gold transition-transform duration-200 group-hover:-translate-x-0.5"
+              ></i>
+              انضم كمزود خدمة / صالون
+            </a>
+          </div>
+
+          <!-- live platform stats (derived from GET /api/providers) -->
+          @if (isLoading()) {
+            <dl class="grid grid-cols-3 gap-3 pt-4 sm:gap-4" aria-hidden="true">
+              @for (skeleton of [0, 1, 2]; track skeleton) {
+                <div
+                  class="animate-pulse rounded-xl border border-white/15 bg-white/10 p-3 text-center backdrop-blur-sm sm:p-4"
+                >
+                  <div class="mx-auto h-7 w-16 rounded-md bg-white/25 sm:h-8"></div>
+                  <div class="mx-auto mt-2 h-2.5 w-20 rounded-md bg-white/15"></div>
+                </div>
+              }
+            </dl>
+          } @else if (heroStats(); as stats) {
+            <dl class="grid grid-cols-3 gap-3 pt-4 sm:gap-4">
+              <div
+                class="rounded-xl border border-white/15 bg-white/5 p-3 text-center backdrop-blur-sm sm:p-4"
+              >
+                <dt class="text-2xl font-extrabold text-brand-gold sm:text-3xl">
+                  {{ formatNumber(stats.salonsCount) }}
+                </dt>
+                <dd class="mt-1 text-[11px] font-semibold text-white/80 sm:text-xs">
+                  صالون نشط
+                </dd>
+              </div>
+              <div
+                class="rounded-xl border border-white/15 bg-white/5 p-3 text-center backdrop-blur-sm sm:p-4"
+              >
+                <dt class="text-2xl font-extrabold text-brand-gold sm:text-3xl">
+                  {{ formatNumber(stats.totalReviews) }}
+                </dt>
+                <dd class="mt-1 text-[11px] font-semibold text-white/80 sm:text-xs">
+                  تقييم من العملاء
+                </dd>
+              </div>
+              <div
+                class="rounded-xl border border-white/15 bg-white/5 p-3 text-center backdrop-blur-sm sm:p-4"
+              >
+                <dt class="text-2xl font-extrabold text-brand-gold sm:text-3xl">
+                  {{ stats.avgRating.toFixed(1) }}
+                </dt>
+                <dd class="mt-1 text-[11px] font-semibold text-white/80 sm:text-xs">
+                  متوسط تقييم الصالونات
+                </dd>
+              </div>
+            </dl>
+          }
+        </div>
+        <!-- hero visual (desktop only) -->
+        <div
+          class="animate-landing-fade-up relative mx-auto hidden w-full lg:block"
+          style="animation-delay: 0.15s"
+        >
+          <div
+            aria-hidden="true"
+            class="animate-landing-spin-slow absolute -inset-8 rounded-[2.5rem] border-2 border-dashed border-white/20"
+          ></div>
+          <div
+            aria-hidden="true"
+            class="absolute -inset-12 -z-10 rounded-full bg-brand-gold/25 blur-3xl"
+          ></div>
+
+          <!-- live top-rated salons panel (GET /api/providers) -->
+          <div
+            class="relative overflow-hidden rounded-2xl bg-surface-container-lowest p-5 text-on-surface shadow-2xl shadow-black/30"
+          >
+            <div
+              class="flex items-center justify-between gap-3 border-b border-outline-variant/60 pb-4"
+            >
+              <div class="flex items-center gap-3">
+                <img
+                  src="lookak-without-bg.png"
+                  alt=""
+                  class="h-11 w-11 rounded-full border border-brand-gold/30 object-cover p-0.5"
+                />
+                <div>
+                  <p class="text-sm font-extrabold">الصالونات الأعلى تقييماً</p>
+                  <p class="text-xs text-on-surface-variant">مباشرة من منصة لوَكك</p>
+                </div>
+              </div>
+              <span
+                class="rounded-full bg-primary-fixed/70 px-2.5 py-1 text-[10px] font-extrabold text-primary"
+                >مباشر من المنصة</span
+              >
+            </div>
+
+            @if (isLoading()) {
+              <ul class="mt-4 space-y-3" aria-hidden="true">
+                @for (skeleton of [0, 1, 2]; track skeleton) {
+                  <li
+                    class="animate-pulse flex items-center justify-between gap-3 rounded-xl border border-outline-variant/60 bg-surface-container/50 px-4 py-3"
+                  >
+                    <span class="space-y-2">
+                      <span class="block h-3 w-32 rounded-md bg-outline-variant/60"></span>
+                      <span class="block h-2.5 w-24 rounded-md bg-outline-variant/40"></span>
+                    </span>
+                    <span class="h-4 w-10 rounded-md bg-outline-variant/60"></span>
+                  </li>
+                }
+              </ul>
+            } @else if (loadError() && providers().length === 0) {
+              <div
+                class="mt-4 rounded-xl border border-outline-variant/60 bg-surface-container/50 px-4 py-6 text-center"
+              >
+                <p class="text-sm font-bold text-on-surface">تعذر تحميل الصالونات حالياً</p>
+                <a
+                  routerLink="/register"
+                  [queryParams]="{ role: 'provider' }"
+                  class="mt-2 inline-block text-xs font-extrabold text-primary hover:text-brand-gold"
+                >
+                  انضم كصالون وكن أول المميزين
+                </a>
+              </div>
+            } @else {
+              <ul class="mt-4 space-y-3">
+                @for (provider of topProviders(); track provider._id) {
+                  <li
+                    class="flex items-center justify-between gap-3 rounded-xl border border-outline-variant/60 bg-surface-container/50 px-4 py-3"
+                  >
+                    <span class="min-w-0">
+                      <span class="block truncate text-sm font-extrabold text-on-surface">
+                        {{ provider.salonName || provider.name }}
+                      </span>
+                      <span class="mt-0.5 block truncate text-xs text-on-surface-variant">
+                        {{ provider.address || 'صالون معتمد على لوَكك' }}
+                      </span>
+                    </span>
+                    <span
+                      class="flex shrink-0 items-center gap-1 text-sm font-extrabold text-primary"
+                    >
+                      <i class="pi pi-star-fill text-brand-gold"></i>
+                      {{ ratingLabel(provider) }}
+                    </span>
+                  </li>
+                } @empty {
+                  <li
+                    class="rounded-xl border border-outline-variant/60 bg-surface-container/50 px-4 py-6 text-center"
+                  >
+                    <p class="text-sm font-bold text-on-surface">لا يوجد صالونات مسجلة بعد</p>
+                    <p class="mt-1 text-xs text-on-surface-variant">
+                      كن أول صالون ينضم إلى لوَكك
+                    </p>
+                  </li>
+                }
+              </ul>
+            }
+
+            <a
+              routerLink="/register"
+              [queryParams]="{ role: 'client' }"
+              class="mt-4 flex items-center justify-between gap-3 rounded-xl bg-gradient-to-l from-brand-gold to-primary px-4 py-3.5 text-white transition duration-200 hover:shadow-lg hover:shadow-primary/30"
+            >
+              <span class="flex items-center gap-2 text-sm font-bold">
+                <i class="pi pi-calendar-plus"></i>
+                احجز موعدك الآن
+              </span>
+              <i class="pi pi-arrow-left text-lg text-primary-fixed"></i>
+            </a>
+          </div>
+
+          <!-- floating chips -->
+          <div
+            class="animate-landing-float absolute -start-8 -top-8 flex items-center gap-2 rounded-xl bg-surface-container-lowest px-3.5 py-2.5 text-xs font-extrabold text-on-surface shadow-xl shadow-black/25"
+          >
+            <i class="pi pi-shield text-sm text-brand-gold"></i>
+            دفع آمن ومضمون
+          </div>
+          @if (topProviderSummary(); as summary) {
+            <div
+              class="animate-landing-float absolute -bottom-7 -end-6 flex items-center gap-2 rounded-xl bg-surface-container-lowest px-3.5 py-2.5 text-xs font-extrabold text-on-surface shadow-xl shadow-black/25"
+              style="animation-delay: 1.4s"
+            >
+              <span class="flex items-center gap-1 text-brand-gold">
+                <i class="pi pi-star-fill text-sm"></i>
+                {{ summary.rating.toFixed(1) }}
+              </span>
+              تقييم {{ formatNumber(summary.reviewsCount) }} عميل
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ===================== FEATURES ===================== -->
+  <section id="features" class="scroll-mt-20 bg-background px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+    <div class="mx-auto max-w-7xl">
+      <div class="animate-landing-fade-up mx-auto max-w-2xl text-center">
+        <span
+          class="inline-flex items-center gap-2 rounded-full border border-brand-gold/30 bg-brand-gold/10 px-4 py-1.5 text-xs font-extrabold tracking-wide text-primary"
+        >
+          <i class="pi pi-star-fill text-brand-gold"></i>
+          لماذا لوَكك؟
+        </span>
+        <h2 class="mt-5 text-3xl font-extrabold leading-snug text-on-surface sm:text-4xl">
+          تجربة فاخرة… من أول ضغطة
+        </h2>
+        <p class="mt-4 text-base leading-relaxed text-on-surface-variant sm:text-lg">
+          صممنا لوَكك لتكون جسرك الذكي بين خبراء الجمال وعملائهم — بسهولة وثقة ولمسة فخامة.
+        </p>
+      </div>
+
+      <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        @for (feature of features; track feature.title) {
+          <article
+            class="group relative overflow-hidden rounded-xl border border-outline-variant/60 bg-surface-container-lowest p-7 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-gold/50 hover:shadow-xl hover:shadow-primary/10"
+          >
+            <span
+              aria-hidden="true"
+              class="pointer-events-none absolute -end-2 -top-6 select-none text-[5.5rem] font-extrabold leading-none text-primary/5 transition-colors duration-300 group-hover:text-brand-gold/10"
+            >
+              {{ '0' + ($index + 1) }}
+            </span>
+
+            <div
+              class="grid h-14 w-14 place-items-center rounded-xl bg-gradient-to-br from-brand-gold to-primary text-2xl text-white shadow-lg shadow-primary/25 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3"
+            >
+              <i [class]="feature.icon"></i>
+            </div>
+
+            <h3 class="mt-5 text-xl font-extrabold text-on-surface">{{ feature.title }}</h3>
+            <p class="mt-3 text-sm leading-relaxed text-on-surface-variant">
+              {{ feature.description }}
+            </p>
+
+            <span
+              class="mt-5 block h-0.5 w-10 rounded-full bg-gradient-to-l from-brand-gold to-primary transition-all duration-300 group-hover:w-20"
+            ></span>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FEATURED SALONS (live) ===================== -->
+  @if (isLoading() || featuredProviders().length) {
+    <section
+      id="salons"
+      class="scroll-mt-20 bg-background px-4 pb-20 sm:px-6 lg:px-8 lg:pb-28"
+    >
+      <div class="mx-auto max-w-7xl">
+        <div
+          class="animate-landing-fade-up flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end"
+        >
+          <div class="max-w-2xl">
+            <span
+              class="inline-flex items-center gap-2 rounded-full border border-brand-gold/30 bg-brand-gold/10 px-4 py-1.5 text-xs font-extrabold tracking-wide text-primary"
+            >
+              <i class="pi pi-building text-brand-gold"></i>
+              صالونات حقيقية
+            </span>
+            <h2 class="mt-5 text-3xl font-extrabold leading-snug text-on-surface sm:text-4xl">
+              أرقى الصالونات على لوَكك
+            </h2>
+            <p class="mt-4 text-base leading-relaxed text-on-surface-variant sm:text-lg">
+              صالونات وكوافيرات وباربر شوب معتمدة، مرتبة حسب تقييمات عملائهم الحقيقية.
+            </p>
+          </div>
+          <a
+            routerLink="/register"
+            [queryParams]="{ role: 'client' }"
+            class="inline-flex shrink-0 items-center gap-2 rounded-lg border border-outline-variant bg-surface-container-lowest px-4 py-2.5 text-sm font-bold text-primary transition duration-200 hover:border-brand-gold hover:bg-brand-gold/5"
+          >
+            احجز موعدك
+            <i class="pi pi-arrow-left text-xs"></i>
+          </a>
+        </div>
+
+        @if (isLoading()) {
+          <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" aria-hidden="true">
+            @for (skeleton of [0, 1, 2, 3, 4, 5, 6, 7]; track skeleton) {
+              <div
+                class="animate-pulse rounded-xl border border-outline-variant/60 bg-surface-container-lowest p-6"
+              >
+                <div class="flex items-start justify-between">
+                  <span class="h-12 w-12 rounded-xl bg-outline-variant/60"></span>
+                  <span class="h-5 w-12 rounded-full bg-outline-variant/50"></span>
+                </div>
+                <div class="mt-4 h-4 w-3/4 rounded-md bg-outline-variant/60"></div>
+                <div class="mt-2 h-3 w-1/2 rounded-md bg-outline-variant/40"></div>
+                <div class="mt-3 h-3 w-full rounded-md bg-outline-variant/40"></div>
+                <div class="mt-5 h-4 w-24 rounded-md bg-outline-variant/50"></div>
+              </div>
+            }
+          </div>
+        } @else {
+          <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            @for (provider of featuredProviders(); track provider._id) {
+              <article
+                class="group relative flex flex-col overflow-hidden rounded-xl border border-outline-variant/60 bg-surface-container-lowest p-6 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-gold/50 hover:shadow-xl hover:shadow-primary/10"
+              >
+                <div class="flex items-start justify-between gap-3">
+                  <span
+                    class="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-brand-gold to-primary text-xl text-white shadow-lg shadow-primary/25"
+                  >
+                    <i class="pi pi-building"></i>
+                  </span>
+                  <span
+                    class="flex shrink-0 items-center gap-1 rounded-full bg-brand-gold/10 px-2.5 py-1 text-xs font-extrabold text-brand-gold"
+                  >
+                    <i class="pi pi-star-fill text-[10px]"></i>
+                    {{ ratingLabel(provider) }}
+                  </span>
+                </div>
+
+                <h3
+                  class="mt-4 truncate text-lg font-extrabold text-on-surface"
+                  [title]="provider.salonName || provider.name"
+                >
+                  {{ provider.salonName || provider.name }}
+                </h3>
+                <p class="mt-1 flex items-center gap-1.5 text-xs text-on-surface-variant">
+                  <i class="pi pi-map-marker text-brand-gold"></i>
+                  <span class="truncate">{{ provider.address || 'معلومات العنوان قريباً' }}</span>
+                </p>
+
+                @if (provider.bio) {
+                  <p class="mt-3 line-clamp-2 flex-1 text-sm leading-relaxed text-on-surface-variant">
+                    {{ provider.bio }}
+                  </p>
+                } @else {
+                  <span class="mt-3 flex-1"></span>
+                }
+
+                <div
+                  class="mt-5 flex items-center justify-between border-t border-outline-variant/60 pt-4"
+                >
+                  <span class="text-xs font-bold text-on-surface-variant">
+                    {{ formatNumber(provider.reviewsCount ?? 0) }} تقييم
+                  </span>
+                  <a
+                    routerLink="/register"
+                    [queryParams]="{ role: 'client' }"
+                    class="inline-flex items-center gap-1.5 text-sm font-extrabold text-primary transition-colors hover:text-brand-gold"
+                  >
+                    احجز
+                    <i class="pi pi-arrow-left text-[10px]"></i>
+                  </a>
+                </div>
+              </article>
+            }
+          </div>
+        }
+      </div>
+    </section>
+  }
+
+  <!-- ===================== CTA BANNER ===================== -->
+  <section class="bg-background px-4 pb-20 sm:px-6 lg:px-8 lg:pb-28">
+    <div
+      class="animate-landing-fade-up relative mx-auto max-w-7xl overflow-hidden rounded-2xl bg-gradient-to-bl from-brand-gold via-primary to-primary px-6 py-14 text-center text-white shadow-2xl shadow-primary/20 sm:px-12"
+    >
+      <div aria-hidden="true" class="pointer-events-none absolute inset-0">
+        <div class="absolute -end-16 -top-20 h-64 w-64 rounded-full bg-white/10 blur-2xl"></div>
+        <div
+          class="absolute -bottom-24 -start-12 h-72 w-72 rounded-full bg-brand-gold/30 blur-2xl"
+        ></div>
+      </div>
+      <div class="relative">
+        <h2 class="text-3xl font-extrabold leading-snug sm:text-4xl">جاهز تبدأ رحلتك مع لوَكك؟</h2>
+        <p class="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-white/85">
+          سواء كنت تبحث عن موعدك المثالي أو تدير صالونك الخاص — خطوتك الأولى تبدأ الآن.
+        </p>
+        <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <a
+            routerLink="/register"
+            [queryParams]="{ role: 'client' }"
+            class="group flex w-full items-center justify-center gap-2 rounded-xl bg-surface-container-lowest px-7 py-4 text-base font-extrabold text-primary shadow-xl transition duration-200 hover:shadow-2xl active:scale-[0.98] sm:w-auto"
+          >
+            <i class="pi pi-calendar-plus text-brand-gold"></i>
+            احجز موعدك الآن
+          </a>
+          <a
+            routerLink="/register"
+            [queryParams]="{ role: 'provider' }"
+            class="group flex w-full items-center justify-center gap-2 rounded-xl border border-white/40 bg-white/10 px-7 py-4 text-base font-bold text-white backdrop-blur-sm transition duration-200 hover:border-brand-gold hover:bg-white/20 active:scale-[0.98] sm:w-auto"
+          >
+            <i class="pi pi-briefcase text-brand-gold"></i>
+            انضم كصالون أو مزود خدمة
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="bg-inverse-surface text-inverse-on-surface">
+  <div class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+    <div class="grid gap-10 md:grid-cols-4">
+      <!-- brand -->
+      <div class="md:col-span-2">
+        <a routerLink="/" class="inline-flex items-center gap-3">
+          <img
+            src="lookak-without-bg.png"
+            alt="شعار لوَكك"
+            class="h-11 w-11 rounded-full border border-brand-gold/40 object-cover p-0.5"
+          />
+          <span class="text-2xl font-extrabold text-white">لوَكك</span>
+        </a>
+        <p class="mt-4 text-sm leading-relaxed text-inverse-on-surface/70">
+          منصة متكاملة تربط نخبة صالونات التجميل والحلاقة بعملائها، وتجعل حجز موعدك تجربة فاخرة
+          وسلسة.
+        </p>
+        <div class="mt-6 flex items-center gap-2">
+          <a
+            href="#"
+            (click)="$event.preventDefault()"
+            aria-label="انستجرام"
+            class="grid h-10 w-10 place-items-center rounded-lg border border-white/15 text-inverse-on-surface/70 transition hover:border-brand-gold hover:bg-brand-gold hover:text-white"
+          >
+            <i class="pi pi-instagram text-sm"></i>
+          </a>
+          <a
+            href="#"
+            (click)="$event.preventDefault()"
+            aria-label="فيسبوك"
+            class="grid h-10 w-10 place-items-center rounded-lg border border-white/15 text-inverse-on-surface/70 transition hover:border-brand-gold hover:bg-brand-gold hover:text-white"
+          >
+            <i class="pi pi-facebook text-sm"></i>
+          </a>
+          <a
+            href="#"
+            (click)="$event.preventDefault()"
+            aria-label="تويتر"
+            class="grid h-10 w-10 place-items-center rounded-lg border border-white/15 text-inverse-on-surface/70 transition hover:border-brand-gold hover:bg-brand-gold hover:text-white"
+          >
+            <i class="pi pi-twitter text-sm"></i>
+          </a>
+          <a
+            href="#"
+            (click)="$event.preventDefault()"
+            aria-label="واتساب"
+            class="grid h-10 w-10 place-items-center rounded-lg border border-white/15 text-inverse-on-surface/70 transition hover:border-brand-gold hover:bg-brand-gold hover:text-white"
+          >
+            <i class="pi pi-whatsapp text-sm"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- quick links -->
+      <nav aria-label="روابط المنصة" class="flex flex-col gap-3 text-sm">
+        <p class="mb-1 text-sm font-extrabold text-brand-gold">المنصة</p>
+        <a routerLink="/login" class="text-inverse-on-surface/70 transition hover:text-brand-gold"
+          >تسجيل الدخول</a
+        >
+        <a
+          routerLink="/register"
+          [queryParams]="{ role: 'client' }"
+          class="text-inverse-on-surface/70 transition hover:text-brand-gold"
+          >حجز موعد</a
+        >
+        <a
+          routerLink="/register"
+          [queryParams]="{ role: 'provider' }"
+          class="text-inverse-on-surface/70 transition hover:text-brand-gold"
+          >انضم كصالون</a
+        >
+        <button
+          type="button"
+          (click)="scrollToSection('features')"
+          class="cursor-pointer text-start text-inverse-on-surface/70 transition hover:text-brand-gold"
+        >
+          لماذا لوَكك؟
+        </button>
+      </nav>
+
+      <!-- support links -->
+      <nav aria-label="روابط المساعدة" class="flex flex-col gap-3 text-sm">
+        <p class="mb-1 text-sm font-extrabold text-brand-gold">الدعم</p>
+        <a
+          href="#"
+          (click)="$event.preventDefault()"
+          class="text-inverse-on-surface/70 transition hover:text-brand-gold"
+          >الأسئلة الشائعة</a
+        >
+        <a
+          href="#"
+          (click)="$event.preventDefault()"
+          class="text-inverse-on-surface/70 transition hover:text-brand-gold"
+          >سياسة الخصوصية</a
+        >
+        <a
+          href="#"
+          (click)="$event.preventDefault()"
+          class="text-inverse-on-surface/70 transition hover:text-brand-gold"
+          >الشروط والأحكام</a
+        >
+      </nav>
+    </div>
+
+    <div
+      class="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 sm:flex-row"
+    >
+      <p class="text-xs text-inverse-on-surface/60">
+        © {{ currentYear }} لوَكك — جميع الحقوق محفوظة. تطوير
+        <a
+          href="https://www.facebook.com/mohamed.abdelaziem.52012"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hover:text-brand-gold underline transition-colors"
+        >
+          محمد عبد العظيم
+        </a>
+      </p>
+      <p class="flex items-center gap-1.5 text-xs text-inverse-on-surface/60">
+        صُنع بـ
+        <i class="pi pi-heart-fill text-brand-gold"></i>
+        لأجلك
+      </p>
+    </div>
+  </div>
+</footer>

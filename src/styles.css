@@ -1,0 +1,165 @@
+@import 'tailwindcss';
+@theme {
+  --font-sans: 'Almarai', sans-serif;
+  --font-body-lg: 'Almarai', sans-serif;
+  --font-headline-lg: 'Almarai', sans-serif;
+  --font-headline-md: 'Almarai', sans-serif;
+  --font-body-md: 'Almarai', sans-serif;
+  --font-display-lg: 'Almarai', sans-serif;
+  --font-headline-lg-mobile: 'Almarai', sans-serif;
+  --font-label-md: 'Almarai', sans-serif;
+
+  --color-surface-container: #f1eee7;
+  --color-surface-tint: #7b5800;
+  --color-on-primary-container: #fffbff;
+  --color-outline-variant: #d3c4af;
+  --color-surface-bright: #fcf9f2;
+  --color-on-surface: #1c1c18;
+  --color-primary-container: #986d00;
+  --color-primary-fixed: #ffdea6;
+  --color-on-tertiary-fixed: #001c37;
+  --color-outline: #817563;
+  --color-surface-dim: #dcdad3;
+  --color-secondary-fixed-dim: #bec8cd;
+  --color-surface-variant: #e5e2db;
+  --color-on-primary-fixed-variant: #5d4200;
+  --color-on-surface-variant: #4f4535;
+  --color-on-background: #1c1c18;
+  --color-primary-fixed-dim: #f7bd48;
+  --color-on-primary: #ffffff;
+  --color-on-tertiary-fixed-variant: #004880;
+  --color-on-tertiary-container: #fdfcff;
+  --color-secondary-container: #d8e1e6;
+  --color-on-secondary-fixed-variant: #3f484c;
+  --color-inverse-on-surface: #f3f0e9;
+  --color-tertiary-fixed: #d2e4ff;
+  --color-inverse-primary: #f7bd48;
+  --color-tertiary-container: #3477bc;
+  --color-on-secondary-container: #5b6468;
+  --color-primary: #785600;
+  --color-surface-container-high: #ebe8e1;
+  --color-tertiary-fixed-dim: #a1c9ff;
+  --color-error: #ba1a1a;
+  --color-background: #fcf9f2;
+  --color-error-container: #ffdad6;
+  --color-on-secondary-fixed: #141d21;
+  --color-surface-container-low: #f6f3ec;
+  --color-inverse-surface: #31312c;
+  --color-secondary-fixed: #dbe4e9;
+  --color-on-error-container: #93000a;
+  --color-surface-container-highest: #e5e2db;
+  --color-on-error: #ffffff;
+  --color-tertiary: #085ea2;
+  --color-surface: #fcf9f2;
+  --color-surface-container-lowest: #ffffff;
+  --color-on-tertiary: #ffffff;
+  --color-secondary: #576064;
+  --color-on-secondary: #ffffff;
+  --color-on-primary-fixed: #271900;
+
+  --color-brand-bg: #f5f2eb;
+  --color-brand-gold: #b8860b;
+  --color-brand-text: #2c3539;
+
+  --radius-DEFAULT: 0.125rem;
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.5rem;
+  --radius-full: 0.75rem;
+
+  --spacing-gutter: 1.5rem;
+  --spacing-margin-desktop: 2.5rem;
+  --spacing-xl: 3rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-xs: 0.5rem;
+  --spacing-lg: 2rem;
+  --spacing-margin-mobile: 1rem;
+  --spacing-unit: 4px;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-background);
+  color: #2c3539;
+  direction: rtl;
+  text-align: right;
+}
+
+.prime-input-container {
+  position: relative;
+}
+.prime-input-container i {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 1rem; /* RTL alignment */
+  color: rgba(44, 53, 57, 0.5);
+  pointer-events: none;
+}
+.prime-input {
+  width: 100%;
+  padding: 0.75rem 2.5rem 0.75rem 1rem; /* Right padding for icon in RTL */
+  border: 1px solid rgba(44, 53, 57, 0.2);
+  border-radius: 0.25rem;
+  background-color: #ffffff;
+  transition: all 0.2s ease-in-out;
+}
+.prime-input:focus {
+  outline: none;
+  border-color: #b8860b;
+  box-shadow: 0 0 0 2px rgba(184, 134, 11, 0.2);
+}
+.prime-btn {
+  background-color: #b8860b;
+  color: #ffffff;
+  border-radius: 0.25rem;
+  padding: 0.75rem 1.5rem;
+  transition:
+    transform 0.1s ease,
+    box-shadow 0.2s ease;
+}
+.prime-btn:active {
+  transform: scale(0.98);
+}
+.prime-btn:hover {
+  box-shadow: 0px 4px 12px rgba(44, 53, 57, 0.15);
+}
+.auth-card {
+  background-color: #ffffff;
+  border: 1px solid rgba(44, 53, 57, 0.1);
+  border-radius: 0.5rem;
+  box-shadow: 0px 4px 12px rgba(44, 53, 57, 0.05);
+}
+
+/* Custom Scrollbar for Lookak */
+::-webkit-scrollbar {
+  width: 8px; /* عرض الـ Scrollbar */
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-background, #f5f2eb); /* لون الخلفية ماشي مع الثيم */
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #b8860b; /* لون البرونز الفخم للـ Thumb */
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a06a3b; /* لون أغمق شوية عند الوقوف عليه بالماوس */
+}
+
+/* دعم متصفحات Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #b8860b #f5f2eb;
+}
+
+
+.p-toast-detail{
+color: var(--color-on-primary-fixed) !important;
+font-weight: 600 !important;
+}

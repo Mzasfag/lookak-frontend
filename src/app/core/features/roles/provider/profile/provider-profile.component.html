@@ -1,0 +1,511 @@
+<!-- Provider — Salon settings & portfolio (إعدادات الصالون والمعرض). -->
+<section class="min-h-full bg-background px-4 py-6 sm:px-6 sm:py-8 lg:px-10 lg:py-10">
+  <div class="mx-auto w-full">
+    <header class="animate-provider-profile-fade-up mb-7 sm:mb-8">
+      <h1
+        class="flex items-center gap-3 text-2xl font-extrabold tracking-tight text-on-surface sm:text-3xl"
+        data-testid="provider-profile-title"
+      >
+        <span
+          class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-gold/15 text-brand-gold ring-1 ring-brand-gold/20"
+          aria-hidden="true"
+        >
+          <i class="pi pi-id-card"></i>
+        </span>
+        إعدادات الصالون والمعرض
+      </h1>
+      <p class="mt-2  text-sm leading-7 text-on-surface-variant">
+        حدّث بيانات صالونك، وأضف صوراً لأفضل أعمالك ليتمكن العملاء من التعرّف عليك بثقة.
+      </p>
+      <div class="mt-4 h-1 w-16 rounded-full bg-gradient-to-l from-brand-gold to-primary"></div>
+    </header>
+
+    @if (isLoading()) {
+      <div
+        class="animate-provider-profile-fade-up flex min-h-80 items-center justify-center"
+        data-testid="provider-profile-loading"
+        role="status"
+        aria-label="جارٍ تحميل ملف الصالون"
+      >
+        <app-loader [fullScreen]="false"></app-loader>
+      </div>
+    } @else if (hasError()) {
+      <div
+        class="animate-provider-profile-fade-up mx-auto flex  flex-col items-center justify-center gap-5 rounded-2xl bg-surface-container-lowest px-6 py-16 text-center shadow-sm ring-1 ring-outline-variant/20 sm:px-10"
+        data-testid="provider-profile-error"
+        role="alert"
+      >
+        <span
+          class="flex h-16 w-16 items-center justify-center rounded-full bg-red-500/10 text-red-600"
+          aria-hidden="true"
+        >
+          <i class="pi pi-exclamation-triangle text-2xl"></i>
+        </span>
+        <div>
+          <p class="text-lg font-extrabold text-on-surface">تعذر تحميل البيانات</p>
+          <p class="mt-1.5 text-sm leading-relaxed text-on-surface-variant">
+            حدثت مشكلة أثناء جلب ملفك الشخصي. تأكد من اتصالك وحاول مجدداً.
+          </p>
+        </div>
+        <button
+          type="button"
+          (click)="loadProfile()"
+          data-testid="provider-profile-retry"
+          class="inline-flex items-center gap-2 rounded-lg bg-brand-gold px-5 py-2.5 text-sm font-extrabold text-white shadow-sm transition duration-200 hover:brightness-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 active:scale-[0.98]"
+        >
+          <i class="pi pi-refresh" aria-hidden="true"></i>
+          إعادة المحاولة
+        </button>
+      </div>
+    } @else {
+      <div class="grid items-start gap-6 lg:grid-cols-3">
+        <form
+          [formGroup]="profileForm"
+          (ngSubmit)="onSave()"
+          novalidate
+          class="animate-provider-profile-fade-up overflow-hidden rounded-2xl bg-surface-container-lowest shadow-sm ring-1 ring-outline-variant/20 lg:col-span-2"
+          data-testid="provider-profile-form"
+        >
+          <div
+            class="flex items-start gap-3 border-b border-outline-variant/30 bg-surface-container/60 px-5 py-4 sm:items-center sm:px-6"
+          >
+            <span
+              class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-gold/15 text-brand-gold"
+              aria-hidden="true"
+            >
+              <i class="pi pi-building"></i>
+            </span>
+            <div>
+              <h2 class="text-base font-extrabold text-on-surface">بيانات الصالون</h2>
+              <p class="mt-0.5 text-xs leading-5 text-on-surface-variant">
+                المعلومات التي تظهر للعملاء في صفحتك العامة
+              </p>
+            </div>
+          </div>
+
+          <div class="grid gap-x-4 gap-y-5 px-5 py-5 sm:grid-cols-2 sm:px-6 sm:py-6">
+            <div>
+              <label for="pp-salon-name" class="mb-1.5 block text-sm font-bold text-on-surface">
+                اسم الصالون <span class="text-red-600" aria-hidden="true">*</span>
+              </label>
+              <input
+                id="pp-salon-name"
+                type="text"
+                formControlName="salonName"
+                autocomplete="organization"
+                maxlength="80"
+                placeholder="مثال: صالون لمسة روز"
+                [attr.aria-invalid]="fieldInvalid(profileForm.controls.salonName) ? 'true' : null"
+                [attr.aria-describedby]="
+                  fieldInvalid(profileForm.controls.salonName) ? 'pp-salon-name-error' : null
+                "
+                [class.border-red-500]="fieldInvalid(profileForm.controls.salonName)"
+                class="w-full rounded-lg border border-outline-variant bg-surface-container-lowest px-3.5 py-2.5 text-sm text-on-surface transition duration-200 placeholder:text-on-surface-variant/60 focus:border-brand-gold focus:outline-none focus:ring-2 focus:ring-brand-gold/25"
+              />
+              @if (fieldInvalid(profileForm.controls.salonName)) {
+                <p id="pp-salon-name-error" class="mt-1.5 text-xs font-bold text-red-600">
+                  أدخل اسم الصالون من حرفين على الأقل.
+                </p>
+              }
+            </div>
+
+            <div>
+              <label for="pp-owner-name" class="mb-1.5 block text-sm font-bold text-on-surface">
+                اسم المسؤول <span class="text-red-600" aria-hidden="true">*</span>
+              </label>
+              <input
+                id="pp-owner-name"
+                type="text"
+                formControlName="name"
+                autocomplete="name"
+                maxlength="60"
+                placeholder="الاسم الكامل"
+                [attr.aria-invalid]="fieldInvalid(profileForm.controls.name) ? 'true' : null"
+                [attr.aria-describedby]="
+                  fieldInvalid(profileForm.controls.name) ? 'pp-owner-name-error' : null
+                "
+                [class.border-red-500]="fieldInvalid(profileForm.controls.name)"
+                class="w-full rounded-lg border border-outline-variant bg-surface-container-lowest px-3.5 py-2.5 text-sm text-on-surface transition duration-200 placeholder:text-on-surface-variant/60 focus:border-brand-gold focus:outline-none focus:ring-2 focus:ring-brand-gold/25"
+              />
+              @if (fieldInvalid(profileForm.controls.name)) {
+                <p id="pp-owner-name-error" class="mt-1.5 text-xs font-bold text-red-600">
+                  أدخل الاسم من حرفين على الأقل.
+                </p>
+              }
+            </div>
+
+            <div>
+              <label for="pp-phone" class="mb-1.5 block text-sm font-bold text-on-surface">
+                رقم الهاتف <span class="text-red-600" aria-hidden="true">*</span>
+              </label>
+              <input
+                id="pp-phone"
+                type="tel"
+                dir="ltr"
+                formControlName="phone"
+                autocomplete="tel"
+                inputmode="tel"
+                maxlength="20"
+                placeholder="+966 5X XXX XXXX"
+                [attr.aria-invalid]="fieldInvalid(profileForm.controls.phone) ? 'true' : null"
+                [attr.aria-describedby]="
+                  fieldInvalid(profileForm.controls.phone) ? 'pp-phone-error' : 'pp-phone-help'
+                "
+                [class.border-red-500]="fieldInvalid(profileForm.controls.phone)"
+                class="w-full rounded-lg border border-outline-variant bg-surface-container-lowest px-3.5 py-2.5 text-left text-sm text-on-surface transition duration-200 placeholder:text-on-surface-variant/60 focus:border-brand-gold focus:outline-none focus:ring-2 focus:ring-brand-gold/25"
+              />
+              @if (fieldInvalid(profileForm.controls.phone)) {
+                <p id="pp-phone-error" class="mt-1.5 text-xs font-bold text-red-600">
+                  أدخل رقم هاتف صحيحاً.
+                </p>
+              } @else {
+                <p id="pp-phone-help" class="mt-1.5 text-[11px] text-on-surface-variant">
+                  يمكنك استخدام رمز الدولة، مثل +966.
+                </p>
+              }
+            </div>
+
+            <div>
+              <label for="pp-address" class="mb-1.5 block text-sm font-bold text-on-surface">
+                عنوان الصالون <span class="text-red-600" aria-hidden="true">*</span>
+              </label>
+              <input
+                id="pp-address"
+                type="text"
+                formControlName="address"
+                autocomplete="street-address"
+                maxlength="200"
+                placeholder="حي، شارع، مدينة"
+                [attr.aria-invalid]="fieldInvalid(profileForm.controls.address) ? 'true' : null"
+                [attr.aria-describedby]="
+                  fieldInvalid(profileForm.controls.address) ? 'pp-address-error' : null
+                "
+                [class.border-red-500]="fieldInvalid(profileForm.controls.address)"
+                class="w-full rounded-lg border border-outline-variant bg-surface-container-lowest px-3.5 py-2.5 text-sm text-on-surface transition duration-200 placeholder:text-on-surface-variant/60 focus:border-brand-gold focus:outline-none focus:ring-2 focus:ring-brand-gold/25"
+              />
+              @if (fieldInvalid(profileForm.controls.address)) {
+                <p id="pp-address-error" class="mt-1.5 text-xs font-bold text-red-600">
+                  أدخل عنوان الصالون.
+                </p>
+              }
+            </div>
+
+            <div class="sm:col-span-2">
+              <div class="mb-1.5 flex items-baseline justify-between gap-3">
+                <label for="pp-description" class="block text-sm font-bold text-on-surface">
+                  نبذة عن الصالون <span class="text-red-600" aria-hidden="true">*</span>
+                </label>
+                <span class="text-[11px] text-on-surface-variant" aria-live="polite">
+                  {{ profileForm.controls.description.value.length }} / 1000
+                </span>
+              </div>
+              <textarea
+                id="pp-description"
+                rows="5"
+                formControlName="description"
+                maxlength="1000"
+                placeholder="عرّف العملاء بخدماتك وأسلوبك وما يميز صالونك…"
+                [attr.aria-invalid]="fieldInvalid(profileForm.controls.description) ? 'true' : null"
+                [attr.aria-describedby]="
+                  fieldInvalid(profileForm.controls.description)
+                    ? 'pp-description-error'
+                    : 'pp-description-help'
+                "
+                [class.border-red-500]="fieldInvalid(profileForm.controls.description)"
+                class="w-full resize-y rounded-lg border border-outline-variant bg-surface-container-lowest px-3.5 py-2.5 text-sm leading-6 text-on-surface transition duration-200 placeholder:text-on-surface-variant/60 focus:border-brand-gold focus:outline-none focus:ring-2 focus:ring-brand-gold/25"
+              ></textarea>
+              @if (fieldInvalid(profileForm.controls.description)) {
+                <p id="pp-description-error" class="mt-1.5 text-xs font-bold text-red-600">
+                  اكتب نبذة لا تقل عن 10 أحرف.
+                </p>
+              } @else {
+                <p id="pp-description-help" class="mt-1.5 text-[11px] text-on-surface-variant">
+                  تظهر هذه النبذة للعملاء عند استعراض صالونك.
+                </p>
+              }
+            </div>
+          </div>
+
+          <div
+            class="flex flex-col-reverse gap-3 border-t border-outline-variant/30 px-5 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6"
+          >
+            <p class="text-xs leading-5 text-on-surface-variant">
+              تُحفظ هذه البيانات وتنعكس على صفحتك العامة فوراً.
+            </p>
+            <button
+              type="submit"
+              [disabled]="submitDisabled"
+              data-testid="profile-save"
+              class="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand-gold px-5 py-2.5 text-sm font-extrabold text-white shadow-sm transition duration-200 hover:brightness-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
+            >
+              @if (isSaving()) {
+                <i class="pi pi-spin pi-spinner" aria-hidden="true"></i>
+                <span>جارٍ الحفظ…</span>
+              } @else {
+                <i class="pi pi-check" aria-hidden="true"></i>
+                <span>حفظ التغييرات</span>
+              }
+            </button>
+          </div>
+        </form>
+
+        <aside
+          class="animate-provider-profile-fade-up h-fit overflow-hidden rounded-2xl bg-surface-container-lowest shadow-sm ring-1 ring-outline-variant/20 lg:sticky lg:top-6"
+          aria-labelledby="provider-profile-summary-title"
+        >
+          <div
+            class="flex items-center gap-3 border-b border-outline-variant/30 bg-surface-container/60 px-5 py-4 sm:px-6"
+          >
+            <span
+              class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-gold/15 text-brand-gold"
+              aria-hidden="true"
+            >
+              <i class="pi pi-chart-bar"></i>
+            </span>
+            <div>
+              <h2
+                id="provider-profile-summary-title"
+                class="text-base font-extrabold text-on-surface"
+              >
+                لمحة عامة
+              </h2>
+              <p class="mt-0.5 text-xs text-on-surface-variant">حالة حسابك في السوق</p>
+            </div>
+          </div>
+
+          <div class="px-5 py-5 sm:px-6">
+            <div class="flex items-center gap-3">
+              <span
+                class="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-brand-gold/15 text-lg font-extrabold text-brand-gold ring-1 ring-brand-gold/20"
+                aria-hidden="true"
+              >
+                {{ profileInitial() }}
+              </span>
+              <div class="min-w-0">
+                <p class="truncate text-base font-extrabold text-on-surface">
+                  {{ profile()?.salonName || 'الصالون' }}
+                </p>
+                <p class="truncate text-xs text-on-surface-variant" dir="ltr">
+                  {{ profile()?.email || '—' }}
+                </p>
+              </div>
+            </div>
+
+            <dl class="mt-5 space-y-3.5">
+              <div
+                class="flex items-center justify-between gap-3 rounded-lg bg-surface-container/50 px-3.5 py-2.5"
+              >
+                <dt class="flex items-center gap-2 text-sm text-on-surface-variant">
+                  <i class="pi pi-star-fill text-brand-gold" aria-hidden="true"></i> التقييم
+                </dt>
+                <dd class="whitespace-nowrap text-sm font-extrabold text-on-surface">
+                  {{ formatRating(profile()?.averageRating) }}
+                  <span class="text-xs font-semibold text-on-surface-variant">
+                    ({{ profile()?.reviewsCount ?? 0 }} تقييم)
+                  </span>
+                </dd>
+              </div>
+              <div
+                class="flex items-center justify-between gap-3 rounded-lg bg-surface-container/50 px-3.5 py-2.5"
+              >
+                <dt class="flex items-center gap-2 text-sm text-on-surface-variant">
+                  <i class="pi pi-phone" aria-hidden="true"></i> الهاتف
+                </dt>
+                <dd class="min-w-0 truncate text-sm font-extrabold text-on-surface" dir="ltr">
+                  {{ profile()?.phone || '—' }}
+                </dd>
+              </div>
+              <div
+                class="flex items-start justify-between gap-3 rounded-lg bg-surface-container/50 px-3.5 py-2.5"
+              >
+                <dt class="flex shrink-0 items-center gap-2 text-sm text-on-surface-variant">
+                  <i class="pi pi-map-marker" aria-hidden="true"></i> العنوان
+                </dt>
+                <dd class=" text-end text-sm font-bold leading-5 text-on-surface">
+                  {{ profile()?.address || '—' }}
+                </dd>
+              </div>
+              <div
+                class="flex items-center justify-between gap-3 rounded-lg bg-surface-container/50 px-3.5 py-2.5"
+              >
+                <dt class="flex items-center gap-2 text-sm text-on-surface-variant">
+                  <i class="pi pi-crown" aria-hidden="true"></i> الباقة
+                </dt>
+                <dd>
+                  <span
+                    class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-extrabold ring-1"
+                    [ngClass]="subscriptionPillClass(profile()?.subscriptionStatus)"
+                  >
+                    <i class="pi pi-circle-fill text-[6px]" aria-hidden="true"></i>
+                    {{ subscriptionLabel(profile()?.subscriptionStatus) }}
+                  </span>
+                </dd>
+              </div>
+            </dl>
+          </div>
+        </aside>
+      </div>
+
+      <section
+        class="animate-provider-profile-fade-up mt-6 overflow-hidden rounded-2xl bg-surface-container-lowest shadow-sm ring-1 ring-outline-variant/20"
+        aria-labelledby="portfolio-title"
+      >
+        <div
+          class="flex flex-col gap-4 border-b border-outline-variant/30 bg-surface-container/60 px-5 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6"
+        >
+          <div class="flex items-start gap-3 sm:items-center">
+            <span
+              class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-gold/15 text-brand-gold"
+              aria-hidden="true"
+            >
+              <i class="pi pi-images"></i>
+            </span>
+            <div>
+              <h2 id="portfolio-title" class="text-base font-extrabold text-on-surface">
+                معرض الأعمال
+              </h2>
+              <p class="mt-0.5 text-xs leading-5 text-on-surface-variant">
+                {{ portfolioImages().length }} / {{ maxPortfolioImages }} صورة · {{ uploadHint }}
+              </p>
+            </div>
+          </div>
+
+          <div class="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-end">
+            <div class="w-full sm:w-64">
+              <label for="portfolio-caption" class="mb-1 block text-xs font-bold text-on-surface-variant">
+                وصف الصور <span class="font-normal">(اختياري)</span>
+              </label>
+              <input
+                id="portfolio-caption"
+                type="text"
+                [formControl]="portfolioCaption"
+                maxlength="200"
+                [disabled]="isUploading()"
+                placeholder="مثال: تسريحة عروس"
+                data-testid="portfolio-caption-input"
+                class="w-full rounded-lg border border-outline-variant/50 bg-surface-container-lowest px-3 py-2 text-sm text-on-surface outline-none transition placeholder:text-on-surface-variant/70 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 disabled:cursor-not-allowed disabled:opacity-60"
+              />
+            </div>
+
+            <label
+              class="inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-brand-gold px-4 py-2.5 text-sm font-extrabold text-white shadow-sm transition duration-200 hover:brightness-95 focus-within:ring-2 focus-within:ring-brand-gold focus-within:ring-offset-2 sm:w-auto"
+              [class.cursor-not-allowed]="
+                isUploading() || portfolioImages().length >= maxPortfolioImages
+              "
+              [class.opacity-50]="isUploading() || portfolioImages().length >= maxPortfolioImages"
+            >
+              <input
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+                multiple
+                class="sr-only"
+                (change)="onFilesSelected($event)"
+                data-testid="portfolio-file-input"
+                [disabled]="isUploading() || portfolioImages().length >= maxPortfolioImages"
+                aria-describedby="portfolio-upload-help"
+              />
+              @if (isUploading()) {
+                <i class="pi pi-spin pi-spinner" aria-hidden="true"></i>
+                <span>جارٍ الرفع…</span>
+              } @else {
+                <i class="pi pi-plus" aria-hidden="true"></i>
+                <span>أضف صوراً</span>
+              }
+            </label>
+          </div>
+        </div>
+
+        <div class="p-5 sm:p-6">
+          <p id="portfolio-upload-help" class="sr-only">
+            اختر صور JPEG أو PNG أو WebP. {{ uploadHint }}
+          </p>
+          @if (portfolioImages().length === 0) {
+            <div
+              class="flex flex-col items-center justify-center gap-4 rounded-xl border border-dashed border-outline-variant bg-surface-container/40 px-6 py-14 text-center"
+              data-testid="portfolio-empty"
+            >
+              <span
+                class="flex h-14 w-14 items-center justify-center rounded-full bg-brand-gold/10 text-brand-gold"
+                aria-hidden="true"
+              >
+                <i class="pi pi-images text-xl"></i>
+              </span>
+              <div>
+                <p class="text-base font-extrabold text-on-surface">لا توجد صور بعد</p>
+                <p class="mt-1  text-sm leading-6 text-on-surface-variant">
+                  أضف صوراً واضحة لأفضل أعمالك ليتعرّف العملاء على أسلوب صالونك.
+                </p>
+              </div>
+            </div>
+          } @else {
+            <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
+              @for (image of portfolioImages(); track image.id; let index = $index) {
+                <figure
+                  class="group relative aspect-square overflow-hidden rounded-xl bg-surface-container ring-1 ring-outline-variant/20"
+                  [attr.data-testid]="'portfolio-image-' + index"
+                >
+                  @if (image.hasLoadError) {
+                    <div
+                      class="flex h-full w-full flex-col items-center justify-center gap-2 px-3 text-center text-on-surface-variant"
+                      role="img"
+                      aria-label="تعذر تحميل صورة من المعرض"
+                    >
+                      <i class="pi pi-image text-xl" aria-hidden="true"></i>
+                      <span class="text-xs font-bold">تعذر تحميل الصورة</span>
+                    </div>
+                  } @else {
+                    <img
+                      [src]="image.url"
+                      [alt]="portfolioImageAlt(image, index)"
+                      loading="lazy"
+                      decoding="async"
+                      (error)="onImageLoadError(image)"
+                      class="h-full w-full object-cover transition duration-300 motion-safe:group-hover:scale-105"
+                    />
+                  }
+
+                  @if (image.isUploading) {
+                    <div
+                      class="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/60 text-white backdrop-blur-sm"
+                      role="status"
+                    >
+                      <i class="pi pi-spin pi-spinner text-2xl" aria-hidden="true"></i>
+                      <span class="text-xs font-extrabold">جارٍ الرفع…</span>
+                    </div>
+                  } @else if (image.isLocal) {
+                    <span
+                      class="absolute start-2 top-2 inline-flex items-center gap-1 rounded-full bg-amber-600/95 px-2 py-1 text-[10px] font-extrabold text-white shadow-sm"
+                    >
+                      <i class="pi pi-cloud-upload" aria-hidden="true"></i> عرض محلي
+                    </span>
+                  }
+
+                  <button
+                    type="button"
+                    (click)="onRemoveImage(image)"
+                    [attr.aria-label]="'حذف ' + portfolioImageAlt(image, index)"
+                    [disabled]="image.isUploading || image.isDeleting"
+                    class="absolute end-2 top-2 flex h-9 w-9 items-center justify-center rounded-full bg-black/60 text-white opacity-100 shadow-sm transition duration-200 hover:bg-red-600 focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-white sm:opacity-0 sm:group-hover:opacity-100 disabled:pointer-events-none disabled:opacity-0"
+                  >
+                    <i
+                      [class]="image.isDeleting ? 'pi pi-spin pi-spinner text-sm' : 'pi pi-trash text-sm'"
+                      aria-hidden="true"
+                    ></i>
+                  </button>
+                </figure>
+              }
+            </div>
+          }
+        </div>
+      </section>
+
+      <p
+        class="animate-provider-profile-fade-up mt-5 flex items-start gap-2 text-xs leading-5 text-on-surface-variant"
+      >
+        <i class="pi pi-info-circle mt-0.5" aria-hidden="true"></i>
+        تظهر الصور التي يكتمل رفعها في معرضك العام. الصور التي تعذر رفعها تبقى ظاهرة لك محلياً فقط.
+      </p>
+    }
+  </div>
+
+</section>

@@ -1,0 +1,41 @@
+<!--
+  Forbidden (403) page — Lookak.
+  Reached when an authenticated, non-admin user tries to open a guarded route
+  (see `adminGuard`). Styled with the same Tailwind theme tokens as the auth pages.
+-->
+<section
+  class="relative flex min-h-screen items-center justify-center overflow-hidden bg-background px-4 py-10 sm:px-6 lg:px-8"
+>
+  <!-- decorative background glows -->
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0">
+    <div class="absolute -start-24 -top-24 h-72 w-72 rounded-full bg-brand-gold/10 blur-3xl"></div>
+    <div class="absolute -bottom-32 -end-16 h-80 w-80 rounded-full bg-primary/10 blur-3xl"></div>
+  </div>
+
+  <!-- 403 card -->
+  <div
+    class="relative flex w-full flex-col items-center gap-7 rounded-xl bg-surface-container-lowest p-10 text-center shadow-xl shadow-primary/10"
+  >
+    <div
+      class="flex h-20 w-20 items-center justify-center rounded-full bg-red-500/10 ring-1 ring-red-500/20"
+    >
+      <i class="pi pi-ban text-4xl text-red-500"></i>
+    </div>
+
+    <div class="space-y-2">
+      <h1 class="text-6xl font-extrabold tracking-tight text-on-surface">403</h1>
+      <h2 class="text-xl font-extrabold text-on-surface">غير مصرح بالوصول</h2>
+      <p class="text-sm leading-relaxed text-on-surface-variant">
+        هذا القسم مخصص لمدراء المنصة فقط. حسابك الحالي لا يملك صلاحية الوصول إلى لوحة تحكم الإدارة.
+      </p>
+    </div>
+
+    <a
+      routerLink="/login"
+      class="group inline-flex cursor-pointer items-center gap-2 rounded-lg bg-gradient-to-l from-brand-gold to-primary px-6 py-3 text-sm font-extrabold text-white shadow-lg shadow-primary/25 transition duration-200 hover:shadow-xl hover:shadow-primary/30 active:scale-[0.98]"
+    >
+      العودة لتسجيل الدخول
+      <i class="pi pi-arrow-left text-sm transition-transform duration-200 group-hover:-translate-x-1"></i>
+    </a>
+  </div>
+</section>
