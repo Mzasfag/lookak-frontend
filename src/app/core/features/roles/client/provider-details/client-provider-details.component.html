@@ -1,4 +1,4 @@
-<div class="animate-fade-in">
+<div class="animate-fade-in max-w-[95%] mx-auto p-2">
   @if (isLoading()) {
     <app-loader [fullScreen]="true" label="جارٍ تحميل تفاصيل الصالون…" />
   } @else if (hasError()) {
@@ -19,29 +19,35 @@
     <!-- Provider Header & Banner -->
     <!-- ===================================================================== -->
     <section
-      class="relative overflow-hidden rounded-3xl border border-outline-variant/20 shadow-lg transition-all duration-300 hover:shadow-xl"
+      class="relative overflow-hidden   rounded-3xl border border-outline-variant/20 shadow-lg transition-all duration-300 hover:shadow-xl"
     >
       <div
-        class="relative h-44 w-full bg-gradient-to-br sm:h-56 animate-gradient"
+        class="relative h-44 w-full sm:h-56 bg-gradient-to-br animate-gradient"
         [class]="getCoverGradient(getProviderId())"
+        [ngStyle]="{
+          'background-image':
+            portfolioImages()?.length !== 0 ? 'url(' + portfolioImages()[0]?.url + ')' : null,
+          'background-size': portfolioImages()?.length !== 0 ? 'cover' : '',
+          'background-position': portfolioImages()?.length !== 0 ? 'center' : '',
+        }"
       >
         <div class="absolute inset-0 bg-black/10"></div>
 
         <!-- Animated status badge -->
         <div class="absolute right-4 top-4 flex items-center gap-2 animate-slide-in-right">
-          @if (getWorkingStatus(p.workingHours).isOpen) {
+          @if (getWorkingStatus(p.workingHours!).isOpen) {
             <span
               class="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/90 px-3 py-1 text-xs font-bold text-white shadow-md backdrop-blur transition-all duration-200 hover:scale-105"
             >
               <i class="pi pi-check-circle text-[10px] animate-pulse"></i>
-              {{ getWorkingStatus(p.workingHours).text }}
+              {{ getWorkingStatus(p.workingHours!).text }}
             </span>
           } @else {
             <span
               class="inline-flex items-center gap-1.5 rounded-full bg-red-500/90 px-3 py-1 text-xs font-bold text-white shadow-md backdrop-blur"
             >
               <i class="pi pi-times-circle text-[10px]"></i>
-              {{ getWorkingStatus(p.workingHours).text }}
+              {{ getWorkingStatus(p.workingHours!).text }}
             </span>
           }
         </div>
@@ -49,7 +55,7 @@
         <!-- Enhanced back button -->
         <a
           routerLink="/client/providers"
-          class="group absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-white/90 px-3 py-1.5 text-xs font-bold text-on-surface shadow-md backdrop-blur transition-all duration-200 hover:bg-white hover:scale-105 hover:shadow-lg animate-slide-in-left"
+          class="group absolute cursor-pointer left-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-white/90 px-3 py-1.5 text-xs font-bold text-on-surface shadow-md backdrop-blur transition-all duration-200 hover:bg-white hover:scale-105 hover:shadow-lg animate-slide-in-left"
         >
           <i
             class="pi pi-arrow-left text-[10px] transition-transform group-hover:-translate-x-0.5"
@@ -77,14 +83,14 @@
               <div
                 class="mt-1 flex flex-wrap items-center gap-2 text-xs font-bold text-on-surface-variant"
               >
-                @if (p.category) {
+                <!-- @if (p?.) {
                   <span
                     class="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-1 text-primary transition-all duration-200 hover:bg-primary/20 hover:scale-105"
                   >
                     <i class="pi pi-tag text-[10px]"></i>
                     {{ p.category }}
                   </span>
-                }
+                } -->
                 @if (p.averageRating !== undefined && p.averageRating !== null) {
                   <span
                     class="inline-flex items-center gap-1 rounded-full bg-amber-500/10 px-2.5 py-1 text-amber-700 transition-all duration-200 hover:bg-amber-500/20 hover:scale-105"
@@ -174,7 +180,7 @@
                 <button
                   type="button"
                   (click)="selectService(getServiceId(svc))"
-                  class="group flex flex-col gap-3 rounded-xl border p-4 text-right transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-primary/40 animate-slide-up"
+                  class="group cursor-pointer flex flex-col gap-3 rounded-xl border p-4 text-right transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-primary/40 animate-slide-up"
                   [style.animation-delay]="idx * 50 + 'ms'"
                   [class.border-primary]="selectedServiceId() === getServiceId(svc)"
                   [class.bg-primary/5]="selectedServiceId() === getServiceId(svc)"
@@ -307,13 +313,13 @@
                 <button
                   type="button"
                   (click)="selectService(getServiceId(svc))"
-                  class="mt-3 w-full rounded-xl bg-primary px-4 py-2.5 text-sm font-black text-on-primary transition hover:opacity-90"
+                  class="mt-3 w-full cursor-pointer rounded-xl bg-primary px-4 py-2.5 text-sm font-black text-on-primary transition hover:opacity-90"
                 >
                   متابعة لاختيار الموعد
                   <i class="pi pi-arrow-left mr-1 text-xs"></i>
                 </button>
               } @else {
-                <div class="flex flex-col items-center gap-2 py-8 text-center">
+                <div class="flex cursor-pointer flex-col items-center gap-2 py-8 text-center">
                   <i class="pi pi-calendar text-3xl text-on-surface-variant/40"></i>
                   <p class="text-sm font-bold text-on-surface-variant">اختر خدمة للبدء</p>
                   <p class="text-xs text-on-surface-variant/70">
@@ -336,7 +342,7 @@
                   <button
                     type="button"
                     (click)="goBack('services')"
-                    class="mt-1 text-[11px] font-bold text-primary hover:underline"
+                    class="mt-1 text-[11px] cursor-pointer font-bold text-primary hover:underline"
                   >
                     <i class="pi pi-pencil text-[9px]"></i> تغيير الخدمة
                   </button>
@@ -371,31 +377,41 @@
                       جارٍ تحميل المواعيد…
                     </div>
                   } @else if (slotsError()) {
-                    <div class="rounded-lg bg-red-500/10 p-3 text-xs font-bold text-red-600">
-                      <i class="pi pi-exclamation-triangle"></i>
-                      {{ slotsError() }}
+                    <div class="rounded-lg bg-red-500/10 p-3">
+                      <div class="flex items-center gap-2 text-xs font-bold text-red-600">
+                        <i class="pi pi-exclamation-triangle"></i>
+                        <span>{{ slotsError() }}</span>
+                      </div>
+                      <button
+                        type="button"
+                        (click)="retryLoadSlots()"
+                        class="mt-2 cursor-pointer inline-flex items-center gap-1 rounded-md bg-red-500/10 px-3 py-1.5 text-xs font-bold text-red-600 hover:bg-red-500/20 transition"
+                      >
+                        <i class="pi pi-refresh text-[10px]"></i>
+                        إعادة المحاولة
+                      </button>
                     </div>
                   } @else if (!selectedDate()) {
                     <div class="py-4 text-center text-xs font-bold text-on-surface-variant/70">
                       اختر التاريخ أولاً لعرض المواعيد.
                     </div>
-                  } @else if (availableSlots().length === 0) {
+                  } @else if (availableSlots()?.length === 0) {
                     <div class="py-4 text-center text-xs font-bold text-on-surface-variant/70">
                       لا توجد مواعيد متاحة في هذا اليوم.
                     </div>
                   } @else {
                     <div class="max-h-72 space-y-3 overflow-y-auto pl-1">
-                      @if (groupedSlots().morning.length > 0) {
+                      @if (groupedSlots()?.morning?.length > 0) {
                         <div>
                           <p class="mb-1.5 text-[11px] font-black text-amber-700">
                             <i class="pi pi-sun"></i> صباحاً
                           </p>
                           <div class="flex flex-wrap gap-2">
-                            @for (slot of groupedSlots().morning; track slot.value) {
+                            @for (slot of groupedSlots()?.morning; track slot.value) {
                               <button
                                 type="button"
                                 (click)="selectTimeSlot(slot.value)"
-                                class="rounded-lg border px-3 py-1.5 text-xs font-bold transition"
+                                class="rounded-lg cursor-pointer border px-3 py-1.5 text-xs font-bold transition"
                                 [class.border-primary]="selectedTimeSlot() === slot.value"
                                 [class.bg-primary]="selectedTimeSlot() === slot.value"
                                 [class.text-on-primary]="selectedTimeSlot() === slot.value"
@@ -410,13 +426,13 @@
                           </div>
                         </div>
                       }
-                      @if (groupedSlots().afternoon.length > 0) {
+                      @if (groupedSlots()?.afternoon?.length > 0) {
                         <div>
                           <p class="mb-1.5 text-[11px] font-black text-orange-700">
                             <i class="pi pi-cloud-sun"></i> ظهراً
                           </p>
                           <div class="flex flex-wrap gap-2">
-                            @for (slot of groupedSlots().afternoon; track slot.value) {
+                            @for (slot of groupedSlots()?.afternoon; track slot.value) {
                               <button
                                 type="button"
                                 (click)="selectTimeSlot(slot.value)"
@@ -435,17 +451,17 @@
                           </div>
                         </div>
                       }
-                      @if (groupedSlots().evening.length > 0) {
+                      @if (groupedSlots()?.evening?.length > 0) {
                         <div>
                           <p class="mb-1.5 text-[11px] font-black text-indigo-700">
                             <i class="pi pi-moon"></i> مساءً
                           </p>
                           <div class="flex flex-wrap gap-2">
-                            @for (slot of groupedSlots().evening; track slot.value) {
+                            @for (slot of groupedSlots()?.evening; track slot.value) {
                               <button
                                 type="button"
                                 (click)="selectTimeSlot(slot.value)"
-                                class="rounded-lg border px-3 py-1.5 text-xs font-bold transition"
+                                class="rounded-lg cursor-pointer border px-3 py-1.5 text-xs font-bold transition"
                                 [class.border-primary]="selectedTimeSlot() === slot.value"
                                 [class.bg-primary]="selectedTimeSlot() === slot.value"
                                 [class.text-on-primary]="selectedTimeSlot() === slot.value"
@@ -506,7 +522,9 @@
                       class="flex items-center justify-between transition-all duration-200 hover:bg-surface-container-high hover:px-2 hover:py-1 hover:rounded-lg"
                     >
                       <dt class="font-bold text-on-surface-variant">الموعد</dt>
-                      <dd class="font-black text-on-surface">{{ selectedTimeSlot() }}</dd>
+                      <dd class="font-black text-on-surface">
+                        {{ formatTimeTo12Hour(selectedTimeSlot()!) }}
+                      </dd>
                     </div>
                     <div
                       class="flex items-center justify-between border-t border-outline-variant/20 pt-2 transition-all duration-200 hover:bg-surface-container-high hover:px-2 hover:py-1 hover:rounded-lg"
@@ -527,7 +545,7 @@
                     <button
                       type="button"
                       (click)="goBack('datetime')"
-                      class="flex-1 rounded-xl border border-outline-variant/40 bg-surface-container px-4 py-2.5 text-sm font-black text-on-surface transition-all duration-200 hover:bg-surface-container-high hover:shadow-md"
+                      class="flex-1 cursor-pointer rounded-xl border border-outline-variant/40 bg-surface-container px-4 py-2.5 text-sm font-black text-on-surface transition-all duration-200 hover:bg-surface-container-high hover:shadow-md"
                     >
                       <i class="pi pi-arrow-right text-xs"></i> تعديل
                     </button>
@@ -535,7 +553,7 @@
                       type="button"
                       (click)="submitBooking()"
                       [disabled]="isBooking()"
-                      class="flex-1 rounded-xl bg-primary px-4 py-2.5 text-sm font-black text-on-primary transition-all duration-200 hover:scale-105 hover:shadow-lg disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
+                      class="flex-1 cursor-pointer rounded-xl bg-primary px-4 py-2.5 text-sm font-black text-on-primary transition-all duration-200 hover:scale-105 hover:shadow-lg disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
                     >
                       @if (isBooking()) {
                         <i class="pi pi-spinner pi-spin text-xs"></i> جارٍ التأكيد…
@@ -544,7 +562,7 @@
                       }
                     </button>
                   </div>
-                                </div>
+                </div>
               }
             }
           }
@@ -565,9 +583,7 @@
               <i class="pi pi-images ml-2 text-primary"></i>
               معرض الأعمال
             </h2>
-            <span
-              class="rounded-full bg-primary/10 px-3 py-1 text-xs font-bold text-primary"
-            >
+            <span class="rounded-full bg-primary/10 px-3 py-1 text-xs font-bold text-primary">
               {{ portfolioImages().length }} صورة
             </span>
           </div>
@@ -604,14 +620,16 @@
             }
           </div>
         </div>
-            </section>
+      </section>
     }
 
     <!-- ===================================================================== -->
     <!-- Reviews & Ratings Section -->
     <!-- ===================================================================== -->
     <section class="mt-6 animate-fade-in" aria-labelledby="reviews-title">
-      <div class="rounded-2xl border border-outline-variant/20 bg-surface-container-lowest p-5 shadow-lg transition-all duration-300 hover:shadow-xl sm:p-6">
+      <div
+        class="rounded-2xl border border-outline-variant/20 bg-surface-container-lowest p-5 shadow-lg transition-all duration-300 hover:shadow-xl sm:p-6"
+      >
         <div class="mb-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h2 id="reviews-title" class="text-lg font-black text-on-surface">
@@ -623,22 +641,36 @@
           @if (reviews().length > 0) {
             <div class="flex items-center gap-4">
               <div class="text-center">
-                <div class="text-3xl font-black text-amber-500">{{ getAverageRating() | number:'1.1-1' }}</div>
+                <div class="text-3xl font-black text-amber-500">
+                  {{ getAverageRating() | number: '1.1-1' }}
+                </div>
                 <div class="mt-1 flex items-center justify-center gap-0.5">
-                  @for (star of [1,2,3,4,5]; track star) {
-                    <i class="pi text-sm" [class.pi-star-fill]="star <= getRoundAverage()" [class.pi-star]="star > getRoundAverage()" [class.text-amber-500]="star <= getRoundAverage()" [class.text-on-surface-variant/40]="star > getRoundAverage()"></i>
+                  @for (star of [1, 2, 3, 4, 5]; track star) {
+                    <i
+                      class="pi text-sm"
+                      [class.pi-star-fill]="star <= getRoundAverage()"
+                      [class.pi-star]="star > getRoundAverage()"
+                      [class.text-amber-500]="star <= getRoundAverage()"
+                      [class.text-on-surface-variant/40]="star > getRoundAverage()"
+                    ></i>
                   }
                 </div>
-                <div class="mt-1 text-xs font-bold text-on-surface-variant">{{ reviews().length }} تقييم</div>
+                <div class="mt-1 text-xs font-bold text-on-surface-variant">
+                  {{ reviews().length }} تقييم
+                </div>
               </div>
             </div>
           }
         </div>
         <div class="mb-5">
-          <button type="button" (click)="toggleReviewForm()" class="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-bold text-on-primary shadow-md transition-all duration-300 hover:scale-105 hover:shadow-lg">
+          <button
+            type="button"
+            (click)="toggleReviewForm()"
+            class="inline-flex cursor-pointer items-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-bold text-on-primary shadow-md transition-all duration-300 hover:scale-105 hover:shadow-lg"
+          >
             <i class="pi pi-plus text-xs"></i>
             أضف تقييمك
-                    </button>
+          </button>
         </div>
 
         <!-- Review Form -->
@@ -650,14 +682,21 @@
                 التقييم <span class="text-red-500">*</span>
               </label>
               <div class="flex items-center gap-1">
-                @for (star of [1,2,3,4,5]; track star) {
-                  <button type="button" (click)="setRating(star)" (mouseenter)="onStarHover(star)" (mouseleave)="onStarLeave()"
-                    class="group p-1 transition-transform duration-150 hover:scale-125">
-                    <i class="pi text-2xl transition-all duration-200"
+                @for (star of [1, 2, 3, 4, 5]; track star) {
+                  <button
+                    type="button"
+                    (click)="setRating(star)"
+                    (mouseenter)="onStarHover(star)"
+                    (mouseleave)="onStarLeave()"
+                    class="group p-1 cursor-pointer transition-transform duration-150 hover:scale-125"
+                  >
+                    <i
+                      class="pi text-2xl transition-all duration-200"
                       [class.pi-star-fill]="star <= getDisplayRating()"
                       [class.pi-star]="star > getDisplayRating()"
                       [class.text-amber-500]="star <= getDisplayRating()"
-                      [class.text-on-surface-variant/40]="star > getDisplayRating()"></i>
+                      [class.text-on-surface-variant/40]="star > getDisplayRating()"
+                    ></i>
                   </button>
                 }
                 <span class="mr-2 text-sm font-bold text-on-surface-variant">
@@ -666,31 +705,46 @@
               </div>
             </div>
             <div class="mb-4">
-              <label for="review-comment" class="mb-2 block text-sm font-bold text-on-surface-variant">
+              <label
+                for="review-comment"
+                class="mb-2 block text-sm font-bold text-on-surface-variant"
+              >
                 تعليقك <span class="font-normal text-on-surface-variant/60">(اختياري)</span>
               </label>
-              <textarea id="review-comment" [formControl]="reviewComment" rows="4" maxlength="500"
+              <textarea
+                id="review-comment"
+                [formControl]="reviewComment"
+                rows="4"
+                maxlength="500"
                 placeholder="شاركنا تفاصيل تجربتك مع هذا الصالون…"
-                class="w-full rounded-xl border border-outline-variant/50 bg-surface-container-lowest px-4 py-3 text-sm text-on-surface outline-none transition-all duration-200 placeholder:text-on-surface-variant/50 focus:border-primary focus:ring-2 focus:ring-primary/20"></textarea>
+                class="w-full rounded-xl border border-outline-variant/50 bg-surface-container-lowest px-4 py-3 text-sm text-on-surface outline-none transition-all duration-200 placeholder:text-on-surface-variant/50 focus:border-primary focus:ring-2 focus:ring-primary/20"
+              ></textarea>
               <div class="mt-1 flex justify-between text-xs text-on-surface-variant/60">
                 <span>أقصى 500 حرف</span>
                 <span>{{ reviewComment.value?.length || 0 }}/500</span>
               </div>
             </div>
             <div class="flex gap-3">
-              <button type="button" (click)="toggleReviewForm()"
-                class="rounded-xl border border-outline-variant/40 bg-surface-container px-5 py-2.5 text-sm font-bold text-on-surface transition-all duration-200 hover:bg-surface-container-high">
+              <button
+                type="button"
+                (click)="toggleReviewForm()"
+                class="rounded-xl cursor-pointer border border-outline-variant/40 bg-surface-container px-5 py-2.5 text-sm font-bold text-on-surface transition-all duration-200 hover:bg-surface-container-high"
+              >
                 إلغاء
               </button>
-              <button type="button" (click)="submitReview()" [disabled]="reviewRating.invalid || isSubmittingReview()"
-                class="flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-bold text-on-primary shadow-md transition-all duration-300 hover:scale-105 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100">
+              <button
+                type="button"
+                (click)="submitReview()"
+                [disabled]="reviewRating.invalid || isSubmittingReview()"
+                class="flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-bold text-on-primary shadow-md transition-all duration-300 hover:scale-105 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+              >
                 @if (isSubmittingReview()) {
                   <i class="pi pi-spinner pi-spin text-xs"></i>
                   جارٍ الإرسال…
                 } @else {
                   <i class="pi pi-send text-xs"></i>
                   إرسال التقييم
-                                }
+                }
               </button>
             </div>
           </div>
@@ -705,6 +759,14 @@
           <div class="rounded-xl bg-red-500/10 p-4 text-center">
             <i class="pi pi-exclamation-triangle text-red-500"></i>
             <p class="mt-2 text-sm font-bold text-red-500">{{ reviewsError() }}</p>
+            <button
+              type="button"
+              (click)="loadProviderReviews(providerId())"
+              class="mt-3 inline-flex cursor-pointer items-center gap-1 rounded-md bg-red-500/10 px-3 py-1.5 text-xs font-bold text-red-600 hover:bg-red-500/20 transition"
+            >
+              <i class="pi pi-refresh text-[10px]"></i>
+              إعادة المحاولة
+            </button>
           </div>
         } @else if (reviews().length === 0) {
           <div class="flex flex-col items-center justify-center py-12 text-center">
@@ -717,32 +779,42 @@
         } @else {
           <div class="space-y-4">
             @for (review of reviews(); track review._id || review.id; let idx = $index) {
-              <div class="group rounded-xl border border-outline-variant/20 bg-surface-container p-4 transition-all duration-300 hover:shadow-md hover:border-primary/20 animate-slide-up"
-                [style.animation-delay]="idx * 50 + 'ms'">
+              <div
+                class="group rounded-xl border border-outline-variant/20 bg-surface-container p-4 transition-all duration-300 hover:shadow-md hover:border-primary/20 animate-slide-up"
+                [style.animation-delay]="idx * 50 + 'ms'"
+              >
                 <div class="flex items-start gap-3">
-                  <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary to-primary/70 text-sm font-black text-on-primary shadow-md">
+                  <div
+                    class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary to-primary/70 text-sm font-black text-on-primary shadow-md"
+                  >
                     {{ getReviewerInitial(review) }}
                   </div>
                   <div class="flex-1 min-w-0">
                     <div class="flex items-center justify-between gap-2">
                       <div class="flex items-center gap-2">
-                        <span class="font-black text-on-surface">{{ getReviewerName(review) }}</span>
+                        <span class="font-black text-on-surface">{{
+                          getReviewerName(review)
+                        }}</span>
                         <div class="flex items-center gap-0.5">
-                          @for (star of [1,2,3,4,5]; track star) {
-                            <i class="pi text-xs"
+                          @for (star of [1, 2, 3, 4, 5]; track star) {
+                            <i
+                              class="pi text-xs"
                               [class.pi-star-fill]="star <= review.rating"
                               [class.pi-star]="star > review.rating"
                               [class.text-amber-500]="star <= review.rating"
-                              [class.text-on-surface-variant/30]="star > review.rating"></i>
+                              [class.text-on-surface-variant/30]="star > review.rating"
+                            ></i>
                           }
                         </div>
                       </div>
                       <span class="text-xs font-bold text-on-surface-variant/60 shrink-0">
-                        {{ formatReviewDate(review.createdAt) }}
+                        {{ formatReviewDate(review.createdAt!) }}
                       </span>
                     </div>
                     @if (review.comment) {
-                      <p class="mt-2 text-sm leading-relaxed text-on-surface-variant">{{ review.comment }}</p>
+                      <p class="mt-2 text-sm leading-relaxed text-on-surface-variant">
+                        {{ review.comment }}
+                      </p>
                     }
                   </div>
                 </div>
@@ -752,19 +824,5 @@
         }
       </div>
     </section>
-
-    <div class="mx-auto max-w-3xl px-4 py-12 text-center">
-      <i class="pi pi-exclamation-triangle text-4xl text-on-surface-variant/40"></i>
-      <p class="mt-3 text-sm font-bold text-on-surface-variant">
-        لم يتم العثور على بيانات مزود الخدمة.
-      </p>
-      <a
-        routerLink="/client/providers"
-        class="mt-4 inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-bold text-on-primary transition hover:opacity-90"
-      >
-        <i class="pi pi-arrow-right text-xs"></i>
-        العودة لقائمة المزودين
-      </a>
-    </div>
   }
 </div>

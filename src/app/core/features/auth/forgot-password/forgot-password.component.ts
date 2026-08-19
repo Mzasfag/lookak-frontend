@@ -118,7 +118,6 @@ export class ForgotPasswordComponent {
       token: this.cookieService.get('reset-token') || this.resetForm.get('token')?.value,
       password: this.resetForm.get('newPassword')?.value,
     };
-    console.log(data);
     // call api
     this.authService.resetPassword(data).subscribe({
       next: (res) => {

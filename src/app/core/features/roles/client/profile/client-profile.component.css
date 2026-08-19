@@ -1,3 +1,21 @@
 :host {
   display: block;
 }
+
+@keyframes profile-fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-profile-fade-up {
+  animation: profile-fade-up 0.45s ease-out both;
+}
+
+@keyframes tab-indicator {
+  from { opacity: 0; transform: scaleX(0.85); }
+  to { opacity: 1; transform: scaleX(1); }
+}
+
+.animate-tab-indicator {
+  animation: tab-indicator 0.3s ease-out both;
+}

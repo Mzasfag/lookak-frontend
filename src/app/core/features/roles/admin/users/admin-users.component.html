@@ -762,7 +762,7 @@
                             <span class="font-bold">{{ dayLabel(slot.dayOfWeek) }}</span>
                             <span class="text-on-surface-variant" dir="ltr">
                               @if (slot.isOpen) {
-                                {{ slot.startTime }} – {{ slot.endTime }}
+                                {{ formatTime(slot.startTime) }} – {{ formatTime(slot.endTime) }}
                               } @else {
                                 مغلق
                               }

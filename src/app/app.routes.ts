@@ -32,6 +32,7 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./core/features/auth/register/register.component').then((file) => file.RegisterComponent),
   },
+ 
   {
     path: 'admin',
     title: 'لوحة تحكم الإدارة',

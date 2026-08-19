@@ -1,525 +1,1436 @@
 ❯ Building...
-✔ Building...
-Prerendered 0 static routes.
-Application bundle generation failed. [16.389 seconds] - 2026-08-14T04:35:32.775Z
-
-[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: Toast is not used within the template of ProviderProfileComponent[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/provider/profile/provider-profile.component.ts:71:50:
-[37m      71 │   imports: [ReactiveFormsModule, LoaderComponent, [32mToast[37m, NgClass],
-         ╵                                                   [32m~~~~~[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'loadDashboard' does not exist on type 'ClientDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.html:12:15:
-[37m      12 │       (click)="[32mloadDashboard[37m()"
-         ╵                [32m~~~~~~~~~~~~~[0m
-
-  Error occurs in the template of component ClientDashboardComponent.
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:34:15:
-[37m      34 │   templateUrl: [32m'./client-dashboard.component.html'[37m,
-         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'formatDate' does not exist on type 'ClientDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.html:92:23:
-[37m      92 │                     {{ [32mformatDate[37m(booking.date) }} • {{ booking....
-         ╵                        [32m~~~~~~~~~~[0m
-
-  Error occurs in the template of component ClientDashboardComponent.
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:34:15:
-[37m      34 │   templateUrl: [32m'./client-dashboard.component.html'[37m,
-         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'statusBadgeClass' does not exist on type 'ClientDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.html:96:80:
-[37m      96 │ ...2.5 py-1 text-xs font-bold {{ [32mstatusBadgeClass[37m(booking.status) }}"
-         ╵                                  [32m~~~~~~~~~~~~~~~~[0m
-
-  Error occurs in the template of component ClientDashboardComponent.
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:34:15:
-[37m      34 │   templateUrl: [32m'./client-dashboard.component.html'[37m,
-         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'statusLabel' does not exist on type 'ClientDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.html:98:21:
-[37m      98 │                   {{ [32mstatusLabel[37m(booking.status) }}
-         ╵                      [32m~~~~~~~~~~~[0m
-
-  Error occurs in the template of component ClientDashboardComponent.
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:34:15:
-[37m      34 │   templateUrl: [32m'./client-dashboard.component.html'[37m,
-         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'statusBadgeClass' does not exist on type 'ClientDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.html:138:80:
-[37m      138 │ ....5 py-1 text-xs font-bold {{ [32mstatusBadgeClass[37m(booking.status) }}"
-          ╵                                 [32m~~~~~~~~~~~~~~~~[0m
-
-  Error occurs in the template of component ClientDashboardComponent.
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:34:15:
-[37m      34 │   templateUrl: [32m'./client-dashboard.component.html'[37m,
-         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'statusLabel' does not exist on type 'ClientDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.html:140:21:
-[37m      140 │                   {{ [32mstatusLabel[37m(booking.status) }}
-          ╵                      [32m~~~~~~~~~~~[0m
-
-  Error occurs in the template of component ClientDashboardComponent.
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:34:15:
-[37m      34 │   templateUrl: [32m'./client-dashboard.component.html'[37m,
-         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2420: Class 'ClientDashboardComponent' incorrectly implements interface 'OnInit'.
-  Property 'ngOnInit' is missing in type 'ClientDashboardComponent' but required in type 'OnInit'.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:37:13:
-[37m      37 │ export class [32mClientDashboardComponent[37m implements OnInit {
-         ╵              [32m~~~~~~~~~~~~~~~~~~~~~~~~[0m
-
-  'ngOnInit' is declared here.
-
-    node_modules/@angular/core/types/core.d.ts:3186:4:
-[37m      3186 │     [32mngOnInit(): void;[37m
-           ╵     [32m~~~~~~~~~~~~~~~~~[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'sortKey' does not exist on type 'ClientDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:56:27:
-[37m      56 │       .sort((a, b) => this.[32msortKey[37m(a).localeCompare(this.sortKey(b...
-         ╵                            [32m~~~~~~~[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'sortKey' does not exist on type 'ClientDashboardComponent'.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:56:57:
-[37m      56 │ ...  .sort((a, b) => this.sortKey(a).localeCompare(this.[32msortKey[37m(b)));
-         ╵                                                         [32m~~~~~~~[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:106:2:
-[37m      106 │   [32mloadDashboard[37m(): void {
-          ╵   [32m~~~~~~~~~~~~~[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'loadDashboard'.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:106:2:
-[37m      106 │   [32mloadDashboard[37m(): void {
-          ╵   [32m~~~~~~~~~~~~~[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:106:17:
-[37m      106 │   loadDashboard()[32m:[37m void {
-          ╵                  [32m^[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2554: Expected 1-2 arguments, but got 3.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:106:19:
-[37m      106 │   loadDashboard(): [32mvoid {[37m
-          ╵                    [32m~~~~~~[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ':' expected.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:107:8:
-[37m      107 │     this[32m.[37misLoading.set(true);
-          ╵         [32m^[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:107:28:
-[37m      107 │     this.isLoading.set(true)[32m;[37m
-          ╵                             [32m^[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ':' expected.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:108:8:
-[37m      108 │     this[32m.[37mhasError.set(false);
-          ╵         [32m^[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:108:28:
-[37m      108 │     this.hasError.set(false)[32m;[37m
-          ╵                             [32m^[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2300: Duplicate identifier '(Missing)'.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:111:9:
-[37m      111 │       me:[32m[37m this.userService.getMe(),
-          ╵          [32m^[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2842: '(Missing)' is an unused renaming of 'me'. Did you intend to use it as a type annotation?[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:111:9:
-[37m      111 │       me:[32m[37m this.userService.getMe(),
-          ╵          [32m^[0m
-
-  We can only write a type for 'me' by adding a type for the entire parameter here.
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:111:14:
-[37m      111 │       me: this[32m[37m.userService.getMe(),
-          ╵               [32m^[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS7031: Binding element '(Missing)' implicitly has an 'any' type.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:111:9:
-[37m      111 │       me:[32m[37m this.userService.getMe(),
-          ╵          [32m^[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1359: Identifier expected. 'this' is a reserved word that cannot be used here.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:111:10:
-[37m      111 │       me: [32mthis[37m.userService.getMe(),
-          ╵           [32m~~~~[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ':' expected.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:111:14:
-[37m      111 │       me: this[32m.[37muserService.getMe(),
-          ╵               [32m^[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2300: Duplicate identifier '(Missing)'.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:111:14:
-[37m      111 │       me: this[32m[37m.userService.getMe(),
-          ╵               [32m^[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2842: '(Missing)' is an unused renaming of 'this'. Did you intend to use it as a type annotation?[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:111:14:
-[37m      111 │       me: this[32m[37m.userService.getMe(),
-          ╵               [32m^[0m
-
-  We can only write a type for 'this' by adding a type for the entire parameter here.
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:111:14:
-[37m      111 │       me: this[32m[37m.userService.getMe(),
-          ╵               [32m^[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS7031: Binding element '(Missing)' implicitly has an 'any' type.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:111:14:
-[37m      111 │       me: this[32m[37m.userService.getMe(),
-          ╵               [32m^[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'pipe' does not exist on type 'Signal<ClientKpiCard[]>'.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:115:7:
-[37m      115 │       .[32mpipe[37m(
-          ╵        [32m~~~~[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS7006: Parameter 'res' implicitly has an 'any' type.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:120:15:
-[37m      120 │         next: ([32mres[37m) => {
-          ╵                [32m~~~[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS7006: Parameter 'error' implicitly has an 'any' type.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:131:16:
-[37m      131 │         error: ([32merror[37m) => {
-          ╵                 [32m~~~~~[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'statusLabel'.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:143:2:
-[37m      143 │   [32mstatusLabel[37m(status: BookingStatus | string): string {
-          ╵   [32m~~~~~~~~~~~[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:143:20:
-[37m      143 │   statusLabel(status[32m:[37m BookingStatus | string): string {
-          ╵                     [32m^[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2693: 'BookingStatus' only refers to a type, but is being used as a value here.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:143:22:
-[37m      143 │   statusLabel(status: [32mBookingStatus[37m | string): string {
-          ╵                       [32m~~~~~~~~~~~~~[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2693: 'string' only refers to a type, but is being used as a value here.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:143:38:
-[37m      143 │   statusLabel(status: BookingStatus | [32mstring[37m): string {
-          ╵                                       [32m~~~~~~[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ';' expected.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:143:45:
-[37m      143 │   statusLabel(status: BookingStatus | string)[32m:[37m string {
-          ╵                                              [32m^[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1434: Unexpected keyword or identifier.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:143:47:
-[37m      143 │   statusLabel(status: BookingStatus | string): [32mstring[37m {
-          ╵                                                [32m~~~~~~[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2693: 'string' only refers to a type, but is being used as a value here.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:143:47:
-[37m      143 │   statusLabel(status: BookingStatus | string): [32mstring[37m {
-          ╵                                                [32m~~~~~~[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'statusBadgeClass'.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:160:2:
-[37m      160 │   [32mstatusBadgeClass[37m(status: BookingStatus | string): string {
-          ╵   [32m~~~~~~~~~~~~~~~~[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:160:25:
-[37m      160 │   statusBadgeClass(status[32m:[37m BookingStatus | string): string {
-          ╵                          [32m^[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2693: 'BookingStatus' only refers to a type, but is being used as a value here.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:160:27:
-[37m      160 │   statusBadgeClass(status: [32mBookingStatus[37m | string): string {
-          ╵                            [32m~~~~~~~~~~~~~[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2693: 'string' only refers to a type, but is being used as a value here.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:160:43:
-[37m      160 │   statusBadgeClass(status: BookingStatus | [32mstring[37m): string {
-          ╵                                            [32m~~~~~~[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ';' expected.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:160:50:
-[37m      160 │   statusBadgeClass(status: BookingStatus | string)[32m:[37m string {
-          ╵                                                   [32m^[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1434: Unexpected keyword or identifier.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:160:52:
-[37m      160 │   statusBadgeClass(status: BookingStatus | string): [32mstring[37m {
-          ╵                                                     [32m~~~~~~[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2693: 'string' only refers to a type, but is being used as a value here.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:160:52:
-[37m      160 │   statusBadgeClass(status: BookingStatus | string): [32mstring[37m {
-          ╵                                                     [32m~~~~~~[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2552: Cannot find name 'formatDate'. Did you mean 'FormData'?[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:178:2:
-[37m      178 │   [32mformatDate[37m(date: string): string {
-          ╵   [32m~~~~~~~~~~[0m
-
-  'FormData' is declared here.
-
-    node_modules/typescript/lib/lib.dom.d.ts:15080:12:
-[37m      15080 │ declare var [32mFormData[37m: {
-            ╵             [32m~~~~~~~~[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2552: Cannot find name 'date'. Did you mean 'Date'?[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:178:13:
-[37m      178 │   formatDate([32mdate[37m: string): string {
-          ╵              [32m~~~~[0m
-
-  'Date' is declared here.
-
-    node_modules/typescript/lib/lib.es5.d.ts:959:12:
-[37m      959 │ declare var [32mDate[37m: DateConstructor;
-          ╵             [32m~~~~[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:178:17:
-[37m      178 │   formatDate(date[32m:[37m string): string {
-          ╵                  [32m^[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2693: 'string' only refers to a type, but is being used as a value here.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:178:19:
-[37m      178 │   formatDate(date: [32mstring[37m): string {
-          ╵                    [32m~~~~~~[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ';' expected.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:178:26:
-[37m      178 │   formatDate(date: string)[32m:[37m string {
-          ╵                           [32m^[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1434: Unexpected keyword or identifier.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:178:28:
-[37m      178 │   formatDate(date: string): [32mstring[37m {
-          ╵                             [32m~~~~~~[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2693: 'string' only refers to a type, but is being used as a value here.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:178:28:
-[37m      178 │   formatDate(date: string): [32mstring[37m {
-          ╵                             [32m~~~~~~[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2552: Cannot find name 'date'. Did you mean 'Date'?[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:179:9:
-[37m      179 │     if (![32mdate[37m) return '—';
-          ╵          [32m~~~~[0m
-
-  'Date' is declared here.
-
-    node_modules/typescript/lib/lib.es5.d.ts:959:12:
-[37m      959 │ declare var [32mDate[37m: DateConstructor;
-          ╵             [32m~~~~[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2552: Cannot find name 'date'. Did you mean 'Date'?[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:180:23:
-[37m      180 │     const d = new Date([32mdate[37m);
-          ╵                        [32m~~~~[0m
-
-  'Date' is declared here.
-
-    node_modules/typescript/lib/lib.es5.d.ts:959:12:
-[37m      959 │ declare var [32mDate[37m: DateConstructor;
-          ╵             [32m~~~~[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1128: Declaration or statement expected.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:191:2:
-[37m      191 │   [32mprivate[37m sortKey(b: IClientBooking): string {
-          ╵   [32m~~~~~~~[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'sortKey'.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:191:10:
-[37m      191 │   private [32msortKey[37m(b: IClientBooking): string {
-          ╵           [32m~~~~~~~[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'b'.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:191:18:
-[37m      191 │   private sortKey([32mb[37m: IClientBooking): string {
-          ╵                   [32m^[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:191:19:
-[37m      191 │   private sortKey(b[32m:[37m IClientBooking): string {
-          ╵                    [32m^[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2693: 'IClientBooking' only refers to a type, but is being used as a value here.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:191:21:
-[37m      191 │   private sortKey(b: [32mIClientBooking[37m): string {
-          ╵                      [32m~~~~~~~~~~~~~~[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ';' expected.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:191:36:
-[37m      191 │   private sortKey(b: IClientBooking)[32m:[37m string {
-          ╵                                     [32m^[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1434: Unexpected keyword or identifier.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:191:38:
-[37m      191 │   private sortKey(b: IClientBooking): [32mstring[37m {
-          ╵                                       [32m~~~~~~[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2693: 'string' only refers to a type, but is being used as a value here.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:191:38:
-[37m      191 │   private sortKey(b: IClientBooking): [32mstring[37m {
-          ╵                                       [32m~~~~~~[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1128: Declaration or statement expected.[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:194:0:
-[37m      194 │ [32m}[37m
-          ╵ [32m^[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mUnexpected "."[0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:267:14:
-[37m      267 │         this: [32m.[37misLoading.set(true),
-          ╵               [32m^[0m
-
-
-[31mX [41;31m[[41;97mERROR[41;31m][0m [1mUnexpected "."[0m
-
-    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:267:14:
-[37m      267 │         this: [32m.[37misLoading.set(true),
-          ╵               [32m^[0m
-
-
+Error fetching notifications: HttpErrorResponse {
+  headers: _HttpHeaders {
+    headers: Map(24) {
+      'access-control-allow-credentials' => [Array],
+      'access-control-allow-origin' => [Array],
+      'connection' => [Array],
+      'content-length' => [Array],
+      'content-security-policy' => [Array],
+      'content-type' => [Array],
+      'cross-origin-opener-policy' => [Array],
+      'cross-origin-resource-policy' => [Array],
+      'date' => [Array],
+      'etag' => [Array],
+      'keep-alive' => [Array],
+      'origin-agent-cluster' => [Array],
+      'referrer-policy' => [Array],
+      'strict-transport-security' => [Array],
+      'vary' => [Array],
+      'x-content-type-options' => [Array],
+      'x-dns-prefetch-control' => [Array],
+      'x-download-options' => [Array],
+      'x-frame-options' => [Array],
+      'x-permitted-cross-domain-policies' => [Array],
+      'x-ratelimit-limit' => [Array],
+      'x-ratelimit-remaining' => [Array],
+      'x-ratelimit-reset' => [Array],
+      'x-xss-protection' => [Array]
+    },
+    normalizedNames: Map(24) {
+      'access-control-allow-credentials' => 'access-control-allow-credentials',
+      'access-control-allow-origin' => 'access-control-allow-origin',
+      'connection' => 'connection',
+      'content-length' => 'content-length',
+      'content-security-policy' => 'content-security-policy',
+      'content-type' => 'content-type',
+      'cross-origin-opener-policy' => 'cross-origin-opener-policy',
+      'cross-origin-resource-policy' => 'cross-origin-resource-policy',
+      'date' => 'date',
+      'etag' => 'etag',
+      'keep-alive' => 'keep-alive',
+      'origin-agent-cluster' => 'origin-agent-cluster',
+      'referrer-policy' => 'referrer-policy',
+      'strict-transport-security' => 'strict-transport-security',
+      'vary' => 'vary',
+      'x-content-type-options' => 'x-content-type-options',
+      'x-dns-prefetch-control' => 'x-dns-prefetch-control',
+      'x-download-options' => 'x-download-options',
+      'x-frame-options' => 'x-frame-options',
+      'x-permitted-cross-domain-policies' => 'x-permitted-cross-domain-policies',
+      'x-ratelimit-limit' => 'x-ratelimit-limit',
+      'x-ratelimit-remaining' => 'x-ratelimit-remaining',
+      'x-ratelimit-reset' => 'x-ratelimit-reset',
+      'x-xss-protection' => 'x-xss-protection'
+    },
+    lazyInit: undefined,
+    lazyUpdate: null
+  },
+  status: 401,
+  statusText: 'Unauthorized',
+  url: 'http://localhost:5000/api/notifications',
+  ok: false,
+  type: undefined,
+  redirected: false,
+  responseType: 'basic',
+  name: 'HttpErrorResponse',
+  message: 'Http failure response for http://localhost:5000/api/notifications: 401 Unauthorized',
+  error: {
+    message: 'Authentication token is required',
+    stack: 'Error: Authentication token is required\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/middleware/authMiddleware.js:10:21\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/utils/asyncHandler.js:2:19\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:157:13)\n' +
+      '    at Route.dispatch (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:117:3)\n' +
+      '    at handle (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:435:11)\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:295:15\n' +
+      '    at processParams (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:582:12)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:291:5)'
+  }
+}
+Error fetching notifications: HttpErrorResponse {
+  headers: _HttpHeaders {
+    headers: Map(24) {
+      'access-control-allow-credentials' => [Array],
+      'access-control-allow-origin' => [Array],
+      'connection' => [Array],
+      'content-length' => [Array],
+      'content-security-policy' => [Array],
+      'content-type' => [Array],
+      'cross-origin-opener-policy' => [Array],
+      'cross-origin-resource-policy' => [Array],
+      'date' => [Array],
+      'etag' => [Array],
+      'keep-alive' => [Array],
+      'origin-agent-cluster' => [Array],
+      'referrer-policy' => [Array],
+      'strict-transport-security' => [Array],
+      'vary' => [Array],
+      'x-content-type-options' => [Array],
+      'x-dns-prefetch-control' => [Array],
+      'x-download-options' => [Array],
+      'x-frame-options' => [Array],
+      'x-permitted-cross-domain-policies' => [Array],
+      'x-ratelimit-limit' => [Array],
+      'x-ratelimit-remaining' => [Array],
+      'x-ratelimit-reset' => [Array],
+      'x-xss-protection' => [Array]
+    },
+    normalizedNames: Map(24) {
+      'access-control-allow-credentials' => 'access-control-allow-credentials',
+      'access-control-allow-origin' => 'access-control-allow-origin',
+      'connection' => 'connection',
+      'content-length' => 'content-length',
+      'content-security-policy' => 'content-security-policy',
+      'content-type' => 'content-type',
+      'cross-origin-opener-policy' => 'cross-origin-opener-policy',
+      'cross-origin-resource-policy' => 'cross-origin-resource-policy',
+      'date' => 'date',
+      'etag' => 'etag',
+      'keep-alive' => 'keep-alive',
+      'origin-agent-cluster' => 'origin-agent-cluster',
+      'referrer-policy' => 'referrer-policy',
+      'strict-transport-security' => 'strict-transport-security',
+      'vary' => 'vary',
+      'x-content-type-options' => 'x-content-type-options',
+      'x-dns-prefetch-control' => 'x-dns-prefetch-control',
+      'x-download-options' => 'x-download-options',
+      'x-frame-options' => 'x-frame-options',
+      'x-permitted-cross-domain-policies' => 'x-permitted-cross-domain-policies',
+      'x-ratelimit-limit' => 'x-ratelimit-limit',
+      'x-ratelimit-remaining' => 'x-ratelimit-remaining',
+      'x-ratelimit-reset' => 'x-ratelimit-reset',
+      'x-xss-protection' => 'x-xss-protection'
+    },
+    lazyInit: undefined,
+    lazyUpdate: null
+  },
+  status: 401,
+  statusText: 'Unauthorized',
+  url: 'http://localhost:5000/api/notifications',
+  ok: false,
+  type: undefined,
+  redirected: false,
+  responseType: 'basic',
+  name: 'HttpErrorResponse',
+  message: 'Http failure response for http://localhost:5000/api/notifications: 401 Unauthorized',
+  error: {
+    message: 'Authentication token is required',
+    stack: 'Error: Authentication token is required\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/middleware/authMiddleware.js:10:21\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/utils/asyncHandler.js:2:19\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:157:13)\n' +
+      '    at Route.dispatch (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:117:3)\n' +
+      '    at handle (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:435:11)\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:295:15\n' +
+      '    at processParams (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:582:12)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:291:5)'
+  }
+}
+Error fetching notifications: HttpErrorResponse {
+  headers: _HttpHeaders {
+    headers: Map(24) {
+      'access-control-allow-credentials' => [Array],
+      'access-control-allow-origin' => [Array],
+      'connection' => [Array],
+      'content-length' => [Array],
+      'content-security-policy' => [Array],
+      'content-type' => [Array],
+      'cross-origin-opener-policy' => [Array],
+      'cross-origin-resource-policy' => [Array],
+      'date' => [Array],
+      'etag' => [Array],
+      'keep-alive' => [Array],
+      'origin-agent-cluster' => [Array],
+      'referrer-policy' => [Array],
+      'strict-transport-security' => [Array],
+      'vary' => [Array],
+      'x-content-type-options' => [Array],
+      'x-dns-prefetch-control' => [Array],
+      'x-download-options' => [Array],
+      'x-frame-options' => [Array],
+      'x-permitted-cross-domain-policies' => [Array],
+      'x-ratelimit-limit' => [Array],
+      'x-ratelimit-remaining' => [Array],
+      'x-ratelimit-reset' => [Array],
+      'x-xss-protection' => [Array]
+    },
+    normalizedNames: Map(24) {
+      'access-control-allow-credentials' => 'access-control-allow-credentials',
+      'access-control-allow-origin' => 'access-control-allow-origin',
+      'connection' => 'connection',
+      'content-length' => 'content-length',
+      'content-security-policy' => 'content-security-policy',
+      'content-type' => 'content-type',
+      'cross-origin-opener-policy' => 'cross-origin-opener-policy',
+      'cross-origin-resource-policy' => 'cross-origin-resource-policy',
+      'date' => 'date',
+      'etag' => 'etag',
+      'keep-alive' => 'keep-alive',
+      'origin-agent-cluster' => 'origin-agent-cluster',
+      'referrer-policy' => 'referrer-policy',
+      'strict-transport-security' => 'strict-transport-security',
+      'vary' => 'vary',
+      'x-content-type-options' => 'x-content-type-options',
+      'x-dns-prefetch-control' => 'x-dns-prefetch-control',
+      'x-download-options' => 'x-download-options',
+      'x-frame-options' => 'x-frame-options',
+      'x-permitted-cross-domain-policies' => 'x-permitted-cross-domain-policies',
+      'x-ratelimit-limit' => 'x-ratelimit-limit',
+      'x-ratelimit-remaining' => 'x-ratelimit-remaining',
+      'x-ratelimit-reset' => 'x-ratelimit-reset',
+      'x-xss-protection' => 'x-xss-protection'
+    },
+    lazyInit: undefined,
+    lazyUpdate: null
+  },
+  status: 401,
+  statusText: 'Unauthorized',
+  url: 'http://localhost:5000/api/notifications',
+  ok: false,
+  type: undefined,
+  redirected: false,
+  responseType: 'basic',
+  name: 'HttpErrorResponse',
+  message: 'Http failure response for http://localhost:5000/api/notifications: 401 Unauthorized',
+  error: {
+    message: 'Authentication token is required',
+    stack: 'Error: Authentication token is required\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/middleware/authMiddleware.js:10:21\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/utils/asyncHandler.js:2:19\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:157:13)\n' +
+      '    at Route.dispatch (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:117:3)\n' +
+      '    at handle (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:435:11)\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:295:15\n' +
+      '    at processParams (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:582:12)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:291:5)'
+  }
+}
+ERROR TypeError: el.getBoundingClientRect is not a function
+    at _ToastItem.measureStackHeight (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\085f2552-3efd-486a-a8ca-994a9849cc71\node_modules\primeng\fesm2022\primeng-toast.mjs:691:23)
+    at _ToastItem.onAfterViewInit (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\085f2552-3efd-486a-a8ca-994a9849cc71\node_modules\primeng\fesm2022\primeng-toast.mjs:683:10)
+    at _ToastItem.ngAfterViewInit (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\085f2552-3efd-486a-a8ca-994a9849cc71\node_modules\primeng\fesm2022\primeng-basecomponent.mjs:287:10)
+    at callHookInternal (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\085f2552-3efd-486a-a8ca-994a9849cc71\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:251:10)
+    at callHook (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\085f2552-3efd-486a-a8ca-994a9849cc71\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:266:7)
+    at callHooks (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\085f2552-3efd-486a-a8ca-994a9849cc71\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:240:9)
+    at executeInitAndCheckHooks (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\085f2552-3efd-486a-a8ca-994a9849cc71\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:209:5)
+    at refreshView (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\085f2552-3efd-486a-a8ca-994a9849cc71\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6070:11)
+    at detectChangesInView (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\085f2552-3efd-486a-a8ca-994a9849cc71\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6153:5)
+    at detectChangesInViewIfAttached (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\085f2552-3efd-486a-a8ca-994a9849cc71\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6136:3)
+Error fetching notifications: HttpErrorResponse {
+  headers: _HttpHeaders {
+    headers: Map(24) {
+      'access-control-allow-credentials' => [Array],
+      'access-control-allow-origin' => [Array],
+      'connection' => [Array],
+      'content-length' => [Array],
+      'content-security-policy' => [Array],
+      'content-type' => [Array],
+      'cross-origin-opener-policy' => [Array],
+      'cross-origin-resource-policy' => [Array],
+      'date' => [Array],
+      'etag' => [Array],
+      'keep-alive' => [Array],
+      'origin-agent-cluster' => [Array],
+      'referrer-policy' => [Array],
+      'strict-transport-security' => [Array],
+      'vary' => [Array],
+      'x-content-type-options' => [Array],
+      'x-dns-prefetch-control' => [Array],
+      'x-download-options' => [Array],
+      'x-frame-options' => [Array],
+      'x-permitted-cross-domain-policies' => [Array],
+      'x-ratelimit-limit' => [Array],
+      'x-ratelimit-remaining' => [Array],
+      'x-ratelimit-reset' => [Array],
+      'x-xss-protection' => [Array]
+    },
+    normalizedNames: Map(24) {
+      'access-control-allow-credentials' => 'access-control-allow-credentials',
+      'access-control-allow-origin' => 'access-control-allow-origin',
+      'connection' => 'connection',
+      'content-length' => 'content-length',
+      'content-security-policy' => 'content-security-policy',
+      'content-type' => 'content-type',
+      'cross-origin-opener-policy' => 'cross-origin-opener-policy',
+      'cross-origin-resource-policy' => 'cross-origin-resource-policy',
+      'date' => 'date',
+      'etag' => 'etag',
+      'keep-alive' => 'keep-alive',
+      'origin-agent-cluster' => 'origin-agent-cluster',
+      'referrer-policy' => 'referrer-policy',
+      'strict-transport-security' => 'strict-transport-security',
+      'vary' => 'vary',
+      'x-content-type-options' => 'x-content-type-options',
+      'x-dns-prefetch-control' => 'x-dns-prefetch-control',
+      'x-download-options' => 'x-download-options',
+      'x-frame-options' => 'x-frame-options',
+      'x-permitted-cross-domain-policies' => 'x-permitted-cross-domain-policies',
+      'x-ratelimit-limit' => 'x-ratelimit-limit',
+      'x-ratelimit-remaining' => 'x-ratelimit-remaining',
+      'x-ratelimit-reset' => 'x-ratelimit-reset',
+      'x-xss-protection' => 'x-xss-protection'
+    },
+    lazyInit: undefined,
+    lazyUpdate: null
+  },
+  status: 401,
+  statusText: 'Unauthorized',
+  url: 'http://localhost:5000/api/notifications',
+  ok: false,
+  type: undefined,
+  redirected: false,
+  responseType: 'basic',
+  name: 'HttpErrorResponse',
+  message: 'Http failure response for http://localhost:5000/api/notifications: 401 Unauthorized',
+  error: {
+    message: 'Authentication token is required',
+    stack: 'Error: Authentication token is required\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/middleware/authMiddleware.js:10:21\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/utils/asyncHandler.js:2:19\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:157:13)\n' +
+      '    at Route.dispatch (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:117:3)\n' +
+      '    at handle (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:435:11)\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:295:15\n' +
+      '    at processParams (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:582:12)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:291:5)'
+  }
+}
+ERROR TypeError: el.getBoundingClientRect is not a function
+    at _ToastItem.measureStackHeight (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\160b5f55-ca0c-42fe-b16b-dd8139d5cee7\node_modules\primeng\fesm2022\primeng-toast.mjs:691:23)
+    at _ToastItem.onAfterViewInit (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\160b5f55-ca0c-42fe-b16b-dd8139d5cee7\node_modules\primeng\fesm2022\primeng-toast.mjs:683:10)
+    at _ToastItem.ngAfterViewInit (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\160b5f55-ca0c-42fe-b16b-dd8139d5cee7\node_modules\primeng\fesm2022\primeng-basecomponent.mjs:287:10)
+    at callHookInternal (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\160b5f55-ca0c-42fe-b16b-dd8139d5cee7\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:251:10)
+    at callHook (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\160b5f55-ca0c-42fe-b16b-dd8139d5cee7\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:266:7)
+    at callHooks (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\160b5f55-ca0c-42fe-b16b-dd8139d5cee7\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:240:9)
+    at executeInitAndCheckHooks (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\160b5f55-ca0c-42fe-b16b-dd8139d5cee7\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:209:5)
+    at refreshView (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\160b5f55-ca0c-42fe-b16b-dd8139d5cee7\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6070:11)
+    at detectChangesInView (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\160b5f55-ca0c-42fe-b16b-dd8139d5cee7\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6153:5)
+    at detectChangesInViewIfAttached (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\160b5f55-ca0c-42fe-b16b-dd8139d5cee7\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6136:3)
+Error fetching notifications: HttpErrorResponse {
+  headers: _HttpHeaders {
+    headers: Map(24) {
+      'access-control-allow-credentials' => [Array],
+      'access-control-allow-origin' => [Array],
+      'connection' => [Array],
+      'content-length' => [Array],
+      'content-security-policy' => [Array],
+      'content-type' => [Array],
+      'cross-origin-opener-policy' => [Array],
+      'cross-origin-resource-policy' => [Array],
+      'date' => [Array],
+      'etag' => [Array],
+      'keep-alive' => [Array],
+      'origin-agent-cluster' => [Array],
+      'referrer-policy' => [Array],
+      'strict-transport-security' => [Array],
+      'vary' => [Array],
+      'x-content-type-options' => [Array],
+      'x-dns-prefetch-control' => [Array],
+      'x-download-options' => [Array],
+      'x-frame-options' => [Array],
+      'x-permitted-cross-domain-policies' => [Array],
+      'x-ratelimit-limit' => [Array],
+      'x-ratelimit-remaining' => [Array],
+      'x-ratelimit-reset' => [Array],
+      'x-xss-protection' => [Array]
+    },
+    normalizedNames: Map(24) {
+      'access-control-allow-credentials' => 'access-control-allow-credentials',
+      'access-control-allow-origin' => 'access-control-allow-origin',
+      'connection' => 'connection',
+      'content-length' => 'content-length',
+      'content-security-policy' => 'content-security-policy',
+      'content-type' => 'content-type',
+      'cross-origin-opener-policy' => 'cross-origin-opener-policy',
+      'cross-origin-resource-policy' => 'cross-origin-resource-policy',
+      'date' => 'date',
+      'etag' => 'etag',
+      'keep-alive' => 'keep-alive',
+      'origin-agent-cluster' => 'origin-agent-cluster',
+      'referrer-policy' => 'referrer-policy',
+      'strict-transport-security' => 'strict-transport-security',
+      'vary' => 'vary',
+      'x-content-type-options' => 'x-content-type-options',
+      'x-dns-prefetch-control' => 'x-dns-prefetch-control',
+      'x-download-options' => 'x-download-options',
+      'x-frame-options' => 'x-frame-options',
+      'x-permitted-cross-domain-policies' => 'x-permitted-cross-domain-policies',
+      'x-ratelimit-limit' => 'x-ratelimit-limit',
+      'x-ratelimit-remaining' => 'x-ratelimit-remaining',
+      'x-ratelimit-reset' => 'x-ratelimit-reset',
+      'x-xss-protection' => 'x-xss-protection'
+    },
+    lazyInit: undefined,
+    lazyUpdate: null
+  },
+  status: 401,
+  statusText: 'Unauthorized',
+  url: 'http://localhost:5000/api/notifications',
+  ok: false,
+  type: undefined,
+  redirected: false,
+  responseType: 'basic',
+  name: 'HttpErrorResponse',
+  message: 'Http failure response for http://localhost:5000/api/notifications: 401 Unauthorized',
+  error: {
+    message: 'Authentication token is required',
+    stack: 'Error: Authentication token is required\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/middleware/authMiddleware.js:10:21\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/utils/asyncHandler.js:2:19\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:157:13)\n' +
+      '    at Route.dispatch (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:117:3)\n' +
+      '    at handle (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:435:11)\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:295:15\n' +
+      '    at processParams (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:582:12)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:291:5)'
+  }
+}
+Error fetching notifications: HttpErrorResponse {
+  headers: _HttpHeaders {
+    headers: Map(24) {
+      'access-control-allow-credentials' => [Array],
+      'access-control-allow-origin' => [Array],
+      'connection' => [Array],
+      'content-length' => [Array],
+      'content-security-policy' => [Array],
+      'content-type' => [Array],
+      'cross-origin-opener-policy' => [Array],
+      'cross-origin-resource-policy' => [Array],
+      'date' => [Array],
+      'etag' => [Array],
+      'keep-alive' => [Array],
+      'origin-agent-cluster' => [Array],
+      'referrer-policy' => [Array],
+      'strict-transport-security' => [Array],
+      'vary' => [Array],
+      'x-content-type-options' => [Array],
+      'x-dns-prefetch-control' => [Array],
+      'x-download-options' => [Array],
+      'x-frame-options' => [Array],
+      'x-permitted-cross-domain-policies' => [Array],
+      'x-ratelimit-limit' => [Array],
+      'x-ratelimit-remaining' => [Array],
+      'x-ratelimit-reset' => [Array],
+      'x-xss-protection' => [Array]
+    },
+    normalizedNames: Map(24) {
+      'access-control-allow-credentials' => 'access-control-allow-credentials',
+      'access-control-allow-origin' => 'access-control-allow-origin',
+      'connection' => 'connection',
+      'content-length' => 'content-length',
+      'content-security-policy' => 'content-security-policy',
+      'content-type' => 'content-type',
+      'cross-origin-opener-policy' => 'cross-origin-opener-policy',
+      'cross-origin-resource-policy' => 'cross-origin-resource-policy',
+      'date' => 'date',
+      'etag' => 'etag',
+      'keep-alive' => 'keep-alive',
+      'origin-agent-cluster' => 'origin-agent-cluster',
+      'referrer-policy' => 'referrer-policy',
+      'strict-transport-security' => 'strict-transport-security',
+      'vary' => 'vary',
+      'x-content-type-options' => 'x-content-type-options',
+      'x-dns-prefetch-control' => 'x-dns-prefetch-control',
+      'x-download-options' => 'x-download-options',
+      'x-frame-options' => 'x-frame-options',
+      'x-permitted-cross-domain-policies' => 'x-permitted-cross-domain-policies',
+      'x-ratelimit-limit' => 'x-ratelimit-limit',
+      'x-ratelimit-remaining' => 'x-ratelimit-remaining',
+      'x-ratelimit-reset' => 'x-ratelimit-reset',
+      'x-xss-protection' => 'x-xss-protection'
+    },
+    lazyInit: undefined,
+    lazyUpdate: null
+  },
+  status: 401,
+  statusText: 'Unauthorized',
+  url: 'http://localhost:5000/api/notifications',
+  ok: false,
+  type: undefined,
+  redirected: false,
+  responseType: 'basic',
+  name: 'HttpErrorResponse',
+  message: 'Http failure response for http://localhost:5000/api/notifications: 401 Unauthorized',
+  error: {
+    message: 'Authentication token is required',
+    stack: 'Error: Authentication token is required\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/middleware/authMiddleware.js:10:21\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/utils/asyncHandler.js:2:19\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:157:13)\n' +
+      '    at Route.dispatch (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:117:3)\n' +
+      '    at handle (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:435:11)\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:295:15\n' +
+      '    at processParams (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:582:12)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:291:5)'
+  }
+}
+
+  It looks like you're using the disabled attribute with a reactive form directive. If you set disabled to true
+  when you set up this control in your component class, the disabled attribute will actually be set in the DOM for
+  you. We recommend using this approach to avoid 'changed after checked' errors.
+
+  Example:
+  // Specify the `disabled` property at control creation time:
+  form = new FormGroup({
+    first: new FormControl({value: 'Nancy', disabled: true}, Validators.required),
+    last: new FormControl('Drew', Validators.required)
+  });
+
+  // Controls can also be enabled/disabled after creation:
+  form.get('first')?.enable();
+  form.get('last')?.disable();
+
+ERROR TypeError: el.getBoundingClientRect is not a function
+    at _ToastItem.measureStackHeight (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\085f2552-3efd-486a-a8ca-994a9849cc71\node_modules\primeng\fesm2022\primeng-toast.mjs:691:23)
+    at _ToastItem.onAfterViewInit (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\085f2552-3efd-486a-a8ca-994a9849cc71\node_modules\primeng\fesm2022\primeng-toast.mjs:683:10)
+    at _ToastItem.ngAfterViewInit (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\085f2552-3efd-486a-a8ca-994a9849cc71\node_modules\primeng\fesm2022\primeng-basecomponent.mjs:287:10)
+    at callHookInternal (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\085f2552-3efd-486a-a8ca-994a9849cc71\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:251:10)
+    at callHook (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\085f2552-3efd-486a-a8ca-994a9849cc71\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:266:7)
+    at callHooks (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\085f2552-3efd-486a-a8ca-994a9849cc71\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:240:9)
+    at executeInitAndCheckHooks (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\085f2552-3efd-486a-a8ca-994a9849cc71\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:209:5)
+    at refreshView (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\085f2552-3efd-486a-a8ca-994a9849cc71\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6070:11)
+    at detectChangesInView (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\085f2552-3efd-486a-a8ca-994a9849cc71\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6153:5)
+    at detectChangesInViewIfAttached (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\085f2552-3efd-486a-a8ca-994a9849cc71\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6136:3)
+
+  It looks like you're using the disabled attribute with a reactive form directive. If you set disabled to true
+  when you set up this control in your component class, the disabled attribute will actually be set in the DOM for
+  you. We recommend using this approach to avoid 'changed after checked' errors.
+
+  Example:
+  // Specify the `disabled` property at control creation time:
+  form = new FormGroup({
+    first: new FormControl({value: 'Nancy', disabled: true}, Validators.required),
+    last: new FormControl('Drew', Validators.required)
+  });
+
+  // Controls can also be enabled/disabled after creation:
+  form.get('first')?.enable();
+  form.get('last')?.disable();
+
+
+  It looks like you're using the disabled attribute with a reactive form directive. If you set disabled to true
+  when you set up this control in your component class, the disabled attribute will actually be set in the DOM for
+  you. We recommend using this approach to avoid 'changed after checked' errors.
+
+  Example:
+  // Specify the `disabled` property at control creation time:
+  form = new FormGroup({
+    first: new FormControl({value: 'Nancy', disabled: true}, Validators.required),
+    last: new FormControl('Drew', Validators.required)
+  });
+
+  // Controls can also be enabled/disabled after creation:
+  form.get('first')?.enable();
+  form.get('last')?.disable();
+
+
+  It looks like you're using the disabled attribute with a reactive form directive. If you set disabled to true
+  when you set up this control in your component class, the disabled attribute will actually be set in the DOM for
+  you. We recommend using this approach to avoid 'changed after checked' errors.
+
+  Example:
+  // Specify the `disabled` property at control creation time:
+  form = new FormGroup({
+    first: new FormControl({value: 'Nancy', disabled: true}, Validators.required),
+    last: new FormControl('Drew', Validators.required)
+  });
+
+  // Controls can also be enabled/disabled after creation:
+  form.get('first')?.enable();
+  form.get('last')?.disable();
+
+
+  It looks like you're using the disabled attribute with a reactive form directive. If you set disabled to true
+  when you set up this control in your component class, the disabled attribute will actually be set in the DOM for
+  you. We recommend using this approach to avoid 'changed after checked' errors.
+
+  Example:
+  // Specify the `disabled` property at control creation time:
+  form = new FormGroup({
+    first: new FormControl({value: 'Nancy', disabled: true}, Validators.required),
+    last: new FormControl('Drew', Validators.required)
+  });
+
+  // Controls can also be enabled/disabled after creation:
+  form.get('first')?.enable();
+  form.get('last')?.disable();
+
+
+  It looks like you're using the disabled attribute with a reactive form directive. If you set disabled to true
+  when you set up this control in your component class, the disabled attribute will actually be set in the DOM for
+  you. We recommend using this approach to avoid 'changed after checked' errors.
+
+  Example:
+  // Specify the `disabled` property at control creation time:
+  form = new FormGroup({
+    first: new FormControl({value: 'Nancy', disabled: true}, Validators.required),
+    last: new FormControl('Drew', Validators.required)
+  });
+
+  // Controls can also be enabled/disabled after creation:
+  form.get('first')?.enable();
+  form.get('last')?.disable();
+
+
+  It looks like you're using the disabled attribute with a reactive form directive. If you set disabled to true
+  when you set up this control in your component class, the disabled attribute will actually be set in the DOM for
+  you. We recommend using this approach to avoid 'changed after checked' errors.
+
+  Example:
+  // Specify the `disabled` property at control creation time:
+  form = new FormGroup({
+    first: new FormControl({value: 'Nancy', disabled: true}, Validators.required),
+    last: new FormControl('Drew', Validators.required)
+  });
+
+  // Controls can also be enabled/disabled after creation:
+  form.get('first')?.enable();
+  form.get('last')?.disable();
+
+
+  It looks like you're using the disabled attribute with a reactive form directive. If you set disabled to true
+  when you set up this control in your component class, the disabled attribute will actually be set in the DOM for
+  you. We recommend using this approach to avoid 'changed after checked' errors.
+
+  Example:
+  // Specify the `disabled` property at control creation time:
+  form = new FormGroup({
+    first: new FormControl({value: 'Nancy', disabled: true}, Validators.required),
+    last: new FormControl('Drew', Validators.required)
+  });
+
+  // Controls can also be enabled/disabled after creation:
+  form.get('first')?.enable();
+  form.get('last')?.disable();
+
+
+  It looks like you're using the disabled attribute with a reactive form directive. If you set disabled to true
+  when you set up this control in your component class, the disabled attribute will actually be set in the DOM for
+  you. We recommend using this approach to avoid 'changed after checked' errors.
+
+  Example:
+  // Specify the `disabled` property at control creation time:
+  form = new FormGroup({
+    first: new FormControl({value: 'Nancy', disabled: true}, Validators.required),
+    last: new FormControl('Drew', Validators.required)
+  });
+
+  // Controls can also be enabled/disabled after creation:
+  form.get('first')?.enable();
+  form.get('last')?.disable();
+
+
+  It looks like you're using the disabled attribute with a reactive form directive. If you set disabled to true
+  when you set up this control in your component class, the disabled attribute will actually be set in the DOM for
+  you. We recommend using this approach to avoid 'changed after checked' errors.
+
+  Example:
+  // Specify the `disabled` property at control creation time:
+  form = new FormGroup({
+    first: new FormControl({value: 'Nancy', disabled: true}, Validators.required),
+    last: new FormControl('Drew', Validators.required)
+  });
+
+  // Controls can also be enabled/disabled after creation:
+  form.get('first')?.enable();
+  form.get('last')?.disable();
+
+
+  It looks like you're using the disabled attribute with a reactive form directive. If you set disabled to true
+  when you set up this control in your component class, the disabled attribute will actually be set in the DOM for
+  you. We recommend using this approach to avoid 'changed after checked' errors.
+
+  Example:
+  // Specify the `disabled` property at control creation time:
+  form = new FormGroup({
+    first: new FormControl({value: 'Nancy', disabled: true}, Validators.required),
+    last: new FormControl('Drew', Validators.required)
+  });
+
+  // Controls can also be enabled/disabled after creation:
+  form.get('first')?.enable();
+  form.get('last')?.disable();
+
+
+  It looks like you're using the disabled attribute with a reactive form directive. If you set disabled to true
+  when you set up this control in your component class, the disabled attribute will actually be set in the DOM for
+  you. We recommend using this approach to avoid 'changed after checked' errors.
+
+  Example:
+  // Specify the `disabled` property at control creation time:
+  form = new FormGroup({
+    first: new FormControl({value: 'Nancy', disabled: true}, Validators.required),
+    last: new FormControl('Drew', Validators.required)
+  });
+
+  // Controls can also be enabled/disabled after creation:
+  form.get('first')?.enable();
+  form.get('last')?.disable();
+
+
+  It looks like you're using the disabled attribute with a reactive form directive. If you set disabled to true
+  when you set up this control in your component class, the disabled attribute will actually be set in the DOM for
+  you. We recommend using this approach to avoid 'changed after checked' errors.
+
+  Example:
+  // Specify the `disabled` property at control creation time:
+  form = new FormGroup({
+    first: new FormControl({value: 'Nancy', disabled: true}, Validators.required),
+    last: new FormControl('Drew', Validators.required)
+  });
+
+  // Controls can also be enabled/disabled after creation:
+  form.get('first')?.enable();
+  form.get('last')?.disable();
+
+
+  It looks like you're using the disabled attribute with a reactive form directive. If you set disabled to true
+  when you set up this control in your component class, the disabled attribute will actually be set in the DOM for
+  you. We recommend using this approach to avoid 'changed after checked' errors.
+
+  Example:
+  // Specify the `disabled` property at control creation time:
+  form = new FormGroup({
+    first: new FormControl({value: 'Nancy', disabled: true}, Validators.required),
+    last: new FormControl('Drew', Validators.required)
+  });
+
+  // Controls can also be enabled/disabled after creation:
+  form.get('first')?.enable();
+  form.get('last')?.disable();
+
+ERROR TypeError: el.getBoundingClientRect is not a function
+    at _ToastItem.measureStackHeight (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\a96a311d-8577-4041-b5a1-b2f256a907a2\node_modules\primeng\fesm2022\primeng-toast.mjs:691:23)
+    at _ToastItem.onAfterViewInit (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\a96a311d-8577-4041-b5a1-b2f256a907a2\node_modules\primeng\fesm2022\primeng-toast.mjs:683:10)
+    at _ToastItem.ngAfterViewInit (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\a96a311d-8577-4041-b5a1-b2f256a907a2\node_modules\primeng\fesm2022\primeng-basecomponent.mjs:287:10)
+    at callHookInternal (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\a96a311d-8577-4041-b5a1-b2f256a907a2\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:251:10)
+    at callHook (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\a96a311d-8577-4041-b5a1-b2f256a907a2\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:266:7)
+    at callHooks (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\a96a311d-8577-4041-b5a1-b2f256a907a2\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:240:9)
+    at executeInitAndCheckHooks (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\a96a311d-8577-4041-b5a1-b2f256a907a2\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:209:5)
+    at refreshView (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\a96a311d-8577-4041-b5a1-b2f256a907a2\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6070:11)
+    at detectChangesInView (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\a96a311d-8577-4041-b5a1-b2f256a907a2\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6153:5)
+    at detectChangesInViewIfAttached (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\a96a311d-8577-4041-b5a1-b2f256a907a2\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6136:3)
+Error fetching notifications: HttpErrorResponse {
+  headers: _HttpHeaders {
+    headers: Map(24) {
+      'access-control-allow-credentials' => [Array],
+      'access-control-allow-origin' => [Array],
+      'connection' => [Array],
+      'content-length' => [Array],
+      'content-security-policy' => [Array],
+      'content-type' => [Array],
+      'cross-origin-opener-policy' => [Array],
+      'cross-origin-resource-policy' => [Array],
+      'date' => [Array],
+      'etag' => [Array],
+      'keep-alive' => [Array],
+      'origin-agent-cluster' => [Array],
+      'referrer-policy' => [Array],
+      'strict-transport-security' => [Array],
+      'vary' => [Array],
+      'x-content-type-options' => [Array],
+      'x-dns-prefetch-control' => [Array],
+      'x-download-options' => [Array],
+      'x-frame-options' => [Array],
+      'x-permitted-cross-domain-policies' => [Array],
+      'x-ratelimit-limit' => [Array],
+      'x-ratelimit-remaining' => [Array],
+      'x-ratelimit-reset' => [Array],
+      'x-xss-protection' => [Array]
+    },
+    normalizedNames: Map(24) {
+      'access-control-allow-credentials' => 'access-control-allow-credentials',
+      'access-control-allow-origin' => 'access-control-allow-origin',
+      'connection' => 'connection',
+      'content-length' => 'content-length',
+      'content-security-policy' => 'content-security-policy',
+      'content-type' => 'content-type',
+      'cross-origin-opener-policy' => 'cross-origin-opener-policy',
+      'cross-origin-resource-policy' => 'cross-origin-resource-policy',
+      'date' => 'date',
+      'etag' => 'etag',
+      'keep-alive' => 'keep-alive',
+      'origin-agent-cluster' => 'origin-agent-cluster',
+      'referrer-policy' => 'referrer-policy',
+      'strict-transport-security' => 'strict-transport-security',
+      'vary' => 'vary',
+      'x-content-type-options' => 'x-content-type-options',
+      'x-dns-prefetch-control' => 'x-dns-prefetch-control',
+      'x-download-options' => 'x-download-options',
+      'x-frame-options' => 'x-frame-options',
+      'x-permitted-cross-domain-policies' => 'x-permitted-cross-domain-policies',
+      'x-ratelimit-limit' => 'x-ratelimit-limit',
+      'x-ratelimit-remaining' => 'x-ratelimit-remaining',
+      'x-ratelimit-reset' => 'x-ratelimit-reset',
+      'x-xss-protection' => 'x-xss-protection'
+    },
+    lazyInit: undefined,
+    lazyUpdate: null
+  },
+  status: 401,
+  statusText: 'Unauthorized',
+  url: 'http://localhost:5000/api/notifications',
+  ok: false,
+  type: undefined,
+  redirected: false,
+  responseType: 'basic',
+  name: 'HttpErrorResponse',
+  message: 'Http failure response for http://localhost:5000/api/notifications: 401 Unauthorized',
+  error: {
+    message: 'Authentication token is required',
+    stack: 'Error: Authentication token is required\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/middleware/authMiddleware.js:10:21\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/utils/asyncHandler.js:2:19\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:157:13)\n' +
+      '    at Route.dispatch (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:117:3)\n' +
+      '    at handle (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:435:11)\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:295:15\n' +
+      '    at processParams (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:582:12)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:291:5)'
+  }
+}
+Error fetching notifications: HttpErrorResponse {
+  headers: _HttpHeaders {
+    headers: Map(24) {
+      'access-control-allow-credentials' => [Array],
+      'access-control-allow-origin' => [Array],
+      'connection' => [Array],
+      'content-length' => [Array],
+      'content-security-policy' => [Array],
+      'content-type' => [Array],
+      'cross-origin-opener-policy' => [Array],
+      'cross-origin-resource-policy' => [Array],
+      'date' => [Array],
+      'etag' => [Array],
+      'keep-alive' => [Array],
+      'origin-agent-cluster' => [Array],
+      'referrer-policy' => [Array],
+      'strict-transport-security' => [Array],
+      'vary' => [Array],
+      'x-content-type-options' => [Array],
+      'x-dns-prefetch-control' => [Array],
+      'x-download-options' => [Array],
+      'x-frame-options' => [Array],
+      'x-permitted-cross-domain-policies' => [Array],
+      'x-ratelimit-limit' => [Array],
+      'x-ratelimit-remaining' => [Array],
+      'x-ratelimit-reset' => [Array],
+      'x-xss-protection' => [Array]
+    },
+    normalizedNames: Map(24) {
+      'access-control-allow-credentials' => 'access-control-allow-credentials',
+      'access-control-allow-origin' => 'access-control-allow-origin',
+      'connection' => 'connection',
+      'content-length' => 'content-length',
+      'content-security-policy' => 'content-security-policy',
+      'content-type' => 'content-type',
+      'cross-origin-opener-policy' => 'cross-origin-opener-policy',
+      'cross-origin-resource-policy' => 'cross-origin-resource-policy',
+      'date' => 'date',
+      'etag' => 'etag',
+      'keep-alive' => 'keep-alive',
+      'origin-agent-cluster' => 'origin-agent-cluster',
+      'referrer-policy' => 'referrer-policy',
+      'strict-transport-security' => 'strict-transport-security',
+      'vary' => 'vary',
+      'x-content-type-options' => 'x-content-type-options',
+      'x-dns-prefetch-control' => 'x-dns-prefetch-control',
+      'x-download-options' => 'x-download-options',
+      'x-frame-options' => 'x-frame-options',
+      'x-permitted-cross-domain-policies' => 'x-permitted-cross-domain-policies',
+      'x-ratelimit-limit' => 'x-ratelimit-limit',
+      'x-ratelimit-remaining' => 'x-ratelimit-remaining',
+      'x-ratelimit-reset' => 'x-ratelimit-reset',
+      'x-xss-protection' => 'x-xss-protection'
+    },
+    lazyInit: undefined,
+    lazyUpdate: null
+  },
+  status: 401,
+  statusText: 'Unauthorized',
+  url: 'http://localhost:5000/api/notifications',
+  ok: false,
+  type: undefined,
+  redirected: false,
+  responseType: 'basic',
+  name: 'HttpErrorResponse',
+  message: 'Http failure response for http://localhost:5000/api/notifications: 401 Unauthorized',
+  error: {
+    message: 'Authentication token is required',
+    stack: 'Error: Authentication token is required\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/middleware/authMiddleware.js:10:21\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/utils/asyncHandler.js:2:19\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:157:13)\n' +
+      '    at Route.dispatch (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:117:3)\n' +
+      '    at handle (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:435:11)\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:295:15\n' +
+      '    at processParams (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:582:12)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:291:5)'
+  }
+}
+Error fetching notifications: HttpErrorResponse {
+  headers: _HttpHeaders {
+    headers: Map(24) {
+      'access-control-allow-credentials' => [Array],
+      'access-control-allow-origin' => [Array],
+      'connection' => [Array],
+      'content-length' => [Array],
+      'content-security-policy' => [Array],
+      'content-type' => [Array],
+      'cross-origin-opener-policy' => [Array],
+      'cross-origin-resource-policy' => [Array],
+      'date' => [Array],
+      'etag' => [Array],
+      'keep-alive' => [Array],
+      'origin-agent-cluster' => [Array],
+      'referrer-policy' => [Array],
+      'strict-transport-security' => [Array],
+      'vary' => [Array],
+      'x-content-type-options' => [Array],
+      'x-dns-prefetch-control' => [Array],
+      'x-download-options' => [Array],
+      'x-frame-options' => [Array],
+      'x-permitted-cross-domain-policies' => [Array],
+      'x-ratelimit-limit' => [Array],
+      'x-ratelimit-remaining' => [Array],
+      'x-ratelimit-reset' => [Array],
+      'x-xss-protection' => [Array]
+    },
+    normalizedNames: Map(24) {
+      'access-control-allow-credentials' => 'access-control-allow-credentials',
+      'access-control-allow-origin' => 'access-control-allow-origin',
+      'connection' => 'connection',
+      'content-length' => 'content-length',
+      'content-security-policy' => 'content-security-policy',
+      'content-type' => 'content-type',
+      'cross-origin-opener-policy' => 'cross-origin-opener-policy',
+      'cross-origin-resource-policy' => 'cross-origin-resource-policy',
+      'date' => 'date',
+      'etag' => 'etag',
+      'keep-alive' => 'keep-alive',
+      'origin-agent-cluster' => 'origin-agent-cluster',
+      'referrer-policy' => 'referrer-policy',
+      'strict-transport-security' => 'strict-transport-security',
+      'vary' => 'vary',
+      'x-content-type-options' => 'x-content-type-options',
+      'x-dns-prefetch-control' => 'x-dns-prefetch-control',
+      'x-download-options' => 'x-download-options',
+      'x-frame-options' => 'x-frame-options',
+      'x-permitted-cross-domain-policies' => 'x-permitted-cross-domain-policies',
+      'x-ratelimit-limit' => 'x-ratelimit-limit',
+      'x-ratelimit-remaining' => 'x-ratelimit-remaining',
+      'x-ratelimit-reset' => 'x-ratelimit-reset',
+      'x-xss-protection' => 'x-xss-protection'
+    },
+    lazyInit: undefined,
+    lazyUpdate: null
+  },
+  status: 401,
+  statusText: 'Unauthorized',
+  url: 'http://localhost:5000/api/notifications',
+  ok: false,
+  type: undefined,
+  redirected: false,
+  responseType: 'basic',
+  name: 'HttpErrorResponse',
+  message: 'Http failure response for http://localhost:5000/api/notifications: 401 Unauthorized',
+  error: {
+    message: 'Authentication token is required',
+    stack: 'Error: Authentication token is required\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/middleware/authMiddleware.js:10:21\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/utils/asyncHandler.js:2:19\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:157:13)\n' +
+      '    at Route.dispatch (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:117:3)\n' +
+      '    at handle (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:435:11)\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:295:15\n' +
+      '    at processParams (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:582:12)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:291:5)'
+  }
+}
+ERROR TypeError: el.getBoundingClientRect is not a function
+    at _ToastItem.measureStackHeight (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\160b5f55-ca0c-42fe-b16b-dd8139d5cee7\node_modules\primeng\fesm2022\primeng-toast.mjs:691:23)
+    at _ToastItem.onAfterViewInit (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\160b5f55-ca0c-42fe-b16b-dd8139d5cee7\node_modules\primeng\fesm2022\primeng-toast.mjs:683:10)
+    at _ToastItem.ngAfterViewInit (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\160b5f55-ca0c-42fe-b16b-dd8139d5cee7\node_modules\primeng\fesm2022\primeng-basecomponent.mjs:287:10)
+    at callHookInternal (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\160b5f55-ca0c-42fe-b16b-dd8139d5cee7\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:251:10)
+    at callHook (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\160b5f55-ca0c-42fe-b16b-dd8139d5cee7\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:266:7)
+    at callHooks (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\160b5f55-ca0c-42fe-b16b-dd8139d5cee7\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:240:9)
+    at executeInitAndCheckHooks (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\160b5f55-ca0c-42fe-b16b-dd8139d5cee7\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:209:5)
+    at refreshView (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\160b5f55-ca0c-42fe-b16b-dd8139d5cee7\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6070:11)
+    at detectChangesInView (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\160b5f55-ca0c-42fe-b16b-dd8139d5cee7\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6153:5)
+    at detectChangesInViewIfAttached (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\160b5f55-ca0c-42fe-b16b-dd8139d5cee7\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6136:3)
+Error fetching notifications: HttpErrorResponse {
+  headers: _HttpHeaders {
+    headers: Map(24) {
+      'access-control-allow-credentials' => [Array],
+      'access-control-allow-origin' => [Array],
+      'connection' => [Array],
+      'content-length' => [Array],
+      'content-security-policy' => [Array],
+      'content-type' => [Array],
+      'cross-origin-opener-policy' => [Array],
+      'cross-origin-resource-policy' => [Array],
+      'date' => [Array],
+      'etag' => [Array],
+      'keep-alive' => [Array],
+      'origin-agent-cluster' => [Array],
+      'referrer-policy' => [Array],
+      'strict-transport-security' => [Array],
+      'vary' => [Array],
+      'x-content-type-options' => [Array],
+      'x-dns-prefetch-control' => [Array],
+      'x-download-options' => [Array],
+      'x-frame-options' => [Array],
+      'x-permitted-cross-domain-policies' => [Array],
+      'x-ratelimit-limit' => [Array],
+      'x-ratelimit-remaining' => [Array],
+      'x-ratelimit-reset' => [Array],
+      'x-xss-protection' => [Array]
+    },
+    normalizedNames: Map(24) {
+      'access-control-allow-credentials' => 'access-control-allow-credentials',
+      'access-control-allow-origin' => 'access-control-allow-origin',
+      'connection' => 'connection',
+      'content-length' => 'content-length',
+      'content-security-policy' => 'content-security-policy',
+      'content-type' => 'content-type',
+      'cross-origin-opener-policy' => 'cross-origin-opener-policy',
+      'cross-origin-resource-policy' => 'cross-origin-resource-policy',
+      'date' => 'date',
+      'etag' => 'etag',
+      'keep-alive' => 'keep-alive',
+      'origin-agent-cluster' => 'origin-agent-cluster',
+      'referrer-policy' => 'referrer-policy',
+      'strict-transport-security' => 'strict-transport-security',
+      'vary' => 'vary',
+      'x-content-type-options' => 'x-content-type-options',
+      'x-dns-prefetch-control' => 'x-dns-prefetch-control',
+      'x-download-options' => 'x-download-options',
+      'x-frame-options' => 'x-frame-options',
+      'x-permitted-cross-domain-policies' => 'x-permitted-cross-domain-policies',
+      'x-ratelimit-limit' => 'x-ratelimit-limit',
+      'x-ratelimit-remaining' => 'x-ratelimit-remaining',
+      'x-ratelimit-reset' => 'x-ratelimit-reset',
+      'x-xss-protection' => 'x-xss-protection'
+    },
+    lazyInit: undefined,
+    lazyUpdate: null
+  },
+  status: 401,
+  statusText: 'Unauthorized',
+  url: 'http://localhost:5000/api/notifications',
+  ok: false,
+  type: undefined,
+  redirected: false,
+  responseType: 'basic',
+  name: 'HttpErrorResponse',
+  message: 'Http failure response for http://localhost:5000/api/notifications: 401 Unauthorized',
+  error: {
+    message: 'Authentication token is required',
+    stack: 'Error: Authentication token is required\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/middleware/authMiddleware.js:10:21\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/utils/asyncHandler.js:2:19\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:157:13)\n' +
+      '    at Route.dispatch (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:117:3)\n' +
+      '    at handle (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:435:11)\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:295:15\n' +
+      '    at processParams (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:582:12)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:291:5)'
+  }
+}
+Error fetching notifications: HttpErrorResponse {
+  headers: _HttpHeaders {
+    headers: Map(24) {
+      'access-control-allow-credentials' => [Array],
+      'access-control-allow-origin' => [Array],
+      'connection' => [Array],
+      'content-length' => [Array],
+      'content-security-policy' => [Array],
+      'content-type' => [Array],
+      'cross-origin-opener-policy' => [Array],
+      'cross-origin-resource-policy' => [Array],
+      'date' => [Array],
+      'etag' => [Array],
+      'keep-alive' => [Array],
+      'origin-agent-cluster' => [Array],
+      'referrer-policy' => [Array],
+      'strict-transport-security' => [Array],
+      'vary' => [Array],
+      'x-content-type-options' => [Array],
+      'x-dns-prefetch-control' => [Array],
+      'x-download-options' => [Array],
+      'x-frame-options' => [Array],
+      'x-permitted-cross-domain-policies' => [Array],
+      'x-ratelimit-limit' => [Array],
+      'x-ratelimit-remaining' => [Array],
+      'x-ratelimit-reset' => [Array],
+      'x-xss-protection' => [Array]
+    },
+    normalizedNames: Map(24) {
+      'access-control-allow-credentials' => 'access-control-allow-credentials',
+      'access-control-allow-origin' => 'access-control-allow-origin',
+      'connection' => 'connection',
+      'content-length' => 'content-length',
+      'content-security-policy' => 'content-security-policy',
+      'content-type' => 'content-type',
+      'cross-origin-opener-policy' => 'cross-origin-opener-policy',
+      'cross-origin-resource-policy' => 'cross-origin-resource-policy',
+      'date' => 'date',
+      'etag' => 'etag',
+      'keep-alive' => 'keep-alive',
+      'origin-agent-cluster' => 'origin-agent-cluster',
+      'referrer-policy' => 'referrer-policy',
+      'strict-transport-security' => 'strict-transport-security',
+      'vary' => 'vary',
+      'x-content-type-options' => 'x-content-type-options',
+      'x-dns-prefetch-control' => 'x-dns-prefetch-control',
+      'x-download-options' => 'x-download-options',
+      'x-frame-options' => 'x-frame-options',
+      'x-permitted-cross-domain-policies' => 'x-permitted-cross-domain-policies',
+      'x-ratelimit-limit' => 'x-ratelimit-limit',
+      'x-ratelimit-remaining' => 'x-ratelimit-remaining',
+      'x-ratelimit-reset' => 'x-ratelimit-reset',
+      'x-xss-protection' => 'x-xss-protection'
+    },
+    lazyInit: undefined,
+    lazyUpdate: null
+  },
+  status: 401,
+  statusText: 'Unauthorized',
+  url: 'http://localhost:5000/api/notifications',
+  ok: false,
+  type: undefined,
+  redirected: false,
+  responseType: 'basic',
+  name: 'HttpErrorResponse',
+  message: 'Http failure response for http://localhost:5000/api/notifications: 401 Unauthorized',
+  error: {
+    message: 'Authentication token is required',
+    stack: 'Error: Authentication token is required\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/middleware/authMiddleware.js:10:21\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/utils/asyncHandler.js:2:19\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:157:13)\n' +
+      '    at Route.dispatch (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:117:3)\n' +
+      '    at handle (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:435:11)\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:295:15\n' +
+      '    at processParams (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:582:12)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:291:5)'
+  }
+}
+ERROR TypeError: el.getBoundingClientRect is not a function
+    at _ToastItem.measureStackHeight (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\160b5f55-ca0c-42fe-b16b-dd8139d5cee7\node_modules\primeng\fesm2022\primeng-toast.mjs:691:23)
+    at _ToastItem.onAfterViewInit (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\160b5f55-ca0c-42fe-b16b-dd8139d5cee7\node_modules\primeng\fesm2022\primeng-toast.mjs:683:10)
+    at _ToastItem.ngAfterViewInit (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\160b5f55-ca0c-42fe-b16b-dd8139d5cee7\node_modules\primeng\fesm2022\primeng-basecomponent.mjs:287:10)
+    at callHookInternal (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\160b5f55-ca0c-42fe-b16b-dd8139d5cee7\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:251:10)
+    at callHook (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\160b5f55-ca0c-42fe-b16b-dd8139d5cee7\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:266:7)
+    at callHooks (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\160b5f55-ca0c-42fe-b16b-dd8139d5cee7\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:240:9)
+    at executeInitAndCheckHooks (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\160b5f55-ca0c-42fe-b16b-dd8139d5cee7\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:209:5)
+    at refreshView (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\160b5f55-ca0c-42fe-b16b-dd8139d5cee7\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6070:11)
+    at detectChangesInView (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\160b5f55-ca0c-42fe-b16b-dd8139d5cee7\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6153:5)
+    at detectChangesInViewIfAttached (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\160b5f55-ca0c-42fe-b16b-dd8139d5cee7\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6136:3)
+Error fetching notifications: HttpErrorResponse {
+  headers: _HttpHeaders {
+    headers: Map(24) {
+      'access-control-allow-credentials' => [Array],
+      'access-control-allow-origin' => [Array],
+      'connection' => [Array],
+      'content-length' => [Array],
+      'content-security-policy' => [Array],
+      'content-type' => [Array],
+      'cross-origin-opener-policy' => [Array],
+      'cross-origin-resource-policy' => [Array],
+      'date' => [Array],
+      'etag' => [Array],
+      'keep-alive' => [Array],
+      'origin-agent-cluster' => [Array],
+      'referrer-policy' => [Array],
+      'strict-transport-security' => [Array],
+      'vary' => [Array],
+      'x-content-type-options' => [Array],
+      'x-dns-prefetch-control' => [Array],
+      'x-download-options' => [Array],
+      'x-frame-options' => [Array],
+      'x-permitted-cross-domain-policies' => [Array],
+      'x-ratelimit-limit' => [Array],
+      'x-ratelimit-remaining' => [Array],
+      'x-ratelimit-reset' => [Array],
+      'x-xss-protection' => [Array]
+    },
+    normalizedNames: Map(24) {
+      'access-control-allow-credentials' => 'access-control-allow-credentials',
+      'access-control-allow-origin' => 'access-control-allow-origin',
+      'connection' => 'connection',
+      'content-length' => 'content-length',
+      'content-security-policy' => 'content-security-policy',
+      'content-type' => 'content-type',
+      'cross-origin-opener-policy' => 'cross-origin-opener-policy',
+      'cross-origin-resource-policy' => 'cross-origin-resource-policy',
+      'date' => 'date',
+      'etag' => 'etag',
+      'keep-alive' => 'keep-alive',
+      'origin-agent-cluster' => 'origin-agent-cluster',
+      'referrer-policy' => 'referrer-policy',
+      'strict-transport-security' => 'strict-transport-security',
+      'vary' => 'vary',
+      'x-content-type-options' => 'x-content-type-options',
+      'x-dns-prefetch-control' => 'x-dns-prefetch-control',
+      'x-download-options' => 'x-download-options',
+      'x-frame-options' => 'x-frame-options',
+      'x-permitted-cross-domain-policies' => 'x-permitted-cross-domain-policies',
+      'x-ratelimit-limit' => 'x-ratelimit-limit',
+      'x-ratelimit-remaining' => 'x-ratelimit-remaining',
+      'x-ratelimit-reset' => 'x-ratelimit-reset',
+      'x-xss-protection' => 'x-xss-protection'
+    },
+    lazyInit: undefined,
+    lazyUpdate: null
+  },
+  status: 401,
+  statusText: 'Unauthorized',
+  url: 'http://localhost:5000/api/notifications',
+  ok: false,
+  type: undefined,
+  redirected: false,
+  responseType: 'basic',
+  name: 'HttpErrorResponse',
+  message: 'Http failure response for http://localhost:5000/api/notifications: 401 Unauthorized',
+  error: {
+    message: 'Authentication token is required',
+    stack: 'Error: Authentication token is required\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/middleware/authMiddleware.js:10:21\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/utils/asyncHandler.js:2:19\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:157:13)\n' +
+      '    at Route.dispatch (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:117:3)\n' +
+      '    at handle (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:435:11)\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:295:15\n' +
+      '    at processParams (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:582:12)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:291:5)'
+  }
+}
+Error fetching notifications: HttpErrorResponse {
+  headers: _HttpHeaders {
+    headers: Map(24) {
+      'access-control-allow-credentials' => [Array],
+      'access-control-allow-origin' => [Array],
+      'connection' => [Array],
+      'content-length' => [Array],
+      'content-security-policy' => [Array],
+      'content-type' => [Array],
+      'cross-origin-opener-policy' => [Array],
+      'cross-origin-resource-policy' => [Array],
+      'date' => [Array],
+      'etag' => [Array],
+      'keep-alive' => [Array],
+      'origin-agent-cluster' => [Array],
+      'referrer-policy' => [Array],
+      'strict-transport-security' => [Array],
+      'vary' => [Array],
+      'x-content-type-options' => [Array],
+      'x-dns-prefetch-control' => [Array],
+      'x-download-options' => [Array],
+      'x-frame-options' => [Array],
+      'x-permitted-cross-domain-policies' => [Array],
+      'x-ratelimit-limit' => [Array],
+      'x-ratelimit-remaining' => [Array],
+      'x-ratelimit-reset' => [Array],
+      'x-xss-protection' => [Array]
+    },
+    normalizedNames: Map(24) {
+      'access-control-allow-credentials' => 'access-control-allow-credentials',
+      'access-control-allow-origin' => 'access-control-allow-origin',
+      'connection' => 'connection',
+      'content-length' => 'content-length',
+      'content-security-policy' => 'content-security-policy',
+      'content-type' => 'content-type',
+      'cross-origin-opener-policy' => 'cross-origin-opener-policy',
+      'cross-origin-resource-policy' => 'cross-origin-resource-policy',
+      'date' => 'date',
+      'etag' => 'etag',
+      'keep-alive' => 'keep-alive',
+      'origin-agent-cluster' => 'origin-agent-cluster',
+      'referrer-policy' => 'referrer-policy',
+      'strict-transport-security' => 'strict-transport-security',
+      'vary' => 'vary',
+      'x-content-type-options' => 'x-content-type-options',
+      'x-dns-prefetch-control' => 'x-dns-prefetch-control',
+      'x-download-options' => 'x-download-options',
+      'x-frame-options' => 'x-frame-options',
+      'x-permitted-cross-domain-policies' => 'x-permitted-cross-domain-policies',
+      'x-ratelimit-limit' => 'x-ratelimit-limit',
+      'x-ratelimit-remaining' => 'x-ratelimit-remaining',
+      'x-ratelimit-reset' => 'x-ratelimit-reset',
+      'x-xss-protection' => 'x-xss-protection'
+    },
+    lazyInit: undefined,
+    lazyUpdate: null
+  },
+  status: 401,
+  statusText: 'Unauthorized',
+  url: 'http://localhost:5000/api/notifications',
+  ok: false,
+  type: undefined,
+  redirected: false,
+  responseType: 'basic',
+  name: 'HttpErrorResponse',
+  message: 'Http failure response for http://localhost:5000/api/notifications: 401 Unauthorized',
+  error: {
+    message: 'Authentication token is required',
+    stack: 'Error: Authentication token is required\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/middleware/authMiddleware.js:10:21\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/utils/asyncHandler.js:2:19\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:157:13)\n' +
+      '    at Route.dispatch (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:117:3)\n' +
+      '    at handle (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:435:11)\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:295:15\n' +
+      '    at processParams (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:582:12)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:291:5)'
+  }
+}
+ERROR TypeError: el.getBoundingClientRect is not a function
+    at _ToastItem.measureStackHeight (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\160b5f55-ca0c-42fe-b16b-dd8139d5cee7\node_modules\primeng\fesm2022\primeng-toast.mjs:691:23)
+    at _ToastItem.onAfterViewInit (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\160b5f55-ca0c-42fe-b16b-dd8139d5cee7\node_modules\primeng\fesm2022\primeng-toast.mjs:683:10)
+    at _ToastItem.ngAfterViewInit (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\160b5f55-ca0c-42fe-b16b-dd8139d5cee7\node_modules\primeng\fesm2022\primeng-basecomponent.mjs:287:10)
+    at callHookInternal (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\160b5f55-ca0c-42fe-b16b-dd8139d5cee7\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:251:10)
+    at callHook (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\160b5f55-ca0c-42fe-b16b-dd8139d5cee7\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:266:7)
+    at callHooks (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\160b5f55-ca0c-42fe-b16b-dd8139d5cee7\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:240:9)
+    at executeInitAndCheckHooks (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\160b5f55-ca0c-42fe-b16b-dd8139d5cee7\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:209:5)
+    at refreshView (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\160b5f55-ca0c-42fe-b16b-dd8139d5cee7\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6070:11)
+    at detectChangesInView (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\160b5f55-ca0c-42fe-b16b-dd8139d5cee7\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6153:5)
+    at detectChangesInViewIfAttached (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\160b5f55-ca0c-42fe-b16b-dd8139d5cee7\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6136:3)
+Error fetching notifications: HttpErrorResponse {
+  headers: _HttpHeaders {
+    headers: Map(24) {
+      'access-control-allow-credentials' => [Array],
+      'access-control-allow-origin' => [Array],
+      'connection' => [Array],
+      'content-length' => [Array],
+      'content-security-policy' => [Array],
+      'content-type' => [Array],
+      'cross-origin-opener-policy' => [Array],
+      'cross-origin-resource-policy' => [Array],
+      'date' => [Array],
+      'etag' => [Array],
+      'keep-alive' => [Array],
+      'origin-agent-cluster' => [Array],
+      'referrer-policy' => [Array],
+      'strict-transport-security' => [Array],
+      'vary' => [Array],
+      'x-content-type-options' => [Array],
+      'x-dns-prefetch-control' => [Array],
+      'x-download-options' => [Array],
+      'x-frame-options' => [Array],
+      'x-permitted-cross-domain-policies' => [Array],
+      'x-ratelimit-limit' => [Array],
+      'x-ratelimit-remaining' => [Array],
+      'x-ratelimit-reset' => [Array],
+      'x-xss-protection' => [Array]
+    },
+    normalizedNames: Map(24) {
+      'access-control-allow-credentials' => 'access-control-allow-credentials',
+      'access-control-allow-origin' => 'access-control-allow-origin',
+      'connection' => 'connection',
+      'content-length' => 'content-length',
+      'content-security-policy' => 'content-security-policy',
+      'content-type' => 'content-type',
+      'cross-origin-opener-policy' => 'cross-origin-opener-policy',
+      'cross-origin-resource-policy' => 'cross-origin-resource-policy',
+      'date' => 'date',
+      'etag' => 'etag',
+      'keep-alive' => 'keep-alive',
+      'origin-agent-cluster' => 'origin-agent-cluster',
+      'referrer-policy' => 'referrer-policy',
+      'strict-transport-security' => 'strict-transport-security',
+      'vary' => 'vary',
+      'x-content-type-options' => 'x-content-type-options',
+      'x-dns-prefetch-control' => 'x-dns-prefetch-control',
+      'x-download-options' => 'x-download-options',
+      'x-frame-options' => 'x-frame-options',
+      'x-permitted-cross-domain-policies' => 'x-permitted-cross-domain-policies',
+      'x-ratelimit-limit' => 'x-ratelimit-limit',
+      'x-ratelimit-remaining' => 'x-ratelimit-remaining',
+      'x-ratelimit-reset' => 'x-ratelimit-reset',
+      'x-xss-protection' => 'x-xss-protection'
+    },
+    lazyInit: undefined,
+    lazyUpdate: null
+  },
+  status: 401,
+  statusText: 'Unauthorized',
+  url: 'http://localhost:5000/api/notifications',
+  ok: false,
+  type: undefined,
+  redirected: false,
+  responseType: 'basic',
+  name: 'HttpErrorResponse',
+  message: 'Http failure response for http://localhost:5000/api/notifications: 401 Unauthorized',
+  error: {
+    message: 'Authentication token is required',
+    stack: 'Error: Authentication token is required\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/middleware/authMiddleware.js:10:21\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/utils/asyncHandler.js:2:19\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:157:13)\n' +
+      '    at Route.dispatch (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:117:3)\n' +
+      '    at handle (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:435:11)\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:295:15\n' +
+      '    at processParams (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:582:12)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:291:5)'
+  }
+}

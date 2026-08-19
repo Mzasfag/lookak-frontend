@@ -1,29 +1,179 @@
-<button 
-  pButton 
-  type="button" 
-  icon="pi pi-bell" 
-  (click)="op.toggle($event)" 
-  class="p-button-text p-button-rounded p-button-secondary">
-  <p-badge [value]="unreadCount().toString()" [hidden]="unreadCount() === 0"></p-badge>
-</button>
-
-<p-popover #op>
-  <div class="flex justify-content-between p-2 align-items-center">
-    <h5>الإشعارات</h5>
-    <div class="flex gap-2">
-      <button pButton [iconOnly]="isMuted() ? 'pi pi-volume-off' : 'pi pi-volume-up'" class="p-button-text p-button-sm" (click)="toggleMute()"></button>
-      <button pButton label="قراءة الكل" class="p-button-text p-button-sm" (click)="markAllAsRead()"></button>
-    </div>
-  </div>
-  <div style="max-height: 400px; overflow-y: auto;">
-    @for (n of notifications(); track n._id) {
-      <div class="p-2 border-bottom-1" [class.bg-gray-100]="!n.isRead" (click)="markAsRead(n._id)">
-        <h6>{{n.title}}</h6>
-        <p>{{n.message}}</p>
-      </div>
+<!-- Notification Trigger Wrapper (relative to contain the absolute dropdown) -->
+<div class="relative inline-block text-left">
+  <!-- Notification Trigger Button -->
+  <button
+    type="button"
+    class="relative flex items-center cursor-pointer justify-center w-11 h-11 rounded-2xl bg-surface-container/60 hover:bg-surface-container text-on-surface-variant hover:text-on-surface border border-outline-variant/20 transition-all duration-200 shadow-xs"
+    (click)="toggleDropdown($event)"
+    [attr.aria-expanded]="isOpen()"
+    [attr.aria-haspopup]="true"
+    aria-label="الإشعارات"
+  >
+    <i class="pi pi-bell text-lg transition-transform duration-200 hover:rotate-12"></i>
+    @if (unreadCount() > 0) {
+      <span
+        class="absolute -top-1 -end-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-brand-gold px-1.5 text-[10px] font-bold text-white shadow-md animate-pulse"
+        [attr.aria-label]="'لديك ' + unreadCount() + ' إشعارات غير مقروءة'"
+      >
+        {{ unreadCount() > 9 ? '9+' : unreadCount() }}
+      </span>
     }
-  </div>
-  <div class="p-2 border-top-1 text-center">
-    <a [routerLink]="notificationsRoute" (click)="op.hide()">عرض الكل</a>
-  </div>
-</p-popover>
+  </button>
+
+  <!-- Dropdown Panel (Professional Clean SaaS Style with Absolute Maximum Layering) -->
+  @if (isOpen()) {
+    <div
+      class="absolute top-full left-[-40px] mt-3 w-[400px] max-w-[calc(100vw-2rem)] origin-top-right rounded-3xl bg-surface border border-outline-variant/30 shadow-2xl ring-1 ring-black/10 backdrop-blur-2xl animate-in fade-in-0 zoom-in-95 duration-200 overflow-hidden isolate !z-[10000000000]"
+      role="menu"
+      aria-orientation="vertical"
+      (click)="$event.stopPropagation()"
+    >
+      <!-- Header -->
+      <div
+        class="flex items-center justify-between px-6 py-4 border-b border-outline-variant/20 bg-surface-container/30"
+      >
+        <div class="flex items-center gap-3">
+          <h3 class="text-base font-black tracking-tight text-on-surface">التنبيهات</h3>
+          @if (unreadCount() > 0) {
+            <span
+              class="px-2.5 py-0.5 text-[11px] font-bold rounded-full bg-brand-gold/15 text-brand-gold"
+            >
+              {{ unreadCount() }} جديد
+            </span>
+          }
+        </div>
+
+        <div class="flex items-center gap-1.5">
+          <!-- Mute Button -->
+          <button
+            type="button"
+            class="flex items-center cursor-pointer justify-center w-9 h-9 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
+            (click)="toggleMute($event)"
+            [attr.aria-label]="isMuted() ? 'تفعيل الصوت' : 'كتم الصوت'"
+            [attr.aria-pressed]="isMuted()"
+            title="{{ isMuted() ? 'تفعيل الصوت' : 'كتم الصوت' }}"
+          >
+            <i [class]="isMuted() ? 'pi pi-volume-off' : 'pi pi-volume-up'" class="text-sm"></i>
+          </button>
+
+          <!-- Mark All As Read -->
+          <button
+            type="button"
+            class="px-3 py-1.5 cursor-pointer text-xs font-bold text-brand-gold bg-brand-gold/10 hover:bg-brand-gold hover:text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-gold/50 rounded-xl disabled:opacity-30 disabled:cursor-not-allowed shadow-xs"
+            (click)="markAllAsRead($event)"
+            [disabled]="unreadCount() === 0"
+          >
+            قراءة الكل
+          </button>
+        </div>
+      </div>
+
+      <!-- Notifications List Container -->
+      <div class="max-h-[440px] overflow-y-auto divide-y divide-outline-variant/10">
+        @if (isLoading()) {
+          <div class="flex flex-col items-center justify-center py-16 gap-3">
+            <div
+              class="h-7 w-7 animate-spin rounded-full border-2 border-brand-gold border-t-transparent"
+            ></div>
+            <span class="text-xs font-semibold text-on-surface-variant/70"
+              >جاري جلب التنبيهات...</span
+            >
+          </div>
+        } @else if (notifications().length === 0) {
+          <div class="flex flex-col items-center justify-center py-20 px-6 text-center">
+            <div
+              class="flex h-16 w-16 items-center justify-center rounded-3xl bg-surface-container text-brand-gold mb-3 shadow-inner"
+            >
+              <i class="pi pi-bell-slash text-2xl opacity-70"></i>
+            </div>
+            <p class="text-on-surface font-bold text-sm">لا توجد إشعارات حالياً</p>
+            <p class="text-xs text-on-surface-variant/60 mt-1">سنقوم بإعلامك فور ورود أي مستجدات</p>
+          </div>
+        } @else {
+          <ul role="list">
+            @for (notification of visibleNotifications; track notification._id) {
+              <li
+                class="relative group px-5 py-4 transition-all duration-200 hover:bg-surface-container-high/60 cursor-pointer"
+                [class.bg-brand-gold/[0.05]]="!notification.isRead"
+                (click)="markAsRead(notification._id, $event)"
+                role="menuitem"
+                [attr.aria-label]="
+                  notification.title + ', ' + formatTimeAgo(notification.createdAt)
+                "
+              >
+                <div class="flex items-start gap-4">
+                  <!-- تم تعديل الألوان هنا لتصبح واضحة ومبنية على تدرجات الـ brand-gold و primary -->
+                  <div
+                    class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-brand-gold/15 text-brand-gold ring-1 ring-brand-gold/30 shadow-xs transition-transform duration-300 group-hover:scale-110"
+                  >
+                    <i class="pi pi-bell text-base"></i>
+                  </div>
+
+                  <!-- Content Area -->
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-start justify-between gap-2">
+                      <h4
+                        class="font-bold text-sm tracking-tight text-on-surface truncate"
+                        [class.text-brand-gold]="!notification.isRead"
+                      >
+                        {{ formatNotificationArabic(notification).title }}
+                      </h4>
+                      @if (!notification.isRead) {
+                        <span
+                          class="flex h-2.5 w-2.5 shrink-0 mt-1 rounded-full bg-brand-gold animate-pulse"
+                          aria-hidden="true"
+                          title="غير مقروء"
+                        ></span>
+                      }
+                    </div>
+
+                    <p class="mt-1 text-xs leading-relaxed text-on-surface-variant/90 line-clamp-2">
+                      {{ formatNotificationArabic(notification).message }}
+                    </p>
+
+                    <div class="mt-2.5 flex items-center justify-between">
+                      <time
+                        class="text-[11px] text-on-surface-variant/50 font-medium"
+                        [attr.datetime]="notification.createdAt"
+                      >
+                        {{ formatTimeAgo(notification.createdAt) }}
+                      </time>
+
+                      @if (!notification.isRead) {
+                        <span
+                          class="text-[10px] font-bold text-brand-gold opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                        >
+                          انقر للقراءة ←
+                        </span>
+                      }
+                    </div>
+                  </div>
+                </div>
+              </li>
+            }
+          </ul>
+        }
+      </div>
+
+      <!-- Footer -->
+      @if (notifications().length > 0 && !isLoading()) {
+        <div class="border-t border-outline-variant/20 px-4 py-3 bg-surface-container/30">
+          <button
+            type="button"
+            class="w-full flex cursor-pointer items-center justify-center gap-2 px-4 py-3 text-xs font-bold text-brand-gold bg-brand-gold/10 hover:bg-brand-gold hover:text-white rounded-2xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-gold/50 shadow-xs group"
+            (click)="navigateToAll($event)"
+          >
+            <i
+              class="pi pi-list text-sm transition-transform duration-200 group-hover:scale-110"
+            ></i>
+            @if (hasMoreNotifications) {
+              <span>عرض كافة الإشعارات ({{ notifications().length + '+' }})</span>
+            } @else {
+              <span>عرض كافة الإشعارات الواردة</span>
+            }
+          </button>
+        </div>
+      }
+    </div>
+  }
+</div>

@@ -15,13 +15,13 @@
   <div class="flex min-w-0 flex-1 flex-col">
     <!-- Top header: salon greeting + status indicator + logout -->
     <header
-      class="  flex items-center gap-3 border-b border-outline-variant/30 bg-surface-container-lowest/90 px-4 py-3 shadow-sm backdrop-blur sm:px-6"
+      class="sticky top-0 z-20 flex items-center gap-3 border-b border-outline-variant/30 bg-surface-container-lowest/90 px-4 py-3 shadow-sm backdrop-blur sm:px-6"
     >
       <button
         type="button"
         (click)="toggleSidebar()"
-        [attr.aria-label]="'فتح القائمة الجانبية'"
-        class="inline-flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-lg text-on-surface transition duration-200 hover:bg-surface-container hover:text-primary lg:hidden"
+        aria-label="فتح القائمة الجانبية"
+        class="inline-flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-xl border border-outline-variant/40 bg-surface-container/50 text-on-surface transition duration-200 hover:border-primary/40 hover:bg-primary/10 hover:text-primary active:scale-95 lg:hidden"
       >
         <i class="pi pi-bars text-lg"></i>
       </button>
@@ -41,10 +41,9 @@
         {{ statusLabel() }}
       </span>
 
-      <!-- Logout -->
       <!-- Notifications -->
       <app-notification-dropdown />
-
+      <!-- Logout -->
       <button
         type="button"
         (click)="onLogout()"
@@ -61,4 +60,3 @@
     </main>
   </div>
 </div>
-

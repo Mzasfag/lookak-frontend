@@ -35,4 +35,8 @@ export class UserService {
     }
     return this.authService.token();
   }
+
+  changePassword(payload: { currentPassword: string; newPassword: string }): Observable<any> {
+    return this.http.patch<any>(`${this.baseUrl}/reset-password`, payload, { headers: this.buildHeaders() });
+  }
 }

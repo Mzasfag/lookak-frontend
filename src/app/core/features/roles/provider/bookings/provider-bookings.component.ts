@@ -3,6 +3,7 @@ import { IProviderBooking, ProviderBookingStatus } from './../../../../models/pr
 import { ProviderBookingsService } from './../../../../services/provider-bookings.service';
 import { NotifyService } from './../../../../services/notify.service';
 import { isPlatformBrowser } from '@angular/common';
+import { formatTimeTo12Hour } from './../../../../utils/time-format.util';
 import {
   Component,
   computed,
@@ -409,13 +410,16 @@ export class ProviderBookingsComponent implements OnInit {
   }
 
   formatTime(value?: string | null): string {
-    return value?.trim() || '—';
+    return formatTimeTo12Hour(value);
   }
 
   formatTimeRange(booking: IProviderBooking): string {
-    return `${this.formatTime(booking.timeSlot)} – ${this.formatTime(booking.endTime)}`;
-  }
+    const start = this.formatTime(booking.timeSlot); // وقت البداية (مثلاً 12:45 م)
+    const end = this.formatTime(booking.endTime); // وقت النهاية (مثلاً 2:45 م)
 
+    // بنرجعهم بالترتيب الصحيح (البداية - النهاية) ومع الـ dir="ltr" فوق هيتثبتوا تماماً
+    return `${start} - ${end}`;
+  }
   formatDuration(minutes: number | null | undefined): string {
     if (minutes == null || Number.isNaN(minutes) || minutes <= 0) {
       return '—';
@@ -454,5 +458,36 @@ export class ProviderBookingsComponent implements OnInit {
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
+  }
+  // إرجاع اسم اليوم بالعربي (مثل: الأحد، الإثنين، اليوم، غداً)
+  formatDayName(dateStr: string): string {
+    if (!dateStr) return '';
+    const date = new Date(dateStr);
+    const today = new Date();
+
+    // مقارنة الأيام لتحديد "اليوم" أو "غداً"
+    if (date.toDateString() === today.toDateString()) {
+      return 'اليوم';
+    }
+
+    const tomorrow = new Date();
+    tomorrow.setDate(today.getDate() + 1);
+    if (date.toDateString() === tomorrow.toDateString()) {
+      return 'غداً';
+    }
+
+    // إرجاع اسم اليوم بالأسبوع بالعربي
+    return date.toLocaleDateString('ar-EG', { weekday: 'long' });
+  }
+
+  // دمج اسم اليوم مع التاريخ بالكامل
+  formatDayNameAndDate(dateStr: string): string {
+    if (!dateStr) return '';
+    const dayName = this.formatDayName(dateStr);
+    // لو اليوم أو غداً نعرضها بشكل مميز
+    if (dayName === 'اليوم' || dayName === 'غداً') {
+      return `${dayName} (${this.formatDate(dateStr)})`;
+    }
+    return `${dayName}، ${this.formatDate(dateStr)}`;
   }
 }

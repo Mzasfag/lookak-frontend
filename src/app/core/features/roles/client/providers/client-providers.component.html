@@ -61,7 +61,7 @@
               <button
                 type="button"
                 (click)="onSearchInput('')"
-                class="absolute inset-y-0 left-0 flex items-center pl-3 text-on-surface-variant hover:text-primary cursor-pointer"
+                class="absolute cursor-pointer inset-y-0 left-0 flex items-center pl-3 text-on-surface-variant hover:text-primary cursor-pointer"
                 title="مسح البحث"
               >
                 <i class="pi pi-times text-sm"></i>
@@ -134,7 +134,7 @@
             <article class="group flex flex-col overflow-hidden rounded-2xl border border-outline-variant/30 bg-surface-container-lowest shadow-xs transition duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/10">
               
               <!-- Card Cover Banner -->
-              <div class="relative h-36 w-full overflow-hidden bg-gradient-to-br {{ getCoverGradient(provider._id || provider.id || '') }} p-4 text-white">
+              <div  class="relative h-36 w-full overflow-hidden bg-gradient-to-br {{ getCoverGradient(provider._id || provider.id || '') }} p-4 text-white">
                 <!-- Background Decorative Pattern -->
                 <div class="pointer-events-none absolute -bottom-10 -left-10 h-32 w-32 rounded-full bg-white/10 blur-xl"></div>
 

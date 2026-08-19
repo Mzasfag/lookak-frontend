@@ -21,11 +21,11 @@ export class ReviewsService {
 
   /** Get all reviews for a specific provider. */
   getProviderReviews(providerId: string): Observable<IReviewsResponse> {
-    return this.http.get<IReviewsResponse>(`${this.baseUrl}/${providerId}`);
+    return this.http.get<IReviewsResponse>(`${this.baseUrl}/provider/${providerId}`);
   }
 
   /** Submit a new review/rating (requires authentication). */
-  createReview(payload: ICreateReviewPayload): Observable<ICreateReviewResponse> {
+  createReview(payload: any): Observable<ICreateReviewResponse> {
     return this.http.post<ICreateReviewResponse>(this.baseUrl, payload);
   }
 }

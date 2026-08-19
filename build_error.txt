@@ -1,0 +1,1428 @@
+It looks like you're using the disabled attribute with a reactive form directive. If you set disabled to true
+  when you set up this control in your component class, the disabled attribute will actually be set in the DOM for
+  you. We recommend using this approach to avoid 'changed after checked' errors.
+
+  Example:
+  // Specify the `disabled` property at control creation time:
+  form = new FormGroup({
+    first: new FormControl({value: 'Nancy', disabled: true}, Validators.required),
+    last: new FormControl('Drew', Validators.required)
+  });
+
+  // Controls can also be enabled/disabled after creation:
+  form.get('first')?.enable();
+  form.get('last')?.disable();
+Error fetching notifications: HttpErrorResponse {
+  headers: _HttpHeaders {
+    headers: Map(24) {
+      'access-control-allow-credentials' => [Array],
+      'access-control-allow-origin' => [Array],
+      'connection' => [Array],
+      'content-length' => [Array],
+      'content-security-policy' => [Array],
+      'content-type' => [Array],
+      'cross-origin-opener-policy' => [Array],
+      'cross-origin-resource-policy' => [Array],
+      'date' => [Array],
+      'etag' => [Array],
+      'keep-alive' => [Array],
+      'origin-agent-cluster' => [Array],
+      'referrer-policy' => [Array],
+      'strict-transport-security' => [Array],
+      'vary' => [Array],
+      'x-content-type-options' => [Array],
+      'x-dns-prefetch-control' => [Array],
+      'x-download-options' => [Array],
+      'x-frame-options' => [Array],
+      'x-permitted-cross-domain-policies' => [Array],
+      'x-ratelimit-limit' => [Array],
+      'x-ratelimit-remaining' => [Array],
+      'x-ratelimit-reset' => [Array],
+      'x-xss-protection' => [Array]
+    },
+    normalizedNames: Map(24) {
+      'access-control-allow-credentials' => 'access-control-allow-credentials',
+      'access-control-allow-origin' => 'access-control-allow-origin',
+      'connection' => 'connection',
+      'content-length' => 'content-length',
+      'content-security-policy' => 'content-security-policy',
+      'content-type' => 'content-type',
+      'cross-origin-opener-policy' => 'cross-origin-opener-policy',
+      'cross-origin-resource-policy' => 'cross-origin-resource-policy',
+      'date' => 'date',
+      'etag' => 'etag',
+      'keep-alive' => 'keep-alive',
+      'origin-agent-cluster' => 'origin-agent-cluster',
+      'referrer-policy' => 'referrer-policy',
+      'strict-transport-security' => 'strict-transport-security',
+      'vary' => 'vary',
+      'x-content-type-options' => 'x-content-type-options',
+      'x-dns-prefetch-control' => 'x-dns-prefetch-control',
+      'x-download-options' => 'x-download-options',
+      'x-frame-options' => 'x-frame-options',
+      'x-permitted-cross-domain-policies' => 'x-permitted-cross-domain-policies',
+      'x-ratelimit-limit' => 'x-ratelimit-limit',
+      'x-ratelimit-remaining' => 'x-ratelimit-remaining',
+      'x-ratelimit-reset' => 'x-ratelimit-reset',
+      'x-xss-protection' => 'x-xss-protection'
+    },
+    lazyInit: undefined,
+    lazyUpdate: null
+  },
+  status: 401,
+  statusText: 'Unauthorized',
+  url: 'http://localhost:5000/api/notifications',
+  ok: false,
+  type: undefined,
+  redirected: false,
+  responseType: 'basic',
+  name: 'HttpErrorResponse',
+  message: 'Http failure response for http://localhost:5000/api/notifications: 401 Unauthorized',
+  error: {
+    message: 'Authentication token is required',
+    stack: 'Error: Authentication token is required\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/middleware/authMiddleware.js:10:21\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/utils/asyncHandler.js:2:19\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:157:13)\n' +
+      '    at Route.dispatch (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:117:3)\n' +
+      '    at handle (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:435:11)\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:295:15\n' +
+      '    at processParams (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:582:12)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:291:5)'
+  }
+}
+Error fetching notifications: HttpErrorResponse {
+  headers: _HttpHeaders {
+    headers: Map(24) {
+      'access-control-allow-credentials' => [Array],
+      'access-control-allow-origin' => [Array],
+      'connection' => [Array],
+      'content-length' => [Array],
+      'content-security-policy' => [Array],
+      'content-type' => [Array],
+      'cross-origin-opener-policy' => [Array],
+      'cross-origin-resource-policy' => [Array],
+      'date' => [Array],
+      'etag' => [Array],
+      'keep-alive' => [Array],
+      'origin-agent-cluster' => [Array],
+      'referrer-policy' => [Array],
+      'strict-transport-security' => [Array],
+      'vary' => [Array],
+      'x-content-type-options' => [Array],
+      'x-dns-prefetch-control' => [Array],
+      'x-download-options' => [Array],
+      'x-frame-options' => [Array],
+      'x-permitted-cross-domain-policies' => [Array],
+      'x-ratelimit-limit' => [Array],
+      'x-ratelimit-remaining' => [Array],
+      'x-ratelimit-reset' => [Array],
+      'x-xss-protection' => [Array]
+    },
+    normalizedNames: Map(24) {
+      'access-control-allow-credentials' => 'access-control-allow-credentials',
+      'access-control-allow-origin' => 'access-control-allow-origin',
+      'connection' => 'connection',
+      'content-length' => 'content-length',
+      'content-security-policy' => 'content-security-policy',
+      'content-type' => 'content-type',
+      'cross-origin-opener-policy' => 'cross-origin-opener-policy',
+      'cross-origin-resource-policy' => 'cross-origin-resource-policy',
+      'date' => 'date',
+      'etag' => 'etag',
+      'keep-alive' => 'keep-alive',
+      'origin-agent-cluster' => 'origin-agent-cluster',
+      'referrer-policy' => 'referrer-policy',
+      'strict-transport-security' => 'strict-transport-security',
+      'vary' => 'vary',
+      'x-content-type-options' => 'x-content-type-options',
+      'x-dns-prefetch-control' => 'x-dns-prefetch-control',
+      'x-download-options' => 'x-download-options',
+      'x-frame-options' => 'x-frame-options',
+      'x-permitted-cross-domain-policies' => 'x-permitted-cross-domain-policies',
+      'x-ratelimit-limit' => 'x-ratelimit-limit',
+      'x-ratelimit-remaining' => 'x-ratelimit-remaining',
+      'x-ratelimit-reset' => 'x-ratelimit-reset',
+      'x-xss-protection' => 'x-xss-protection'
+    },
+    lazyInit: undefined,
+    lazyUpdate: null
+  },
+  status: 401,
+  statusText: 'Unauthorized',
+  url: 'http://localhost:5000/api/notifications',
+  ok: false,
+  type: undefined,
+  redirected: false,
+  responseType: 'basic',
+  name: 'HttpErrorResponse',
+  message: 'Http failure response for http://localhost:5000/api/notifications: 401 Unauthorized',
+  error: {
+    message: 'Authentication token is required',
+    stack: 'Error: Authentication token is required\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/middleware/authMiddleware.js:10:21\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/utils/asyncHandler.js:2:19\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:157:13)\n' +
+      '    at Route.dispatch (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:117:3)\n' +
+      '    at handle (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:435:11)\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:295:15\n' +
+      '    at processParams (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:582:12)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:291:5)'
+  }
+}
+It looks like you're using the disabled attribute with a reactive form directive. If you set disabled to true
+  when you set up this control in your component class, the disabled attribute will actually be set in the DOM for
+  you. We recommend using this approach to avoid 'changed after checked' errors.
+
+  Example:
+  // Specify the `disabled` property at control creation time:
+  form = new FormGroup({
+    first: new FormControl({value: 'Nancy', disabled: true}, Validators.required),
+    last: new FormControl('Drew', Validators.required)
+  });
+
+  // Controls can also be enabled/disabled after creation:
+  form.get('first')?.enable();
+  form.get('last')?.disable();
+It looks like you're using the disabled attribute with a reactive form directive. If you set disabled to true
+  when you set up this control in your component class, the disabled attribute will actually be set in the DOM for
+  you. We recommend using this approach to avoid 'changed after checked' errors.
+
+  Example:
+  // Specify the `disabled` property at control creation time:
+  form = new FormGroup({
+    first: new FormControl({value: 'Nancy', disabled: true}, Validators.required),
+    last: new FormControl('Drew', Validators.required)
+  });
+
+  // Controls can also be enabled/disabled after creation:
+  form.get('first')?.enable();
+  form.get('last')?.disable();
+It looks like you're using the disabled attribute with a reactive form directive. If you set disabled to true
+  when you set up this control in your component class, the disabled attribute will actually be set in the DOM for
+  you. We recommend using this approach to avoid 'changed after checked' errors.
+
+  Example:
+  // Specify the `disabled` property at control creation time:
+  form = new FormGroup({
+    first: new FormControl({value: 'Nancy', disabled: true}, Validators.required),
+    last: new FormControl('Drew', Validators.required)
+  });
+
+  // Controls can also be enabled/disabled after creation:
+  form.get('first')?.enable();
+  form.get('last')?.disable();
+It looks like you're using the disabled attribute with a reactive form directive. If you set disabled to true
+  when you set up this control in your component class, the disabled attribute will actually be set in the DOM for
+  you. We recommend using this approach to avoid 'changed after checked' errors.
+
+  Example:
+  // Specify the `disabled` property at control creation time:
+  form = new FormGroup({
+    first: new FormControl({value: 'Nancy', disabled: true}, Validators.required),
+    last: new FormControl('Drew', Validators.required)
+  });
+
+  // Controls can also be enabled/disabled after creation:
+  form.get('first')?.enable();
+  form.get('last')?.disable();
+It looks like you're using the disabled attribute with a reactive form directive. If you set disabled to true
+  when you set up this control in your component class, the disabled attribute will actually be set in the DOM for
+  you. We recommend using this approach to avoid 'changed after checked' errors.
+
+  Example:
+  // Specify the `disabled` property at control creation time:
+  form = new FormGroup({
+    first: new FormControl({value: 'Nancy', disabled: true}, Validators.required),
+    last: new FormControl('Drew', Validators.required)
+  });
+
+  // Controls can also be enabled/disabled after creation:
+  form.get('first')?.enable();
+  form.get('last')?.disable();
+It looks like you're using the disabled attribute with a reactive form directive. If you set disabled to true
+  when you set up this control in your component class, the disabled attribute will actually be set in the DOM for
+  you. We recommend using this approach to avoid 'changed after checked' errors.
+
+  Example:
+  // Specify the `disabled` property at control creation time:
+  form = new FormGroup({
+    first: new FormControl({value: 'Nancy', disabled: true}, Validators.required),
+    last: new FormControl('Drew', Validators.required)
+  });
+
+  // Controls can also be enabled/disabled after creation:
+  form.get('first')?.enable();
+  form.get('last')?.disable();
+It looks like you're using the disabled attribute with a reactive form directive. If you set disabled to true
+  when you set up this control in your component class, the disabled attribute will actually be set in the DOM for
+  you. We recommend using this approach to avoid 'changed after checked' errors.
+
+  Example:
+  // Specify the `disabled` property at control creation time:
+  form = new FormGroup({
+    first: new FormControl({value: 'Nancy', disabled: true}, Validators.required),
+    last: new FormControl('Drew', Validators.required)
+  });
+
+  // Controls can also be enabled/disabled after creation:
+  form.get('first')?.enable();
+  form.get('last')?.disable();
+It looks like you're using the disabled attribute with a reactive form directive. If you set disabled to true
+  when you set up this control in your component class, the disabled attribute will actually be set in the DOM for
+  you. We recommend using this approach to avoid 'changed after checked' errors.
+
+  Example:
+  // Specify the `disabled` property at control creation time:
+  form = new FormGroup({
+    first: new FormControl({value: 'Nancy', disabled: true}, Validators.required),
+    last: new FormControl('Drew', Validators.required)
+  });
+
+  // Controls can also be enabled/disabled after creation:
+  form.get('first')?.enable();
+  form.get('last')?.disable();
+It looks like you're using the disabled attribute with a reactive form directive. If you set disabled to true
+  when you set up this control in your component class, the disabled attribute will actually be set in the DOM for
+  you. We recommend using this approach to avoid 'changed after checked' errors.
+
+  Example:
+  // Specify the `disabled` property at control creation time:
+  form = new FormGroup({
+    first: new FormControl({value: 'Nancy', disabled: true}, Validators.required),
+    last: new FormControl('Drew', Validators.required)
+  });
+
+  // Controls can also be enabled/disabled after creation:
+  form.get('first')?.enable();
+  form.get('last')?.disable();
+It looks like you're using the disabled attribute with a reactive form directive. If you set disabled to true
+  when you set up this control in your component class, the disabled attribute will actually be set in the DOM for
+  you. We recommend using this approach to avoid 'changed after checked' errors.
+
+  Example:
+  // Specify the `disabled` property at control creation time:
+  form = new FormGroup({
+    first: new FormControl({value: 'Nancy', disabled: true}, Validators.required),
+    last: new FormControl('Drew', Validators.required)
+  });
+
+  // Controls can also be enabled/disabled after creation:
+  form.get('first')?.enable();
+  form.get('last')?.disable();
+It looks like you're using the disabled attribute with a reactive form directive. If you set disabled to true
+  when you set up this control in your component class, the disabled attribute will actually be set in the DOM for
+  you. We recommend using this approach to avoid 'changed after checked' errors.
+
+  Example:
+  // Specify the `disabled` property at control creation time:
+  form = new FormGroup({
+    first: new FormControl({value: 'Nancy', disabled: true}, Validators.required),
+    last: new FormControl('Drew', Validators.required)
+  });
+
+  // Controls can also be enabled/disabled after creation:
+  form.get('first')?.enable();
+  form.get('last')?.disable();
+It looks like you're using the disabled attribute with a reactive form directive. If you set disabled to true
+  when you set up this control in your component class, the disabled attribute will actually be set in the DOM for
+  you. We recommend using this approach to avoid 'changed after checked' errors.
+
+  Example:
+  // Specify the `disabled` property at control creation time:
+  form = new FormGroup({
+    first: new FormControl({value: 'Nancy', disabled: true}, Validators.required),
+    last: new FormControl('Drew', Validators.required)
+  });
+
+  // Controls can also be enabled/disabled after creation:
+  form.get('first')?.enable();
+  form.get('last')?.disable();
+It looks like you're using the disabled attribute with a reactive form directive. If you set disabled to true
+  when you set up this control in your component class, the disabled attribute will actually be set in the DOM for
+  you. We recommend using this approach to avoid 'changed after checked' errors.
+
+  Example:
+  // Specify the `disabled` property at control creation time:
+  form = new FormGroup({
+    first: new FormControl({value: 'Nancy', disabled: true}, Validators.required),
+    last: new FormControl('Drew', Validators.required)
+  });
+
+  // Controls can also be enabled/disabled after creation:
+  form.get('first')?.enable();
+  form.get('last')?.disable();
+Error fetching notifications: HttpErrorResponse {
+  headers: _HttpHeaders {
+    headers: Map(24) {
+      'access-control-allow-credentials' => [Array],
+      'access-control-allow-origin' => [Array],
+      'connection' => [Array],
+      'content-length' => [Array],
+      'content-security-policy' => [Array],
+      'content-type' => [Array],
+      'cross-origin-opener-policy' => [Array],
+      'cross-origin-resource-policy' => [Array],
+      'date' => [Array],
+      'etag' => [Array],
+      'keep-alive' => [Array],
+      'origin-agent-cluster' => [Array],
+      'referrer-policy' => [Array],
+      'strict-transport-security' => [Array],
+      'vary' => [Array],
+      'x-content-type-options' => [Array],
+      'x-dns-prefetch-control' => [Array],
+      'x-download-options' => [Array],
+      'x-frame-options' => [Array],
+      'x-permitted-cross-domain-policies' => [Array],
+      'x-ratelimit-limit' => [Array],
+      'x-ratelimit-remaining' => [Array],
+      'x-ratelimit-reset' => [Array],
+      'x-xss-protection' => [Array]
+    },
+    normalizedNames: Map(24) {
+      'access-control-allow-credentials' => 'access-control-allow-credentials',
+      'access-control-allow-origin' => 'access-control-allow-origin',
+      'connection' => 'connection',
+      'content-length' => 'content-length',
+      'content-security-policy' => 'content-security-policy',
+      'content-type' => 'content-type',
+      'cross-origin-opener-policy' => 'cross-origin-opener-policy',
+      'cross-origin-resource-policy' => 'cross-origin-resource-policy',
+      'date' => 'date',
+      'etag' => 'etag',
+      'keep-alive' => 'keep-alive',
+      'origin-agent-cluster' => 'origin-agent-cluster',
+      'referrer-policy' => 'referrer-policy',
+      'strict-transport-security' => 'strict-transport-security',
+      'vary' => 'vary',
+      'x-content-type-options' => 'x-content-type-options',
+      'x-dns-prefetch-control' => 'x-dns-prefetch-control',
+      'x-download-options' => 'x-download-options',
+      'x-frame-options' => 'x-frame-options',
+      'x-permitted-cross-domain-policies' => 'x-permitted-cross-domain-policies',
+      'x-ratelimit-limit' => 'x-ratelimit-limit',
+      'x-ratelimit-remaining' => 'x-ratelimit-remaining',
+      'x-ratelimit-reset' => 'x-ratelimit-reset',
+      'x-xss-protection' => 'x-xss-protection'
+    },
+    lazyInit: undefined,
+    lazyUpdate: null
+  },
+  status: 401,
+  statusText: 'Unauthorized',
+  url: 'http://localhost:5000/api/notifications',
+  ok: false,
+  type: undefined,
+  redirected: false,
+  responseType: 'basic',
+  name: 'HttpErrorResponse',
+  message: 'Http failure response for http://localhost:5000/api/notifications: 401 Unauthorized',
+  error: {
+    message: 'Authentication token is required',
+    stack: 'Error: Authentication token is required\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/middleware/authMiddleware.js:10:21\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/utils/asyncHandler.js:2:19\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:157:13)\n' +
+      '    at Route.dispatch (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:117:3)\n' +
+      '    at handle (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:435:11)\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:295:15\n' +
+      '    at processParams (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:582:12)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:291:5)'
+  }
+}
+Error fetching notifications: HttpErrorResponse {
+  headers: _HttpHeaders {
+    headers: Map(24) {
+      'access-control-allow-credentials' => [Array],
+      'access-control-allow-origin' => [Array],
+      'connection' => [Array],
+      'content-length' => [Array],
+      'content-security-policy' => [Array],
+      'content-type' => [Array],
+      'cross-origin-opener-policy' => [Array],
+      'cross-origin-resource-policy' => [Array],
+      'date' => [Array],
+      'etag' => [Array],
+      'keep-alive' => [Array],
+      'origin-agent-cluster' => [Array],
+      'referrer-policy' => [Array],
+      'strict-transport-security' => [Array],
+      'vary' => [Array],
+      'x-content-type-options' => [Array],
+      'x-dns-prefetch-control' => [Array],
+      'x-download-options' => [Array],
+      'x-frame-options' => [Array],
+      'x-permitted-cross-domain-policies' => [Array],
+      'x-ratelimit-limit' => [Array],
+      'x-ratelimit-remaining' => [Array],
+      'x-ratelimit-reset' => [Array],
+      'x-xss-protection' => [Array]
+    },
+    normalizedNames: Map(24) {
+      'access-control-allow-credentials' => 'access-control-allow-credentials',
+      'access-control-allow-origin' => 'access-control-allow-origin',
+      'connection' => 'connection',
+      'content-length' => 'content-length',
+      'content-security-policy' => 'content-security-policy',
+      'content-type' => 'content-type',
+      'cross-origin-opener-policy' => 'cross-origin-opener-policy',
+      'cross-origin-resource-policy' => 'cross-origin-resource-policy',
+      'date' => 'date',
+      'etag' => 'etag',
+      'keep-alive' => 'keep-alive',
+      'origin-agent-cluster' => 'origin-agent-cluster',
+      'referrer-policy' => 'referrer-policy',
+      'strict-transport-security' => 'strict-transport-security',
+      'vary' => 'vary',
+      'x-content-type-options' => 'x-content-type-options',
+      'x-dns-prefetch-control' => 'x-dns-prefetch-control',
+      'x-download-options' => 'x-download-options',
+      'x-frame-options' => 'x-frame-options',
+      'x-permitted-cross-domain-policies' => 'x-permitted-cross-domain-policies',
+      'x-ratelimit-limit' => 'x-ratelimit-limit',
+      'x-ratelimit-remaining' => 'x-ratelimit-remaining',
+      'x-ratelimit-reset' => 'x-ratelimit-reset',
+      'x-xss-protection' => 'x-xss-protection'
+    },
+    lazyInit: undefined,
+    lazyUpdate: null
+  },
+  status: 401,
+  statusText: 'Unauthorized',
+  url: 'http://localhost:5000/api/notifications',
+  ok: false,
+  type: undefined,
+  redirected: false,
+  responseType: 'basic',
+  name: 'HttpErrorResponse',
+  message: 'Http failure response for http://localhost:5000/api/notifications: 401 Unauthorized',
+  error: {
+    message: 'Authentication token is required',
+    stack: 'Error: Authentication token is required\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/middleware/authMiddleware.js:10:21\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/utils/asyncHandler.js:2:19\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:157:13)\n' +
+      '    at Route.dispatch (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:117:3)\n' +
+      '    at handle (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:435:11)\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:295:15\n' +
+      '    at processParams (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:582:12)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:291:5)'
+  }
+}
+Error fetching notifications: HttpErrorResponse {
+  headers: _HttpHeaders {
+    headers: Map(24) {
+      'access-control-allow-credentials' => [Array],
+      'access-control-allow-origin' => [Array],
+      'connection' => [Array],
+      'content-length' => [Array],
+      'content-security-policy' => [Array],
+      'content-type' => [Array],
+      'cross-origin-opener-policy' => [Array],
+      'cross-origin-resource-policy' => [Array],
+      'date' => [Array],
+      'etag' => [Array],
+      'keep-alive' => [Array],
+      'origin-agent-cluster' => [Array],
+      'referrer-policy' => [Array],
+      'strict-transport-security' => [Array],
+      'vary' => [Array],
+      'x-content-type-options' => [Array],
+      'x-dns-prefetch-control' => [Array],
+      'x-download-options' => [Array],
+      'x-frame-options' => [Array],
+      'x-permitted-cross-domain-policies' => [Array],
+      'x-ratelimit-limit' => [Array],
+      'x-ratelimit-remaining' => [Array],
+      'x-ratelimit-reset' => [Array],
+      'x-xss-protection' => [Array]
+    },
+    normalizedNames: Map(24) {
+      'access-control-allow-credentials' => 'access-control-allow-credentials',
+      'access-control-allow-origin' => 'access-control-allow-origin',
+      'connection' => 'connection',
+      'content-length' => 'content-length',
+      'content-security-policy' => 'content-security-policy',
+      'content-type' => 'content-type',
+      'cross-origin-opener-policy' => 'cross-origin-opener-policy',
+      'cross-origin-resource-policy' => 'cross-origin-resource-policy',
+      'date' => 'date',
+      'etag' => 'etag',
+      'keep-alive' => 'keep-alive',
+      'origin-agent-cluster' => 'origin-agent-cluster',
+      'referrer-policy' => 'referrer-policy',
+      'strict-transport-security' => 'strict-transport-security',
+      'vary' => 'vary',
+      'x-content-type-options' => 'x-content-type-options',
+      'x-dns-prefetch-control' => 'x-dns-prefetch-control',
+      'x-download-options' => 'x-download-options',
+      'x-frame-options' => 'x-frame-options',
+      'x-permitted-cross-domain-policies' => 'x-permitted-cross-domain-policies',
+      'x-ratelimit-limit' => 'x-ratelimit-limit',
+      'x-ratelimit-remaining' => 'x-ratelimit-remaining',
+      'x-ratelimit-reset' => 'x-ratelimit-reset',
+      'x-xss-protection' => 'x-xss-protection'
+    },
+    lazyInit: undefined,
+    lazyUpdate: null
+  },
+  status: 401,
+  statusText: 'Unauthorized',
+  url: 'http://localhost:5000/api/notifications',
+  ok: false,
+  type: undefined,
+  redirected: false,
+  responseType: 'basic',
+  name: 'HttpErrorResponse',
+  message: 'Http failure response for http://localhost:5000/api/notifications: 401 Unauthorized',
+  error: {
+    message: 'Authentication token is required',
+    stack: 'Error: Authentication token is required\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/middleware/authMiddleware.js:10:21\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/utils/asyncHandler.js:2:19\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:157:13)\n' +
+      '    at Route.dispatch (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:117:3)\n' +
+      '    at handle (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:435:11)\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:295:15\n' +
+      '    at processParams (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:582:12)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:291:5)'
+  }
+}
+ERROR TypeError: el.getBoundingClientRect is not a function
+    at _ToastItem.measureStackHeight (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\aa36fb67-a0b2-4ff3-b9b7-887a4f5c5b2c\node_modules\primeng\fesm2022\primeng-toast.mjs:691:23)
+    at _ToastItem.onAfterViewInit (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\aa36fb67-a0b2-4ff3-b9b7-887a4f5c5b2c\node_modules\primeng\fesm2022\primeng-toast.mjs:683:10)
+    at _ToastItem.ngAfterViewInit (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\aa36fb67-a0b2-4ff3-b9b7-887a4f5c5b2c\node_modules\primeng\fesm2022\primeng-basecomponent.mjs:287:10)
+    at callHookInternal (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\aa36fb67-a0b2-4ff3-b9b7-887a4f5c5b2c\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:251:10)
+    at callHook (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\aa36fb67-a0b2-4ff3-b9b7-887a4f5c5b2c\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:266:7)
+    at callHooks (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\aa36fb67-a0b2-4ff3-b9b7-887a4f5c5b2c\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:240:9)
+    at executeInitAndCheckHooks (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\aa36fb67-a0b2-4ff3-b9b7-887a4f5c5b2c\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:209:5)
+    at refreshView (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\aa36fb67-a0b2-4ff3-b9b7-887a4f5c5b2c\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6070:11)
+    at detectChangesInView (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\aa36fb67-a0b2-4ff3-b9b7-887a4f5c5b2c\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6153:5)
+    at detectChangesInViewIfAttached (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\aa36fb67-a0b2-4ff3-b9b7-887a4f5c5b2c\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6136:3)
+Error fetching notifications: HttpErrorResponse {
+  headers: _HttpHeaders {
+    headers: Map(24) {
+      'access-control-allow-credentials' => [Array],
+      'access-control-allow-origin' => [Array],
+      'connection' => [Array],
+      'content-length' => [Array],
+      'content-security-policy' => [Array],
+      'content-type' => [Array],
+      'cross-origin-opener-policy' => [Array],
+      'cross-origin-resource-policy' => [Array],
+      'date' => [Array],
+      'etag' => [Array],
+      'keep-alive' => [Array],
+      'origin-agent-cluster' => [Array],
+      'referrer-policy' => [Array],
+      'strict-transport-security' => [Array],
+      'vary' => [Array],
+      'x-content-type-options' => [Array],
+      'x-dns-prefetch-control' => [Array],
+      'x-download-options' => [Array],
+      'x-frame-options' => [Array],
+      'x-permitted-cross-domain-policies' => [Array],
+      'x-ratelimit-limit' => [Array],
+      'x-ratelimit-remaining' => [Array],
+      'x-ratelimit-reset' => [Array],
+      'x-xss-protection' => [Array]
+    },
+    normalizedNames: Map(24) {
+      'access-control-allow-credentials' => 'access-control-allow-credentials',
+      'access-control-allow-origin' => 'access-control-allow-origin',
+      'connection' => 'connection',
+      'content-length' => 'content-length',
+      'content-security-policy' => 'content-security-policy',
+      'content-type' => 'content-type',
+      'cross-origin-opener-policy' => 'cross-origin-opener-policy',
+      'cross-origin-resource-policy' => 'cross-origin-resource-policy',
+      'date' => 'date',
+      'etag' => 'etag',
+      'keep-alive' => 'keep-alive',
+      'origin-agent-cluster' => 'origin-agent-cluster',
+      'referrer-policy' => 'referrer-policy',
+      'strict-transport-security' => 'strict-transport-security',
+      'vary' => 'vary',
+      'x-content-type-options' => 'x-content-type-options',
+      'x-dns-prefetch-control' => 'x-dns-prefetch-control',
+      'x-download-options' => 'x-download-options',
+      'x-frame-options' => 'x-frame-options',
+      'x-permitted-cross-domain-policies' => 'x-permitted-cross-domain-policies',
+      'x-ratelimit-limit' => 'x-ratelimit-limit',
+      'x-ratelimit-remaining' => 'x-ratelimit-remaining',
+      'x-ratelimit-reset' => 'x-ratelimit-reset',
+      'x-xss-protection' => 'x-xss-protection'
+    },
+    lazyInit: undefined,
+    lazyUpdate: null
+  },
+  status: 401,
+  statusText: 'Unauthorized',
+  url: 'http://localhost:5000/api/notifications',
+  ok: false,
+  type: undefined,
+  redirected: false,
+  responseType: 'basic',
+  name: 'HttpErrorResponse',
+  message: 'Http failure response for http://localhost:5000/api/notifications: 401 Unauthorized',
+  error: {
+    message: 'Authentication token is required',
+    stack: 'Error: Authentication token is required\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/middleware/authMiddleware.js:10:21\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/utils/asyncHandler.js:2:19\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:157:13)\n' +
+      '    at Route.dispatch (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:117:3)\n' +
+      '    at handle (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:435:11)\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:295:15\n' +
+      '    at processParams (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:582:12)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:291:5)'
+  }
+}
+Error fetching notifications: HttpErrorResponse {
+  headers: _HttpHeaders {
+    headers: Map(24) {
+      'access-control-allow-credentials' => [Array],
+      'access-control-allow-origin' => [Array],
+      'connection' => [Array],
+      'content-length' => [Array],
+      'content-security-policy' => [Array],
+      'content-type' => [Array],
+      'cross-origin-opener-policy' => [Array],
+      'cross-origin-resource-policy' => [Array],
+      'date' => [Array],
+      'etag' => [Array],
+      'keep-alive' => [Array],
+      'origin-agent-cluster' => [Array],
+      'referrer-policy' => [Array],
+      'strict-transport-security' => [Array],
+      'vary' => [Array],
+      'x-content-type-options' => [Array],
+      'x-dns-prefetch-control' => [Array],
+      'x-download-options' => [Array],
+      'x-frame-options' => [Array],
+      'x-permitted-cross-domain-policies' => [Array],
+      'x-ratelimit-limit' => [Array],
+      'x-ratelimit-remaining' => [Array],
+      'x-ratelimit-reset' => [Array],
+      'x-xss-protection' => [Array]
+    },
+    normalizedNames: Map(24) {
+      'access-control-allow-credentials' => 'access-control-allow-credentials',
+      'access-control-allow-origin' => 'access-control-allow-origin',
+      'connection' => 'connection',
+      'content-length' => 'content-length',
+      'content-security-policy' => 'content-security-policy',
+      'content-type' => 'content-type',
+      'cross-origin-opener-policy' => 'cross-origin-opener-policy',
+      'cross-origin-resource-policy' => 'cross-origin-resource-policy',
+      'date' => 'date',
+      'etag' => 'etag',
+      'keep-alive' => 'keep-alive',
+      'origin-agent-cluster' => 'origin-agent-cluster',
+      'referrer-policy' => 'referrer-policy',
+      'strict-transport-security' => 'strict-transport-security',
+      'vary' => 'vary',
+      'x-content-type-options' => 'x-content-type-options',
+      'x-dns-prefetch-control' => 'x-dns-prefetch-control',
+      'x-download-options' => 'x-download-options',
+      'x-frame-options' => 'x-frame-options',
+      'x-permitted-cross-domain-policies' => 'x-permitted-cross-domain-policies',
+      'x-ratelimit-limit' => 'x-ratelimit-limit',
+      'x-ratelimit-remaining' => 'x-ratelimit-remaining',
+      'x-ratelimit-reset' => 'x-ratelimit-reset',
+      'x-xss-protection' => 'x-xss-protection'
+    },
+    lazyInit: undefined,
+    lazyUpdate: null
+  },
+  status: 401,
+  statusText: 'Unauthorized',
+  url: 'http://localhost:5000/api/notifications',
+  ok: false,
+  type: undefined,
+  redirected: false,
+  responseType: 'basic',
+  name: 'HttpErrorResponse',
+  message: 'Http failure response for http://localhost:5000/api/notifications: 401 Unauthorized',
+  error: {
+    message: 'Authentication token is required',
+    stack: 'Error: Authentication token is required\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/middleware/authMiddleware.js:10:21\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/utils/asyncHandler.js:2:19\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:157:13)\n' +
+      '    at Route.dispatch (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:117:3)\n' +
+      '    at handle (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:435:11)\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:295:15\n' +
+      '    at processParams (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:582:12)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:291:5)'
+  }
+}
+ERROR TypeError: el.getBoundingClientRect is not a function
+    at _ToastItem.measureStackHeight (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\cb9f74d5-bf66-4350-83b5-b63407b6ba59\node_modules\primeng\fesm2022\primeng-toast.mjs:691:23)
+    at _ToastItem.onAfterViewInit (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\cb9f74d5-bf66-4350-83b5-b63407b6ba59\node_modules\primeng\fesm2022\primeng-toast.mjs:683:10)
+    at _ToastItem.ngAfterViewInit (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\cb9f74d5-bf66-4350-83b5-b63407b6ba59\node_modules\primeng\fesm2022\primeng-basecomponent.mjs:287:10)
+    at callHookInternal (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\cb9f74d5-bf66-4350-83b5-b63407b6ba59\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:251:10)
+    at callHook (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\cb9f74d5-bf66-4350-83b5-b63407b6ba59\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:266:7)
+    at callHooks (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\cb9f74d5-bf66-4350-83b5-b63407b6ba59\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:240:9)
+    at executeInitAndCheckHooks (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\cb9f74d5-bf66-4350-83b5-b63407b6ba59\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:209:5)
+    at refreshView (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\cb9f74d5-bf66-4350-83b5-b63407b6ba59\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6070:11)
+    at detectChangesInView (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\cb9f74d5-bf66-4350-83b5-b63407b6ba59\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6153:5)
+    at detectChangesInViewIfAttached (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\cb9f74d5-bf66-4350-83b5-b63407b6ba59\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6136:3)
+Error fetching notifications: HttpErrorResponse {
+  headers: _HttpHeaders {
+    headers: Map(24) {
+      'access-control-allow-credentials' => [Array],
+      'access-control-allow-origin' => [Array],
+      'connection' => [Array],
+      'content-length' => [Array],
+      'content-security-policy' => [Array],
+      'content-type' => [Array],
+      'cross-origin-opener-policy' => [Array],
+      'cross-origin-resource-policy' => [Array],
+      'date' => [Array],
+      'etag' => [Array],
+      'keep-alive' => [Array],
+      'origin-agent-cluster' => [Array],
+      'referrer-policy' => [Array],
+      'strict-transport-security' => [Array],
+      'vary' => [Array],
+      'x-content-type-options' => [Array],
+      'x-dns-prefetch-control' => [Array],
+      'x-download-options' => [Array],
+      'x-frame-options' => [Array],
+      'x-permitted-cross-domain-policies' => [Array],
+      'x-ratelimit-limit' => [Array],
+      'x-ratelimit-remaining' => [Array],
+      'x-ratelimit-reset' => [Array],
+      'x-xss-protection' => [Array]
+    },
+    normalizedNames: Map(24) {
+      'access-control-allow-credentials' => 'access-control-allow-credentials',
+      'access-control-allow-origin' => 'access-control-allow-origin',
+      'connection' => 'connection',
+      'content-length' => 'content-length',
+      'content-security-policy' => 'content-security-policy',
+      'content-type' => 'content-type',
+      'cross-origin-opener-policy' => 'cross-origin-opener-policy',
+      'cross-origin-resource-policy' => 'cross-origin-resource-policy',
+      'date' => 'date',
+      'etag' => 'etag',
+      'keep-alive' => 'keep-alive',
+      'origin-agent-cluster' => 'origin-agent-cluster',
+      'referrer-policy' => 'referrer-policy',
+      'strict-transport-security' => 'strict-transport-security',
+      'vary' => 'vary',
+      'x-content-type-options' => 'x-content-type-options',
+      'x-dns-prefetch-control' => 'x-dns-prefetch-control',
+      'x-download-options' => 'x-download-options',
+      'x-frame-options' => 'x-frame-options',
+      'x-permitted-cross-domain-policies' => 'x-permitted-cross-domain-policies',
+      'x-ratelimit-limit' => 'x-ratelimit-limit',
+      'x-ratelimit-remaining' => 'x-ratelimit-remaining',
+      'x-ratelimit-reset' => 'x-ratelimit-reset',
+      'x-xss-protection' => 'x-xss-protection'
+    },
+    lazyInit: undefined,
+    lazyUpdate: null
+  },
+  status: 401,
+  statusText: 'Unauthorized',
+  url: 'http://localhost:5000/api/notifications',
+  ok: false,
+  type: undefined,
+  redirected: false,
+  responseType: 'basic',
+  name: 'HttpErrorResponse',
+  message: 'Http failure response for http://localhost:5000/api/notifications: 401 Unauthorized',
+  error: {
+    message: 'Authentication token is required',
+    stack: 'Error: Authentication token is required\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/middleware/authMiddleware.js:10:21\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/utils/asyncHandler.js:2:19\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:157:13)\n' +
+      '    at Route.dispatch (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:117:3)\n' +
+      '    at handle (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:435:11)\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:295:15\n' +
+      '    at processParams (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:582:12)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:291:5)'
+  }
+}
+ERROR TypeError: el.getBoundingClientRect is not a function
+    at _ToastItem.measureStackHeight (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\cb9f74d5-bf66-4350-83b5-b63407b6ba59\node_modules\primeng\fesm2022\primeng-toast.mjs:691:23)
+    at _ToastItem.onAfterViewInit (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\cb9f74d5-bf66-4350-83b5-b63407b6ba59\node_modules\primeng\fesm2022\primeng-toast.mjs:683:10)
+    at _ToastItem.ngAfterViewInit (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\cb9f74d5-bf66-4350-83b5-b63407b6ba59\node_modules\primeng\fesm2022\primeng-basecomponent.mjs:287:10)
+    at callHookInternal (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\cb9f74d5-bf66-4350-83b5-b63407b6ba59\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:251:10)
+    at callHook (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\cb9f74d5-bf66-4350-83b5-b63407b6ba59\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:266:7)
+    at callHooks (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\cb9f74d5-bf66-4350-83b5-b63407b6ba59\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:240:9)
+    at executeInitAndCheckHooks (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\cb9f74d5-bf66-4350-83b5-b63407b6ba59\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:209:5)
+    at refreshView (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\cb9f74d5-bf66-4350-83b5-b63407b6ba59\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6070:11)
+    at detectChangesInView (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\cb9f74d5-bf66-4350-83b5-b63407b6ba59\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6153:5)
+    at detectChangesInViewIfAttached (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\cb9f74d5-bf66-4350-83b5-b63407b6ba59\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6136:3)
+ERROR TypeError: el.getBoundingClientRect is not a function
+    at _ToastItem.measureStackHeight (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\22fe8cb7-df59-4a29-97b0-a64a38d7b559\node_modules\primeng\fesm2022\primeng-toast.mjs:691:23)
+    at _ToastItem.onAfterViewInit (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\22fe8cb7-df59-4a29-97b0-a64a38d7b559\node_modules\primeng\fesm2022\primeng-toast.mjs:683:10)
+    at _ToastItem.ngAfterViewInit (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\22fe8cb7-df59-4a29-97b0-a64a38d7b559\node_modules\primeng\fesm2022\primeng-basecomponent.mjs:287:10)
+    at callHookInternal (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\22fe8cb7-df59-4a29-97b0-a64a38d7b559\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:251:10)
+    at callHook (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\22fe8cb7-df59-4a29-97b0-a64a38d7b559\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:266:7)
+    at callHooks (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\22fe8cb7-df59-4a29-97b0-a64a38d7b559\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:240:9)
+    at executeInitAndCheckHooks (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\22fe8cb7-df59-4a29-97b0-a64a38d7b559\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:209:5)
+    at refreshView (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\22fe8cb7-df59-4a29-97b0-a64a38d7b559\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6070:11)
+    at detectChangesInView (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\22fe8cb7-df59-4a29-97b0-a64a38d7b559\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6153:5)
+    at detectChangesInViewIfAttached (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\22fe8cb7-df59-4a29-97b0-a64a38d7b559\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6136:3)
+Error fetching notifications: HttpErrorResponse {
+  headers: _HttpHeaders {
+    headers: Map(24) {
+      'access-control-allow-credentials' => [Array],
+      'access-control-allow-origin' => [Array],
+      'connection' => [Array],
+      'content-length' => [Array],
+      'content-security-policy' => [Array],
+      'content-type' => [Array],
+      'cross-origin-opener-policy' => [Array],
+      'cross-origin-resource-policy' => [Array],
+      'date' => [Array],
+      'etag' => [Array],
+      'keep-alive' => [Array],
+      'origin-agent-cluster' => [Array],
+      'referrer-policy' => [Array],
+      'strict-transport-security' => [Array],
+      'vary' => [Array],
+      'x-content-type-options' => [Array],
+      'x-dns-prefetch-control' => [Array],
+      'x-download-options' => [Array],
+      'x-frame-options' => [Array],
+      'x-permitted-cross-domain-policies' => [Array],
+      'x-ratelimit-limit' => [Array],
+      'x-ratelimit-remaining' => [Array],
+      'x-ratelimit-reset' => [Array],
+      'x-xss-protection' => [Array]
+    },
+    normalizedNames: Map(24) {
+      'access-control-allow-credentials' => 'access-control-allow-credentials',
+      'access-control-allow-origin' => 'access-control-allow-origin',
+      'connection' => 'connection',
+      'content-length' => 'content-length',
+      'content-security-policy' => 'content-security-policy',
+      'content-type' => 'content-type',
+      'cross-origin-opener-policy' => 'cross-origin-opener-policy',
+      'cross-origin-resource-policy' => 'cross-origin-resource-policy',
+      'date' => 'date',
+      'etag' => 'etag',
+      'keep-alive' => 'keep-alive',
+      'origin-agent-cluster' => 'origin-agent-cluster',
+      'referrer-policy' => 'referrer-policy',
+      'strict-transport-security' => 'strict-transport-security',
+      'vary' => 'vary',
+      'x-content-type-options' => 'x-content-type-options',
+      'x-dns-prefetch-control' => 'x-dns-prefetch-control',
+      'x-download-options' => 'x-download-options',
+      'x-frame-options' => 'x-frame-options',
+      'x-permitted-cross-domain-policies' => 'x-permitted-cross-domain-policies',
+      'x-ratelimit-limit' => 'x-ratelimit-limit',
+      'x-ratelimit-remaining' => 'x-ratelimit-remaining',
+      'x-ratelimit-reset' => 'x-ratelimit-reset',
+      'x-xss-protection' => 'x-xss-protection'
+    },
+    lazyInit: undefined,
+    lazyUpdate: null
+  },
+  status: 401,
+  statusText: 'Unauthorized',
+  url: 'http://localhost:5000/api/notifications',
+  ok: false,
+  type: undefined,
+  redirected: false,
+  responseType: 'basic',
+  name: 'HttpErrorResponse',
+  message: 'Http failure response for http://localhost:5000/api/notifications: 401 Unauthorized',
+  error: {
+    message: 'Authentication token is required',
+    stack: 'Error: Authentication token is required\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/middleware/authMiddleware.js:10:21\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/utils/asyncHandler.js:2:19\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:157:13)\n' +
+      '    at Route.dispatch (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:117:3)\n' +
+      '    at handle (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:435:11)\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:295:15\n' +
+      '    at processParams (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:582:12)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:291:5)'
+  }
+}
+ERROR TypeError: el.getBoundingClientRect is not a function
+    at _ToastItem.measureStackHeight (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\aa36fb67-a0b2-4ff3-b9b7-887a4f5c5b2c\node_modules\primeng\fesm2022\primeng-toast.mjs:691:23)
+    at _ToastItem.onAfterViewInit (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\aa36fb67-a0b2-4ff3-b9b7-887a4f5c5b2c\node_modules\primeng\fesm2022\primeng-toast.mjs:683:10)
+    at _ToastItem.ngAfterViewInit (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\aa36fb67-a0b2-4ff3-b9b7-887a4f5c5b2c\node_modules\primeng\fesm2022\primeng-basecomponent.mjs:287:10)
+    at callHookInternal (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\aa36fb67-a0b2-4ff3-b9b7-887a4f5c5b2c\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:251:10)
+    at callHook (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\aa36fb67-a0b2-4ff3-b9b7-887a4f5c5b2c\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:266:7)
+    at callHooks (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\aa36fb67-a0b2-4ff3-b9b7-887a4f5c5b2c\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:240:9)
+    at executeInitAndCheckHooks (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\aa36fb67-a0b2-4ff3-b9b7-887a4f5c5b2c\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:209:5)
+    at refreshView (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\aa36fb67-a0b2-4ff3-b9b7-887a4f5c5b2c\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6070:11)
+    at detectChangesInView (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\aa36fb67-a0b2-4ff3-b9b7-887a4f5c5b2c\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6153:5)
+    at detectChangesInViewIfAttached (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\aa36fb67-a0b2-4ff3-b9b7-887a4f5c5b2c\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6136:3)
+Error fetching notifications: HttpErrorResponse {
+  headers: _HttpHeaders {
+    headers: Map(24) {
+      'access-control-allow-credentials' => [Array],
+      'access-control-allow-origin' => [Array],
+      'connection' => [Array],
+      'content-length' => [Array],
+      'content-security-policy' => [Array],
+      'content-type' => [Array],
+      'cross-origin-opener-policy' => [Array],
+      'cross-origin-resource-policy' => [Array],
+      'date' => [Array],
+      'etag' => [Array],
+      'keep-alive' => [Array],
+      'origin-agent-cluster' => [Array],
+      'referrer-policy' => [Array],
+      'strict-transport-security' => [Array],
+      'vary' => [Array],
+      'x-content-type-options' => [Array],
+      'x-dns-prefetch-control' => [Array],
+      'x-download-options' => [Array],
+      'x-frame-options' => [Array],
+      'x-permitted-cross-domain-policies' => [Array],
+      'x-ratelimit-limit' => [Array],
+      'x-ratelimit-remaining' => [Array],
+      'x-ratelimit-reset' => [Array],
+      'x-xss-protection' => [Array]
+    },
+    normalizedNames: Map(24) {
+      'access-control-allow-credentials' => 'access-control-allow-credentials',
+      'access-control-allow-origin' => 'access-control-allow-origin',
+      'connection' => 'connection',
+      'content-length' => 'content-length',
+      'content-security-policy' => 'content-security-policy',
+      'content-type' => 'content-type',
+      'cross-origin-opener-policy' => 'cross-origin-opener-policy',
+      'cross-origin-resource-policy' => 'cross-origin-resource-policy',
+      'date' => 'date',
+      'etag' => 'etag',
+      'keep-alive' => 'keep-alive',
+      'origin-agent-cluster' => 'origin-agent-cluster',
+      'referrer-policy' => 'referrer-policy',
+      'strict-transport-security' => 'strict-transport-security',
+      'vary' => 'vary',
+      'x-content-type-options' => 'x-content-type-options',
+      'x-dns-prefetch-control' => 'x-dns-prefetch-control',
+      'x-download-options' => 'x-download-options',
+      'x-frame-options' => 'x-frame-options',
+      'x-permitted-cross-domain-policies' => 'x-permitted-cross-domain-policies',
+      'x-ratelimit-limit' => 'x-ratelimit-limit',
+      'x-ratelimit-remaining' => 'x-ratelimit-remaining',
+      'x-ratelimit-reset' => 'x-ratelimit-reset',
+      'x-xss-protection' => 'x-xss-protection'
+    },
+    lazyInit: undefined,
+    lazyUpdate: null
+  },
+  status: 401,
+  statusText: 'Unauthorized',
+  url: 'http://localhost:5000/api/notifications',
+  ok: false,
+  type: undefined,
+  redirected: false,
+  responseType: 'basic',
+  name: 'HttpErrorResponse',
+  message: 'Http failure response for http://localhost:5000/api/notifications: 401 Unauthorized',
+  error: {
+    message: 'Authentication token is required',
+    stack: 'Error: Authentication token is required\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/middleware/authMiddleware.js:10:21\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/utils/asyncHandler.js:2:19\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:157:13)\n' +
+      '    at Route.dispatch (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:117:3)\n' +
+      '    at handle (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:435:11)\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:295:15\n' +
+      '    at processParams (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:582:12)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:291:5)'
+  }
+}
+Error fetching notifications: HttpErrorResponse {
+  headers: _HttpHeaders {
+    headers: Map(24) {
+      'access-control-allow-credentials' => [Array],
+      'access-control-allow-origin' => [Array],
+      'connection' => [Array],
+      'content-length' => [Array],
+      'content-security-policy' => [Array],
+      'content-type' => [Array],
+      'cross-origin-opener-policy' => [Array],
+      'cross-origin-resource-policy' => [Array],
+      'date' => [Array],
+      'etag' => [Array],
+      'keep-alive' => [Array],
+      'origin-agent-cluster' => [Array],
+      'referrer-policy' => [Array],
+      'strict-transport-security' => [Array],
+      'vary' => [Array],
+      'x-content-type-options' => [Array],
+      'x-dns-prefetch-control' => [Array],
+      'x-download-options' => [Array],
+      'x-frame-options' => [Array],
+      'x-permitted-cross-domain-policies' => [Array],
+      'x-ratelimit-limit' => [Array],
+      'x-ratelimit-remaining' => [Array],
+      'x-ratelimit-reset' => [Array],
+      'x-xss-protection' => [Array]
+    },
+    normalizedNames: Map(24) {
+      'access-control-allow-credentials' => 'access-control-allow-credentials',
+      'access-control-allow-origin' => 'access-control-allow-origin',
+      'connection' => 'connection',
+      'content-length' => 'content-length',
+      'content-security-policy' => 'content-security-policy',
+      'content-type' => 'content-type',
+      'cross-origin-opener-policy' => 'cross-origin-opener-policy',
+      'cross-origin-resource-policy' => 'cross-origin-resource-policy',
+      'date' => 'date',
+      'etag' => 'etag',
+      'keep-alive' => 'keep-alive',
+      'origin-agent-cluster' => 'origin-agent-cluster',
+      'referrer-policy' => 'referrer-policy',
+      'strict-transport-security' => 'strict-transport-security',
+      'vary' => 'vary',
+      'x-content-type-options' => 'x-content-type-options',
+      'x-dns-prefetch-control' => 'x-dns-prefetch-control',
+      'x-download-options' => 'x-download-options',
+      'x-frame-options' => 'x-frame-options',
+      'x-permitted-cross-domain-policies' => 'x-permitted-cross-domain-policies',
+      'x-ratelimit-limit' => 'x-ratelimit-limit',
+      'x-ratelimit-remaining' => 'x-ratelimit-remaining',
+      'x-ratelimit-reset' => 'x-ratelimit-reset',
+      'x-xss-protection' => 'x-xss-protection'
+    },
+    lazyInit: undefined,
+    lazyUpdate: null
+  },
+  status: 401,
+  statusText: 'Unauthorized',
+  url: 'http://localhost:5000/api/notifications',
+  ok: false,
+  type: undefined,
+  redirected: false,
+  responseType: 'basic',
+  name: 'HttpErrorResponse',
+  message: 'Http failure response for http://localhost:5000/api/notifications: 401 Unauthorized',
+  error: {
+    message: 'Authentication token is required',
+    stack: 'Error: Authentication token is required\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/middleware/authMiddleware.js:10:21\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/utils/asyncHandler.js:2:19\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:157:13)\n' +
+      '    at Route.dispatch (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:117:3)\n' +
+      '    at handle (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:435:11)\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:295:15\n' +
+      '    at processParams (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:582:12)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:291:5)'
+  }
+}
+Error fetching notifications: HttpErrorResponse {
+  headers: _HttpHeaders {
+    headers: Map(24) {
+      'access-control-allow-credentials' => [Array],
+      'access-control-allow-origin' => [Array],
+      'connection' => [Array],
+      'content-length' => [Array],
+      'content-security-policy' => [Array],
+      'content-type' => [Array],
+      'cross-origin-opener-policy' => [Array],
+      'cross-origin-resource-policy' => [Array],
+      'date' => [Array],
+      'etag' => [Array],
+      'keep-alive' => [Array],
+      'origin-agent-cluster' => [Array],
+      'referrer-policy' => [Array],
+      'strict-transport-security' => [Array],
+      'vary' => [Array],
+      'x-content-type-options' => [Array],
+      'x-dns-prefetch-control' => [Array],
+      'x-download-options' => [Array],
+      'x-frame-options' => [Array],
+      'x-permitted-cross-domain-policies' => [Array],
+      'x-ratelimit-limit' => [Array],
+      'x-ratelimit-remaining' => [Array],
+      'x-ratelimit-reset' => [Array],
+      'x-xss-protection' => [Array]
+    },
+    normalizedNames: Map(24) {
+      'access-control-allow-credentials' => 'access-control-allow-credentials',
+      'access-control-allow-origin' => 'access-control-allow-origin',
+      'connection' => 'connection',
+      'content-length' => 'content-length',
+      'content-security-policy' => 'content-security-policy',
+      'content-type' => 'content-type',
+      'cross-origin-opener-policy' => 'cross-origin-opener-policy',
+      'cross-origin-resource-policy' => 'cross-origin-resource-policy',
+      'date' => 'date',
+      'etag' => 'etag',
+      'keep-alive' => 'keep-alive',
+      'origin-agent-cluster' => 'origin-agent-cluster',
+      'referrer-policy' => 'referrer-policy',
+      'strict-transport-security' => 'strict-transport-security',
+      'vary' => 'vary',
+      'x-content-type-options' => 'x-content-type-options',
+      'x-dns-prefetch-control' => 'x-dns-prefetch-control',
+      'x-download-options' => 'x-download-options',
+      'x-frame-options' => 'x-frame-options',
+      'x-permitted-cross-domain-policies' => 'x-permitted-cross-domain-policies',
+      'x-ratelimit-limit' => 'x-ratelimit-limit',
+      'x-ratelimit-remaining' => 'x-ratelimit-remaining',
+      'x-ratelimit-reset' => 'x-ratelimit-reset',
+      'x-xss-protection' => 'x-xss-protection'
+    },
+    lazyInit: undefined,
+    lazyUpdate: null
+  },
+  status: 401,
+  statusText: 'Unauthorized',
+  url: 'http://localhost:5000/api/notifications',
+  ok: false,
+  type: undefined,
+  redirected: false,
+  responseType: 'basic',
+  name: 'HttpErrorResponse',
+  message: 'Http failure response for http://localhost:5000/api/notifications: 401 Unauthorized',
+  error: {
+    message: 'Authentication token is required',
+    stack: 'Error: Authentication token is required\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/middleware/authMiddleware.js:10:21\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/utils/asyncHandler.js:2:19\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:157:13)\n' +
+      '    at Route.dispatch (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:117:3)\n' +
+      '    at handle (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:435:11)\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:295:15\n' +
+      '    at processParams (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:582:12)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:291:5)'
+  }
+}
+ERROR TypeError: el.getBoundingClientRect is not a function
+    at _ToastItem.measureStackHeight (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\aa36fb67-a0b2-4ff3-b9b7-887a4f5c5b2c\node_modules\primeng\fesm2022\primeng-toast.mjs:691:23)
+    at _ToastItem.onAfterViewInit (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\aa36fb67-a0b2-4ff3-b9b7-887a4f5c5b2c\node_modules\primeng\fesm2022\primeng-toast.mjs:683:10)
+    at _ToastItem.ngAfterViewInit (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\aa36fb67-a0b2-4ff3-b9b7-887a4f5c5b2c\node_modules\primeng\fesm2022\primeng-basecomponent.mjs:287:10)
+    at callHookInternal (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\aa36fb67-a0b2-4ff3-b9b7-887a4f5c5b2c\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:251:10)
+    at callHook (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\aa36fb67-a0b2-4ff3-b9b7-887a4f5c5b2c\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:266:7)
+    at callHooks (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\aa36fb67-a0b2-4ff3-b9b7-887a4f5c5b2c\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:240:9)
+    at executeInitAndCheckHooks (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\aa36fb67-a0b2-4ff3-b9b7-887a4f5c5b2c\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:209:5)
+    at refreshView (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\aa36fb67-a0b2-4ff3-b9b7-887a4f5c5b2c\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6070:11)
+    at detectChangesInView (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\aa36fb67-a0b2-4ff3-b9b7-887a4f5c5b2c\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6153:5)
+    at detectChangesInViewIfAttached (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\aa36fb67-a0b2-4ff3-b9b7-887a4f5c5b2c\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6136:3)
+Error fetching notifications: HttpErrorResponse {
+  headers: _HttpHeaders {
+    headers: Map(24) {
+      'access-control-allow-credentials' => [Array],
+      'access-control-allow-origin' => [Array],
+      'connection' => [Array],
+      'content-length' => [Array],
+      'content-security-policy' => [Array],
+      'content-type' => [Array],
+      'cross-origin-opener-policy' => [Array],
+      'cross-origin-resource-policy' => [Array],
+      'date' => [Array],
+      'etag' => [Array],
+      'keep-alive' => [Array],
+      'origin-agent-cluster' => [Array],
+      'referrer-policy' => [Array],
+      'strict-transport-security' => [Array],
+      'vary' => [Array],
+      'x-content-type-options' => [Array],
+      'x-dns-prefetch-control' => [Array],
+      'x-download-options' => [Array],
+      'x-frame-options' => [Array],
+      'x-permitted-cross-domain-policies' => [Array],
+      'x-ratelimit-limit' => [Array],
+      'x-ratelimit-remaining' => [Array],
+      'x-ratelimit-reset' => [Array],
+      'x-xss-protection' => [Array]
+    },
+    normalizedNames: Map(24) {
+      'access-control-allow-credentials' => 'access-control-allow-credentials',
+      'access-control-allow-origin' => 'access-control-allow-origin',
+      'connection' => 'connection',
+      'content-length' => 'content-length',
+      'content-security-policy' => 'content-security-policy',
+      'content-type' => 'content-type',
+      'cross-origin-opener-policy' => 'cross-origin-opener-policy',
+      'cross-origin-resource-policy' => 'cross-origin-resource-policy',
+      'date' => 'date',
+      'etag' => 'etag',
+      'keep-alive' => 'keep-alive',
+      'origin-agent-cluster' => 'origin-agent-cluster',
+      'referrer-policy' => 'referrer-policy',
+      'strict-transport-security' => 'strict-transport-security',
+      'vary' => 'vary',
+      'x-content-type-options' => 'x-content-type-options',
+      'x-dns-prefetch-control' => 'x-dns-prefetch-control',
+      'x-download-options' => 'x-download-options',
+      'x-frame-options' => 'x-frame-options',
+      'x-permitted-cross-domain-policies' => 'x-permitted-cross-domain-policies',
+      'x-ratelimit-limit' => 'x-ratelimit-limit',
+      'x-ratelimit-remaining' => 'x-ratelimit-remaining',
+      'x-ratelimit-reset' => 'x-ratelimit-reset',
+      'x-xss-protection' => 'x-xss-protection'
+    },
+    lazyInit: undefined,
+    lazyUpdate: null
+  },
+  status: 401,
+  statusText: 'Unauthorized',
+  url: 'http://localhost:5000/api/notifications',
+  ok: false,
+  type: undefined,
+  redirected: false,
+  responseType: 'basic',
+  name: 'HttpErrorResponse',
+  message: 'Http failure response for http://localhost:5000/api/notifications: 401 Unauthorized',
+  error: {
+    message: 'Authentication token is required',
+    stack: 'Error: Authentication token is required\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/middleware/authMiddleware.js:10:21\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/utils/asyncHandler.js:2:19\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:157:13)\n' +
+      '    at Route.dispatch (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:117:3)\n' +
+      '    at handle (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:435:11)\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:295:15\n' +
+      '    at processParams (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:582:12)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:291:5)'
+  }
+}
+ERROR TypeError: el.getBoundingClientRect is not a function
+    at _ToastItem.measureStackHeight (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\057147de-d928-446e-9a51-6a6d8db82326\node_modules\primeng\fesm2022\primeng-toast.mjs:691:23)
+    at _ToastItem.onAfterViewInit (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\057147de-d928-446e-9a51-6a6d8db82326\node_modules\primeng\fesm2022\primeng-toast.mjs:683:10)
+    at _ToastItem.ngAfterViewInit (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\057147de-d928-446e-9a51-6a6d8db82326\node_modules\primeng\fesm2022\primeng-basecomponent.mjs:287:10)
+    at callHookInternal (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\057147de-d928-446e-9a51-6a6d8db82326\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:251:10)
+    at callHook (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\057147de-d928-446e-9a51-6a6d8db82326\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:266:7)
+    at callHooks (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\057147de-d928-446e-9a51-6a6d8db82326\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:240:9)
+    at executeInitAndCheckHooks (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\057147de-d928-446e-9a51-6a6d8db82326\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:209:5)
+    at refreshView (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\057147de-d928-446e-9a51-6a6d8db82326\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6070:11)
+    at detectChangesInView (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\057147de-d928-446e-9a51-6a6d8db82326\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6153:5)
+    at detectChangesInViewIfAttached (D:\projects\lookak-app\lookak-frontend\lookak\.angular\prerender-root\057147de-d928-446e-9a51-6a6d8db82326\node_modules\@angular\core\fesm2022\_debug_node-chunk.mjs:6136:3)
+Error fetching notifications: HttpErrorResponse {
+  headers: _HttpHeaders {
+    headers: Map(24) {
+      'access-control-allow-credentials' => [Array],
+      'access-control-allow-origin' => [Array],
+      'connection' => [Array],
+      'content-length' => [Array],
+      'content-security-policy' => [Array],
+      'content-type' => [Array],
+      'cross-origin-opener-policy' => [Array],
+      'cross-origin-resource-policy' => [Array],
+      'date' => [Array],
+      'etag' => [Array],
+      'keep-alive' => [Array],
+      'origin-agent-cluster' => [Array],
+      'referrer-policy' => [Array],
+      'strict-transport-security' => [Array],
+      'vary' => [Array],
+      'x-content-type-options' => [Array],
+      'x-dns-prefetch-control' => [Array],
+      'x-download-options' => [Array],
+      'x-frame-options' => [Array],
+      'x-permitted-cross-domain-policies' => [Array],
+      'x-ratelimit-limit' => [Array],
+      'x-ratelimit-remaining' => [Array],
+      'x-ratelimit-reset' => [Array],
+      'x-xss-protection' => [Array]
+    },
+    normalizedNames: Map(24) {
+      'access-control-allow-credentials' => 'access-control-allow-credentials',
+      'access-control-allow-origin' => 'access-control-allow-origin',
+      'connection' => 'connection',
+      'content-length' => 'content-length',
+      'content-security-policy' => 'content-security-policy',
+      'content-type' => 'content-type',
+      'cross-origin-opener-policy' => 'cross-origin-opener-policy',
+      'cross-origin-resource-policy' => 'cross-origin-resource-policy',
+      'date' => 'date',
+      'etag' => 'etag',
+      'keep-alive' => 'keep-alive',
+      'origin-agent-cluster' => 'origin-agent-cluster',
+      'referrer-policy' => 'referrer-policy',
+      'strict-transport-security' => 'strict-transport-security',
+      'vary' => 'vary',
+      'x-content-type-options' => 'x-content-type-options',
+      'x-dns-prefetch-control' => 'x-dns-prefetch-control',
+      'x-download-options' => 'x-download-options',
+      'x-frame-options' => 'x-frame-options',
+      'x-permitted-cross-domain-policies' => 'x-permitted-cross-domain-policies',
+      'x-ratelimit-limit' => 'x-ratelimit-limit',
+      'x-ratelimit-remaining' => 'x-ratelimit-remaining',
+      'x-ratelimit-reset' => 'x-ratelimit-reset',
+      'x-xss-protection' => 'x-xss-protection'
+    },
+    lazyInit: undefined,
+    lazyUpdate: null
+  },
+  status: 401,
+  statusText: 'Unauthorized',
+  url: 'http://localhost:5000/api/notifications',
+  ok: false,
+  type: undefined,
+  redirected: false,
+  responseType: 'basic',
+  name: 'HttpErrorResponse',
+  message: 'Http failure response for http://localhost:5000/api/notifications: 401 Unauthorized',
+  error: {
+    message: 'Authentication token is required',
+    stack: 'Error: Authentication token is required\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/middleware/authMiddleware.js:10:21\n' +
+      '    at file:///D:/projects/lookak-app/lookak-backend/src/utils/asyncHandler.js:2:19\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:157:13)\n' +
+      '    at Route.dispatch (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\route.js:117:3)\n' +
+      '    at handle (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:435:11)\n' +
+      '    at Layer.handleRequest (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\lib\\layer.js:152:17)\n' +
+      '    at D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:295:15\n' +
+      '    at processParams (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:582:12)\n' +
+      '    at next (D:\\projects\\lookak-app\\lookak-backend\\node_modules\\router\\index.js:291:5)'
+  }
+}
+[1m[33m[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: ErrorAlertComponent is not used within the template of ClientDashboardComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:37:55:
+[37m      37 │ ... [CommonModule, RouterLink, LoaderComponent, [32mErrorAlertComponent[37m],
+         ╵                                                 [32m~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: Toast is not used within the template of ProviderProfileComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/core/features/roles/provider/profile/provider-profile.component.ts:71:50:
+[37m      71 │   imports: [ReactiveFormsModule, LoaderComponent, [32mToast[37m, NgClass],
+         ╵                                                   [32m~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: RouterLink is not used within the template of NotificationDropdownComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/notification-dropdown/notification-dropdown.component.ts:22:26:
+[37m      22 │   imports: [CommonModule, [32mRouterLink[37m],
+         ╵                           [32m~~~~~~~~~~[0m
+
+[39m[22m

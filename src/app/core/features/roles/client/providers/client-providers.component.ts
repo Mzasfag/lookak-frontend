@@ -9,6 +9,7 @@ import { ProvidersService } from '../../../../services/providers.service';
 import { IPublicProvider, IWorkingHoursEntry } from '../../../../models/provider.model';
 import { LoaderComponent } from '../../../../../shared/components/loader/loader.component';
 import { ErrorAlertComponent } from '../../../../../shared/components/error-alert/error-alert.component';
+import { formatTimeTo12Hour } from '../../../../utils/time-format.util';
 
 export interface ProviderCategoryFilter {
   id: string;
@@ -105,10 +106,20 @@ export class ClientProvidersComponent implements OnInit {
         const name = (p.salonName || p.name || '').toLowerCase();
 
         if (category === 'barber') {
-          return cat.includes('barber') || bio.includes('رجالي') || bio.includes('حلاقة') || name.includes('رجالي');
+          return (
+            cat.includes('barber') ||
+            bio.includes('رجالي') ||
+            bio.includes('حلاقة') ||
+            name.includes('رجالي')
+          );
         }
         if (category === 'beauty') {
-          return cat.includes('beauty') || bio.includes('نسائي') || bio.includes('تجميل') || name.includes('تجميل');
+          return (
+            cat.includes('beauty') ||
+            bio.includes('نسائي') ||
+            bio.includes('تجميل') ||
+            name.includes('تجميل')
+          );
         }
         if (category === 'spa') {
           return cat.includes('spa') || bio.includes('سبا') || bio.includes('مساج');
@@ -180,7 +191,7 @@ export class ClientProvidersComponent implements OnInit {
     if (todaySchedule && todaySchedule.isOpen) {
       const timeText =
         todaySchedule.startTime && todaySchedule.endTime
-          ? `${todaySchedule.startTime} - ${todaySchedule.endTime}`
+          ? `${formatTimeTo12Hour(todaySchedule.startTime)} - ${formatTimeTo12Hour(todaySchedule.endTime)}`
           : 'مفتوح اليوم';
       return { isOpen: true, text: timeText };
     }

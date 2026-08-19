@@ -17,6 +17,9 @@ export class BookingsService {
   private baseUrl = `${environment.baseUrl}/bookings`;
 
   getAvailableSlots(providerId: string, serviceId: string, date: string): Observable<any> {
+    console.log('[DEBUG] BookingsService.getAvailableSlots called with:', { providerId, serviceId, date });
+    console.log('[DEBUG] Request URL:', `${this.baseUrl}/available-slots`);
+    console.log('[DEBUG] Request params:', { providerId, serviceId, date });
     return this.http.get<any>(`${this.baseUrl}/available-slots`, {
       params: { providerId, serviceId, date },
     });

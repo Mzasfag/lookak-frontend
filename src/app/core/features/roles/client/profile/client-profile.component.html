@@ -1,0 +1,552 @@
+<!-- =====================================================================
+  Client Profile — RTL Arabic (Lookak).
+  Tabs: personal info (editable) • bookings • security/password.
+  Tokens: brand-gold, primary, surface-container, outline-variant, tertiary, error.
+  RTL is the document default; use ps-/pe-/start-/end- logical utilities.
+===================================================================== -->
+<section class="px-4 py-6 sm:px-6 lg:px-8">
+  <!-- ===================== Page header ===================== -->
+  <header class="animate-profile-fade-up mb-8 flex flex-wrap items-center justify-between gap-4">
+    <div>
+      <h1
+        class="flex items-center gap-3 text-2xl font-extrabold tracking-tight text-on-surface sm:text-3xl"
+      >
+        <span
+          class="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-gold/15 text-brand-gold ring-1 ring-brand-gold/20"
+        >
+          <i class="pi pi-user"></i>
+        </span>
+        الملف الشخصي
+      </h1>
+      <p class="mt-2 text-sm text-on-surface-variant">
+        أهلاً {{ profile()?.name || 'عميلنا العزيز' }}، اطّلع على بياناتك وأحدث حجوزاتك بأمان.
+      </p>
+    </div>
+
+    <button
+      type="button"
+      (click)="loadData()"
+      [disabled]="isLoading()"
+      class="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-outline-variant bg-surface-container-lowest px-4 py-2.5 text-sm font-bold text-primary transition duration-200 hover:border-brand-gold hover:bg-brand-gold/5 disabled:cursor-not-allowed disabled:opacity-50"
+    >
+      <i [class]="isLoading() ? 'pi pi-spin pi-spinner' : 'pi pi-refresh'"></i>
+      تحديث البيانات
+    </button>
+  </header>
+
+  <!-- ===================== Loading state ===================== -->
+  @if (isLoading()) {
+    <app-loader [fullScreen]="false" label="جارٍ تحميل بيانات الملف الشخصي…" />
+  }
+
+  <!-- ===================== Error state ===================== -->
+  @else if (hasError()) {
+    <div
+      class="animate-profile-fade-up flex flex-col items-center gap-5 rounded-xl bg-surface-container-lowest px-6 py-14 text-center shadow-lg shadow-primary/5 ring-1 ring-outline-variant/20"
+    >
+      <div
+        class="flex h-14 w-14 items-center justify-center rounded-full bg-error/10 ring-1 ring-error/20"
+      >
+        <i class="pi pi-exclamation-triangle text-2xl text-error"></i>
+      </div>
+      <div class="space-y-1.5">
+        <h2 class="text-lg font-extrabold text-on-surface">تعذر تحميل البيانات</h2>
+        <p class="text-sm text-on-surface-variant">
+          {{ errorMessage() || 'حدث خطأ أثناء جلب بيانات الملف الشخصي. يرجى المحاولة مرة أخرى.' }}
+        </p>
+      </div>
+      <button
+        type="button"
+        (click)="loadData()"
+        class="inline-flex cursor-pointer items-center gap-2 rounded-lg bg-gradient-to-l from-brand-gold to-primary px-6 py-3 text-sm font-extrabold text-white shadow-lg shadow-primary/25 transition duration-200 hover:shadow-xl hover:shadow-primary/30 active:scale-[0.98]"
+      >
+        <i class="pi pi-refresh"></i>
+        إعادة المحاولة
+      </button>
+    </div>
+  }
+
+  <!-- ===================== Loaded content ===================== -->
+  @else {
+    <div class="animate-profile-fade-up space-y-8">
+      <!-- ---------- Cover header ---------- -->
+      <section
+        class="relative overflow-hidden rounded-2xl bg-gradient-to-l from-primary via-primary-container to-brand-gold p-6 text-white shadow-md ring-1 ring-outline-variant/20 sm:p-8"
+      >
+        <div
+          class="relative z-10 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between"
+        >
+          <div class="flex items-center gap-4">
+            <div
+              class="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl border-4 border-white/30 bg-white/15 text-3xl font-black text-white shadow-lg backdrop-blur-sm"
+            >
+              {{ userInitials() }}
+            </div>
+            <div class="space-y-1.5">
+              <h2 class="text-2xl font-extrabold sm:text-3xl">
+                {{ profile()?.name || 'عميلنا العزيز' }}
+              </h2>
+              <div class="flex flex-wrap items-center gap-2 text-xs font-bold">
+                @if (isVerified()) {
+                  <span
+                    class="inline-flex items-center gap-1 rounded-full bg-emerald-400/20 px-2.5 py-1 ring-1 ring-emerald-300/40"
+                  >
+                    <i class="pi pi-verified text-emerald-200"></i>
+                    حساب مُفعّل
+                  </span>
+                }
+                <!-- <span
+                  class="inline-flex items-center gap-1 rounded-full bg-white/15 px-2.5 py-1 backdrop-blur-sm"
+                >
+                  <i class="pi pi-calendar-plus text-brand-gold"></i>
+                  عضو منذ {{ registrationDate() }}
+                </span> -->
+              </div>
+            </div>
+          </div>
+
+          @if (profile()?.isBookingRestricted) {
+            <div
+              class="inline-flex items-center gap-2 rounded-lg bg-error/15 px-3.5 py-2 text-xs font-bold text-error ring-1 ring-error/20"
+            >
+              <i class="pi pi-exclamation-triangle text-brand-gold"></i>
+              حسابك مقيد من الحجز حالياً
+            </div>
+          }
+        </div>
+      </section>
+
+      <!-- ---------- Stats chips ---------- -->
+      <section class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+        @for (stat of stats(); track stat.label) {
+          <div
+            class="flex items-center gap-4 rounded-2xl bg-surface-container-lowest p-5 shadow-sm ring-1 ring-outline-variant/20 transition duration-200 hover:-translate-y-0.5 hover:shadow-md hover:ring-primary/30"
+          >
+            <span
+              class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl {{
+                stat.iconClasses
+              }} shadow-sm {{ stat.glowClasses }}"
+            >
+              <i class="pi {{ stat.icon }} text-xl"></i>
+            </span>
+            <div class="min-w-0">
+              <p class="truncate text-xs font-extrabold text-on-surface-variant">
+                {{ stat.label }}
+              </p>
+              <p class="text-2xl font-black text-on-surface">{{ stat.value }}</p>
+            </div>
+          </div>
+        }
+      </section>
+
+      <!-- ---------- Tab bar (RTL, gold indicator) ---------- -->
+      <nav
+        class="animate-tab-indicator sticky top-2 z-20 flex md:flex-row flex-col flex-wrap gap-1 rounded-2xl border border-outline-variant/30 bg-surface-container-lowest p-1.5 shadow-sm"
+        role="tablist"
+        aria-label="أقسام الملف الشخصي"
+      >
+        @for (tab of tabs; track tab.id) {
+          <button
+            type="button"
+            role="tab"
+            [attr.aria-selected]="activeTab() === tab.id"
+            [class]="
+              activeTab() === tab.id
+                ? 'bg-gradient-to-l from-brand-gold to-primary text-white shadow-md shadow-primary/25'
+                : 'text-on-surface-variant hover:bg-surface-container hover:text-primary'
+            "
+            (click)="setTab(tab.id)"
+            class="inline-flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl px-3 py-2.5 text-sm font-extrabold transition duration-200 active:scale-[0.98]"
+          >
+            <i class="pi {{ tab.icon }}"></i>
+            {{ tab.label }}
+          </button>
+        }
+      </nav>
+
+      <!-- ---------- Tab panels ---------- -->
+      <div class="animate-profile-fade-up">
+        <!-- ========== Tab 1: Personal info ========== -->
+        @if (activeTab() === 'personal') {
+          <section
+            class="rounded-2xl border border-outline-variant/20 bg-surface-container-lowest p-5 shadow-lg transition-all duration-300 hover:shadow-xl sm:p-6"
+          >
+            <div class="mb-5 flex flex-wrap items-center justify-between gap-3">
+              <h2 class="flex items-center gap-2 text-lg font-extrabold text-on-surface">
+                <i class="pi pi-id-card text-brand-gold"></i>
+                بياناتي الشخصية
+              </h2>
+              @if (!isEditing()) {
+                <button
+                  type="button"
+                  (click)="startEdit()"
+                  class="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-outline-variant bg-surface-container-lowest px-4 py-2.5 text-sm font-bold text-primary transition duration-200 hover:border-brand-gold hover:bg-brand-gold/5"
+                >
+                  <i class="pi pi-pencil text-brand-gold"></i>
+                  تعديل البيانات
+                </button>
+              }
+            </div>
+
+            <form [formGroup]="profileForm" (ngSubmit)="saveProfile()" class="space-y-5">
+              <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+                <!-- Name -->
+                <div>
+                  <label for="name" class="mb-1.5 block text-sm font-bold text-on-surface"
+                    >الاسم الكامل</label
+                  >
+                  <div class="relative">
+                    <i
+                      class="pi pi-user absolute end-3 top-1/2 -translate-y-1/2 text-on-surface-variant/60"
+                    ></i>
+                    <input
+                      id="name"
+                      type="text"
+                      formControlName="name"
+                      [readonly]="!isEditing()"
+                      [class]="
+                        fieldInvalid('name')
+                          ? 'border-error focus:border-error focus:ring-error/25'
+                          : 'border-outline-variant focus:border-brand-gold focus:ring-brand-gold/25'
+                      "
+                      class="w-full rounded-lg border bg-surface-container py-2.5 pe-10 ps-4 text-sm font-bold text-on-surface transition placeholder:text-on-surface-variant/40 focus:outline-none focus:ring-2 disabled:bg-surface-container-lowest disabled:text-on-surface-variant"
+                      placeholder="الاسم الكامل"
+                    />
+                  </div>
+                </div>
+
+                <!-- Phone -->
+                <div>
+                  <label for="phone" class="mb-1.5 block text-sm font-bold text-on-surface"
+                    >رقم الجوال</label
+                  >
+                  <div class="relative">
+                    <i
+                      class="pi pi-phone absolute end-3 top-1/2 -translate-y-1/2 text-on-surface-variant/60"
+                    ></i>
+                    <input
+                      id="phone"
+                      type="tel"
+                      formControlName="phone"
+                      [readonly]="!isEditing()"
+                      [class]="
+                        fieldInvalid('phone')
+                          ? 'border-error focus:border-error focus:ring-error/25'
+                          : 'border-outline-variant focus:border-brand-gold focus:ring-brand-gold/25'
+                      "
+                      class="w-full rounded-lg border bg-surface-container py-2.5 pe-10 ps-4 text-sm font-bold text-on-surface transition placeholder:text-on-surface-variant/40 focus:outline-none focus:ring-2 disabled:bg-surface-container-lowest disabled:text-on-surface-variant"
+                      placeholder="+9665xxxxxxxx"
+                    />
+                  </div>
+                </div>
+
+                <!-- Email -->
+                <div>
+                  <label for="email" class="mb-1.5 block text-sm font-bold text-on-surface"
+                    >البريد الإلكتروني</label
+                  >
+                  <div class="relative">
+                    <i
+                      class="pi pi-envelope absolute end-3 top-1/2 -translate-y-1/2 text-on-surface-variant/60"
+                    ></i>
+                    <input
+                      id="email"
+                      type="email"
+                      formControlName="email"
+                      [readonly]="!isEditing()"
+                      [class]="
+                        fieldInvalid('email')
+                          ? 'border-error focus:border-error focus:ring-error/25'
+                          : 'border-outline-variant focus:border-brand-gold focus:ring-brand-gold/25'
+                      "
+                      class="w-full rounded-lg border bg-surface-container py-2.5 pe-10 ps-4 text-sm font-bold text-on-surface transition placeholder:text-on-surface-variant/40 focus:outline-none focus:ring-2 disabled:bg-surface-container-lowest disabled:text-on-surface-variant"
+                      placeholder="name@email.com"
+                    />
+                  </div>
+                </div>
+
+  
+              
+              </div>
+
+              @if (isEditing()) {
+                <div
+                  class="flex flex-wrap items-center justify-end gap-3 border-t border-outline-variant/20 pt-4"
+                >
+                  <button
+                    type="button"
+                    (click)="cancelEdit()"
+                    [disabled]="isSaving()"
+                    class="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-outline-variant bg-surface-container-lowest px-5 py-2.5 text-sm font-bold text-on-surface-variant transition duration-200 hover:bg-surface-container disabled:opacity-50"
+                  >
+                    <i class="pi pi-times"></i>
+                    إلغاء
+                  </button>
+                  <button
+                    type="submit"
+                    [disabled]="isSaving()"
+                    class="inline-flex cursor-pointer items-center gap-2 rounded-lg bg-gradient-to-l from-brand-gold to-primary px-5 py-2.5 text-sm font-extrabold text-white shadow-md shadow-primary/25 transition duration-200 hover:shadow-lg hover:brightness-105 active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-60"
+                  >
+                    @if (isSaving()) {
+                      <i class="pi pi-spin pi-spinner"></i>
+                      جارٍ الحفظ…
+                    } @else {
+                      <i class="pi pi-check"></i>
+                      حفظ التغييرات
+                    }
+                  </button>
+                </div>
+              }
+            </form>
+          </section>
+        }
+
+        <!-- ========== Tab 2: Bookings ========== -->
+        @if (activeTab() === 'bookings') {
+          <section
+            class="rounded-2xl border border-outline-variant/20 bg-surface-container-lowest p-5 shadow-lg transition-all duration-300 hover:shadow-xl sm:p-6"
+          >
+            <div class="mb-5 flex flex-wrap items-center justify-between gap-3">
+              <h2 class="flex items-center gap-2 text-lg font-extrabold text-on-surface">
+                <i class="pi pi-calendar-clock text-brand-gold"></i>
+                أحدث حجوزاتي
+              </h2>
+              <a
+                routerLink="/client/bookings"
+                class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-outline-variant px-3 py-2 text-xs font-bold text-primary transition duration-200 hover:border-brand-gold hover:bg-brand-gold/5"
+              >
+                عرض الكل
+                <i class="pi pi-arrow-left"></i>
+              </a>
+            </div>
+
+            @if (sortedBookings().length === 0) {
+              <div
+                class="flex flex-col items-center gap-3 rounded-xl bg-surface-container px-6 py-12 text-center"
+              >
+                <span
+                  class="flex h-16 w-16 items-center justify-center rounded-full bg-surface-container-lowest text-on-surface-variant ring-1 ring-outline-variant/30"
+                >
+                  <i class="pi pi-calendar-times text-2xl"></i>
+                </span>
+                <p class="text-sm font-bold text-on-surface-variant">لا توجد حجوزات حتى الآن</p>
+                <a
+                  routerLink="/client/providers"
+                  class="mt-1 inline-flex cursor-pointer items-center gap-2 rounded-lg bg-gradient-to-l from-brand-gold to-primary px-5 py-2.5 text-sm font-extrabold text-white shadow-md shadow-primary/25 transition duration-200 hover:brightness-105 active:scale-[0.97]"
+                >
+                  <i class="pi pi-search"></i>
+                  تصفّح الصالونات والخدمات
+                </a>
+              </div>
+            } @else {
+              <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+                @for (booking of sortedBookings(); track booking._id) {
+                  <article
+                    class="group flex flex-col gap-3 rounded-xl border border-outline-variant/30 bg-surface-container p-4 transition duration-200 hover:-translate-y-0.5 hover:border-brand-gold/50 hover:shadow-md"
+                  >
+                    <div class="flex items-start justify-between gap-3">
+                      <div class="min-w-0">
+                        <p class="truncate text-sm font-extrabold text-on-surface">
+                          {{ booking.serviceId?.name || 'خدمة' }}
+                        </p>
+                        <p class="mt-0.5 truncate text-xs font-bold text-on-surface-variant">
+                          {{ booking.providerId?.salonName || booking.providerId?.name || 'صالون' }}
+                        </p>
+                      </div>
+                      <span
+                        class="shrink-0 rounded-full px-2.5 py-1 text-xs font-extrabold {{
+                          statusBadgeClass(booking.status)
+                        }}"
+                      >
+                        {{ statusLabel(booking.status) }}
+                      </span>
+                    </div>
+
+                    <div
+                      class="grid grid-cols-2 gap-3 border-t border-outline-variant/20 pt-3 text-xs font-bold text-on-surface-variant"
+                    >
+                      <div class="flex items-center gap-2">
+                        <i class="pi pi-calendar text-brand-gold"></i>
+                        {{ formatDate(booking.date) }}
+                      </div>
+                      <div class="flex items-center gap-2">
+                        <i class="pi pi-clock text-brand-gold"></i>
+                        {{ booking.timeSlot }}
+                      </div>
+                      <div class="flex items-center gap-2">
+                        <i class="pi pi-money-bill text-brand-gold"></i>
+                        {{ formatAmount(booking.totalPrice) }}
+                      </div>
+                      
+                    </div>
+                  </article>
+                }
+              </div>
+            }
+          </section>
+        }
+
+        <!-- ========== Tab 3: Security ========== -->
+        @if (activeTab() === 'security') {
+          <section
+            class="rounded-2xl border border-outline-variant/20 bg-surface-container-lowest p-5 shadow-lg transition-all duration-300 hover:shadow-xl sm:p-6"
+          >
+            <div class="mb-5 flex items-center gap-2">
+              <h2 class="flex items-center gap-2 text-lg font-extrabold text-on-surface">
+                <i class="pi pi-shield text-brand-gold"></i>
+                الأمان وتغيير كلمة المرور
+              </h2>
+            </div>
+
+            @if (formMode() == 'reset') {
+              <form [formGroup]="resetForm" (submit)="resetPassword()" class="space-y-5">
+                <!-- New password -->
+                <div>
+                  <label for="password" class="mb-1.5 block text-sm font-bold text-on-surface"
+                    >كلمة المرور الجديدة</label
+                  >
+                  <div class="relative">
+                    <i
+                      class="pi pi-lock absolute end-3 top-1/2 -translate-y-1/2 text-on-surface-variant/60"
+                    ></i>
+                    <input
+                      id="password"
+                      type="password"
+                      formControlName="password"
+                      [class]="
+                        passwordController?.errors && passwordController?.touched
+                          ? 'border-error focus:border-error focus:ring-error/25'
+                          : 'border-outline-variant focus:border-brand-gold focus:ring-brand-gold/25'
+                      "
+                      class="w-full rounded-lg border bg-surface-container py-2.5 pe-10 ps-4 text-sm font-bold text-on-surface transition placeholder:text-on-surface-variant/40 focus:outline-none focus:ring-2"
+                      placeholder="6 أحرف على الأقل"
+                    />
+                  </div>
+                  @if (passwordController?.errors && passwordController?.touched) {
+                    <p class="mt-1 text-xs font-bold text-error">
+                      كلمة المرور الجديدة (6 أحرف على الأقل)
+                    </p>
+                  }
+                </div>
+
+                <!-- Confirm password -->
+                <div>
+                  <label
+                    for="confirmPassword"
+                    class="mb-1.5 block text-sm font-bold text-on-surface"
+                    >تأكيد كلمة المرور الجديدة</label
+                  >
+                  <div class="relative">
+                    <i
+                      class="pi pi-lock absolute end-3 top-1/2 -translate-y-1/2 text-on-surface-variant/60"
+                    ></i>
+                    <input
+                      id="confirmPassword"
+                      type="password"
+                      formControlName="confirmPassword"
+                      [class]="
+                        (confirmPasswordController?.errors && confirmPasswordController.touched) ||
+                        (resetForm?.errors?.['mismatch'] && confirmPasswordController?.touched)
+                          ? 'border-error focus:border-error focus:ring-error/25'
+                          : 'border-outline-variant focus:border-brand-gold focus:ring-brand-gold/25'
+                      "
+                      class="w-full rounded-lg border bg-surface-container py-2.5 pe-10 ps-4 text-sm font-bold text-on-surface transition placeholder:text-on-surface-variant/40 focus:outline-none focus:ring-2"
+                      placeholder="أعد إدخال كلمة المرور"
+                    />
+                  </div>
+
+                  @if (confirmPasswordController?.errors && confirmPasswordController?.touched) {
+                    @if (confirmPasswordController?.getError('required')) {
+                      <p class="mt-1 text-xs font-bold text-error">تأكيد كلمة المرور مطلوب</p>
+                    }
+                  }
+                  @if (resetForm.errors?.['mismatch'] && confirmPasswordController?.touched) {
+                    <p class="mt-1 text-xs font-bold text-error">كلمتا المرور غير متطابقتين</p>
+                  }
+                </div>
+
+                <div
+                  class="flex flex-wrap items-center justify-end gap-3 border-t border-outline-variant/20 pt-4"
+                >
+                  <div class="flex gap-2">
+                    <button
+                      type="button"
+                      (click)="cancelResetPassword()"
+                      class="inline-flex cursor-pointer bg-red-500 hover:bg-red-600 text-white items-center gap-2 rounded-lg border border-outline-variant  px-5 py-2.5 text-sm font-bold  transition duration-200  disabled:opacity-50"
+                    >
+                      <i class="pi pi-times"></i>
+                      إلغاء
+                    </button>
+                    <button
+                      type="submit"
+                      [disabled]="isChangingPassword()"
+                      class="inline-flex cursor-pointer items-center gap-2 rounded-lg bg-gradient-to-l from-brand-gold to-primary px-6 py-2.5 text-sm font-extrabold text-white shadow-md shadow-primary/25 transition duration-200 hover:shadow-lg hover:brightness-105 active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-60"
+                    >
+                      @if (isChangingPassword()) {
+                        <i class="pi pi-spin pi-spinner"></i>
+                        جارٍ التحديث…
+                      } @else {
+                        <i class="pi pi-shield"></i>
+                        تغيير كلمة المرور
+                      }
+                    </button>
+                  </div>
+                </div>
+              </form>
+            } @else {
+              <form [formGroup]="forgetPasswordForm" (submit)="forgetPassword()" class="space-y-5">
+                <!-- Current password -->
+                <div>
+                  <label for="identifier" class="mb-1.5 block text-sm font-bold text-on-surface"
+                    >البريد الإلكتروني أو رقم الهاتف</label
+                  >
+                  <div class="relative">
+                    <i
+                      class="pi pi-mail absolute end-3 top-1/2 -translate-y-1/2 text-on-surface-variant/60"
+                    ></i>
+                    <input
+                      id="identifier"
+                      type="text"
+                      formControlName="identifier"
+                      readonly
+                      [class]="
+                        identifierController?.errors && identifierController?.touched
+                          ? 'border-error focus:border-error focus:ring-error/25'
+                          : 'border-outline-variant focus:border-brand-gold focus:ring-brand-gold/25'
+                      "
+                      class="w-full rounded-lg border bg-surface-container py-2.5 pe-10 ps-4 text-sm font-bold text-on-surface transition placeholder:text-on-surface-variant/40 focus:outline-none focus:ring-2"
+                      placeholder="example@email.com أو +20xxxxxxxxx"
+                    />
+                  </div>
+                  @if (identifierController?.errors && identifierController?.touched) {
+                    <p class="mt-1 text-xs font-bold text-error">
+                      يرجى إدخال البريد الإلكتروني أو رقم الهاتف
+                    </p>
+                  }
+                </div>
+
+                <div
+                  class="flex flex-wrap items-center justify-end gap-3 border-t border-outline-variant/20 pt-4"
+                >
+                  <button
+                    type="submit"
+                    [disabled]="isForgetPassword()"
+                    class="inline-flex cursor-pointer items-center gap-2 rounded-lg bg-gradient-to-l from-brand-gold to-primary px-6 py-2.5 text-sm font-extrabold text-white shadow-md shadow-primary/25 transition duration-200 hover:shadow-lg hover:brightness-105 active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-60"
+                  >
+                    @if (isForgetPassword()) {
+                      <i class="pi pi-spin pi-spinner"></i>
+                      جارٍ التحديث…
+                    } @else {
+                      تخطي
+                      <i class="pi pi-chevron-left"></i>
+                    }
+                  </button>
+                </div>
+              </form>
+            }
+          </section>
+        }
+      </div>
+    </div>
+  }
+</section>

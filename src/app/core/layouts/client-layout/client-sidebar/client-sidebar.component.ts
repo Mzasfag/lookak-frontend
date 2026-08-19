@@ -1,9 +1,20 @@
-import { Component, computed, inject, input, output } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  input,
+  OnInit,
+  output,
+  PLATFORM_ID,
+  signal,
+} from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 
 import { AUTH_TOKEN_COOKIE, AUTH_USER_COOKIE } from '../../../constants/auth.constants';
 import { AuthService } from '../../../services/auth.service';
+import { IUser } from '../../../models/user.model';
+import { isPlatformBrowser } from '@angular/common';
 
 export interface ClientNavLink {
   route: string;
@@ -18,21 +29,33 @@ export interface ClientNavLink {
   templateUrl: './client-sidebar.component.html',
   styleUrl: './client-sidebar.component.css',
 })
-export class ClientSidebarComponent {
+export class ClientSidebarComponent implements OnInit {
   private readonly authService = inject(AuthService);
   private readonly cookieService = inject(CookieService);
   private readonly router = inject(Router);
+  private platformId = inject(PLATFORM_ID);
 
   readonly isOpen = input(false);
   readonly closed = output<void>();
 
-  readonly user = computed(() => this.authService.userData());
+  readonly user = signal<IUser | null>(null);
 
   readonly userName = computed(() => this.user()?.name?.trim() || 'العميل');
 
   readonly userPhoneOrEmail = computed(
     () => this.user()?.phone?.trim() || this.user()?.email?.trim() || 'حساب عميل',
   );
+
+  ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      const hasToken = this.cookieService.check(AUTH_TOKEN_COOKIE);
+      if (hasToken) {
+        const userData: IUser | null =
+          JSON.parse(this.cookieService.get(AUTH_USER_COOKIE)) || this.authService.userData();
+        this.user.set(userData);
+      }
+    }
+  }
 
   readonly navLinks: ClientNavLink[] = [
     { route: '/client/dashboard', label: 'لوحة التحكم', icon: 'pi-home', exact: true },

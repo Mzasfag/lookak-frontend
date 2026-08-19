@@ -33,7 +33,7 @@
 
         <div class="min-w-0">
           <p class="truncate text-xs font-bold text-on-surface-variant">مرحباً بك 👋</p>
-          <p class="truncate text-base font-extrabold text-on-surface">{{ displayName() }}</p>
+          <p class="truncate text-base font-extrabold text-on-surface">{{ displayName()?.name }}</p>
         </div>
       </div>
 
@@ -47,7 +47,7 @@
           class="hidden sm:flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-brand-gold to-primary text-xs font-extrabold text-white shadow-sm ring-2 ring-brand-gold/20"
           title="حسابك المسجل"
         >
-          {{ userInitial() }}
+          {{ displayName()?.name![0]?.toUpperCase() }}
         </div>
       </div>
     </header>
@@ -58,4 +58,3 @@
     </main>
   </div>
 </div>
-

@@ -1,0 +1,89 @@
+/* Notification Dropdown Styles */
+:host {
+  display: inline-block;
+}
+
+/* Custom scrollbar for dropdown */
+.max-h-\[400px\]::-webkit-scrollbar {
+  width: 6px;
+}
+
+.max-h-\[400px\]::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.max-h-\[400px\]::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 3px;
+}
+
+.max-h-\[400px\]::-webkit-scrollbar-thumb:hover {
+  background-color: hsl(var(--muted-foreground) / 0.5);
+}
+
+/* Animation keyframes */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes zoom-in {
+  from {
+    transform: scale(0.95);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.animate-in {
+  animation-duration: 200ms;
+  animation-timing-function: ease-out;
+  animation-fill-mode: both;
+}
+
+.fade-in-0 {
+  animation-name: fade-in;
+}
+
+.zoom-in-95 {
+  animation-name: zoom-in;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .animate-in {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  .animate-pulse {
+    animation: none !important;
+  }
+}
+
+/* Focus visible styles */
+button:focus-visible {
+  outline: 2px solid var(--color-brand-gold);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .bg-surface-container {
+    border-width: 2px;
+  }
+
+  .text-on-surface-variant {
+    color: inherit;
+  }
+}
+
+
+.notification-dropdown {
+z-index: 99999999999999999999999 !important;
+}

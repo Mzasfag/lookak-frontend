@@ -1,19 +1,14 @@
 import { Component, computed, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { CommonModule } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { finalize } from 'rxjs';
 
 import { BookingsService } from './../../../../../core/services/bookings.service';
 import { NotifyService } from './../../../../../core/services/notify.service';
-import { LoaderComponent } from './../../../../../shared/components/loader/loader.component';
-import { ErrorAlertComponent } from './../../../../../shared/components/error-alert/error-alert.component';
+import { formatTimeTo12Hour } from './../../../../../core/utils/time-format.util';
 
 import { BookingStatus } from './../../../../../core/models/admin.model';
-import {
-  IClientBooking,
-  IClientBookingsResponse,
-} from './../../../../../core/models/client.model';
+import { IClientBooking, IClientBookingsResponse } from './../../../../../core/models/client.model';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -39,7 +34,7 @@ export interface ClientBookingsStatChip {
 
 @Component({
   selector: 'app-client-bookings',
-  imports: [CommonModule, RouterLink, LoaderComponent, ErrorAlertComponent],
+  imports: [RouterLink],
   templateUrl: './client-bookings.component.html',
   styleUrl: './client-bookings.component.css',
 })
@@ -65,7 +60,10 @@ export class ClientBookingsComponent implements OnInit {
   // Cancel confirmation modal
   readonly bookingToCancel = signal<IClientBooking | null>(null);
   readonly isCancelling = signal(false);
-readonly statusFilterOptions: ClientBookingStatusOption[] = [
+
+  // Booking details modal
+  readonly detailBooking = signal<IClientBooking | null>(null);
+  readonly statusFilterOptions: ClientBookingStatusOption[] = [
     { value: 'all', label: 'كل الحالات' },
     { value: 'pending', label: 'قيد الانتظار' },
     { value: 'confirmed', label: 'مؤكد' },
@@ -101,19 +99,23 @@ readonly statusFilterOptions: ClientBookingStatusOption[] = [
 
   readonly currentStatusLabel = computed(
     () =>
-      this.statusFilterOptions.find((option) => option.value === this.statusFilter())
-        ?.label ?? 'كل الحالات',
+      this.statusFilterOptions.find((option) => option.value === this.statusFilter())?.label ??
+      'كل الحالات',
   );
 
   readonly filteredBookings = computed<IClientBooking[]>(() => {
     const filter = this.statusFilter();
-    if (filter === 'all') return this.bookings();
-    return this.bookings().filter((b) => b.status === filter);
-  });
+    const allBookings = this.bookings();
 
+    if (filter === 'all') {
+      return allBookings;
+    }
+
+    // تصفية الحجوزات بناءً على الحالة المختارة
+    return allBookings.filter((booking) => booking.status === filter);
+  });
   readonly upcomingCount = computed(
-    () =>
-      this.bookings().filter((b) => b.status !== 'cancelled' && b.status !== 'no-show').length,
+    () => this.bookings().filter((b) => b.status !== 'cancelled' && b.status !== 'no-show').length,
   );
 
   readonly completedCount = computed(
@@ -151,7 +153,7 @@ readonly statusFilterOptions: ClientBookingStatusOption[] = [
     },
   ]);
 
-// -------------------------------------------------------------------------
+  // -------------------------------------------------------------------------
   // Lifecycle
   // -------------------------------------------------------------------------
 
@@ -172,8 +174,8 @@ readonly statusFilterOptions: ClientBookingStatusOption[] = [
       )
       .subscribe({
         next: (res: IClientBookingsResponse) => {
-          this.bookings.set(res?.bookings ?? []);
-          this.totalCount.set(res?.count ?? 0);
+          this.bookings.set(res?.bookings);
+          this.totalCount.set(res?.count);
         },
         error: (error) => {
           this.hasError.set(true);
@@ -254,16 +256,30 @@ readonly statusFilterOptions: ClientBookingStatusOption[] = [
       case 'pending':
         return 'bg-amber-500/10 text-amber-700 ring-amber-500/30';
       case 'confirmed':
-        return 'bg-primary/10 text-primary ring-primary/30';
-      case 'completed':
         return 'bg-emerald-500/10 text-emerald-700 ring-emerald-500/30';
+      case 'completed':
+        return 'bg-blue-500/10 text-blue-700 ring-blue-500/30';
       case 'cancelled':
-        return 'bg-red-500/10 text-red-600 ring-red-500/30';
+        return 'bg-rose-500/10 text-rose-700 ring-rose-500/30';
       case 'no-show':
         return 'bg-on-surface-variant/10 text-on-surface-variant ring-outline-variant/30';
       default:
         return 'bg-surface-container text-on-surface-variant ring-outline-variant/30';
     }
+  }
+
+  /** Opens the self-contained booking details modal. */
+  openDetails(booking: IClientBooking): void {
+    this.detailBooking.set(booking);
+  }
+
+  closeDetails(): void {
+    this.detailBooking.set(null);
+  }
+
+  /** Resets the status filter back to "all" (used by the empty-state CTA). */
+  clearFilter(): void {
+    this.statusFilter.set('all');
   }
 
   formatDate(date: string): string {
@@ -279,7 +295,7 @@ readonly statusFilterOptions: ClientBookingStatusOption[] = [
   }
 
   formatTime(value?: string | null): string {
-    return value?.trim() || '—';
+    return formatTimeTo12Hour(value);
   }
 
   formatTimeRange(booking: IClientBooking): string {

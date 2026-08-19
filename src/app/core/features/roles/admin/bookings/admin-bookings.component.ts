@@ -5,6 +5,7 @@ import { NotifyService } from './../../../../services/notify.service';
 import { Component, computed, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { finalize } from 'rxjs';
+import { formatTimeTo12Hour } from './../../../../utils/time-format.util';
 
 /** Statuses accepted by the filter dropdown (server-side filter). */
 export type BookingStatusFilter = BookingStatus | 'all';
@@ -316,7 +317,7 @@ export class AdminBookingsComponent implements OnInit {
   }
 
   formatTime(value?: string | null): string {
-    return value?.trim() || '—';
+    return formatTimeTo12Hour(value);
   }
 
   formatNumber(value: number | null | undefined): string {

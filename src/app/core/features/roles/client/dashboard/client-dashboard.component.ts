@@ -18,7 +18,11 @@ import {
   IClientProfile,
   IClientProfileResponse,
 } from './../../../../../core/models/client.model';
-import { GetNotificationsResponse, NotificationItem } from './../../../../../core/models/notification.model';
+import {
+  GetNotificationsResponse,
+  NotificationItem,
+} from './../../../../../core/models/notification.model';
+import { NotificationService } from '../../../../services/notification.service';
 
 /** A single KPI card rendered on the dashboard. */
 export interface ClientKpiCard {
@@ -41,6 +45,7 @@ export class ClientDashboardComponent implements OnInit {
   private readonly notificationApi = inject(NotificationApiService);
   private readonly notifyService = inject(NotifyService);
   private readonly destroyRef = inject(DestroyRef);
+  notifService = inject(NotificationService);
 
   readonly profile = signal<IClientProfile | null>(null);
   readonly bookings = signal<IClientBooking[]>([]);
@@ -67,16 +72,12 @@ export class ClientDashboardComponent implements OnInit {
   });
 
   readonly recentBookings = computed<IClientBooking[]>(() =>
-    [...this.bookings()]
-      .sort((a, b) => b.createdAt.localeCompare(a.createdAt))
-      .slice(0, 5),
+    [...this.bookings()].sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, 5),
   );
 
   /** Most recent notifications (newest first), capped for the dashboard panel. */
   readonly recentNotifications = computed<NotificationItem[]>(() =>
-    [...this.notifications()]
-      .sort((a, b) => b.createdAt.localeCompare(a.createdAt))
-      .slice(0, 5),
+    [...this.notifications()].sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, 5),
   );
 
   readonly kpis = computed<ClientKpiCard[]>(() => {
@@ -97,13 +98,15 @@ export class ClientDashboardComponent implements OnInit {
         label: 'الحجوزات القادمة',
         value: upcoming,
         icon: 'pi-clock',
-        iconClasses: 'bg-amber-500/10 text-amber-700 ring-1 ring-amber-500/20',
+        // Brand gold for pending/upcoming
+        iconClasses: 'bg-brand-gold/15 text-brand-gold ring-1 ring-brand-gold/20',
       },
       {
         label: 'الحجوزات المكتملة',
         value: completed,
         icon: 'pi-check-circle',
-        iconClasses: 'bg-emerald-500/10 text-emerald-700 ring-1 ring-emerald-500/20',
+        // Tertiary (blue) for completed
+        iconClasses: 'bg-tertiary/10 text-tertiary ring-1 ring-tertiary/20',
       },
       {
         label: 'إشعارات غير مقروءة',
@@ -115,7 +118,8 @@ export class ClientDashboardComponent implements OnInit {
         label: 'الحجوزات الملغاة',
         value: cancelled,
         icon: 'pi-times-circle',
-        iconClasses: 'bg-red-500/10 text-red-600 ring-1 ring-red-500/20',
+        // Error (red) for cancelled
+        iconClasses: 'bg-error/10 text-error ring-1 ring-error/20',
       },
     ];
   });
@@ -201,33 +205,40 @@ export class ClientDashboardComponent implements OnInit {
     }
   }
 
+  /** Returns design-system-compliant badge classes for a booking status. */
   statusBadgeClass(status: BookingStatus | string): string {
     switch (status) {
       case 'pending':
-        return 'bg-amber-500/10 text-amber-700 ring-amber-500/30';
+        // Brand gold for pending/awaiting
+        return 'bg-brand-gold/10 text-brand-gold ring-brand-gold/30';
       case 'confirmed':
+        // Primary for confirmed
         return 'bg-primary/10 text-primary ring-primary/30';
       case 'completed':
-        return 'bg-emerald-500/10 text-emerald-700 ring-emerald-500/30';
+        // Tertiary (blue) for completed
+        return 'bg-tertiary/10 text-tertiary ring-tertiary/30';
       case 'cancelled':
-        return 'bg-red-500/10 text-red-600 ring-red-500/30';
+        // Error (red) for cancelled
+        return 'bg-error/10 text-error ring-error/30';
       case 'no-show':
+        // Muted surface variant for no-show
         return 'bg-on-surface-variant/10 text-on-surface-variant ring-outline-variant/40';
       default:
         return 'bg-surface-container text-on-surface-variant ring-outline-variant/20';
     }
   }
 
+  /** Returns design-system-compliant dot color for a booking status. */
   statusDotClass(status: BookingStatus | string): string {
     switch (status) {
       case 'pending':
-        return 'bg-amber-500';
+        return 'bg-brand-gold';
       case 'confirmed':
         return 'bg-primary';
       case 'completed':
-        return 'bg-emerald-500';
+        return 'bg-tertiary';
       case 'cancelled':
-        return 'bg-red-500';
+        return 'bg-error';
       case 'no-show':
         return 'bg-on-surface-variant';
       default:
@@ -277,8 +288,89 @@ export class ClientDashboardComponent implements OnInit {
     }
   }
 
+  // 1. دالة تحويل الوقت من 24 ساعة إلى 12 ساعة (AM / PM) بالعربي أو الإنجليزي
+  formatTimeTo12Hour(timeStr: string): string {
+    if (!timeStr) return '';
+    // لو الوقت جاي بصيغة "14:30" أو "14:30:00"
+    const parts = timeStr.split(':');
+    if (parts.length < 2) return timeStr;
+
+    let hours = parseInt(parts[0], 10);
+    const minutes = parts[1];
+    const period = hours >= 12 ? 'م' : 'ص'; // أو استخدم 'PM' / 'AM' حسب رغبتك
+
+    hours = hours % 12;
+    hours = hours ? hours : 12; // الساعة 0 تبقى 12
+
+    const formattedHours = hours < 10 ? '0' + hours : hours;
+    return `${formattedHours}:${minutes} ${period}`;
+  }
+
+
+
   /** "2026-08-14" → sortable key (keeps upcoming list chronological). */
   private sortKey(b: IClientBooking): string {
     return `${b?.date || ''}T${b?.timeSlot || '00:00'}`;
+  }
+
+  bookingStatusAr: { [key: string]: string } = {
+    pending: 'قيد الانتظار',
+    confirmed: 'مؤكد',
+    completed: 'مكتمل',
+    cancelled: 'ملغى',
+    'no-show': 'لم يحضر',
+  };
+
+  // دالة تحويل وتوليد الإشعار بالعربي بناءً على الـ type والـ data
+  formatNotificationArabic(notification: any): { title: string; message: string } {
+    const type = notification.type;
+    const data = notification.data || {};
+    const senderName = notification.senderId?.name || 'مستخدم';
+
+    switch (type) {
+      case 'booking_created':
+        return {
+          title: 'طلب حجز جديد',
+          message: `قام ${senderName} بحجز موعد جديد${data.date ? ' بتاريخ ' + data.date : ''}`,
+        };
+
+      case 'booking_updated': {
+        const statusText = this.bookingStatusAr[data.status] || data.status || 'محدثة';
+        return {
+          title: 'تحديث حالة الحجز',
+          message: `أصبحت حالة الحجز الخاص بك: ${statusText}`,
+        };
+      }
+
+      case 'booking_cancelled':
+        return {
+          title: 'تم إلغاء الحجز',
+          message: `قام ${senderName} بإلغاء الحجز`,
+        };
+
+      case 'review_created':
+        return {
+          title: 'تقييم جديد',
+          message: `قام ${senderName} بتقييم الخدمة${data.rating ? ' بقيمة ' + data.rating + ' ⭐' : ''}`,
+        };
+
+      case 'system':
+        if (data.noShowCount) {
+          return {
+            title: 'تم تقييد الحساب',
+            message: `تم تقييد حسابك مؤقتاً بسبب تكرار عدم الحضور (${data.noShowCount} مرات). يرجى مراجعة الإدارة.`,
+          };
+        }
+        return {
+          title: 'إشعار من النظام',
+          message: notification.message, // fallback لو إشعار نظام عام
+        };
+
+      default:
+        return {
+          title: notification.title || 'إشعار جديد',
+          message: notification.message || '',
+        };
+    }
   }
 }

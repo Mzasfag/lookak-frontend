@@ -5,6 +5,7 @@ import { AdminService } from './../../../../services/admin.service';
 import { Component, computed, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Subject, debounceTime, distinctUntilChanged, finalize } from 'rxjs';
+import { formatTimeTo12Hour } from '../../../../utils/time-format.util';
 
 /** A single quick-overview statistic shown above the users list. */
 export interface UsersStatChip {
@@ -616,11 +617,15 @@ export class AdminUsersComponent implements OnInit {
     return date.toLocaleDateString('ar-EG-u-nu-latn');
   }
 
-  formatRating(value?: number | null): string {
+    formatRating(value?: number | null): string {
     if (value == null || Number.isNaN(value)) {
       return '—';
     }
     return value.toFixed(1);
+  }
+
+  formatTime(value?: string | null): string {
+    return formatTimeTo12Hour(value);
   }
 
   dayLabel(day: number | undefined): string {

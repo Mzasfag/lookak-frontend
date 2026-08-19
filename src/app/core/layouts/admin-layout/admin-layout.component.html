@@ -19,14 +19,14 @@
     <header
       class="sticky top-0 z-20 flex items-center gap-3 bg-surface-container-lowest/90 px-4 py-3 shadow-sm ring-1 ring-outline-variant/30 backdrop-blur lg:hidden"
     >
-      <button
-        type="button"
-        (click)="toggleSidebar()"
-        [attr.aria-label]="'فتح القائمة الجانبية'"
-        class="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg text-on-surface transition duration-200 hover:bg-surface-container hover:text-primary"
-      >
-        <i class="pi pi-bars text-lg"></i>
-      </button>
+       <button
+          type="button"
+          (click)="toggleSidebar()"
+          aria-label="فتح القائمة الجانبية"
+          class="inline-flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-xl border border-outline-variant/40 bg-surface-container/50 text-on-surface transition duration-200 hover:border-primary/40 hover:bg-primary/10 hover:text-primary active:scale-95 lg:hidden"
+        >
+          <i class="pi pi-bars text-lg"></i>
+        </button>
       <span class="text-base font-extrabold text-on-surface">لوحة تحكم الإدارة</span>
       <div class="ml-auto">
         <app-notification-dropdown />

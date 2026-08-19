@@ -1,272 +1,407 @@
 <!-- =====================================================================
   Client — My Bookings (حجوزاتي) — Lookak.
-  Fetches from `GET /api/bookings/my-bookings`, filters client-side by status,
-  cancels via `PATCH /api/bookings/:id/cancel`.
-  Desktop table + mobile cards, RTL-first, Tailwind theme tokens.
 ===================================================================== -->
-<section class="bg-background px-4 py-6 sm:px-6 lg:px-8">
-  <!-- ===================== Page header ===================== -->
-  <header class="mb-6 flex flex-wrap items-center justify-between gap-4">
-    <div>
-      <h1 class="flex items-center gap-3 text-2xl font-extrabold tracking-tight text-on-surface sm:text-3xl">
-        <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-gold/15 text-brand-gold ring-1 ring-brand-gold/20">
-          <i class="pi pi-calendar"></i>
-        </span>
-        حجوزاتي
-      </h1>
-      <p class="mt-2 text-sm text-on-surface-variant">
-        جميع حجوزاتك في مكان واحد — يمكنك متابعة حالتها أو إلغاؤها
-      </p>
-    </div>
-
-    <button
-      type="button"
-      (click)="loadBookings()"
-      [disabled]="isLoading()"
-      class="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-outline-variant bg-surface-container-lowest px-4 py-2.5 text-sm font-bold text-primary transition duration-200 hover:border-brand-gold hover:bg-brand-gold/5 disabled:cursor-not-allowed disabled:opacity-50"
+<section class="min-h-screen bg-background px-4 py-8 sm:px-6 lg:px-8">
+  <div class="space-y-6">
+    <!-- ===================== Page Header ===================== -->
+    <header
+      class="flex flex-wrap items-center justify-between gap-4 border-b border-outline-variant/20 pb-6"
     >
-      <i [class]="isLoading() ? 'pi pi-spin pi-spinner' : 'pi pi-refresh'"></i>
-      تحديث البيانات
-    </button>
-  </header>
-
-  <!-- ===================== Loading ===================== -->
-  @if (isLoading()) {
-    <div class="flex min-h-80 items-center justify-center" role="status" aria-label="جارٍ تحميل الحجوزات">
-      <app-loader [fullScreen]="false"></app-loader>
-    </div>
-  }
-
-  <!-- ===================== Error ===================== -->
-  @if (hasError() && !isLoading()) {
-    <div class="mx-auto flex max-w-md flex-col items-center gap-4 rounded-2xl bg-surface-container-lowest px-6 py-12 text-center shadow-sm ring-1 ring-outline-variant/20">
-      <span class="flex h-14 w-14 items-center justify-center rounded-full bg-red-500/10 text-red-600">
-        <i class="pi pi-exclamation-triangle text-2xl"></i>
-      </span>
-      <div>
-        <p class="text-lg font-extrabold text-on-surface">تعذر تحميل الحجوزات</p>
-        <p class="mt-1 text-sm text-on-surface-variant">{{ errorMessage() }}</p>
+      <div class="flex items-center gap-4">
+        <span
+          class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-brand-gold/15 text-brand-gold ring-1 ring-brand-gold/30 shadow-xs"
+        >
+          <i class="pi pi-calendar text-xl"></i>
+        </span>
+        <div>
+          <h1 class="text-2xl font-black tracking-tight text-on-surface sm:text-3xl">حجوزاتي</h1>
+          <p class="mt-1 text-sm font-medium text-on-surface-variant">
+            إدارة ومتابعة جميع مواعيدك وحجوزاتك السابقة والقادمة بكل سهولة
+          </p>
+        </div>
       </div>
+
       <button
         type="button"
         (click)="loadBookings()"
-        class="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-bold text-white transition hover:opacity-90"
+        [disabled]="isLoading()"
+        class="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-outline-variant/40 bg-surface-container-lowest px-4 py-2.5 text-xs font-bold text-on-surface transition-all duration-200 hover:border-brand-gold hover:bg-brand-gold/10 hover:text-brand-gold active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 shadow-xs"
       >
-        <i class="pi pi-refresh"></i>
-        إعادة المحاولة
+        <i
+          [class]="
+            isLoading()
+              ? 'pi pi-spin pi-spinner text-sm leading-none text-brand-gold'
+              : 'pi pi-refresh text-sm leading-none text-brand-gold'
+          "
+        ></i>
+        تحديث البيانات
       </button>
-    </div>
-  }
+    </header>
 
-  <!-- ===================== Content ===================== -->
-  @if (!isLoading() && !hasError()) {
-    <!-- Stats chips -->
-    @if (statChips(); as chips) {
-      <div class="mb-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
-        @for (chip of chips; track chip.label) {
-          <div class="flex items-center gap-3 rounded-xl bg-surface-container-lowest p-4 shadow-sm ring-1 ring-outline-variant/20">
-            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg {{ chip.iconClasses }}">
-              <i class="pi {{ chip.icon }}"></i>
-            </span>
-            <div class="min-w-0">
-              <p class="truncate text-xs font-extrabold text-on-surface-variant">{{ chip.label }}</p>
-              <p class="truncate text-lg font-extrabold text-on-surface">{{ chip.value }}</p>
+    <!-- ===================== Loading (Skeleton) ===================== -->
+    @if (isLoading()) {
+      <div
+        class="hidden overflow-hidden rounded-3xl bg-surface-container-lowest shadow-sm ring-1 ring-outline-variant/20 md:block"
+        role="status"
+      >
+        <div class="border-b border-outline-variant/20 bg-surface-container/40 px-6 py-4">
+          <div class="h-4 w-48 rounded-full bg-outline-variant/15 animate-pulse"></div>
+        </div>
+        <div class="divide-y divide-outline-variant/10">
+          @for (i of [1, 2, 3, 4]; track i) {
+            <div class="flex items-center gap-4 px-6 py-4">
+              <div class="h-11 w-11 shrink-0 rounded-2xl bg-outline-variant/15 animate-pulse"></div>
+              <div class="flex-1 space-y-2">
+                <div class="h-4 w-40 rounded-full bg-outline-variant/15 animate-pulse"></div>
+                <div class="h-3 w-28 rounded-full bg-outline-variant/10 animate-pulse"></div>
+              </div>
+              <div class="h-7 w-24 rounded-full bg-outline-variant/15 animate-pulse"></div>
+              <div class="h-9 w-24 rounded-xl bg-outline-variant/10 animate-pulse"></div>
             </div>
-          </div>
-        }
+          }
+        </div>
       </div>
     }
-<!-- Status filter pills -->
-    <div class="mb-6 rounded-xl bg-surface-container-lowest p-4 shadow-sm ring-1 ring-outline-variant/20">
-      <div class="flex flex-wrap items-center justify-between gap-3">
-        <div class="flex items-center gap-1.5 overflow-x-auto pb-1">
-          @for (option of statusFilterOptions; track option.value) {
+
+    <!-- ===================== Error State ===================== -->
+    @else if (hasError()) {
+      <div
+        class="flex flex-col items-center gap-5 rounded-3xl bg-surface-container-lowest px-6 py-16 text-center shadow-lg ring-1 ring-outline-variant/20"
+      >
+        <span
+          class="flex h-16 w-16 items-center justify-center rounded-2xl bg-error/10 text-error ring-1 ring-error/20 shadow-inner"
+        >
+          <i class="pi pi-exclamation-triangle text-2xl leading-none"></i>
+        </span>
+        <div class="space-y-1">
+          <p class="text-lg font-black text-on-surface">تعذر تحميل الحجوزات</p>
+          <p class="text-sm text-on-surface-variant">{{ errorMessage() }}</p>
+        </div>
+        <button
+          type="button"
+          (click)="loadBookings()"
+          class="inline-flex cursor-pointer items-center gap-2 rounded-xl bg-gradient-to-l from-brand-gold to-primary px-6 py-3 text-xs font-bold text-white shadow-md transition-all duration-200 hover:opacity-90 active:scale-[0.98]"
+        >
+          <i class="pi pi-refresh text-sm leading-none"></i>
+          إعادة المحاولة
+        </button>
+      </div>
+    }
+
+    <!-- ===================== Main Content ===================== -->
+    @else {
+      <!-- Stats Chips -->
+      @if (statChips(); as chips) {
+        <div class="grid grid-cols-2 gap-4 sm:grid-cols-4">
+          @for (chip of chips; track chip.label) {
+            <div
+              class="group flex items-center gap-4 rounded-3xl bg-surface-container-lowest p-5 shadow-xs ring-1 ring-outline-variant/20 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md hover:ring-brand-gold/40"
+            >
+              <span
+                class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl {{
+                  chip.iconClasses
+                }} shadow-xs transition-transform duration-300 group-hover:scale-110"
+              >
+                <i class="pi {{ chip.icon }} text-xl leading-none"></i>
+              </span>
+              <div class="min-w-0">
+                <p class="truncate text-xs font-bold text-on-surface-variant/80">
+                  {{ chip.label }}
+                </p>
+                <p class="truncate text-2xl font-black tracking-tight text-on-surface mt-0.5">
+                  {{ chip.value }}
+                </p>
+              </div>
+            </div>
+          }
+        </div>
+      }
+
+      <!-- Status Filter Pills -->
+      <div
+        class="rounded-3xl bg-surface-container-lowest p-2.5 shadow-xs ring-1 ring-outline-variant/20 sm:p-3"
+      >
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div class="flex flex-1 items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0">
+            @for (option of statusFilterOptions; track option.value) {
+              <button
+                type="button"
+                (click)="statusFilter.set(option.value)"
+                class="inline-flex cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-2xl px-4 py-2 text-xs font-bold transition-all duration-200"
+                [class.bg-brand-gold]="statusFilter() === option.value"
+                [class.text-white]="statusFilter() === option.value"
+                [class.shadow-sm]="statusFilter() === option.value"
+                [class.text-on-surface-variant]="statusFilter() !== option.value"
+                [class.hover:bg-surface-container]="statusFilter() !== option.value"
+                [class.hover:text-on-surface]="statusFilter() !== option.value"
+              >
+                {{ option.label }}
+                @if (option.value !== 'all') {
+                  <span
+                    class="rounded-full bg-black/10 px-2 py-0.5 text-[10px] font-black tabular-nums"
+                  >
+                    {{ statusCounts()[option.value] }}
+                  </span>
+                }
+              </button>
+            }
+          </div>
+          <span class="shrink-0 px-3 text-xs font-bold text-on-surface-variant">
+            {{ currentStatusLabel() }}:
+            <span class="text-brand-gold font-black">{{ filteredBookings().length }}</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Empty State vs Data Views -->
+      @if (filteredBookings().length === 0) {
+        <div
+          class="flex flex-col items-center gap-5 rounded-3xl bg-surface-container-lowest px-6 py-20 text-center shadow-xs ring-1 ring-outline-variant/20"
+        >
+          <span
+            class="flex h-20 w-20 items-center justify-center rounded-3xl bg-brand-gold/10 text-brand-gold shadow-inner"
+          >
+            <i class="pi pi-calendar-plus text-3xl leading-none"></i>
+          </span>
+          <div class="space-y-1.5">
+            <p class="text-lg font-black text-on-surface">لا توجد حجوزات</p>
+            <p class="text-sm text-on-surface-variant max-w-sm mx-auto">
+              @if (statusFilter() === 'all') {
+                لم تقم بأي حجز حتى الآن. استكشف أفضل مزودي الخدمة واحجز موعدك الأول!
+              } @else {
+                لا توجد حجوزات تطابق الفلتر المختار حالياً.
+              }
+            </p>
+          </div>
+          @if (statusFilter() === 'all') {
+            <a
+              routerLink="/client/providers"
+              class="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-l from-brand-gold to-primary px-6 py-3 text-xs font-bold text-white shadow-md transition-all duration-200 hover:opacity-90 active:scale-[0.98]"
+            >
+              <i class="pi pi-search text-sm leading-none"></i>
+              تصفح مزودي الخدمة
+            </a>
+          } @else {
             <button
               type="button"
-              (click)="statusFilter.set(option.value)"
-              class="inline-flex cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-lg px-3 py-1.5 text-xs font-extrabold transition duration-200"
-              [class.bg-primary/10]="statusFilter() === option.value"
-              [class.text-primary]="statusFilter() === option.value"
-              [class.ring-1]="statusFilter() === option.value"
-              [class.ring-primary/30]="statusFilter() === option.value"
-              [class.text-on-surface-variant]="statusFilter() !== option.value"
-              [class.hover:bg-surface-container]="statusFilter() !== option.value"
+              (click)="clearFilter()"
+              class="inline-flex items-center gap-2 rounded-2xl border border-outline-variant/40 bg-surface-container px-6 py-3 text-xs font-bold text-on-surface transition-all duration-200 hover:bg-surface-container-high"
             >
-              {{ option.label }}
-              @if (option.value !== 'all') {
-                <span class="tabular-nums opacity-70">({{ statusCounts()[option.value] }})</span>
-              }
+              <i class="pi pi-filter-slash text-sm leading-none"></i>
+              عرض كل الحجوزات
             </button>
           }
         </div>
-        <span class="shrink-0 text-xs font-bold text-on-surface-variant">
-          {{ currentStatusLabel() }}: {{ filteredBookings().length }}
-        </span>
-      </div>
-    </div>
-
-    <!-- Empty state -->
-    @if (filteredBookings().length === 0) {
-      <div class="flex flex-col items-center gap-4 rounded-2xl bg-surface-container-lowest px-6 py-16 text-center shadow-sm ring-1 ring-outline-variant/20">
-        <span class="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
-          <i class="pi pi-calendar-plus text-2xl"></i>
-        </span>
-        <div>
-          <p class="text-lg font-extrabold text-on-surface">لا توجد حجوزات</p>
-          <p class="mt-1 text-sm text-on-surface-variant">
-            @if (statusFilter() === 'all') {
-              لم تقم بأي حجز بعد. تصفح مزودي الخدمة واحجز موعدك الآن!
-            } @else {
-              لا توجد حجوزات بهذه الحالة.
-            }
-          </p>
-        </div>
-        @if (statusFilter() === 'all') {
-          <a
-            routerLink="/client/providers"
-            class="inline-flex items-center gap-2 rounded-lg bg-gradient-to-l from-brand-gold to-primary px-5 py-2.5 text-sm font-bold text-white shadow-sm transition hover:opacity-90"
-          >
-            <i class="pi pi-search"></i>
-            تصفح مزودي الخدمة
-          </a>
-        }
-      </div>
-<!-- ===================== Desktop table ===================== -->
-    @if (filteredBookings().length > 0) {
-      <!-- Desktop table (hidden on small screens) -->
-      <div class="hidden overflow-hidden rounded-2xl bg-surface-container-lowest shadow-sm ring-1 ring-outline-variant/20 md:block">
-        <table class="w-full text-right text-sm">
-          <thead>
-            <tr class="border-b border-outline-variant/20 bg-surface-container/60">
-              <th class="px-4 py-3.5 text-xs font-extrabold uppercase tracking-wider text-on-surface-variant">الخدمة</th>
-              <th class="px-4 py-3.5 text-xs font-extrabold uppercase tracking-wider text-on-surface-variant">مزود الخدمة</th>
-              <th class="px-4 py-3.5 text-xs font-extrabold uppercase tracking-wider text-on-surface-variant">التاريخ</th>
-              <th class="px-4 py-3.5 text-xs font-extrabold uppercase tracking-wider text-on-surface-variant">الوقت</th>
-              <th class="px-4 py-3.5 text-xs font-extrabold uppercase tracking-wider text-on-surface-variant">المدة</th>
-              <th class="px-4 py-3.5 text-xs font-extrabold uppercase tracking-wider text-on-surface-variant">السعر</th>
-              <th class="px-4 py-3.5 text-xs font-extrabold uppercase tracking-wider text-on-surface-variant">الحالة</th>
-              <th class="px-4 py-3.5 text-xs font-extrabold uppercase tracking-wider text-on-surface-variant"></th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-outline-variant/10">
-            @for (booking of filteredBookings(); track booking._id) {
-              <tr class="transition-colors hover:bg-surface-container/40">
-                <td class="px-4 py-3.5 font-bold text-on-surface">{{ booking.serviceId?.name }}</td>
-                <td class="px-4 py-3.5 text-on-surface-variant">{{ booking.providerId?.salonName || booking.providerId?.name }}</td>
-                <td class="px-4 py-3.5 text-on-surface-variant" dir="ltr">{{ formatDate(booking.date) }}</td>
-                <td class="px-4 py-3.5 text-on-surface-variant">{{ formatTimeRange(booking) }}</td>
-                <td class="px-4 py-3.5 text-on-surface-variant">{{ formatDuration(booking.durationMinutes) }}</td>
-                <td class="px-4 py-3.5 font-bold text-on-surface">{{ formatCurrency(booking.totalPrice) }}</td>
-                <td class="px-4 py-3.5">
-                  <span class="inline-flex rounded-full px-2.5 py-1 text-xs font-bold ring-1 {{ statusBadgeClass(booking.status) }}">
-                    {{ statusLabel(booking.status) }}
-                  </span>
-                </td>
-                <td class="px-4 py-3.5">
-                  @if (isRowBusy(booking)) {
-                    <i class="pi pi-spin pi-spinner text-primary"></i>
-                  } @else if (canCancel(booking)) {
-                    <button
-                      type="button"
-                      (click)="requestCancel(booking)"
-                      class="inline-flex cursor-pointer items-center gap-1 rounded-lg px-3 py-1.5 text-xs font-extrabold text-red-600 ring-1 ring-red-500/30 transition duration-200 hover:bg-red-500/10 active:scale-[0.97]"
-                    >
-                      <i class="pi pi-times text-[10px]"></i>
-                      إلغاء
-                    </button>
-                  }
-                </td>
+      } @else {
+        <!-- ===================== Desktop Table ===================== -->
+        <div
+          class="hidden overflow-hidden rounded-3xl bg-surface-container-lowest shadow-sm ring-1 ring-outline-variant/20 md:block"
+        >
+          <table class="w-full text-right text-sm">
+            <thead>
+              <tr
+                class="border-b border-outline-variant/20 bg-surface-container/50 text-xs font-bold text-on-surface-variant"
+              >
+                <th class="px-5 py-4">الخدمة</th>
+                <th class="px-5 py-4">مزود الخدمة</th>
+                <th class="px-5 py-4">التاريخ</th>
+                <th class="px-5 py-4">الوقت</th>
+                <th class="px-5 py-4">المدة</th>
+                <th class="px-5 py-4">السعر</th>
+                <th class="px-5 py-4">الحالة</th>
+                <th class="px-5 py-4 text-end">الإجراءات</th>
               </tr>
-            }
-          </tbody>
-        </table>
-      </div>
-    }
-<!-- ===================== Mobile cards ===================== -->
-      <div class="space-y-3 md:hidden">
-        @for (booking of filteredBookings(); track booking._id) {
-          <div class="rounded-2xl bg-surface-container-lowest p-4 shadow-sm ring-1 ring-outline-variant/20">
-            <div class="flex items-start justify-between gap-3">
-              <div class="min-w-0 flex-1">
-                <p class="truncate text-base font-extrabold text-on-surface">{{ booking.serviceId?.name }}</p>
-                <p class="truncate text-sm text-on-surface-variant">{{ booking.providerId?.salonName || booking.providerId?.name }}</p>
-              </div>
-              <span class="shrink-0 rounded-full px-2.5 py-1 text-xs font-bold ring-1 {{ statusBadgeClass(booking.status) }}">
-                {{ statusLabel(booking.status) }}
-              </span>
-            </div>
+            </thead>
+            <tbody class="divide-y divide-outline-variant/10">
+              @for (booking of filteredBookings(); track booking._id) {
+                <tr class="transition-colors hover:bg-surface-container/30">
+                  <td class="px-5 py-4 font-black text-on-surface">
+                    <div class="flex items-center gap-2.5">
+                      <span
+                        class="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-brand-gold/10 text-brand-gold"
+                      >
+                        <i class="pi pi-shopping-bag text-xs leading-none"></i>
+                      </span>
+                      <span>{{ booking.serviceId?.name }}</span>
+                    </div>
+                  </td>
+                  <td class="px-5 py-4 font-medium text-on-surface-variant">
+                    {{ booking.providerId?.salonName || booking.providerId?.name }}
+                  </td>
+                  <td class="px-5 py-4 font-medium text-on-surface-variant" dir="ltr">
+                    {{ formatDate(booking.date) }}
+                  </td>
+                  <td class="px-5 py-4 font-medium text-on-surface-variant">
+                    {{ formatTimeRange(booking) }}
+                  </td>
+                  <td class="px-5 py-4 font-medium text-on-surface-variant">
+                    {{ formatDuration(booking.durationMinutes) }}
+                  </td>
+                  <td class="px-5 py-4 font-black text-brand-gold">
+                    {{ formatCurrency(booking.totalPrice) }}
+                  </td>
+                  <td class="px-5 py-4">
+                    <span
+                      class="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-bold ring-1 {{
+                        statusBadgeClass(booking.status)
+                      }}"
+                    >
+                      <span
+                        class="h-1.5 w-1.5 rounded-full bg-current shadow-[0_0_8px_currentColor]"
+                      ></span>
+                      {{ statusLabel(booking.status) }}
+                    </span>
+                  </td>
+                  <td class="px-5 py-4">
+                    <div class="flex items-center justify-end gap-2">
+                      <button
+                        type="button"
+                        (click)="openDetails(booking)"
+                        class="inline-flex cursor-pointer items-center gap-1.5 rounded-xl border border-outline-variant/30 bg-surface-container-lowest px-3.5 py-2 text-xs font-bold text-on-surface transition-all duration-200 hover:border-brand-gold hover:bg-brand-gold/10 hover:text-brand-gold active:scale-[0.97]"
+                      >
+                        <i class="pi pi-eye text-xs leading-none text-brand-gold"></i>
+                        التفاصيل
+                      </button>
+                      @if (isRowBusy(booking)) {
+                        <i class="pi pi-spin pi-spinner text-brand-gold text-base leading-none"></i>
+                      } @else if (canCancel(booking)) {
+                        <button
+                          type="button"
+                          (click)="requestCancel(booking)"
+                          class="inline-flex cursor-pointer items-center gap-1 rounded-xl bg-error/10 px-3.5 py-2 text-xs font-bold text-error ring-1 ring-error/20 transition-all duration-200 hover:bg-error/20 active:scale-[0.97]"
+                        >
+                          <i class="pi pi-times text-xs leading-none"></i>
+                          إلغاء
+                        </button>
+                      }
+                    </div>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
 
-            <dl class="mt-3 space-y-2 border-t border-outline-variant/20 pt-3 text-sm">
-              <div class="flex items-center justify-between gap-3">
-                <dt class="text-on-surface-variant">التاريخ</dt>
-                <dd class="font-bold text-on-surface" dir="ltr">{{ formatDate(booking.date) }}</dd>
+        <!-- ===================== Mobile Cards ===================== -->
+        <div class="space-y-3.5 md:hidden">
+          @for (booking of filteredBookings(); track booking._id) {
+            <div
+              class="rounded-3xl bg-surface-container-lowest p-5 shadow-xs ring-1 ring-outline-variant/20 transition-all duration-200 hover:shadow-md hover:ring-brand-gold/30"
+            >
+              <div class="flex items-start justify-between gap-3">
+                <div class="flex min-w-0 flex-1 items-center gap-3">
+                  <span
+                    class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-brand-gold/10 text-brand-gold ring-1 ring-brand-gold/20"
+                  >
+                    <i class="pi pi-shopping-bag text-base leading-none"></i>
+                  </span>
+                  <div class="min-w-0">
+                    <p class="truncate text-base font-black text-on-surface">
+                      {{ booking.serviceId?.name }}
+                    </p>
+                    <p class="truncate text-xs font-medium text-on-surface-variant">
+                      {{ booking.providerId?.salonName || booking.providerId?.name }}
+                    </p>
+                  </div>
+                </div>
+                <span
+                  class="inline-flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold ring-1 {{
+                    statusBadgeClass(booking.status)
+                  }}"
+                >
+                  <span
+                    class="h-1.5 w-1.5 rounded-full bg-current shadow-[0_0_8px_currentColor]"
+                  ></span>
+                  {{ statusLabel(booking.status) }}
+                </span>
               </div>
-              <div class="flex items-center justify-between gap-3">
-                <dt class="text-on-surface-variant">الوقت</dt>
-                <dd class="font-bold text-on-surface">{{ formatTimeRange(booking) }}</dd>
-              </div>
-              <div class="flex items-center justify-between gap-3">
-                <dt class="text-on-surface-variant">المدة</dt>
-                <dd class="font-bold text-on-surface">{{ formatDuration(booking.durationMinutes) }}</dd>
-              </div>
-              <div class="flex items-center justify-between gap-3">
-                <dt class="text-on-surface-variant">السعر</dt>
-                <dd class="font-bold text-on-surface">{{ formatCurrency(booking.totalPrice) }}</dd>
-              </div>
-            </dl>
 
-            <div class="mt-3 flex items-center justify-end gap-2 border-t border-outline-variant/20 pt-3">
-              @if (isRowBusy(booking)) {
-                <i class="pi pi-spin pi-spinner text-primary"></i>
-              } @else if (canCancel(booking)) {
+              <dl class="mt-4 space-y-2 border-t border-outline-variant/15 pt-3 text-xs">
+                <div class="flex items-center justify-between gap-3">
+                  <dt class="text-on-surface-variant">التاريخ</dt>
+                  <dd class="font-bold text-on-surface" dir="ltr">
+                    {{ formatDate(booking.date) }}
+                  </dd>
+                </div>
+                <div class="flex items-center justify-between gap-3">
+                  <dt class="text-on-surface-variant">الوقت</dt>
+                  <dd class="font-bold text-on-surface">{{ formatTimeRange(booking) }}</dd>
+                </div>
+                <div class="flex items-center justify-between gap-3">
+                  <dt class="text-on-surface-variant">المدة</dt>
+                  <dd class="font-bold text-on-surface">
+                    {{ formatDuration(booking.durationMinutes) }}
+                  </dd>
+                </div>
+                <div class="flex items-center justify-between gap-3">
+                  <dt class="text-on-surface-variant">السعر</dt>
+                  <dd class="font-black text-brand-gold text-sm">
+                    {{ formatCurrency(booking.totalPrice) }}
+                  </dd>
+                </div>
+              </dl>
+
+              <div
+                class="mt-4 flex items-center justify-end gap-2 border-t border-outline-variant/15 pt-3"
+              >
                 <button
                   type="button"
-                  (click)="requestCancel(booking)"
-                  class="inline-flex cursor-pointer items-center gap-1 rounded-lg px-3 py-1.5 text-xs font-extrabold text-red-600 ring-1 ring-red-500/30 transition duration-200 hover:bg-red-500/10 active:scale-[0.97]"
+                  (click)="openDetails(booking)"
+                  class="inline-flex cursor-pointer items-center gap-1.5 rounded-xl border border-outline-variant/30 bg-surface-container-lowest px-4 py-2 text-xs font-bold text-on-surface transition-all duration-200 hover:border-brand-gold hover:bg-brand-gold/10 hover:text-brand-gold active:scale-[0.97]"
                 >
-                  <i class="pi pi-times text-[10px]"></i>
-                  إلغاء الحجز
+                  <i class="pi pi-eye text-xs leading-none text-brand-gold"></i>
+                  التفاصيل
                 </button>
-              }
+                @if (isRowBusy(booking)) {
+                  <i class="pi pi-spin pi-spinner text-brand-gold text-base leading-none"></i>
+                } @else if (canCancel(booking)) {
+                  <button
+                    type="button"
+                    (click)="requestCancel(booking)"
+                    class="inline-flex cursor-pointer items-center gap-1 rounded-xl bg-error/10 px-4 py-2 text-xs font-bold text-error ring-1 ring-error/20 transition-all duration-200 hover:bg-error/20 active:scale-[0.97]"
+                  >
+                    <i class="pi pi-times text-xs leading-none"></i>
+                    إلغاء
+                  </button>
+                }
+              </div>
             </div>
-          </div>
-        }
-      </div>
+          }
+        </div>
+      }
     }
-  }
+  </div>
 </section>
 
-<!-- ===================== Cancel confirmation modal ===================== -->
+<!-- ===================== Cancel Confirmation Modal ===================== -->
 @if (bookingToCancel(); as pendingCancel) {
   <div
-    class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4 backdrop-blur-sm"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-xs animate-in fade-in-0"
     (click)="dismissCancel()"
     role="dialog"
     aria-modal="true"
-    aria-labelledby="cancel-dialog-title"
   >
     <div
-      class="w-full max-w-md rounded-2xl bg-surface-container-lowest p-6 shadow-xl ring-1 ring-outline-variant/20"
+      class="w-full rounded-3xl bg-surface-container-lowest p-6 shadow-2xl ring-1 ring-outline-variant/20 sm:p-8"
       (click)="$event.stopPropagation()"
     >
       <div class="flex flex-col items-center gap-4 text-center">
-        <span class="flex h-14 w-14 items-center justify-center rounded-full bg-red-500/10 text-red-600">
-          <i class="pi pi-exclamation-triangle text-2xl"></i>
+        <span
+          class="flex h-16 w-16 items-center justify-center rounded-2xl bg-error/10 text-error ring-1 ring-error/20 shadow-inner"
+        >
+          <i class="pi pi-exclamation-triangle text-2xl leading-none"></i>
         </span>
-        <div>
-          <h2 id="cancel-dialog-title" class="text-lg font-extrabold text-on-surface">تأكيد إلغاء الحجز</h2>
-          <p class="mt-2 text-sm leading-relaxed text-on-surface-variant">
+        <div class="space-y-1">
+          <h2 class="text-lg font-black text-on-surface">تأكيد إلغاء الحجز</h2>
+          <p class="text-sm leading-relaxed text-on-surface-variant">
             هل أنت متأكد من إلغاء حجز
-            <span class="font-bold text-on-surface">{{ pendingCancel.serviceId?.name }}</span>
-            في
-            <span class="font-bold text-on-surface">{{ formatDate(pendingCancel.date) }}</span>
+            <span class="font-bold text-on-surface">"{{ pendingCancel.serviceId?.name }}"</span>
+            المقرر في
+            <span class="font-bold text-on-surface" dir="ltr">{{
+              formatDate(pendingCancel.date)
+            }}</span>
             ؟
           </p>
-          @if (pendingCancel.notes) {
-            <p class="mt-2 rounded-lg bg-surface-container px-3 py-2 text-xs text-on-surface-variant">
-              ملاحظاتك: {{ pendingCancel.notes }}
-            </p>
-          }
         </div>
       </div>
 
@@ -275,7 +410,7 @@
           type="button"
           (click)="dismissCancel()"
           [disabled]="isCancelling()"
-          class="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-outline-variant bg-surface-container px-5 py-2.5 text-sm font-bold text-on-surface transition duration-200 hover:bg-surface-container-high disabled:cursor-not-allowed disabled:opacity-50"
+          class="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-outline-variant/40 bg-surface-container px-5 py-2.5 text-xs font-bold text-on-surface transition-all duration-200 hover:bg-surface-container-high disabled:opacity-50"
         >
           تراجع
         </button>
@@ -283,14 +418,123 @@
           type="button"
           (click)="confirmCancel()"
           [disabled]="isCancelling()"
-          class="inline-flex cursor-pointer items-center gap-2 rounded-lg bg-red-600 px-5 py-2.5 text-sm font-bold text-white shadow-sm transition duration-200 hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-50"
+          class="inline-flex cursor-pointer items-center gap-2 rounded-xl bg-error px-5 py-2.5 text-xs font-bold text-on-error shadow-md transition-all duration-200 hover:opacity-90 disabled:opacity-50"
         >
           @if (isCancelling()) {
-            <i class="pi pi-spin pi-spinner"></i>
+            <i class="pi pi-spin pi-spinner text-sm leading-none"></i>
           } @else {
-            <i class="pi pi-times"></i>
+            <i class="pi pi-times text-sm leading-none"></i>
           }
           {{ isCancelling() ? 'جارٍ الإلغاء…' : 'تأكيد الإلغاء' }}
+        </button>
+      </div>
+    </div>
+  </div>
+}
+
+<!-- ===================== Booking Details Modal ===================== -->
+<!-- ===================== Booking Details Modal ===================== -->
+@if (detailBooking(); as detail) {
+  <div
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-xs animate-in fade-in-0"
+    (click)="closeDetails()"
+    role="dialog"
+    aria-modal="true"
+  >
+    <div
+      class="w-full rounded-3xl bg-surface-container-lowest p-6 shadow-2xl ring-1 ring-outline-variant/20 sm:p-8"
+      (click)="$event.stopPropagation()"
+    >
+      <div class="flex items-start justify-between gap-3 border-b border-outline-variant/20 pb-4">
+        <div class="flex items-center gap-3.5">
+          <!-- تعديل هنا: تم إجبار الأيقونة على الظهور بـ text-xl وتحديد لونها الصريح -->
+          <span
+            class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-brand-gold/15 text-brand-gold ring-1 ring-brand-gold/30 shadow-xs"
+          >
+            <i class="pi pi-check-square text-xl text-brand-gold leading-none"></i>
+          </span>
+          <div>
+            <h2 class="text-lg font-black text-on-surface">{{ detail.serviceId?.name }}</h2>
+            <p class="text-xs font-medium text-on-surface-variant">
+              {{ detail.providerId?.salonName || detail.providerId?.name }}
+            </p>
+          </div>
+        </div>
+        <button
+          type="button"
+          (click)="closeDetails()"
+          class="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-xl bg-surface-container text-on-surface-variant transition-all duration-200 hover:bg-surface-container-high hover:text-on-surface"
+        >
+          <i class="pi pi-times text-sm leading-none"></i>
+        </button>
+      </div>
+
+      <div
+        class="mt-4 flex items-center justify-between rounded-2xl bg-surface-container/60 px-4 py-3 ring-1 ring-outline-variant/10"
+      >
+        <span class="text-xs font-bold text-on-surface-variant">حالة الحجز الحالية</span>
+        <span
+          class="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-bold ring-1 {{
+            statusBadgeClass(detail.status)
+          }}"
+        >
+          <span class="h-1.5 w-1.5 rounded-full bg-current shadow-[0_0_8px_currentColor]"></span>
+          {{ statusLabel(detail.status) }}
+        </span>
+      </div>
+
+      <dl class="mt-4 space-y-1 text-xs">
+        <div
+          class="flex items-center justify-between gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-surface-container/50"
+        >
+          <dt class="text-on-surface-variant font-medium">مزود الخدمة</dt>
+          <dd class="font-bold text-on-surface">{{ detail.providerId?.name }}</dd>
+        </div>
+        <div
+          class="flex items-center justify-between gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-surface-container/50"
+        >
+          <dt class="text-on-surface-variant font-medium">التاريخ</dt>
+          <dd class="font-bold text-on-surface" dir="ltr">{{ formatDate(detail.date) }}</dd>
+        </div>
+        <div
+          class="flex items-center justify-between gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-surface-container/50"
+        >
+          <dt class="text-on-surface-variant font-medium">الوقت</dt>
+          <dd class="font-bold text-on-surface">{{ formatTimeRange(detail) }}</dd>
+        </div>
+        <div
+          class="flex items-center justify-between gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-surface-container/50"
+        >
+          <dt class="text-on-surface-variant font-medium">المدة</dt>
+          <dd class="font-bold text-on-surface">{{ formatDuration(detail.durationMinutes) }}</dd>
+        </div>
+        <div
+          class="flex items-center justify-between gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-surface-container/50"
+        >
+          <dt class="text-on-surface-variant font-medium">السعر الإجمالي</dt>
+          <dd class="font-black text-brand-gold text-sm">
+            {{ formatCurrency(detail.totalPrice) }}
+          </dd>
+        </div>
+      </dl>
+
+      <div class="mt-6 flex items-center justify-end gap-3 border-t border-outline-variant/20 pt-4">
+        @if (canCancel(detail)) {
+          <button
+            type="button"
+            (click)="requestCancel(detail)"
+            class="inline-flex cursor-pointer items-center gap-1.5 rounded-xl bg-error/10 px-4 py-2.5 text-xs font-bold text-error ring-1 ring-error/20 transition-all duration-200 hover:bg-error/20 active:scale-[0.97]"
+          >
+            <i class="pi pi-times text-xs leading-none"></i>
+            إلغاء الحجز
+          </button>
+        }
+        <button
+          type="button"
+          (click)="closeDetails()"
+          class="inline-flex cursor-pointer items-center gap-2 rounded-xl bg-gradient-to-l from-brand-gold to-primary px-5 py-2.5 text-xs font-bold text-white shadow-sm transition-all duration-200 hover:opacity-90 active:scale-[0.98]"
+        >
+          إغلاق
         </button>
       </div>
     </div>

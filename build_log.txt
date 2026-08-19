@@ -1,27 +1,107 @@
-
-> lookak@0.0.0 build
-> ng build
-
 ❯ Building...
-Error: Not enough space
-    at Function.<anonymous> (D:\projects\lookak-app\lookak-frontend\lookak\node_modules\lmdb\dist\index.cjs:677:7) {
-  code: 12
-}
-D:\projects\lookak-app\lookak-frontend\lookak\node_modules\lmdb\dist\index.cjs:773
-				let error = new Error('Commit failed (see commitError for details)');
-				            ^
+✔ Building...
+Browser bundles     
+Initial chunk files  | Names                             |  Raw size
+chunk-UPOIKNKC.js    | -                                 | 988.40 kB | 
+chunk-KQ4E42R6.js    | -                                 | 259.41 kB | 
+chunk-UQH24LEG.js    | -                                 | 258.77 kB | 
+main.js              | main                              | 150.34 kB | 
+styles.css           | styles                            | 133.92 kB | 
+chunk-SWGIVTL2.js    | -                                 | 126.67 kB | 
+chunk-DFSSSNQQ.js    | -                                 | 103.89 kB | 
+chunk-OF2XHT7U.js    | -                                 |  45.91 kB | 
+chunk-BEZPLBVH.js    | -                                 |  24.04 kB | 
+chunk-7JANQP67.js    | -                                 |  15.96 kB | 
+chunk-HOFQHBFJ.js    | -                                 |   6.83 kB | 
+chunk-7TFBT7S3.js    | -                                 |   6.37 kB | 
+chunk-US7YGX5Q.js    | -                                 |   1.83 kB | 
+chunk-C2HFVTX5.js    | -                                 |   1.24 kB | 
+chunk-32SOHUYN.js    | -                                 | 267 bytes | 
 
-Error: Commit failed (see commitError for details)
-    at rejectCommit (D:\projects\lookak-app\lookak-frontend\lookak\node_modules\lmdb\dist\index.cjs:773:17)
-    at resolveWrites (D:\projects\lookak-app\lookak-frontend\lookak\node_modules\lmdb\dist\index.cjs:735:40)
-    at Function.<anonymous> (D:\projects\lookak-app\lookak-frontend\lookak\node_modules\lmdb\dist\index.cjs:662:4) {
-  commitError: Promise {
-    <rejected> Error: Not enough space
-        at Function.<anonymous> (D:\projects\lookak-app\lookak-frontend\lookak\node_modules\lmdb\dist\index.cjs:677:7) {
-      code: 12
-    },
-    reject: [Function (anonymous)]
-  }
-}
+                     | Initial total                     |   2.12 MB
 
-Node.js v24.19.0
+Lazy chunk files     | Names                             |  Raw size
+chunk-NH6FW45D.js    | -                                 | 163.69 kB | 
+chunk-JUMN4MKV.js    | admin-users-component             | 160.86 kB | 
+chunk-VDRBO2KD.js    | client-provider-details-component | 150.14 kB | 
+chunk-SCAVTEAD.js    | -                                 | 127.40 kB | 
+chunk-ORPIUTC2.js    | provider-bookings-component       |  99.09 kB | 
+chunk-YQ5CLNZX.js    | provider-profile-component        |  96.94 kB | 
+chunk-CABQH7N6.js    | landing-component                 |  94.27 kB | 
+chunk-AOOXPHLV.js    | provider-services-component       |  91.64 kB | 
+chunk-H5QMPDSB.js    | client-dashboard-component        |  77.33 kB | 
+chunk-PUZ6DNFI.js    | register-component                |  67.65 kB | 
+chunk-5QTTEUFU.js    | client-bookings-component         |  61.35 kB | 
+chunk-POMQIGCN.js    | admin-bookings-component          |  54.96 kB | 
+chunk-OI4Y5LIP.js    | forgot-password-component         |  54.14 kB | 
+chunk-OXYSC7MC.js    | admin-dashboard-component         |  49.24 kB | 
+chunk-6SXLS2DQ.js    | client-providers-component        |  44.23 kB | 
+...and 21 more lazy chunks files. Use "--verbose" to show all the files.
+
+
+Server bundles      
+Initial chunk files  | Names                             |  Raw size
+server.mjs           | server                            |   2.03 MB | 
+main.server.mjs      | main.server                       |   1.09 MB | 
+chunk-VQ6JLEWI.mjs   | -                                 | 986.86 kB | 
+polyfills.server.mjs | polyfills.server                  | 495.81 kB | 
+chunk-4Z3IV7CX.mjs   | -                                 | 259.65 kB | 
+chunk-76FNN5IE.mjs   | -                                 | 256.56 kB | 
+chunk-TSA6LFNK.mjs   | -                                 | 126.70 kB | 
+chunk-DT2JROML.mjs   | -                                 | 103.92 kB | 
+chunk-QLKVTRBG.mjs   | -                                 |  45.93 kB | 
+chunk-3PIARFWV.mjs   | -                                 |  24.03 kB | 
+chunk-E6VVQM5H.mjs   | -                                 |  15.95 kB | 
+chunk-XZQLODQL.mjs   | -                                 |   6.82 kB | 
+chunk-YB7JJMRD.mjs   | -                                 |   6.36 kB | 
+chunk-2LWKHUQ2.mjs   | -                                 |   3.33 kB | 
+chunk-LEH5XX4U.mjs   | -                                 |   2.06 kB | 
+chunk-A4VABGZG.mjs   | -                                 |   1.82 kB | 
+chunk-WU4JH4R3.mjs   | -                                 |   1.23 kB | 
+chunk-TWCKEEY6.mjs   | -                                 | 253 bytes | 
+
+Lazy chunk files     | Names                             |  Raw size
+chunk-G7OOMF3E.mjs   | -                                 | 163.71 kB | 
+chunk-RPDAXXCV.mjs   | admin-users-component             | 160.89 kB | 
+chunk-AI57HA2U.mjs   | client-provider-details-component | 150.19 kB | 
+chunk-GHYTBV2O.mjs   | -                                 | 127.43 kB | 
+chunk-HNTFYYX7.mjs   | provider-bookings-component       |  99.12 kB | 
+chunk-H2PRSCI7.mjs   | provider-profile-component        |  96.98 kB | 
+chunk-ZRDPRA5Z.mjs   | landing-component                 |  94.29 kB | 
+chunk-56P3LWXB.mjs   | provider-services-component       |  91.67 kB | 
+chunk-ZDQTZUTP.mjs   | client-dashboard-component        |  77.37 kB | 
+chunk-DFDKKTZZ.mjs   | register-component                |  67.68 kB | 
+chunk-QK7FPQ3O.mjs   | client-bookings-component         |  61.38 kB | 
+chunk-O4LV25I3.mjs   | admin-bookings-component          |  54.99 kB | 
+chunk-2BISGFIK.mjs   | forgot-password-component         |  54.17 kB | 
+chunk-QQL3Q3Z5.mjs   | admin-dashboard-component         |  49.27 kB | 
+chunk-QU2FDOMG.mjs   | client-providers-component        |  44.26 kB | 
+...and 23 more lazy chunks files. Use "--verbose" to show all the files.
+
+Prerendered 23 static routes.
+Application bundle generation failed. [18.879 seconds] - 2026-08-16T04:57:41.601Z
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: ErrorAlertComponent is not used within the template of ClientBookingsComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/core/features/roles/client/bookings/client-bookings.component.ts:43:55:
+[37m      43 │ ... [CommonModule, RouterLink, LoaderComponent, [32mErrorAlertComponent[37m],
+         ╵                                                 [32m~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: ErrorAlertComponent is not used within the template of ClientDashboardComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/core/features/roles/client/dashboard/client-dashboard.component.ts:34:55:
+[37m      34 │ ... [CommonModule, RouterLink, LoaderComponent, [32mErrorAlertComponent[37m],
+         ╵                                                 [32m~~~~~~~~~~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: Toast is not used within the template of ProviderProfileComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/core/features/roles/provider/profile/provider-profile.component.ts:71:50:
+[37m      71 │   imports: [ReactiveFormsModule, LoaderComponent, [32mToast[37m, NgClass],
+         ╵                                                   [32m~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mThe 'client/provider/:id' route uses prerendering and includes parameters, but 'getPrerenderParams' is missing. Please define 'getPrerenderParams' function for this route in your server routing configuration or specify a different 'renderMode'.[0m
+
+
