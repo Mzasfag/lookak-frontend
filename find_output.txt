@@ -1,3 +1,0 @@
-D:\projects\lookak-app\lookak-frontend\lookak\src\app\core\features\roles\client\dashboard\client-dashboard.component.css
-D:\projects\lookak-app\lookak-frontend\lookak\src\app\core\features\roles\client\dashboard\client-dashboard.component.html
-D:\projects\lookak-app\lookak-frontend\lookak\src\app\core\features\roles\client\dashboard\client-dashboard.component.ts

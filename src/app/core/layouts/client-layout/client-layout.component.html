@@ -18,33 +18,33 @@
   <div class="flex min-w-0 flex-1 flex-col">
     <!-- Top Header Bar -->
     <header
-      class="sticky top-0 z-20 flex items-center justify-between gap-3 border-b border-outline-variant/30 bg-surface-container-lowest/95 px-4 py-3 shadow-xs backdrop-blur-md sm:px-6"
+      class="sticky top-0 z-20 flex items-center justify-between gap-3 border-b border-outline-variant/30 bg-surface-container-lowest/95 px-3 py-2.5 shadow-xs backdrop-blur-md sm:px-4 sm:py-3 lg:px-6"
     >
       <!-- Left side (RTL Start): Hamburger Toggle + Greeting -->
-      <div class="flex items-center gap-3 min-w-0">
+      <div class="flex items-center gap-2.5 min-w-0">
         <button
           type="button"
           (click)="toggleSidebar()"
           aria-label="فتح القائمة الجانبية"
-          class="inline-flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-xl border border-outline-variant/40 bg-surface-container/50 text-on-surface transition duration-200 hover:border-primary/40 hover:bg-primary/10 hover:text-primary active:scale-95 lg:hidden"
+          class="inline-flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-xl border border-outline-variant/40 bg-surface-container/50 text-on-surface transition duration-200 hover:border-primary/40 hover:bg-primary/10 hover:text-primary active:scale-95 lg:hidden"
         >
-          <i class="pi pi-bars text-lg"></i>
+          <i class="pi pi-bars text-base"></i>
         </button>
 
         <div class="min-w-0">
-          <p class="truncate text-xs font-bold text-on-surface-variant">مرحباً بك 👋</p>
-          <p class="truncate text-base font-extrabold text-on-surface">{{ displayName()?.name }}</p>
+          <p class="truncate text-[11px] font-bold text-on-surface-variant">مرحباً بك 👋</p>
+          <p class="truncate text-sm font-extrabold text-on-surface sm:text-base">{{ displayName()?.name }}</p>
         </div>
       </div>
 
       <!-- Right side (RTL End): Notifications + Quick Profile Chip -->
-      <div class="flex items-center gap-3 shrink-0">
+      <div class="flex items-center gap-2.5 shrink-0">
         <!-- Live Notifications Dropdown -->
         <app-notification-dropdown />
 
         <!-- User Quick Initial Chip -->
         <div
-          class="hidden sm:flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-brand-gold to-primary text-xs font-extrabold text-white shadow-sm ring-2 ring-brand-gold/20"
+          class="hidden sm:flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-brand-gold to-primary text-[11px] font-extrabold text-white shadow-sm ring-2 ring-brand-gold/20"
           title="حسابك المسجل"
         >
           {{ displayName()?.name![0]?.toUpperCase() }}

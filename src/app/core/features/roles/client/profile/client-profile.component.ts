@@ -123,7 +123,7 @@ export class ClientProfileComponent implements OnInit {
   readonly registrationDate = computed<string>(() => {
     const profileData = this.profile() as Record<string, unknown> | null;
     if (!profileData) return '—';
-    
+
     const value = profileData['createdAt'] || profileData['created_at'];
     if (!value) return '—';
 
@@ -233,7 +233,7 @@ export class ClientProfileComponent implements OnInit {
   // Lifecycle
   // ---------------------------------------------------------------------------
   ngOnInit(): void {
-    this.loadData()
+    this.loadData();
     if (isPlatformBrowser(this.platformId)) {
       const hasUser = this.cookieService.check(AUTH_USER_COOKIE);
       if (hasUser) {
@@ -398,7 +398,15 @@ export class ClientProfileComponent implements OnInit {
         this.authService.token.set(res?.token);
         this.cookieService.set(AUTH_USER_COOKIE, JSON.stringify(res?.user));
         this.authService.userData.set(res?.user);
-        this.resetForm.reset();
+        if (isPlatformBrowser(this.platformId)) {
+          const loginValue: { identifier: string; password: string; rememberMe: boolean } = {
+            password: this.resetForm.get('password')?.value!,
+            identifier: res?.user?.phone,
+            rememberMe: true,
+          };
+          this.cookieService.set('loginValue', JSON.stringify(loginValue));
+          this.resetForm.reset();
+        }
       },
       error: (error) => {
         this.isChangingPassword.set(false);

@@ -5,20 +5,20 @@
 <section class=" px-4 py-6 sm:px-6 lg:px-8">
   <!-- ===================== Page header ===================== -->
   <header
-    class="animate-client-dashboard-fade-up mb-8 flex flex-wrap items-center justify-between gap-4"
+    class="animate-client-dashboard-fade-up mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4"
   >
-    <div>
+    <div class="w-full">
       <h1
-        class="flex items-center gap-3 text-2xl font-extrabold tracking-tight text-on-surface sm:text-3xl"
+        class="flex items-center gap-2.5 text-xl font-extrabold tracking-tight text-on-surface sm:text-2xl lg:text-3xl"
       >
         <span
-          class="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-gold/15 text-brand-gold ring-1 ring-brand-gold/20"
+          class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand-gold/15 text-brand-gold ring-1 ring-brand-gold/20 sm:h-10 sm:w-10"
         >
-          <i class="pi pi-th-large"></i>
+          <i class="pi pi-th-large text-lg sm:text-xl"></i>
         </span>
         لوحة التحكم
       </h1>
-      <p class="mt-2 text-sm text-on-surface-variant">
+      <p class="mt-1.5 text-xs text-on-surface-variant sm:text-sm">
         مرحباً {{ profile()?.name || 'عميلنا العزيز' }}، نظرة عامة على حجوزاتك وإشعاراتك.
       </p>
     </div>
@@ -27,10 +27,10 @@
       type="button"
       (click)="loadData()"
       [disabled]="isLoading()"
-      class="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-outline-variant bg-surface-container-lowest px-4 py-2.5 text-sm font-bold text-primary transition duration-200 hover:border-brand-gold hover:bg-brand-gold/5 disabled:cursor-not-allowed disabled:opacity-50"
+      class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-outline-variant bg-surface-container-lowest px-3 py-2 text-xs font-bold text-primary transition duration-200 hover:border-brand-gold hover:bg-brand-gold/5 disabled:cursor-not-allowed disabled:opacity-50 sm:px-4 sm:py-2.5 sm:text-sm"
     >
-      <i [class]="isLoading() ? 'pi pi-spin pi-spinner' : 'pi pi-refresh'"></i>
-      تحديث البيانات
+      <i [class]="isLoading() ? 'pi pi-spin pi-spinner' : 'pi pi-refresh'" class="text-sm"></i>
+      <span class="hidden sm:inline">تحديث البيانات</span>
     </button>
   </header>
 
@@ -70,38 +70,37 @@
     <div class="animate-client-dashboard-fade-up space-y-8">
       <!-- ---------- Welcome Banner Card ---------- -->
       <section
-        class="relative overflow-hidden rounded-2xl bg-gradient-to-l from-primary via-primary-container to-brand-gold p-6 text-white shadow-md ring-1 ring-outline-variant/20 sm:p-8"
+        class="relative overflow-hidden rounded-2xl bg-gradient-to-l from-primary via-primary-container to-brand-gold p-4 text-white shadow-md ring-1 ring-outline-variant/20 sm:p-6 lg:p-8"
       >
-        <div class="relative z-10 flex flex-wrap items-center justify-between gap-4">
-          <div class="space-y-2">
+        <div class="relative z-10 flex flex-col items-center justify-center gap-3 text-center sm:flex-row sm:items-center sm:justify-between sm:text-start">
+          <div class="min-w-0 space-y-1.5">
             <span
-              class="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1 text-xs font-extrabold backdrop-blur-sm"
+              class="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-2.5 py-1 text-xs font-extrabold backdrop-blur-sm"
             >
-              👋 مرحباً بعودتك
+              <i class="pi pi-sparkles text-brand-gold/90"></i> مرحباً بعودتك
             </span>
-            <h2 class="text-2xl font-extrabold sm:text-3xl">
+            <h2 class="text-xl font-extrabold leading-tight sm:text-2xl lg:text-3xl">
               {{ profile()?.name || 'عزيزي العميل' }}
             </h2>
-            <p class="text-sm leading-relaxed opacity-90">
-              يسعدنا خدمتك مجدداً في لوكاك. استعرض حجوزاتك القادمة، واكتشف صالونات الخدمة المميزة
-              لحجز موعدك القادم.
+            <p class="text-xs leading-relaxed text-white/80 sm:text-sm">
+              يسعدنا خدمتك مجدداً في لوكاك. استعرض حجوزاتك القادمة.
             </p>
             @if (profile()?.isBookingRestricted) {
               <div
-                class="mt-2 inline-flex items-center gap-2 rounded-lg bg-error/15 px-3.5 py-2 text-xs font-bold text-error ring-1 ring-error/20"
+                class="mt-1.5 inline-flex items-center gap-1.5 rounded-lg bg-error/15 px-3 py-1.5 text-[10px] font-bold text-error ring-1 ring-error/20 sm:text-xs"
               >
                 <i class="pi pi-exclamation-triangle text-brand-gold"></i>
-                حسابك مقيد من إمكانية الحجز حالياً. يرجى التواصل مع الدعم الفني.
+                حسابك مقيد من الحجز حالياً. تواصل مع الدعم الفني.
               </div>
             }
           </div>
           <div class="hidden sm:block">
             <a
               routerLink="/client/providers"
-              class="inline-flex items-center gap-2 rounded-xl bg-surface-container-lowest px-5 py-3 text-sm font-extrabold text-primary shadow-sm transition duration-200 hover:bg-surface-bright hover:shadow-md active:scale-[0.98]"
+              class="inline-flex items-center gap-2 rounded-xl bg-surface-container-lowest px-4 py-2.5 text-sm font-extrabold text-primary shadow-sm transition duration-200 hover:bg-surface-bright hover:shadow-md active:scale-\[0\.98\]"
             >
               <i class="pi pi-search text-brand-gold"></i>
-              تصفح الخدمات والصالونات
+              تصفح الخدمات
             </a>
           </div>
         </div>
@@ -113,23 +112,23 @@
           <i class="pi pi-chart-bar text-brand-gold"></i>
           إحصائيات الحجوزات
         </h2>
-        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <div class="grid grid-cols-1 gap-3 sm:gap-4 sm:grid-cols-2 xl:grid-cols-4">
           @for (kpi of kpis(); track kpi.label) {
             <div
-              class="flex items-center gap-4 rounded-xl bg-surface-container-lowest p-5 shadow-sm ring-1 ring-outline-variant/20 transition duration-200 hover:shadow-md hover:ring-primary/30"
+              class="flex items-center gap-4 rounded-xl bg-surface-container-lowest p-3.5 sm:p-4 shadow-sm ring-1 ring-outline-variant/20 transition duration-200 hover:shadow-md hover:ring-primary/30"
             >
               <span
-                class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl {{
+                class="flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-xl {{
                   kpi.iconClasses
                 }}"
               >
-                <i class="pi {{ kpi.icon }} text-xl"></i>
+                <i class="pi {{ kpi.icon }} text-lg sm:text-xl"></i>
               </span>
               <div class="min-w-0 flex-1">
-                <p class="truncate text-xs font-extrabold text-on-surface-variant">
+                <p class="truncate text-\[10px\] sm:text-xs font-extrabold text-on-surface-variant">
                   {{ kpi.label }}
                 </p>
-                <p class="mt-1 truncate text-2xl font-extrabold text-on-surface">
+                <p class="mt-1 truncate text-xl sm:text-2xl font-extrabold text-on-surface">
                   {{ kpi.value }}
                 </p>
               </div>
@@ -163,7 +162,7 @@
           @if (upcomingBookings().length === 0) {
             <div class="flex flex-col items-center justify-center py-10 text-center">
               <span
-                class="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-surface-container text-on-surface-variant"
+                class="mb-3 flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-surface-container text-on-surface-variant"
               >
                 <i class="pi pi-calendar-times text-xl"></i>
               </span>
@@ -215,7 +214,7 @@
                   </div>
                   <!-- Status Badge (Updated Professional Colors) -->
                   <span
-                    class="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1 text-xs font-extrabold shadow-2xs {{
+                    class="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-2.5 py-1 text-xs font-extrabold shadow-2xs {{
                       booking.status === 'confirmed'
                         ? 'bg-emerald-500/10 text-emerald-600 ring-1 ring-emerald-500/30'
                         : booking.status === 'pending'
@@ -267,7 +266,7 @@
           @if (recentBookings().length === 0) {
             <div class="flex flex-col items-center justify-center py-10 text-center">
               <span
-                class="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-surface-container text-on-surface-variant"
+                class="mb-3 flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-surface-container text-on-surface-variant"
               >
                 <i class="pi pi-inbox text-xl"></i>
               </span>
@@ -304,7 +303,7 @@
                   </div>
                   <!-- Status Badge (Updated Professional Colors) -->
                   <span
-                    class="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1 text-xs font-extrabold shadow-2xs {{
+                    class="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-2.5 py-1 text-xs font-extrabold shadow-2xs {{
                       booking.status === 'confirmed'
                         ? 'bg-emerald-500/10 text-emerald-600 ring-1 ring-emerald-500/30'
                         : booking.status === 'pending'
@@ -505,3 +504,33 @@
     </div>
   }
 </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

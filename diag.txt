@@ -1,4 +1,0 @@
-LINES=194
-LAST5=  /** "2026-08-14" ƒ?? sortable key (keeps upcoming list chronological). */ |   private sortKey(b: IClientBooking): string { |     return `${b.date}T${b.timeSlot ?? '00:00'}`; |   } | }
-NODEPROCS=2
-ANGULAR=GONE
