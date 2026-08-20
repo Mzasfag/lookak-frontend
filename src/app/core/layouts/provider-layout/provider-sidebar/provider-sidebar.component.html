@@ -1,31 +1,31 @@
 <aside
   [class]="isOpen() ? 'translate-x-0' : 'translate-x-full'"
-  class="provider-sidebar fixed inset-y-0 right-0 z-40 flex w-72 flex-col bg-surface-container-lowest shadow-2xl shadow-primary/10 ring-1 ring-outline-variant/20 transition-transform duration-300 lg:static lg:inset-y-auto lg:h-full lg:translate-x-0"
+  class="provider-sidebar fixed inset-y-0 right-0 z-40 flex w-72 max-w-[85vw] flex-col bg-surface-container-lowest shadow-2xl shadow-primary/10 ring-1 ring-outline-variant/20 transition-transform duration-300 lg:static lg:inset-y-auto lg:h-full lg:translate-x-0 lg:max-w-none"
   aria-label="القائمة الجانبية لمزود الخدمة"
 >
   <!-- Brand header -->
-  <div class="flex items-center gap-3 border-b border-outline-variant/30 px-5 py-5">
+  <div class="flex items-center gap-3 border-b border-outline-variant/30 px-4 py-4 sm:px-5 sm:py-5">
     <img
       src="lookak-without-bg.png"
       alt="شعار لوَكك"
-      class="h-11 w-11 rounded-full bg-brand-gold/15 object-cover p-1 ring-1 ring-brand-gold/30"
+      class="h-10 w-10 rounded-full bg-brand-gold/15 object-cover p-1 ring-1 ring-brand-gold/30 sm:h-11 sm:w-11"
     />
     <div class="min-w-0">
-      <p class="text-lg font-extrabold leading-tight text-on-surface">لوَكك</p>
-      <p class="text-xs font-bold text-brand-gold">لوحة مزود الخدمة</p>
+      <p class="text-base font-extrabold leading-tight text-on-surface sm:text-lg">لوَكك</p>
+      <p class="text-[10px] font-bold text-brand-gold sm:text-xs">لوحة مزود الخدمة</p>
     </div>
     <button
       type="button"
       (click)="closed.emit()"
       [attr.aria-label]="'إغلاق القائمة'"
-      class="ms-auto inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg text-on-surface-variant transition duration-200 hover:bg-surface-container hover:text-primary lg:hidden"
+      class="ms-auto inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg text-on-surface-variant transition duration-200 hover:bg-surface-container hover:text-primary lg:hidden sm:h-9 sm:w-9"
     >
-      <i class="pi pi-times"></i>
+      <i class="pi pi-times text-sm"></i>
     </button>
   </div>
 
   <!-- Main navigation -->
-  <nav class="flex-1 space-y-1.5 overflow-y-auto px-3 py-5">
+  <nav class="flex-1 space-y-1 overflow-y-auto px-2.5 py-4 sm:px-3 sm:py-5">
     @for (link of navLinks; track link.route) {
       <a
         [routerLink]="link.route"
@@ -33,10 +33,10 @@
         [routerLinkActiveOptions]="{ exact: false }"
         (click)="onNavClick()"
         [attr.aria-label]="link.label"
-        class="provider-sidebar-link group flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-bold text-on-surface-variant transition duration-200 hover:bg-surface-container hover:text-primary"
+        class="provider-sidebar-link group flex items-center gap-2.5 rounded-lg px-3 py-2.5 text-sm font-bold text-on-surface-variant transition duration-200 hover:bg-surface-container hover:text-primary sm:gap-3 sm:rounded-xl sm:px-4 sm:py-3"
       >
         <span
-          class="provider-sidebar-link-icon flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-surface-container text-primary transition duration-200 group-hover:bg-brand-gold/15 group-hover:text-brand-gold"
+          class="provider-sidebar-link-icon flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-surface-container text-primary transition duration-200 group-hover:bg-brand-gold/15 group-hover:text-brand-gold sm:h-9 sm:w-9"
         >
           <i class="pi {{ link.icon }} text-base"></i>
         </span>
@@ -46,29 +46,29 @@
   </nav>
 
   <!-- Footer actions -->
-  <div class="space-y-2 border-t border-outline-variant/30 p-4">
+  <div class="space-y-2 border-t border-outline-variant/30 p-3 sm:p-4">
     <a
       routerLink="/"
-      class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-bold text-on-surface-variant transition duration-200 hover:bg-surface-container hover:text-primary"
+      class="flex items-center gap-2.5 rounded-lg px-3 py-2.5 text-sm font-bold text-on-surface-variant transition duration-200 hover:bg-surface-container hover:text-primary sm:gap-3 sm:rounded-xl sm:px-4 sm:py-3"
     >
       <span
-        class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-surface-container text-primary"
+        class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-surface-container text-primary sm:h-9 sm:w-9"
       >
         <i class="pi pi-arrow-right text-base"></i>
       </span>
-      العودة إلى الموقع
+      <span class="truncate">العودة إلى الموقع</span>
     </a>
     <button
       type="button"
       (click)="onLogout()"
-      class="flex w-full cursor-pointer items-center gap-3 rounded-xl px-4 py-3 text-sm font-bold text-red-600 transition duration-200 hover:bg-red-500/10"
+      class="flex w-full cursor-pointer items-center gap-2.5 rounded-lg px-3 py-2.5 text-sm font-bold text-red-600 transition duration-200 hover:bg-red-500/10 sm:gap-3 sm:rounded-xl sm:px-4 sm:py-3"
     >
       <span
-        class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-red-500/10 text-red-500"
+        class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-red-500/10 text-red-500 sm:h-9 sm:w-9"
       >
         <i class="pi pi-sign-out text-base"></i>
       </span>
-      تسجيل الخروج
+      <span class="truncate">تسجيل الخروج</span>
     </button>
   </div>
 </aside>

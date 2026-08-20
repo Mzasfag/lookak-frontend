@@ -1,3 +1,3 @@
 export const environment = {
-    baseUrl:"https://lookak-backend.vercel.app/api",
+    baseUrl:"http://localhost:5000/api",
 };

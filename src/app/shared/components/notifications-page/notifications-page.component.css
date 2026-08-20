@@ -52,16 +52,36 @@
 }
 
 /* Staggered animation for list items */
-ul li:nth-child(1) { animation-delay: 0ms; }
-ul li:nth-child(2) { animation-delay: 50ms; }
-ul li:nth-child(3) { animation-delay: 100ms; }
-ul li:nth-child(4) { animation-delay: 150ms; }
-ul li:nth-child(5) { animation-delay: 200ms; }
-ul li:nth-child(6) { animation-delay: 250ms; }
-ul li:nth-child(7) { animation-delay: 300ms; }
-ul li:nth-child(8) { animation-delay: 350ms; }
-ul li:nth-child(9) { animation-delay: 400ms; }
-ul li:nth-child(10) { animation-delay: 450ms; }
+ul li:nth-child(1) {
+  animation-delay: 0ms;
+}
+ul li:nth-child(2) {
+  animation-delay: 50ms;
+}
+ul li:nth-child(3) {
+  animation-delay: 100ms;
+}
+ul li:nth-child(4) {
+  animation-delay: 150ms;
+}
+ul li:nth-child(5) {
+  animation-delay: 200ms;
+}
+ul li:nth-child(6) {
+  animation-delay: 250ms;
+}
+ul li:nth-child(7) {
+  animation-delay: 300ms;
+}
+ul li:nth-child(8) {
+  animation-delay: 350ms;
+}
+ul li:nth-child(9) {
+  animation-delay: 400ms;
+}
+ul li:nth-child(10) {
+  animation-delay: 450ms;
+}
 
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
@@ -116,5 +136,75 @@ a:focus-visible {
   .bg-surface-container {
     box-shadow: none !important;
     border: 1px solid #000 !important;
+  }
+}
+
+/* ──────────────────────────────────────────────
+   Design Tokens & Utilities (scoped to component)
+   ────────────────────────────────────────────── */
+:host {
+  /* Ensure RTL base */
+  direction: rtl;
+}
+
+/* Hide scrollbar for filter tabs (cross-browser) */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE/Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/Opera */
+}
+
+/* ──────────────────────────────────────────────
+   Focus Visible — Better keyboard UX
+   ────────────────────────────────────────────── */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+:focus-visible {
+  outline: 2px solid var(--color-brand-gold, #d4a843);
+  outline-offset: 2px;
+}
+
+/* ──────────────────────────────────────────────
+   Reduced Motion Respect
+   ────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ──────────────────────────────────────────────
+   High Contrast Mode Support
+   ────────────────────────────────────────────── */
+@media (prefers-contrast: high) {
+  .border-outline-variant\/10,
+  .border-outline-variant\/20 {
+    border-color: currentColor !important;
+  }
+  .bg-surface-container\/40,
+  .bg-surface-container\/60 {
+    background-color: var(--color-surface-container, #f5f5f5) !important;
+  }
+}
+
+/* ──────────────────────────────────────────────
+   Print Styles
+   ──────────────────────⋆──────────────────────── */
+@media print {
+  header,
+  nav[aria-label="تنقل الصفحات"],
+  button[aria-label="تعيين كمقروء"] {
+    display: none !important;
+  }
+  .min-h-screen {
+    min-height: auto !important;
   }
 }

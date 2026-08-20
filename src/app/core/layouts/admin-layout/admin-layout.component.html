@@ -1,8 +1,7 @@
 <div class="flex items-stretch min-h-screen bg-background text-on-surface">
   <!-- Sidebar: sticky column on desktop, off-canvas drawer on mobile -->
-  
-    <app-admin-sidebar [isOpen]="isSidebarOpen()" (closed)="closeSidebar()" />
 
+  <app-admin-sidebar [isOpen]="isSidebarOpen()" (closed)="closeSidebar()" />
 
   <!-- Mobile drawer backdrop -->
   @if (isSidebarOpen()) {
@@ -17,9 +16,10 @@
   <div class="flex min-w-0 flex-1 flex-col">
     <!-- Mobile top bar -->
     <header
-      class="sticky top-0 z-20 flex items-center gap-3 bg-surface-container-lowest/90 px-4 py-3 shadow-sm ring-1 ring-outline-variant/30 backdrop-blur lg:hidden"
+      class="sticky top-0 z-20 flex items-center justify-between gap-3 bg-surface-container-lowest/90 px-4 py-3 shadow-sm ring-1 ring-outline-variant/30 backdrop-blur lg:hidden"
     >
-       <button
+      <div class="flex items-center gap-2">
+        <button
           type="button"
           (click)="toggleSidebar()"
           aria-label="فتح القائمة الجانبية"
@@ -27,11 +27,13 @@
         >
           <i class="pi pi-bars text-lg"></i>
         </button>
-      <span class="text-base font-extrabold text-on-surface">لوحة تحكم الإدارة</span>
-      <div class="ml-auto">
+        <span class="text-base font-extrabold text-on-surface"
+          >لوحة تحكم الإدارة</span
+        >
+      </div>
+      <div >
         <app-notification-dropdown />
       </div>
-
     </header>
 
     <main class="min-w-0 flex-1">

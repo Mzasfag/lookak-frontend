@@ -14,54 +14,54 @@
 <header
   class="sticky top-0 z-50 border-b border-outline-variant/60 bg-background/85 backdrop-blur-md"
 >
-  <div class="mx-auto flex h-16  items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
+  <div class="mx-auto flex h-14 sm:h-16 items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
     <!-- brand -->
     <a
       routerLink="/"
-      class="group flex shrink-0 items-center gap-3"
+      class="group flex shrink-0 items-center gap-2 sm:gap-3"
       aria-label="لوَكك - الصفحة الرئيسية"
     >
       <span
-        class="grid h-11 w-11 place-items-center rounded-full border border-brand-gold/40 bg-gradient-to-br from-brand-gold/15 to-primary/15 shadow-inner transition-transform duration-300 group-hover:scale-105"
+        class="grid h-9 w-9 sm:h-10 sm:w-10 place-items-center rounded-full border border-brand-gold/40 bg-gradient-to-br from-brand-gold/15 to-primary/15 shadow-inner transition-transform duration-300 group-hover:scale-105"
       >
         <img
           src="lookak-without-bg.png"
           alt="شعار لوَكك"
-          class="h-9 w-9 rounded-full object-cover"
+          class="h-7 w-7 sm:h-8 sm:w-8 rounded-full object-cover"
         />
       </span>
       <span class="flex flex-col leading-none">
-        <span class="text-2xl font-extrabold tracking-tight text-primary">لوَكك</span>
-        <span class="mt-1 hidden text-[10px] font-bold tracking-widest text-brand-gold sm:block"
+        <span class="text-xl font-extrabold tracking-tight text-primary sm:text-2xl">لوَكك</span>
+        <span class="mt-0.5 hidden text-[10px] font-bold tracking-widest text-brand-gold sm:block"
           >جمالك… عنوانه</span
         >
       </span>
     </a>
 
     <!-- quick actions -->
-    <nav class="flex items-center gap-2 sm:gap-3" aria-label="إجراءات سريعة">
+    <nav class="flex items-center gap-1.5 sm:gap-2" aria-label="إجراءات سريعة">
       <a
         routerLink="/login"
-        class="hidden items-center gap-2 rounded-lg border border-outline-variant bg-surface-container-lowest px-4 py-2.5 text-sm font-bold text-on-surface transition-colors duration-200 hover:border-brand-gold/60 hover:text-brand-gold sm:flex"
+        class="hidden items-center gap-2 rounded-lg border border-outline-variant bg-surface-container-lowest px-3 py-2 text-sm font-bold text-on-surface transition-colors duration-200 hover:border-brand-gold/60 hover:text-brand-gold sm:flex"
       >
         <i class="pi pi-user text-xs"></i>
         تسجيل الدخول
       </a>
       <a
         routerLink="/login"
-        class="grid h-10 w-10 place-items-center rounded-lg border border-outline-variant bg-surface-container-lowest text-primary sm:hidden"
+        class="grid h-9 w-9 sm:h-10 sm:w-10 place-items-center rounded-lg border border-outline-variant bg-surface-container-lowest text-primary sm:hidden"
         aria-label="تسجيل الدخول"
       >
         <i class="pi pi-user text-sm"></i>
       </a>
       <a
         routerLink="/register"
-        class="group flex items-center gap-2 rounded-lg bg-gradient-to-l from-brand-gold to-primary px-4 py-2.5 text-sm font-extrabold text-white shadow-lg shadow-primary/25 transition duration-200 hover:shadow-xl hover:shadow-primary/30 active:scale-[0.98]"
+        class="group flex items-center gap-1.5 rounded-lg bg-gradient-to-l from-brand-gold to-primary px-3 py-2 text-sm font-extrabold text-white shadow-lg shadow-primary/25 transition duration-200 hover:shadow-xl hover:shadow-primary/30 active:scale-[0.98] sm:px-4 sm:py-2.5"
       >
         <i
           class="pi pi-user-plus text-xs transition-transform duration-200 group-hover:-translate-x-0.5"
         ></i>
-        انضم إلينا
+        <span class="hidden sm:inline">انضم إلينا</span>
       </a>
     </nav>
   </div>
@@ -99,26 +99,26 @@
       class="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-background to-transparent"
     ></div>
 
-    <div class="relative mx-auto px-4 pb-20 pt-14 sm:px-6 lg:px-8 lg:pb-28 lg:pt-20">
-      <div class="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]">
+    <div class="relative mx-auto px-4 pb-16 pt-10 sm:px-6 lg:px-8 lg:pb-24 lg:pt-14">
+      <div class="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
         <!-- copy -->
-        <div class="animate-landing-fade-up space-y-7 text-center lg:text-start">
+        <div class="animate-landing-fade-up space-y-6 text-center lg:text-start">
           <span
-            class="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-xs font-bold tracking-wide backdrop-blur-sm"
+            class="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-1 text-xs font-bold tracking-wide backdrop-blur-sm sm:px-4 sm:py-1.5"
           >
             <i class="pi pi-sparkles text-brand-gold"></i>
             منصة لوَكك لحجوزات التجميل والعناية
           </span>
 
-          <h1 class="text-4xl font-extrabold leading-[1.4] sm:text-5xl lg:text-6xl">
+          <h1 class="text-3xl font-extrabold leading-[1.35] sm:text-4xl lg:text-5xl xl:text-6xl">
             اكتشف أرقى صالونات التجميل والعناية
-            <span class="relative mt-3 block text-brand-gold">
+            <span class="relative mt-2 block text-brand-gold">
               واحجز موعدك بكل سهولة
               <svg
                 aria-hidden="true"
                 viewBox="0 0 220 12"
                 fill="none"
-                class="absolute inset-x-0 -bottom-4 mx-auto h-3 w-48 text-primary-fixed sm:w-64"
+                class="absolute inset-x-0 -bottom-3 mx-auto h-2 w-40 text-primary-fixed sm:w-48 lg:w-56"
               >
                 <path
                   d="M3 8.5C60 2.5 142 2 217 6.5"
@@ -131,7 +131,7 @@
             </span>
           </h1>
 
-          <p class="mx-auto text-base leading-relaxed text-white/85 sm:text-lg lg:mx-0">
+          <p class="mx-auto text-sm leading-relaxed text-white/85 sm:text-base lg:mx-0">
             من تسريحة الشعر إلى جلسات العناية الفاخرة — لوَكك تجمع لك نخبة الخبراء وتوصلّك إلى موعدك
             المثالي في ثوانٍ معدودة.
           </p>
@@ -141,7 +141,7 @@
             <button
               type="button"
               (click)="scrollToSection('features')"
-              class="group flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-gradient-to-l from-brand-gold to-primary px-7 py-4 text-base font-extrabold text-white shadow-xl shadow-black/25 transition duration-200 hover:shadow-2xl hover:shadow-black/30 active:scale-[0.98] sm:w-auto"
+              class="group flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-gradient-to-l from-brand-gold to-primary px-6 py-3.5 text-sm font-extrabold text-white shadow-xl shadow-black/25 transition duration-200 hover:shadow-2xl hover:shadow-black/30 active:scale-[0.98] sm:w-auto sm:px-7 sm:py-4"
             >
               استكشف الخدمات والحجوزات
               <i
@@ -151,10 +151,10 @@
             <a
               routerLink="/register"
               [queryParams]="{ role: 'provider' }"
-              class="group flex w-full items-center justify-center gap-2 rounded-xl border border-white/40 bg-white/10 px-7 py-4 text-base font-bold text-white backdrop-blur-sm transition duration-200 hover:border-brand-gold hover:bg-white/20 active:scale-[0.98] sm:w-auto"
+              class="group flex w-full items-center justify-center gap-2 rounded-xl border border-white/40 bg-white/10 px-6 py-3.5 text-sm font-bold text-white backdrop-blur-sm transition duration-200 hover:border-brand-gold hover:bg-white/20 active:scale-[0.98] sm:w-auto sm:px-7 sm:py-4"
             >
               <i
-                class="pi pi-briefcase text-sm text-brand-gold transition-transform duration-200 group-hover:-translate-x-0.5"
+                class="pi pi-briefcase text-xs text-brand-gold transition-transform duration-200 group-hover:-translate-x-0.5 sm:text-sm"
               ></i>
               انضم كمزود خدمة / صالون
             </a>
@@ -162,45 +162,45 @@
 
           <!-- live platform stats (derived from GET /api/providers) -->
           @if (isLoading()) {
-            <dl class="grid grid-cols-3 gap-3 pt-4 sm:gap-4" aria-hidden="true">
+            <dl class="grid grid-cols-3 gap-2 pt-3 sm:gap-3 sm:pt-4" aria-hidden="true">
               @for (skeleton of [0, 1, 2]; track skeleton) {
                 <div
-                  class="animate-pulse rounded-xl border border-white/15 bg-white/10 p-3 text-center backdrop-blur-sm sm:p-4"
+                  class="animate-pulse rounded-xl border border-white/15 bg-white/10 p-2 text-center backdrop-blur-sm sm:p-3"
                 >
-                  <div class="mx-auto h-7 w-16 rounded-md bg-white/25 sm:h-8"></div>
-                  <div class="mx-auto mt-2 h-2.5 w-20 rounded-md bg-white/15"></div>
+                  <div class="mx-auto h-6 w-14 rounded-md bg-white/25 sm:h-7"></div>
+                  <div class="mx-auto mt-1.5 h-2 w-16 rounded-md bg-white/15"></div>
                 </div>
               }
             </dl>
           } @else if (heroStats(); as stats) {
-            <dl class="grid grid-cols-3 gap-3 pt-4 sm:gap-4">
+            <dl class="grid grid-cols-3 gap-2 pt-3 sm:gap-3 sm:pt-4">
               <div
-                class="rounded-xl border border-white/15 bg-white/5 p-3 text-center backdrop-blur-sm sm:p-4"
+                class="rounded-xl border border-white/15 bg-white/5 p-2 text-center backdrop-blur-sm sm:p-3"
               >
-                <dt class="text-2xl font-extrabold text-brand-gold sm:text-3xl">
+                <dt class="text-xl font-extrabold text-brand-gold sm:text-2xl lg:text-3xl">
                   {{ formatNumber(stats.salonsCount) }}
                 </dt>
-                <dd class="mt-1 text-[11px] font-semibold text-white/80 sm:text-xs">
+                <dd class="mt-0.5 text-[10px] font-semibold text-white/80 sm:text-[11px]">
                   صالون نشط
                 </dd>
               </div>
               <div
-                class="rounded-xl border border-white/15 bg-white/5 p-3 text-center backdrop-blur-sm sm:p-4"
+                class="rounded-xl border border-white/15 bg-white/5 p-2 text-center backdrop-blur-sm sm:p-3"
               >
-                <dt class="text-2xl font-extrabold text-brand-gold sm:text-3xl">
+                <dt class="text-xl font-extrabold text-brand-gold sm:text-2xl lg:text-3xl">
                   {{ formatNumber(stats.totalReviews) }}
                 </dt>
-                <dd class="mt-1 text-[11px] font-semibold text-white/80 sm:text-xs">
+                <dd class="mt-0.5 text-[10px] font-semibold text-white/80 sm:text-[11px]">
                   تقييم من العملاء
                 </dd>
               </div>
               <div
-                class="rounded-xl border border-white/15 bg-white/5 p-3 text-center backdrop-blur-sm sm:p-4"
+                class="rounded-xl border border-white/15 bg-white/5 p-2 text-center backdrop-blur-sm sm:p-3"
               >
-                <dt class="text-2xl font-extrabold text-brand-gold sm:text-3xl">
+                <dt class="text-xl font-extrabold text-brand-gold sm:text-2xl lg:text-3xl">
                   {{ stats.avgRating.toFixed(1) }}
                 </dt>
-                <dd class="mt-1 text-[11px] font-semibold text-white/80 sm:text-xs">
+                <dd class="mt-0.5 text-[10px] font-semibold text-white/80 sm:text-[11px]">
                   متوسط تقييم الصالونات
                 </dd>
               </div>
@@ -223,71 +223,71 @@
 
           <!-- live top-rated salons panel (GET /api/providers) -->
           <div
-            class="relative overflow-hidden rounded-2xl bg-surface-container-lowest p-5 text-on-surface shadow-2xl shadow-black/30"
+            class="relative overflow-hidden rounded-2xl bg-surface-container-lowest p-4 text-on-surface shadow-2xl shadow-black/30 sm:p-5"
           >
             <div
-              class="flex items-center justify-between gap-3 border-b border-outline-variant/60 pb-4"
+              class="flex items-center justify-between gap-3 border-b border-outline-variant/60 pb-3"
             >
-              <div class="flex items-center gap-3">
+              <div class="flex items-center gap-2">
                 <img
                   src="lookak-without-bg.png"
                   alt=""
-                  class="h-11 w-11 rounded-full border border-brand-gold/30 object-cover p-0.5"
+                  class="h-9 w-9 sm:h-10 sm:w-10 rounded-full border border-brand-gold/30 object-cover p-0.5"
                 />
                 <div>
-                  <p class="text-sm font-extrabold">الصالونات الأعلى تقييماً</p>
-                  <p class="text-xs text-on-surface-variant">مباشرة من منصة لوَكك</p>
+                  <p class="text-xs font-extrabold sm:text-sm">الصالونات الأعلى تقييماً</p>
+                  <p class="text-[10px] text-on-surface-variant sm:text-xs">مباشرة من منصة لوَكك</p>
                 </div>
               </div>
               <span
-                class="rounded-full bg-primary-fixed/70 px-2.5 py-1 text-[10px] font-extrabold text-primary"
+                class="rounded-full bg-primary-fixed/70 px-2 py-0.5 text-[9px] font-extrabold text-primary sm:px-2.5 sm:py-1 sm:text-[10px]"
                 >مباشر من المنصة</span
               >
             </div>
 
             @if (isLoading()) {
-              <ul class="mt-4 space-y-3" aria-hidden="true">
+              <ul class="mt-3 space-y-2.5" aria-hidden="true">
                 @for (skeleton of [0, 1, 2]; track skeleton) {
                   <li
-                    class="animate-pulse flex items-center justify-between gap-3 rounded-xl border border-outline-variant/60 bg-surface-container/50 px-4 py-3"
+                    class="animate-pulse flex items-center justify-between gap-2 rounded-xl border border-outline-variant/60 bg-surface-container/50 px-3 py-2.5 sm:px-4 sm:py-3"
                   >
-                    <span class="space-y-2">
-                      <span class="block h-3 w-32 rounded-md bg-outline-variant/60"></span>
-                      <span class="block h-2.5 w-24 rounded-md bg-outline-variant/40"></span>
+                    <span class="space-y-1.5">
+                      <span class="block h-2.5 w-28 rounded-md bg-outline-variant/60"></span>
+                      <span class="block h-2 w-20 rounded-md bg-outline-variant/40"></span>
                     </span>
-                    <span class="h-4 w-10 rounded-md bg-outline-variant/60"></span>
+                    <span class="h-3.5 w-8 rounded-md bg-outline-variant/60"></span>
                   </li>
                 }
               </ul>
             } @else if (loadError() && providers().length === 0) {
               <div
-                class="mt-4 rounded-xl border border-outline-variant/60 bg-surface-container/50 px-4 py-6 text-center"
+                class="mt-3 rounded-xl border border-outline-variant/60 bg-surface-container/50 px-3 py-4 text-center sm:px-4 sm:py-6"
               >
-                <p class="text-sm font-bold text-on-surface">تعذر تحميل الصالونات حالياً</p>
+                <p class="text-xs font-bold text-on-surface sm:text-sm">تعذر تحميل الصالونات حالياً</p>
                 <a
                   routerLink="/register"
                   [queryParams]="{ role: 'provider' }"
-                  class="mt-2 inline-block text-xs font-extrabold text-primary hover:text-brand-gold"
+                  class="mt-1.5 inline-block text-[10px] font-extrabold text-primary hover:text-brand-gold sm:text-xs"
                 >
                   انضم كصالون وكن أول المميزين
                 </a>
               </div>
             } @else {
-              <ul class="mt-4 space-y-3">
+              <ul class="mt-3 space-y-2.5">
                 @for (provider of topProviders(); track provider._id) {
                   <li
-                    class="flex items-center justify-between gap-3 rounded-xl border border-outline-variant/60 bg-surface-container/50 px-4 py-3"
+                    class="flex items-center justify-between gap-2 rounded-xl border border-outline-variant/60 bg-surface-container/50 px-3 py-2.5 sm:px-4 sm:py-3"
                   >
                     <span class="min-w-0">
-                      <span class="block truncate text-sm font-extrabold text-on-surface">
+                      <span class="block truncate text-xs font-extrabold text-on-surface sm:text-sm">
                         {{ provider.salonName || provider.name }}
                       </span>
-                      <span class="mt-0.5 block truncate text-xs text-on-surface-variant">
+                      <span class="mt-0.5 block truncate text-[10px] text-on-surface-variant sm:text-xs">
                         {{ provider.address || 'صالون معتمد على لوَكك' }}
                       </span>
                     </span>
                     <span
-                      class="flex shrink-0 items-center gap-1 text-sm font-extrabold text-primary"
+                      class="flex shrink-0 items-center gap-1 text-xs font-extrabold text-primary sm:text-sm"
                     >
                       <i class="pi pi-star-fill text-brand-gold"></i>
                       {{ ratingLabel(provider) }}
@@ -295,10 +295,10 @@
                   </li>
                 } @empty {
                   <li
-                    class="rounded-xl border border-outline-variant/60 bg-surface-container/50 px-4 py-6 text-center"
+                    class="rounded-xl border border-outline-variant/60 bg-surface-container/50 px-3 py-4 text-center sm:px-4 sm:py-6"
                   >
-                    <p class="text-sm font-bold text-on-surface">لا يوجد صالونات مسجلة بعد</p>
-                    <p class="mt-1 text-xs text-on-surface-variant">
+                    <p class="text-xs font-bold text-on-surface sm:text-sm">لا يوجد صالونات مسجلة بعد</p>
+                    <p class="mt-0.5 text-[10px] text-on-surface-variant sm:text-xs">
                       كن أول صالون ينضم إلى لوَكك
                     </p>
                   </li>
@@ -309,30 +309,30 @@
             <a
               routerLink="/register"
               [queryParams]="{ role: 'client' }"
-              class="mt-4 flex items-center justify-between gap-3 rounded-xl bg-gradient-to-l from-brand-gold to-primary px-4 py-3.5 text-white transition duration-200 hover:shadow-lg hover:shadow-primary/30"
+              class="mt-3 flex items-center justify-between gap-2 rounded-xl bg-gradient-to-l from-brand-gold to-primary px-3 py-2.5 text-white transition duration-200 hover:shadow-lg hover:shadow-primary/30 sm:px-4 sm:py-3.5"
             >
-              <span class="flex items-center gap-2 text-sm font-bold">
+              <span class="flex items-center gap-1.5 text-xs font-bold sm:text-sm">
                 <i class="pi pi-calendar-plus"></i>
                 احجز موعدك الآن
               </span>
-              <i class="pi pi-arrow-left text-lg text-primary-fixed"></i>
+              <i class="pi pi-arrow-left text-base text-primary-fixed sm:text-lg"></i>
             </a>
           </div>
 
           <!-- floating chips -->
           <div
-            class="animate-landing-float absolute -start-8 -top-8 flex items-center gap-2 rounded-xl bg-surface-container-lowest px-3.5 py-2.5 text-xs font-extrabold text-on-surface shadow-xl shadow-black/25"
+            class="animate-landing-float absolute -start-6 -top-6 flex items-center gap-1.5 rounded-xl bg-surface-container-lowest px-3 py-2 text-[10px] font-extrabold text-on-surface shadow-xl shadow-black/25 sm:px-3.5 sm:py-2.5 sm:text-xs"
           >
-            <i class="pi pi-shield text-sm text-brand-gold"></i>
+            <i class="pi pi-shield text-xs text-brand-gold sm:text-sm"></i>
             دفع آمن ومضمون
           </div>
           @if (topProviderSummary(); as summary) {
             <div
-              class="animate-landing-float absolute -bottom-7 -end-6 flex items-center gap-2 rounded-xl bg-surface-container-lowest px-3.5 py-2.5 text-xs font-extrabold text-on-surface shadow-xl shadow-black/25"
+              class="animate-landing-float absolute -bottom-5 -end-4 flex items-center gap-1.5 rounded-xl bg-surface-container-lowest px-3 py-2 text-[10px] font-extrabold text-on-surface shadow-xl shadow-black/25 sm:px-3.5 sm:py-2.5 sm:text-xs"
               style="animation-delay: 1.4s"
             >
               <span class="flex items-center gap-1 text-brand-gold">
-                <i class="pi pi-star-fill text-sm"></i>
+                <i class="pi pi-star-fill text-xs sm:text-sm"></i>
                 {{ summary.rating.toFixed(1) }}
               </span>
               تقييم {{ formatNumber(summary.reviewsCount) }} عميل
@@ -343,48 +343,48 @@
     </div>
   </section>
   <!-- ===================== FEATURES ===================== -->
-  <section id="features" class="scroll-mt-20 bg-background px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+  <section id="features" class="scroll-mt-20 bg-background px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
     <div class="mx-auto">
       <div class="animate-landing-fade-up mx-auto max-w-2xl text-center">
         <span
-          class="inline-flex items-center gap-2 rounded-full border border-brand-gold/30 bg-brand-gold/10 px-4 py-1.5 text-xs font-extrabold tracking-wide text-primary"
+          class="inline-flex items-center gap-2 rounded-full border border-brand-gold/30 bg-brand-gold/10 px-3 py-1 text-xs font-extrabold tracking-wide text-primary sm:px-4 sm:py-1.5"
         >
           <i class="pi pi-star-fill text-brand-gold"></i>
           لماذا لوَكك؟
         </span>
-        <h2 class="mt-5 text-3xl font-extrabold leading-snug text-on-surface sm:text-4xl">
+        <h2 class="mt-4 text-2xl font-extrabold leading-snug text-on-surface sm:text-3xl lg:text-4xl">
           تجربة فاخرة… من أول ضغطة
         </h2>
-        <p class="mt-4 text-base leading-relaxed text-on-surface-variant sm:text-lg">
+        <p class="mt-3 text-sm leading-relaxed text-on-surface-variant sm:text-base lg:text-lg">
           صممنا لوَكك لتكون جسرك الذكي بين خبراء الجمال وعملائهم — بسهولة وثقة ولمسة فخامة.
         </p>
       </div>
 
-      <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         @for (feature of features; track feature.title) {
           <article
-            class="group relative overflow-hidden rounded-xl border border-outline-variant/60 bg-surface-container-lowest p-7 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-gold/50 hover:shadow-xl hover:shadow-primary/10"
+            class="group relative overflow-hidden rounded-xl border border-outline-variant/60 bg-surface-container-lowest p-5 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-gold/50 hover:shadow-xl hover:shadow-primary/10 sm:p-7"
           >
             <span
               aria-hidden="true"
-              class="pointer-events-none absolute -end-2 -top-6 select-none text-[5.5rem] font-extrabold leading-none text-primary/5 transition-colors duration-300 group-hover:text-brand-gold/10"
+              class="pointer-events-none absolute -end-2 -top-4 select-none text-[4.5rem] font-extrabold leading-none text-primary/5 transition-colors duration-300 group-hover:text-brand-gold/10 sm:text-[5.5rem] sm:-top-6"
             >
               {{ '0' + ($index + 1) }}
             </span>
 
             <div
-              class="grid h-14 w-14 place-items-center rounded-xl bg-gradient-to-br from-brand-gold to-primary text-2xl text-white shadow-lg shadow-primary/25 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3"
+              class="grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br from-brand-gold to-primary text-xl text-white shadow-lg shadow-primary/25 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3 sm:h-14 sm:w-14 sm:text-2xl"
             >
               <i [class]="feature.icon"></i>
             </div>
 
-            <h3 class="mt-5 text-xl font-extrabold text-on-surface">{{ feature.title }}</h3>
-            <p class="mt-3 text-sm leading-relaxed text-on-surface-variant">
+            <h3 class="mt-4 text-lg font-extrabold text-on-surface sm:text-xl">{{ feature.title }}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-on-surface-variant">
               {{ feature.description }}
             </p>
 
             <span
-              class="mt-5 block h-0.5 w-10 rounded-full bg-gradient-to-l from-brand-gold to-primary transition-all duration-300 group-hover:w-20"
+              class="mt-4 block h-0.5 w-10 rounded-full bg-gradient-to-l from-brand-gold to-primary transition-all duration-300 group-hover:w-20"
             ></span>
           </article>
         }
@@ -396,7 +396,7 @@
   @if (isLoading() || featuredProviders().length) {
     <section
       id="salons"
-      class="scroll-mt-20 bg-background px-4 pb-20 sm:px-6 lg:px-8 lg:pb-28"
+      class="scroll-mt-20 bg-background px-4 pb-16 sm:px-6 lg:px-8 lg:pb-24"
     >
       <div class="mx-auto max-w-7xl">
         <div
@@ -404,22 +404,22 @@
         >
           <div class="max-w-2xl">
             <span
-              class="inline-flex items-center gap-2 rounded-full border border-brand-gold/30 bg-brand-gold/10 px-4 py-1.5 text-xs font-extrabold tracking-wide text-primary"
+              class="inline-flex items-center gap-2 rounded-full border border-brand-gold/30 bg-brand-gold/10 px-3 py-1 text-xs font-extrabold tracking-wide text-primary sm:px-4 sm:py-1.5"
             >
               <i class="pi pi-building text-brand-gold"></i>
               صالونات حقيقية
             </span>
-            <h2 class="mt-5 text-3xl font-extrabold leading-snug text-on-surface sm:text-4xl">
+            <h2 class="mt-4 text-2xl font-extrabold leading-snug text-on-surface sm:text-3xl lg:text-4xl">
               أرقى الصالونات على لوَكك
             </h2>
-            <p class="mt-4 text-base leading-relaxed text-on-surface-variant sm:text-lg">
+            <p class="mt-3 text-sm leading-relaxed text-on-surface-variant sm:text-base lg:text-lg">
               صالونات وكوافيرات وباربر شوب معتمدة، مرتبة حسب تقييمات عملائهم الحقيقية.
             </p>
           </div>
           <a
             routerLink="/register"
             [queryParams]="{ role: 'client' }"
-            class="inline-flex shrink-0 items-center gap-2 rounded-lg border border-outline-variant bg-surface-container-lowest px-4 py-2.5 text-sm font-bold text-primary transition duration-200 hover:border-brand-gold hover:bg-brand-gold/5"
+            class="inline-flex shrink-0 items-center gap-2 rounded-lg border border-outline-variant bg-surface-container-lowest px-3 py-2 text-sm font-bold text-primary transition duration-200 hover:border-brand-gold hover:bg-brand-gold/5 sm:px-4 sm:py-2.5"
           >
             احجز موعدك
             <i class="pi pi-arrow-left text-xs"></i>
@@ -427,74 +427,74 @@
         </div>
 
         @if (isLoading()) {
-          <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" aria-hidden="true">
+          <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" aria-hidden="true">
             @for (skeleton of [0, 1, 2, 3, 4, 5, 6, 7]; track skeleton) {
               <div
-                class="animate-pulse rounded-xl border border-outline-variant/60 bg-surface-container-lowest p-6"
+                class="animate-pulse rounded-xl border border-outline-variant/60 bg-surface-container-lowest p-4 sm:p-6"
               >
                 <div class="flex items-start justify-between">
-                  <span class="h-12 w-12 rounded-xl bg-outline-variant/60"></span>
-                  <span class="h-5 w-12 rounded-full bg-outline-variant/50"></span>
+                  <span class="h-10 w-10 rounded-xl bg-outline-variant/60 sm:h-12 sm:w-12"></span>
+                  <span class="h-4 w-10 rounded-full bg-outline-variant/50 sm:h-5 sm:w-12"></span>
                 </div>
-                <div class="mt-4 h-4 w-3/4 rounded-md bg-outline-variant/60"></div>
-                <div class="mt-2 h-3 w-1/2 rounded-md bg-outline-variant/40"></div>
-                <div class="mt-3 h-3 w-full rounded-md bg-outline-variant/40"></div>
-                <div class="mt-5 h-4 w-24 rounded-md bg-outline-variant/50"></div>
+                <div class="mt-3 h-3.5 w-3/4 rounded-md bg-outline-variant/60 sm:mt-4 sm:h-4"></div>
+                <div class="mt-1.5 h-2.5 w-1/2 rounded-md bg-outline-variant/40 sm:mt-2 sm:h-3"></div>
+                <div class="mt-2.5 h-2.5 w-full rounded-md bg-outline-variant/40 sm:mt-3 sm:h-3"></div>
+                <div class="mt-4 h-3.5 w-20 rounded-md bg-outline-variant/50 sm:mt-5 sm:h-4 sm:w-24"></div>
               </div>
             }
           </div>
         } @else {
-          <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             @for (provider of featuredProviders(); track provider._id) {
               <article
-                class="group relative flex flex-col overflow-hidden rounded-xl border border-outline-variant/60 bg-surface-container-lowest p-6 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-gold/50 hover:shadow-xl hover:shadow-primary/10"
+                class="group relative flex flex-col overflow-hidden rounded-xl border border-outline-variant/60 bg-surface-container-lowest p-4 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-gold/50 hover:shadow-xl hover:shadow-primary/10 sm:p-6"
               >
-                <div class="flex items-start justify-between gap-3">
+                <div class="flex items-start justify-between gap-2 sm:gap-3">
                   <span
-                    class="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-brand-gold to-primary text-xl text-white shadow-lg shadow-primary/25"
+                    class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-brand-gold to-primary text-lg text-white shadow-lg shadow-primary/25 sm:h-12 sm:w-12 sm:text-xl"
                   >
                     <i class="pi pi-building"></i>
                   </span>
                   <span
-                    class="flex shrink-0 items-center gap-1 rounded-full bg-brand-gold/10 px-2.5 py-1 text-xs font-extrabold text-brand-gold"
+                    class="flex shrink-0 items-center gap-1 rounded-full bg-brand-gold/10 px-2 py-1 text-[10px] font-extrabold text-brand-gold sm:px-2.5 sm:py-1 sm:text-xs"
                   >
-                    <i class="pi pi-star-fill text-[10px]"></i>
+                    <i class="pi pi-star-fill text-[9px] sm:text-[10px]"></i>
                     {{ ratingLabel(provider) }}
                   </span>
                 </div>
 
                 <h3
-                  class="mt-4 truncate text-lg font-extrabold text-on-surface"
+                  class="mt-3 truncate text-base font-extrabold text-on-surface sm:text-lg"
                   [title]="provider.salonName || provider.name"
                 >
                   {{ provider.salonName || provider.name }}
                 </h3>
-                <p class="mt-1 flex items-center gap-1.5 text-xs text-on-surface-variant">
+                <p class="mt-1 flex items-center gap-1 text-[10px] text-on-surface-variant sm:text-xs">
                   <i class="pi pi-map-marker text-brand-gold"></i>
                   <span class="truncate">{{ provider.address || 'معلومات العنوان قريباً' }}</span>
                 </p>
 
                 @if (provider.bio) {
-                  <p class="mt-3 line-clamp-2 flex-1 text-sm leading-relaxed text-on-surface-variant">
+                  <p class="mt-2 line-clamp-2 flex-1 text-xs leading-relaxed text-on-surface-variant sm:text-sm">
                     {{ provider.bio }}
                   </p>
                 } @else {
-                  <span class="mt-3 flex-1"></span>
+                  <span class="mt-2 flex-1"></span>
                 }
 
                 <div
-                  class="mt-5 flex items-center justify-between border-t border-outline-variant/60 pt-4"
+                  class="mt-4 flex items-center justify-between border-t border-outline-variant/60 pt-3 sm:mt-5 sm:pt-4"
                 >
-                  <span class="text-xs font-bold text-on-surface-variant">
+                  <span class="text-[10px] font-bold text-on-surface-variant sm:text-xs">
                     {{ formatNumber(provider.reviewsCount ?? 0) }} تقييم
                   </span>
                   <a
                     routerLink="/register"
                     [queryParams]="{ role: 'client' }"
-                    class="inline-flex items-center gap-1.5 text-sm font-extrabold text-primary transition-colors hover:text-brand-gold"
+                    class="inline-flex items-center gap-1 text-xs font-extrabold text-primary transition-colors hover:text-brand-gold sm:gap-1.5 sm:text-sm"
                   >
                     احجز
-                    <i class="pi pi-arrow-left text-[10px]"></i>
+                    <i class="pi pi-arrow-left text-[9px] sm:text-[10px]"></i>
                   </a>
                 </div>
               </article>
@@ -506,9 +506,9 @@
   }
 
   <!-- ===================== CTA BANNER ===================== -->
-  <section class="bg-background px-4 pb-20 sm:px-6 lg:px-8 lg:pb-28">
+  <section class="bg-background px-4 pb-16 sm:px-6 lg:px-8 lg:pb-24">
     <div
-      class="animate-landing-fade-up relative mx-auto  overflow-hidden rounded-2xl bg-gradient-to-bl from-brand-gold via-primary to-primary px-6 py-14 text-center text-white shadow-2xl shadow-primary/20 sm:px-12"
+      class="animate-landing-fade-up relative mx-auto overflow-hidden rounded-2xl bg-gradient-to-bl from-brand-gold via-primary to-primary px-5 py-12 text-center text-white shadow-2xl shadow-primary/20 sm:px-8 sm:py-14 lg:px-12 lg:py-16"
     >
       <div aria-hidden="true" class="pointer-events-none absolute inset-0">
         <div class="absolute -end-16 -top-20 h-64 w-64 rounded-full bg-white/10 blur-2xl"></div>
@@ -517,15 +517,15 @@
         ></div>
       </div>
       <div class="relative">
-        <h2 class="text-3xl font-extrabold leading-snug sm:text-4xl">جاهز تبدأ رحلتك مع لوَكك؟</h2>
-        <p class="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-white/85">
+        <h2 class="text-2xl font-extrabold leading-snug sm:text-3xl lg:text-4xl">جاهز تبدأ رحلتك مع لوَكك؟</h2>
+        <p class="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-white/85 sm:text-base">
           سواء كنت تبحث عن موعدك المثالي أو تدير صالونك الخاص — خطوتك الأولى تبدأ الآن.
         </p>
-        <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <div class="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <a
             routerLink="/register"
             [queryParams]="{ role: 'client' }"
-            class="group flex w-full items-center justify-center gap-2 rounded-xl bg-surface-container-lowest px-7 py-4 text-base font-extrabold text-primary shadow-xl transition duration-200 hover:shadow-2xl active:scale-[0.98] sm:w-auto"
+            class="group flex w-full items-center justify-center gap-2 rounded-xl bg-surface-container-lowest px-6 py-3.5 text-sm font-extrabold text-primary shadow-xl transition duration-200 hover:shadow-2xl active:scale-[0.98] sm:w-auto sm:px-7 sm:py-4"
           >
             <i class="pi pi-calendar-plus text-brand-gold"></i>
             احجز موعدك الآن
@@ -533,7 +533,7 @@
           <a
             routerLink="/register"
             [queryParams]="{ role: 'provider' }"
-            class="group flex w-full items-center justify-center gap-2 rounded-xl border border-white/40 bg-white/10 px-7 py-4 text-base font-bold text-white backdrop-blur-sm transition duration-200 hover:border-brand-gold hover:bg-white/20 active:scale-[0.98] sm:w-auto"
+            class="group flex w-full items-center justify-center gap-2 rounded-xl border border-white/40 bg-white/10 px-6 py-3.5 text-sm font-bold text-white backdrop-blur-sm transition duration-200 hover:border-brand-gold hover:bg-white/20 active:scale-[0.98] sm:w-auto sm:px-7 sm:py-4"
           >
             <i class="pi pi-briefcase text-brand-gold"></i>
             انضم كصالون أو مزود خدمة
@@ -546,61 +546,61 @@
 
 <!-- ===================== FOOTER ===================== -->
 <footer class="bg-inverse-surface text-inverse-on-surface">
-  <div class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
-    <div class="grid gap-10 md:grid-cols-4">
+  <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+    <div class="grid gap-8 md:grid-cols-4">
       <!-- brand -->
       <div class="md:col-span-2">
-        <a routerLink="/" class="inline-flex items-center gap-3">
+        <a routerLink="/" class="inline-flex items-center gap-2">
           <img
             src="lookak-without-bg.png"
             alt="شعار لوَكك"
-            class="h-11 w-11 rounded-full border border-brand-gold/40 object-cover p-0.5"
+            class="h-9 w-9 rounded-full border border-brand-gold/40 object-cover p-0.5 sm:h-10 sm:w-10"
           />
-          <span class="text-2xl font-extrabold text-white">لوَكك</span>
+          <span class="text-xl font-extrabold text-white sm:text-2xl">لوَكك</span>
         </a>
-        <p class="mt-4 text-sm leading-relaxed text-inverse-on-surface/70">
+        <p class="mt-3 text-sm leading-relaxed text-inverse-on-surface/70">
           منصة متكاملة تربط نخبة صالونات التجميل والحلاقة بعملائها، وتجعل حجز موعدك تجربة فاخرة
           وسلسة.
         </p>
-        <div class="mt-6 flex items-center gap-2">
+        <div class="mt-5 flex items-center gap-2">
           <a
             href="#"
             (click)="$event.preventDefault()"
             aria-label="انستجرام"
-            class="grid h-10 w-10 place-items-center rounded-lg border border-white/15 text-inverse-on-surface/70 transition hover:border-brand-gold hover:bg-brand-gold hover:text-white"
+            class="grid h-9 w-9 place-items-center rounded-lg border border-white/15 text-inverse-on-surface/70 transition hover:border-brand-gold hover:bg-brand-gold hover:text-white sm:h-10 sm:w-10"
           >
-            <i class="pi pi-instagram text-sm"></i>
+            <i class="pi pi-instagram text-xs sm:text-sm"></i>
           </a>
           <a
             href="#"
             (click)="$event.preventDefault()"
             aria-label="فيسبوك"
-            class="grid h-10 w-10 place-items-center rounded-lg border border-white/15 text-inverse-on-surface/70 transition hover:border-brand-gold hover:bg-brand-gold hover:text-white"
+            class="grid h-9 w-9 place-items-center rounded-lg border border-white/15 text-inverse-on-surface/70 transition hover:border-brand-gold hover:bg-brand-gold hover:text-white sm:h-10 sm:w-10"
           >
-            <i class="pi pi-facebook text-sm"></i>
+            <i class="pi pi-facebook text-xs sm:text-sm"></i>
           </a>
           <a
             href="#"
             (click)="$event.preventDefault()"
             aria-label="تويتر"
-            class="grid h-10 w-10 place-items-center rounded-lg border border-white/15 text-inverse-on-surface/70 transition hover:border-brand-gold hover:bg-brand-gold hover:text-white"
+            class="grid h-9 w-9 place-items-center rounded-lg border border-white/15 text-inverse-on-surface/70 transition hover:border-brand-gold hover:bg-brand-gold hover:text-white sm:h-10 sm:w-10"
           >
-            <i class="pi pi-twitter text-sm"></i>
+            <i class="pi pi-twitter text-xs sm:text-sm"></i>
           </a>
           <a
             href="#"
             (click)="$event.preventDefault()"
             aria-label="واتساب"
-            class="grid h-10 w-10 place-items-center rounded-lg border border-white/15 text-inverse-on-surface/70 transition hover:border-brand-gold hover:bg-brand-gold hover:text-white"
+            class="grid h-9 w-9 place-items-center rounded-lg border border-white/15 text-inverse-on-surface/70 transition hover:border-brand-gold hover:bg-brand-gold hover:text-white sm:h-10 sm:w-10"
           >
-            <i class="pi pi-whatsapp text-sm"></i>
+            <i class="pi pi-whatsapp text-xs sm:text-sm"></i>
           </a>
         </div>
       </div>
 
       <!-- quick links -->
-      <nav aria-label="روابط المنصة" class="flex flex-col gap-3 text-sm">
-        <p class="mb-1 text-sm font-extrabold text-brand-gold">المنصة</p>
+      <nav aria-label="روابط المنصة" class="flex flex-col gap-2.5 text-sm">
+        <p class="mb-0.5 font-extrabold text-brand-gold">المنصة</p>
         <a routerLink="/login" class="text-inverse-on-surface/70 transition hover:text-brand-gold"
           >تسجيل الدخول</a
         >
@@ -626,8 +626,8 @@
       </nav>
 
       <!-- support links -->
-      <nav aria-label="روابط المساعدة" class="flex flex-col gap-3 text-sm">
-        <p class="mb-1 text-sm font-extrabold text-brand-gold">الدعم</p>
+      <nav aria-label="روابط المساعدة" class="flex flex-col gap-2.5 text-sm">
+        <p class="mb-0.5 font-extrabold text-brand-gold">الدعم</p>
         <a
           href="#"
           (click)="$event.preventDefault()"
@@ -650,9 +650,9 @@
     </div>
 
     <div
-      class="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 sm:flex-row"
+      class="mt-10 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-5 sm:flex-row sm:gap-4"
     >
-      <p class="text-xs text-inverse-on-surface/60">
+      <p class="text-xs text-inverse-on-surface/60 text-center sm:text-left">
         © {{ currentYear }} لوَكك — جميع الحقوق محفوظة. تطوير
         <a
           href="https://www.facebook.com/mohamed.abdelaziem.52012"

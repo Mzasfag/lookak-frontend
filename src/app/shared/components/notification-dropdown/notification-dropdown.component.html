@@ -3,13 +3,13 @@
   <!-- Notification Trigger Button -->
   <button
     type="button"
-    class="relative flex items-center cursor-pointer justify-center w-11 h-11 rounded-2xl bg-surface-container/60 hover:bg-surface-container text-on-surface-variant hover:text-on-surface border border-outline-variant/20 transition-all duration-200 shadow-xs"
+    class="relative flex items-center cursor-pointer justify-center w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-xl sm:rounded-2xl bg-surface-container/60 hover:bg-surface-container text-on-surface-variant hover:text-on-surface border border-outline-variant/20 transition-all duration-200 shadow-xs"
     (click)="toggleDropdown($event)"
     [attr.aria-expanded]="isOpen()"
     [attr.aria-haspopup]="true"
     aria-label="الإشعارات"
   >
-    <i class="pi pi-bell text-lg transition-transform duration-200 hover:rotate-12"></i>
+    <i class="pi pi-bell text-base sm:text-lg transition-transform duration-200 hover:rotate-12"></i>
     @if (unreadCount() > 0) {
       <span
         class="absolute -top-1 -end-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-brand-gold px-1.5 text-[10px] font-bold text-white shadow-md animate-pulse"
@@ -23,7 +23,7 @@
   <!-- Dropdown Panel (Professional Clean SaaS Style with Absolute Maximum Layering) -->
   @if (isOpen()) {
     <div
-      class="absolute top-full left-[-40px] mt-3 w-[400px] max-w-[calc(100vw-2rem)] origin-top-right rounded-3xl bg-surface border border-outline-variant/30 shadow-2xl ring-1 ring-black/10 backdrop-blur-2xl animate-in fade-in-0 zoom-in-95 duration-200 overflow-hidden isolate !z-[10000000000]"
+      class="absolute top-full left-[30px] mt-2 w-[92vw] max-w-[400px] origin-top-right rounded-3xl bg-surface border border-outline-variant/30 shadow-2xl ring-1 ring-black/10 backdrop-blur-2xl animate-in fade-in-0 zoom-in-95 duration-200 overflow-hidden isolate !z-[10000000000]"
       role="menu"
       aria-orientation="vertical"
       (click)="$event.stopPropagation()"

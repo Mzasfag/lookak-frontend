@@ -6,7 +6,7 @@
   --color-surface-container, --radius-lg, --radius-xl.
 ===================================================================== -->
 <section
-  class="relative flex min-h-screen items-center justify-center overflow-hidden bg-background px-4 py-10 sm:px-6 lg:px-8"
+  class="relative flex min-h-screen items-center justify-center overflow-hidden bg-background px-4 py-8 sm:px-6 lg:px-8"
 >
   <!-- decorative background glows -->
   <div aria-hidden="true" class="pointer-events-none absolute inset-0">
@@ -21,11 +21,11 @@
 
   <!-- auth card (split on desktop, stacked on mobile) -->
   <div
-    class="animate-login-fade-up relative grid w-full overflow-hidden rounded-xl bg-surface-container-lowest shadow-xl shadow-primary/10 lg:grid-cols-2"
+    class="animate-login-fade-up relative grid w-full max-w-lg overflow-hidden rounded-xl bg-surface-container-lowest shadow-xl shadow-primary/10 lg:max-w-4xl lg:grid-cols-2"
   >
     <!-- ===== Brand panel (desktop only) ===== -->
     <aside
-      class="relative hidden flex-col justify-center gap-8 overflow-hidden bg-gradient-to-br from-brand-gold/75 via-primary/90 to-primary p-10 text-white lg:flex shadow-inner"
+      class="relative hidden flex-col justify-center gap-8 overflow-hidden bg-gradient-to-br from-brand-gold/75 via-primary/90 to-primary p-8 sm:p-10 text-white lg:flex shadow-inner"
     >
       <div aria-hidden="true" class="pointer-events-none absolute inset-0">
         <div class="absolute -end-20 -top-16 h-64 w-64 rounded-full bg-white/10 blur-2xl"></div>
@@ -40,13 +40,13 @@
         <img
           src="lookak-without-bg.png"
           alt="شعار لوَكك"
-          class="h-12 w-12 rounded-full bg-white/20 object-cover p-1"
+          class="h-10 w-10 rounded-full bg-white/20 object-cover p-1 sm:h-12 sm:w-12"
         />
-        <span class="text-3xl font-extrabold tracking-tight">لوَكك</span>
+        <span class="text-2xl font-extrabold tracking-tight sm:text-3xl">لوَكك</span>
       </div>
 
       <div class="relative space-y-4">
-        <h1 class="text-4xl font-extrabold leading-[1.35] drop-shadow-sm">
+        <h1 class="text-3xl font-extrabold leading-[1.35] drop-shadow-sm sm:text-4xl">
           إطلالتك…
           <br />
           تبدأ من هنا
@@ -76,7 +76,7 @@
     </aside>
 
     <!-- ===== Form panel ===== -->
-    <div class="bg-surface-container-lowest p-6 sm:p-10 lg:p-12">
+    <div class="bg-surface-container-lowest p-6 sm:p-8 lg:p-10">
       <!-- back to landing page -->
       <div class="mb-6">
         <a
