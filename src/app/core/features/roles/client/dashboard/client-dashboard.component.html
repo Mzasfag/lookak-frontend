@@ -2,7 +2,7 @@
   Client Dashboard — Summary page (Lookak).
   Renders Welcome Banner, KPI cards, upcoming & recent bookings, notifications and quick actions.
 ===================================================================== -->
-<section class=" px-4 py-6 sm:px-6 lg:px-8">
+<section class="px-4 py-6 sm:px-6 lg:px-8">
   <!-- ===================== Page header ===================== -->
   <header
     class="animate-client-dashboard-fade-up mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4"
@@ -19,7 +19,8 @@
         لوحة التحكم
       </h1>
       <p class="mt-1.5 text-xs text-on-surface-variant sm:text-sm">
-        مرحباً {{ profile()?.name || 'عميلنا العزيز' }}، نظرة عامة على حجوزاتك وإشعاراتك.
+        مرحباً {{ profile()?.name || "عميلنا العزيز" }}، نظرة عامة على حجوزاتك
+        وإشعاراتك.
       </p>
     </div>
 
@@ -27,10 +28,10 @@
       type="button"
       (click)="loadData()"
       [disabled]="isLoading()"
-      class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-outline-variant bg-surface-container-lowest px-3 py-2 text-xs font-bold text-primary transition duration-200 hover:border-brand-gold hover:bg-brand-gold/5 disabled:cursor-not-allowed disabled:opacity-50 sm:px-4 sm:py-2.5 sm:text-sm"
+      class="flex cursor-pointer items-center justify-center gap-2 rounded-lg border w-full md:w-[200px] border-outline-variant bg-surface-container-lowest px-4 py-2.5 text-sm font-bold text-primary transition duration-200 hover:border-brand-gold hover:bg-brand-gold/5 disabled:cursor-not-allowed disabled:opacity-50"
     >
-      <i [class]="isLoading() ? 'pi pi-spin pi-spinner' : 'pi pi-refresh'" class="text-sm"></i>
-      <span class="hidden sm:inline">تحديث البيانات</span>
+      <i [class]="isLoading() ? 'pi pi-spin pi-spinner' : 'pi pi-refresh'"></i>
+      تحديث البيانات
     </button>
   </header>
 
@@ -50,9 +51,14 @@
         <i class="pi pi-exclamation-triangle text-2xl text-error"></i>
       </div>
       <div class="space-y-1.5">
-        <h2 class="text-lg font-extrabold text-on-surface">تعذر تحميل البيانات</h2>
+        <h2 class="text-lg font-extrabold text-on-surface">
+          تعذر تحميل البيانات
+        </h2>
         <p class="text-sm text-on-surface-variant">
-          {{ errorMessage() || 'حدث خطأ أثناء جلب بيانات لوحة التحكم. يرجى المحاولة مرة أخرى.' }}
+          {{
+            errorMessage() ||
+              "حدث خطأ أثناء جلب بيانات لوحة التحكم. يرجى المحاولة مرة أخرى."
+          }}
         </p>
       </div>
       <button
@@ -72,15 +78,19 @@
       <section
         class="relative overflow-hidden rounded-2xl bg-gradient-to-l from-primary via-primary-container to-brand-gold p-4 text-white shadow-md ring-1 ring-outline-variant/20 sm:p-6 lg:p-8"
       >
-        <div class="relative z-10 flex flex-col items-center justify-center gap-3 text-center sm:flex-row sm:items-center sm:justify-between sm:text-start">
+        <div
+          class="relative z-10 flex flex-col items-center justify-center gap-3 text-center sm:flex-row sm:items-center sm:justify-between sm:text-start"
+        >
           <div class="min-w-0 space-y-1.5">
             <span
               class="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-2.5 py-1 text-xs font-extrabold backdrop-blur-sm"
             >
               <i class="pi pi-sparkles text-brand-gold/90"></i> مرحباً بعودتك
             </span>
-            <h2 class="text-xl font-extrabold leading-tight sm:text-2xl lg:text-3xl">
-              {{ profile()?.name || 'عزيزي العميل' }}
+            <h2
+              class="text-xl font-extrabold leading-tight sm:text-2xl lg:text-3xl"
+            >
+              {{ profile()?.name || "عزيزي العميل" }}
             </h2>
             <p class="text-xs leading-relaxed text-white/80 sm:text-sm">
               يسعدنا خدمتك مجدداً في لوكاك. استعرض حجوزاتك القادمة.
@@ -108,11 +118,15 @@
 
       <!-- ---------- KPI Cards Section ---------- -->
       <section>
-        <h2 class="mb-4 flex items-center gap-2 text-base font-extrabold text-on-surface">
+        <h2
+          class="mb-4 flex items-center gap-2 text-base font-extrabold text-on-surface"
+        >
           <i class="pi pi-chart-bar text-brand-gold"></i>
           إحصائيات الحجوزات
         </h2>
-        <div class="grid grid-cols-1 gap-3 sm:gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <div
+          class="grid grid-cols-1 gap-3 sm:gap-4 sm:grid-cols-2 xl:grid-cols-4"
+        >
           @for (kpi of kpis(); track kpi.label) {
             <div
               class="flex items-center gap-4 rounded-xl bg-surface-container-lowest p-3.5 sm:p-4 shadow-sm ring-1 ring-outline-variant/20 transition duration-200 hover:shadow-md hover:ring-primary/30"
@@ -125,10 +139,14 @@
                 <i class="pi {{ kpi.icon }} text-lg sm:text-xl"></i>
               </span>
               <div class="min-w-0 flex-1">
-                <p class="truncate text-\[10px\] sm:text-xs font-extrabold text-on-surface-variant">
+                <p
+                  class="truncate text-\[10px\] sm:text-xs font-extrabold text-on-surface-variant"
+                >
                   {{ kpi.label }}
                 </p>
-                <p class="mt-1 truncate text-xl sm:text-2xl font-extrabold text-on-surface">
+                <p
+                  class="mt-1 truncate text-xl sm:text-2xl font-extrabold text-on-surface"
+                >
                   {{ kpi.value }}
                 </p>
               </div>
@@ -146,7 +164,9 @@
           <div
             class="mb-5 flex flex-wrap items-center justify-between gap-3 border-b border-outline-variant/30 pb-4"
           >
-            <h2 class="flex items-center gap-2 text-base font-extrabold text-on-surface">
+            <h2
+              class="flex items-center gap-2 text-base font-extrabold text-on-surface"
+            >
               <i class="pi pi-calendar text-brand-gold"></i>
               الحجوزات القادمة
             </h2>
@@ -160,13 +180,17 @@
           </div>
 
           @if (upcomingBookings().length === 0) {
-            <div class="flex flex-col items-center justify-center py-10 text-center">
+            <div
+              class="flex flex-col items-center justify-center py-10 text-center"
+            >
               <span
                 class="mb-3 flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-surface-container text-on-surface-variant"
               >
                 <i class="pi pi-calendar-times text-xl"></i>
               </span>
-              <p class="text-sm font-bold text-on-surface">لا توجد حجوزات قادمة</p>
+              <p class="text-sm font-bold text-on-surface">
+                لا توجد حجوزات قادمة
+              </p>
               <p class="mt-1 text-xs text-on-surface-variant">
                 لم تقم بحجز أي مواعيد قادمة حتى الآن
               </p>
@@ -179,7 +203,10 @@
             </div>
           } @else {
             <ul class="space-y-3">
-              @for (booking of upcomingBookings().slice(0, 4); track booking._id) {
+              @for (
+                booking of upcomingBookings().slice(0, 4);
+                track booking._id
+              ) {
                 <li
                   class="flex flex-wrap items-center justify-between gap-3 rounded-xl bg-surface-container/50 p-4 ring-1 ring-outline-variant/20 transition duration-200 hover:bg-surface-container/80"
                 >
@@ -190,15 +217,24 @@
                       <i class="pi pi-calendar-clock text-lg"></i>
                     </span>
                     <div class="min-w-0 flex-1">
-                      <p class="truncate text-sm font-extrabold text-on-surface">
-                        {{ booking.serviceId?.name || 'خدمة محددة' }}
-                      </p>
-                      <p class="mt-0.5 truncate text-xs text-on-surface-variant">
-                        <i class="pi pi-building text-[10px] text-brand-gold me-1"></i>
-                        {{ booking.providerId?.salonName || booking.providerId?.name }}
+                      <p
+                        class="truncate text-sm font-extrabold text-on-surface"
+                      >
+                        {{ booking.serviceId?.name || "خدمة محددة" }}
                       </p>
                       <p
-                        class="mt-1 flex items-center justify-start gap-2 text-xs font-bold text-on-surface"
+                        class="mt-0.5 truncate text-xs text-on-surface-variant"
+                      >
+                        <i
+                          class="pi pi-building text-[10px] text-brand-gold me-1"
+                        ></i>
+                        {{
+                          booking.providerId?.salonName ||
+                            booking.providerId?.name
+                        }}
+                      </p>
+                      <p
+                        class="mt-1 flex items-start flex-col justify-start gap-2 text-xs font-bold text-on-surface"
                         dir="rtl"
                       >
                         <span>{{ formatDate(booking.date) }}</span>
@@ -250,7 +286,9 @@
           <div
             class="mb-5 flex flex-wrap items-center justify-between gap-3 border-b border-outline-variant/30 pb-4"
           >
-            <h2 class="flex items-center gap-2 text-base font-extrabold text-on-surface">
+            <h2
+              class="flex items-center gap-2 text-base font-extrabold text-on-surface"
+            >
               <i class="pi pi-history text-brand-gold"></i>
               أحدث الحجوزات
             </h2>
@@ -264,13 +302,17 @@
           </div>
 
           @if (recentBookings().length === 0) {
-            <div class="flex flex-col items-center justify-center py-10 text-center">
+            <div
+              class="flex flex-col items-center justify-center py-10 text-center"
+            >
               <span
                 class="mb-3 flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-surface-container text-on-surface-variant"
               >
                 <i class="pi pi-inbox text-xl"></i>
               </span>
-              <p class="text-sm font-bold text-on-surface">لا توجد سجلات حجوزات سابقاً</p>
+              <p class="text-sm font-bold text-on-surface">
+                لا توجد سجلات حجوزات سابقاً
+              </p>
               <p class="mt-1 text-xs text-on-surface-variant">
                 ستظهر هنا تفاصيل كافة الحجوزات المكتملة أو السابقة
               </p>
@@ -288,16 +330,32 @@
                       <i class="pi pi-receipt text-lg"></i>
                     </span>
                     <div class="min-w-0 flex-1">
-                      <p class="truncate text-sm font-extrabold text-on-surface">
-                        {{ booking.serviceId?.name || 'خدمة محددة' }}
+                      <p
+                        class="truncate text-sm font-extrabold text-on-surface"
+                      >
+                        {{ booking.serviceId?.name || "خدمة محددة" }}
                       </p>
-                      <p class="mt-0.5 truncate text-xs text-on-surface-variant">
-                        <i class="pi pi-building text-[10px] text-brand-gold me-1"></i>
-                        {{ booking.providerId?.salonName || booking.providerId?.name }}
+                      <p
+                        class="mt-0.5 truncate text-xs text-on-surface-variant"
+                      >
+                        <i
+                          class="pi pi-building text-[10px] text-brand-gold me-1"
+                        ></i>
+                        {{
+                          booking.providerId?.salonName ||
+                            booking.providerId?.name
+                        }}
                       </p>
-                      <p class="mt-1 text-xs text-on-surface-variant font-medium" dir="ltr">
+                      <p
+                        class="mt-1 text-xs text-on-surface-variant font-medium"
+                        dir="ltr"
+                      >
                         {{ formatDate(booking.date) }}
-                        {{ booking.timeSlot ? '• ' + formatTimeTo12Hour(booking.timeSlot) : '' }}
+                        {{
+                          booking.timeSlot
+                            ? "• " + formatTimeTo12Hour(booking.timeSlot)
+                            : ""
+                        }}
                       </p>
                     </div>
                   </div>
@@ -342,7 +400,9 @@
           <div
             class="mb-5 flex flex-wrap items-center justify-between gap-3 border-b border-outline-variant/30 pb-4"
           >
-            <h2 class="flex items-center gap-2 text-base font-extrabold text-on-surface">
+            <h2
+              class="flex items-center gap-2 text-base font-extrabold text-on-surface"
+            >
               <i class="pi pi-bell text-brand-gold"></i>
               آخر الإشعارات
               @if (unreadNotifications() > 0) {
@@ -380,17 +440,24 @@
           </div>
 
           @if (recentNotifications().length === 0) {
-            <div class="flex flex-col items-center justify-center py-8 text-center">
+            <div
+              class="flex flex-col items-center justify-center py-8 text-center"
+            >
               <span
                 class="mb-2 flex h-10 w-10 items-center justify-center rounded-full bg-surface-container text-on-surface-variant"
               >
                 <i class="pi pi-bell-slash text-lg"></i>
               </span>
-              <p class="text-sm font-bold text-on-surface-variant">لا توجد إشعارات حالياً</p>
+              <p class="text-sm font-bold text-on-surface-variant">
+                لا توجد إشعارات حالياً
+              </p>
             </div>
           } @else {
             <ul class="space-y-3">
-              @for (n of notifService.notifications()?.slice(0,5); track n._id) {
+              @for (
+                n of notifService.notifications()?.slice(0, 5);
+                track n._id
+              ) {
                 <li
                   class="flex items-start gap-3.5 rounded-xl p-3.5 transition duration-200 ring-1 {{
                     n.isRead
@@ -405,14 +472,20 @@
                   </div>
                   <div class="min-w-0 flex-1">
                     <div class="flex items-center justify-between gap-2">
-                      <p class="truncate text-sm font-extrabold text-on-surface">
+                      <p
+                        class="truncate text-sm font-extrabold text-on-surface"
+                      >
                         {{ formatNotificationArabic(n)?.title }}
                       </p>
-                      <span class="shrink-0 text-[11px] font-bold text-on-surface-variant/80">
+                      <span
+                        class="shrink-0 text-[11px] font-bold text-on-surface-variant/80"
+                      >
                         {{ formatNotificationTime(n.createdAt) }}
                       </span>
                     </div>
-                    <p class="mt-1 text-xs leading-relaxed text-on-surface-variant line-clamp-2">
+                    <p
+                      class="mt-1 text-xs leading-relaxed text-on-surface-variant line-clamp-2"
+                    >
                       {{ formatNotificationArabic(n)?.message }}
                     </p>
                   </div>
@@ -449,10 +522,14 @@
                 <i class="pi pi-search text-lg"></i>
               </span>
               <div class="min-w-0 flex-1">
-                <p class="text-sm font-extrabold text-on-surface group-hover:text-primary">
+                <p
+                  class="text-sm font-extrabold text-on-surface group-hover:text-primary"
+                >
                   تصفح مزودي الخدمة
                 </p>
-                <p class="text-xs text-on-surface-variant">استكشف أفضل الصالونات والخدمات</p>
+                <p class="text-xs text-on-surface-variant">
+                  استكشف أفضل الصالونات والخدمات
+                </p>
               </div>
               <i
                 class="pi pi-chevron-left text-xs text-on-surface-variant transition-transform duration-200 group-hover:-translate-x-1 group-hover:text-primary"
@@ -469,10 +546,14 @@
                 <i class="pi pi-calendar text-lg"></i>
               </span>
               <div class="min-w-0 flex-1">
-                <p class="text-sm font-extrabold text-on-surface group-hover:text-brand-gold">
+                <p
+                  class="text-sm font-extrabold text-on-surface group-hover:text-brand-gold"
+                >
                   إدارة حجوزاتي
                 </p>
-                <p class="text-xs text-on-surface-variant">استعرض الحجوزات أو قم بإلغائها</p>
+                <p class="text-xs text-on-surface-variant">
+                  استعرض الحجوزات أو قم بإلغائها
+                </p>
               </div>
               <i
                 class="pi pi-chevron-left text-xs text-on-surface-variant transition-transform duration-200 group-hover:-translate-x-1 group-hover:text-brand-gold"
@@ -489,10 +570,14 @@
                 <i class="pi pi-user text-lg"></i>
               </span>
               <div class="min-w-0 flex-1">
-                <p class="text-sm font-extrabold text-on-surface group-hover:text-tertiary">
+                <p
+                  class="text-sm font-extrabold text-on-surface group-hover:text-tertiary"
+                >
                   الملف الشخصي
                 </p>
-                <p class="text-xs text-on-surface-variant">تعديل بياناتك الشخصية وحسابك</p>
+                <p class="text-xs text-on-surface-variant">
+                  تعديل بياناتك الشخصية وحسابك
+                </p>
               </div>
               <i
                 class="pi pi-chevron-left text-xs text-on-surface-variant transition-transform duration-200 group-hover:-translate-x-1 group-hover:text-tertiary"
@@ -504,33 +589,3 @@
     </div>
   }
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
